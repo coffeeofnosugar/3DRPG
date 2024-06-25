@@ -3,6 +3,7 @@ using UnityEngine;
 public class MouseManager : UnitySingleton<MouseManager>
 {
     public event Action<Vector3> OnMouseClicked;
+    public event Action<GameObject> OnEnemyClicked;
     Ray ray;
     private RaycastHit hit;
 
@@ -35,7 +36,12 @@ public class MouseManager : UnitySingleton<MouseManager>
 
     private void MouseControl()
     {
-        if (Input.GetMouseButtonDown(0) && hit.collider != null && hit.collider.CompareTag("Ground"))
-            OnMouseClicked?.Invoke(hit.point);
+        if (Input.GetMouseButtonDown(0) && hit.collider != null)
+        {
+            if (hit.collider.CompareTag("Ground"))
+                OnMouseClicked?.Invoke(hit.point);
+            if (hit.collider.CompareTag("Enemy"))
+                OnEnemyClicked?.Invoke(hit.collider.gameObject);
+        }
     }
 }
