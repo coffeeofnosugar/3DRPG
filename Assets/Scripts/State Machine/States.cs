@@ -109,7 +109,7 @@ public class FightIdleState : IState
             var colliders = Physics.OverlapBox(parameter.attackPoint.position, parameter.attackSize, parameter.attackPoint.rotation, 1 << 6);
             if (colliders.Length > 0)
             {
-                if (parameter.attackTimeInterval >= parameter.attackCD)
+                if (parameter.lastAttackTime >= parameter.attackCD)
                     manager.TransitionState(StateType.Attack);
             }
             else
@@ -176,7 +176,7 @@ public class AttackState : IState
 
     public void OnEnter()
     {
-        parameter.attackTimeInterval = 0;
+        parameter.lastAttackTime = 0;
         parameter.agent.destination = manager.transform.position;
         parameter.animator.SetTrigger("Attack");
     }

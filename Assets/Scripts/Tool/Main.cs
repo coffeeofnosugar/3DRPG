@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+// »»∏¸≤‚ ‘Ω≈±æ
+
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;

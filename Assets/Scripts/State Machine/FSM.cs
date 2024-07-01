@@ -46,7 +46,7 @@ public class EnemyParameter
     // 攻击目标
     [HideInInspector] public GameObject attackTarget;
     // 攻击时间间隔
-    [HideInInspector] public float attackTimeInterval;
+    [HideInInspector] public float lastAttackTime;
 }
 
 public class FSM : MonoBehaviour
@@ -68,7 +68,7 @@ public class FSM : MonoBehaviour
         parameter.agent = GetComponent<NavMeshAgent>();
 
         parameter.originPosition = transform.position;
-        parameter.attackTimeInterval = parameter.attackCD;
+        parameter.lastAttackTime = parameter.attackCD;
     }
 
     private void Start()
@@ -86,7 +86,7 @@ public class FSM : MonoBehaviour
 
     private void Update()
     {
-        parameter.attackTimeInterval += Time.deltaTime;
+        parameter.lastAttackTime += Time.deltaTime;
         currentState.OnUpdate();
     }
 
