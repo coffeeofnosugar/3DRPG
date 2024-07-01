@@ -1,4 +1,4 @@
 public enum StateType
 {
-    Idle, Walk, Chase, Run, Attack, Hit, Die
+    BaseIdle, Walk, FightIdle, Run, Attack, Hit, Die
 }

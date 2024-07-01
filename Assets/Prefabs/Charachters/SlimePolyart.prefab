@@ -174,8 +174,8 @@ GameObject:
   - component: {fileID: 5039449961570050471}
   - component: {fileID: 2211744114189261124}
   - component: {fileID: 923239224243628298}
-  - component: {fileID: 4652595723838043014}
   - component: {fileID: 471640471950754976}
+  - component: {fileID: 530486111894676424}
   m_Layer: 7
   m_Name: SlimePolyart
   m_TagString: Enemy
@@ -191,13 +191,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4247539653154516912}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.81740856, z: -0, w: 0.5760584}
+  m_LocalRotation: {x: 0, y: 0.81740636, z: 0, w: 0.5760615}
   m_LocalPosition: {x: -10.12, y: 0.088, z: 17.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4831286420654507555}
   - {fileID: 6270038459634304696}
+  - {fileID: 1704891391826847024}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 109.652, z: 0}
 --- !u!95 &2211744114189261124
@@ -210,7 +211,7 @@ Animator:
   m_GameObject: {fileID: 4247539653154516912}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 56fc0b4f7d154039a7099564596a545b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9bbcf96c9a254c5ba654027c656d7b39, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d252a97c51c06b4ab1685d1e92814e8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -243,18 +244,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4652595723838043014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247539653154516912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63f632337490e324396f1d8fbceabab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &471640471950754976
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -276,6 +265,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &530486111894676424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4247539653154516912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d57a81d13050f14c8d918685ab183e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameter:
+    health: 100
+    isPatrol: 1
+    moveSpeed: 2.5
+    idleTime: 2
+    patrolRange: 8.86
+    sightRadius: 10
+    chaseSpeed: 1.5
+    attackCD: 2
+    attackPoint: {fileID: 1704891391826847024}
+    attackSize: {x: 1, y: 1, z: 1}
+    animator: {fileID: 0}
+    agent: {fileID: 0}
+    originPosition: {x: 0, y: 0, z: 0}
+    attackTarget: {fileID: 0}
 --- !u!1 &5492864219113465190
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +480,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7846603118930501271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7630149708856154544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1704891391826847024}
+  m_Layer: 7
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1704891391826847024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630149708856154544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.025, y: 0.535, z: 0.731}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5039449961570050471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8498929702415814629
 GameObject:
