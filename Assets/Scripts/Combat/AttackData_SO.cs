@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "New Attack", menuName = "Attack/Attack Data")]
+public class AttackData_SO : ScriptableObject
+{
+    /// <summary>
+    /// ¹¥»÷·¶Î§
+    /// </summary>
+    public float attackRange;
+    /// <summary>
+    /// ¼¼ÄÜ¹¥»÷·¶Î§
+    /// </summary>
+    public float skillRange;
+    /// <summary>
+    /// ¹¥»÷ÀäÈ´Ê±¼ä
+    /// </summary>
+    public float coolDown;
+    /// <summary>
+    /// ×îÐ¡ÉËº¦
+    /// </summary>
+    public int minDamge;
+    /// <summary>
+    /// ×î´óÉËº¦
+    /// </summary>
+    public int maxDamge;
+    /// <summary>
+    /// ±©»÷Öµ
+    /// </summary>
+    public float criticalMultiplier;
+    /// <summary>
+    /// ±©»÷ÂÊ
+    /// </summary>
+    public float criticalChance;
+}
