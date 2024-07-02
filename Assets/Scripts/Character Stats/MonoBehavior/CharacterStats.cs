@@ -10,6 +10,8 @@ public class CharacterStats : MonoBehaviour
 
     public bool isCritical;
 
+    public bool getHit;
+
     #region Read from CharacterData_SO
     public bool IsOpenAI
     {
@@ -35,6 +37,11 @@ public class CharacterStats : MonoBehaviour
     {
         get { if (characterData != null) { return characterData.currentDefence; } else { return 0; } }
         set { characterData.baseDefence = value; }
+    }
+    public float DestoryTime
+    {
+        get { if (characterData != null) { return characterData.destoryTime; } else { return 0; } }
+        set { characterData.destoryTime = value; }
     }
     #endregion
 
@@ -81,6 +88,7 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(CharacterStats attacker, CharacterStats defener)
     {
+        defener.getHit = true;
         float coreDamage = Random.Range(attacker.MinDange, attacker.MaxDange);
         if (attacker.isCritical)
         {

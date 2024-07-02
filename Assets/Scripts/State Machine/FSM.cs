@@ -17,9 +17,6 @@ public class EnemyParameter
 
 
     [Header("基础属性")]
-    [Tooltip("血量")]
-    public int health = 100;
-
     [Tooltip("视野范围")]
     public float sightRadius = 10;
 
@@ -38,6 +35,7 @@ public class EnemyParameter
 
     // 出生点
     [HideInInspector] public Vector3 originPosition;
+    [HideInInspector] public Quaternion originRotation;
     // 攻击目标
     [HideInInspector] public GameObject attackTarget;
     // 攻击时间间隔
@@ -48,6 +46,8 @@ public class FSM : MonoBehaviour
 {
     public EnemyParameter parameter;
     public CharacterStats characterStats;
+    public Collider coll;
+
     public IState currentState;
 
     private BaseIdleState idleState;
@@ -63,8 +63,10 @@ public class FSM : MonoBehaviour
         parameter.animator = GetComponent<Animator>();
         parameter.agent = GetComponent<NavMeshAgent>();
         characterStats = GetComponent<CharacterStats>();
+        coll = GetComponent<Collider>();
 
         parameter.originPosition = transform.position;
+        parameter.originRotation = transform.rotation;
         parameter.lastAttackTime = parameter.attackCD;
     }
 

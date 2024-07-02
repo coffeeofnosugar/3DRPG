@@ -25,6 +25,9 @@ public class BaseIdleState : IState
 
     public void OnUpdate()
     {
+        if (characterStats.getHit)
+            manager.TransitionState(StateType.Hit);
+
         if (manager.IsFoundPlayer())
             manager.TransitionState(StateType.FightIdle);
 
@@ -49,6 +52,7 @@ public class WalkState : IState
 {
     private FSM manager;
     private EnemyParameter parameter;
+    private CharacterStats characterStats;
 
     private Vector3 wayPoint;
     private float stoppingDistance;
@@ -57,6 +61,7 @@ public class WalkState : IState
     {
         this.manager = manager;
         this.parameter = manager.parameter;
+        this.characterStats = manager.characterStats;
         this.stoppingDistance = parameter.agent.stoppingDistance;
     }
 
@@ -69,6 +74,9 @@ public class WalkState : IState
 
     public void OnUpdate()
     {
+        if (characterStats.getHit)
+            manager.TransitionState(StateType.Hit);
+
         // 如果视野中有敌人，进入战斗模式
         if (manager.IsFoundPlayer())
             manager.TransitionState(StateType.FightIdle);
@@ -86,7 +94,19 @@ public class WalkState : IState
             // 返回出生点
             parameter.agent.destination = parameter.originPosition;
             if (parameter.originPosition.x == manager.transform.position.x && parameter.originPosition.z == manager.transform.position.z)
-                manager.TransitionState(StateType.BaseIdle);
+            {
+                float angel = Quaternion.Angle(parameter.originRotation, manager.transform.rotation);
+                Debug.Log(angel);
+                Debugs.Instance["angel"] = angel.ToString();
+                if (angel >= 0.01f)
+                {
+                    manager.transform.rotation = Quaternion.Slerp(manager.transform.rotation, parameter.originRotation, 0.01f);
+                }
+                else
+                {
+                    manager.TransitionState(StateType.BaseIdle);
+                }
+            }
         }
     }
 
@@ -127,6 +147,9 @@ public class FightIdleState : IState
 
     public void OnUpdate()
     {
+        if (characterStats.getHit)
+            manager.TransitionState(StateType.Hit);
+
         if (characterStats.IsOpenAI && parameter.attackTarget)
         {
             if (manager.IsTargetInAttackRange())
@@ -148,11 +171,13 @@ public class RunState : IState
 {
     private FSM manager;
     private EnemyParameter parameter;
+    private CharacterStats characterStats;
 
     public RunState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
+        this.characterStats = manager.characterStats;
     }
 
     public void OnEnter()
@@ -164,6 +189,9 @@ public class RunState : IState
 
     public void OnUpdate()
     {
+        if (characterStats.getHit)
+            manager.TransitionState(StateType.Hit);
+
         if (manager.IsFoundPlayer())
         {
             if (manager.IsTargetInAttackRange())
@@ -216,6 +244,9 @@ public class AttackState : IState
 
     public void OnUpdate()
     {
+        if (characterStats.getHit)
+            manager.TransitionState(StateType.Hit);
+
         info = parameter.animator.GetCurrentAnimatorStateInfo(1);
         Debugs.Instance["info.normalizedTime"] = info.normalizedTime.ToString("f2");
         if (info.normalizedTime >= .95f)
@@ -229,6 +260,7 @@ public class HitState : IState
 {
     private FSM manager;
     private EnemyParameter parameter;
+    private CharacterStats characterStats;
 
     private AnimatorStateInfo info;
 
@@ -236,6 +268,7 @@ public class HitState : IState
     {
         this.manager = manager;
         this.parameter = manager.parameter;
+        this.characterStats = manager.characterStats;
     }
 
     public void OnEnter()
@@ -245,33 +278,39 @@ public class HitState : IState
 
     public void OnUpdate()
     {
-        info = parameter.animator.GetCurrentAnimatorStateInfo(1);
-        if (info.normalizedTime >= .95f)
-            manager.TransitionState(StateType.FightIdle);
+        info = parameter.animator.GetCurrentAnimatorStateInfo(2);
 
-        if (parameter.health <= 0)
+        if (characterStats.CurrentHealth <= 0)
             manager.TransitionState(StateType.Die);
-        else
+        else if (info.normalizedTime >= .95f)
             manager.TransitionState(StateType.FightIdle);
     }
 
-    public void OnExit() { }
+    public void OnExit()
+    {
+        characterStats.getHit = false;
+    }
 }
 
 public class DieState : IState
 {
     private FSM manager;
     private EnemyParameter parameter;
+    private CharacterStats characterStats;
 
     public DieState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
+        this.characterStats = manager.characterStats;
     }
 
     public void OnEnter()
     {
-        parameter.animator.SetTrigger("Die");
+        parameter.agent.enabled = false;
+        manager.coll.enabled = false;
+        parameter.animator.SetTrigger("Death");
+        Object.Destroy(manager.gameObject, characterStats.DestoryTime);
     }
 
     public void OnUpdate() { }

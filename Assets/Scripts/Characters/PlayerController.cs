@@ -79,9 +79,12 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        var targetStats = attackTarget.GetComponent<CharacterStats>();
+        if (attackTarget)
+        {
+            var targetStats = attackTarget.GetComponent<CharacterStats>();
 
-        targetStats.TakeDamage(characterStats, targetStats);
+            targetStats.TakeDamage(characterStats, targetStats);
+        }
     }
     #endregion
 }
