@@ -5,6 +5,7 @@ public class BaseIdleState : IState
 {
     private FSM manager;
     private EnemyParameter parameter;
+    private CharacterStats characterStats;
 
     private float time = 0;
 
@@ -12,6 +13,7 @@ public class BaseIdleState : IState
     {
         this.manager = manager;
         this.parameter = manager.parameter;
+        this.characterStats = manager.characterStats;
     }
 
     public void OnEnter()
@@ -26,11 +28,14 @@ public class BaseIdleState : IState
         if (manager.IsFoundPlayer())
             manager.TransitionState(StateType.FightIdle);
 
-        if (parameter.isPatrol)
+        if (characterStats.IsOpenAI)
         {
-            time += Time.deltaTime;
-            if (time > parameter.idleTime)
-                manager.TransitionState(StateType.Walk);
+            if (parameter.originPosition.x != manager.transform.position.x || parameter.originPosition.z != manager.transform.position.z)
+            {
+                time += Time.deltaTime;
+                if (time > parameter.idleTime)
+                    manager.TransitionState(StateType.Walk);
+            }
         }
     }
 
@@ -46,11 +51,13 @@ public class WalkState : IState
     private EnemyParameter parameter;
 
     private Vector3 wayPoint;
+    private float stoppingDistance;
 
     public WalkState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
+        this.stoppingDistance = parameter.agent.stoppingDistance;
     }
 
     public void OnEnter()
@@ -62,13 +69,25 @@ public class WalkState : IState
 
     public void OnUpdate()
     {
+        // 如果视野中有敌人，进入战斗模式
         if (manager.IsFoundPlayer())
             manager.TransitionState(StateType.FightIdle);
 
-        parameter.agent.destination = wayPoint;
-        float stoppingDistance = parameter.agent.stoppingDistance;
-        if ((wayPoint - manager.transform.position).sqrMagnitude <= stoppingDistance * stoppingDistance)
-            manager.TransitionState(StateType.BaseIdle);
+        // 如果是巡逻怪
+        if (parameter.isPatrol)
+        {
+            // 开始巡逻
+            parameter.agent.destination = wayPoint;
+            if ((wayPoint - manager.transform.position).sqrMagnitude <= stoppingDistance * stoppingDistance)
+                manager.TransitionState(StateType.BaseIdle);
+        }
+        else
+        {
+            // 返回出生点
+            parameter.agent.destination = parameter.originPosition;
+            if (parameter.originPosition.x == manager.transform.position.x && parameter.originPosition.z == manager.transform.position.z)
+                manager.TransitionState(StateType.BaseIdle);
+        }
     }
 
     public void OnExit()
@@ -91,11 +110,13 @@ public class FightIdleState : IState
 {
     private FSM manager;
     private EnemyParameter parameter;
+    private CharacterStats characterStats;
 
     public FightIdleState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
+        this.characterStats = manager.characterStats;
     }
 
     public void OnEnter()
@@ -106,7 +127,7 @@ public class FightIdleState : IState
 
     public void OnUpdate()
     {
-        if (parameter.attackTarget)
+        if (characterStats.IsOpenAI && parameter.attackTarget)
         {
             if (manager.IsTargetInAttackRange())
             {
@@ -169,7 +190,6 @@ public class AttackState : IState
     private CharacterStats characterStats;
 
     private AnimatorStateInfo info;
-    private bool isCritical;
 
     public AttackState(FSM manager)
     {
@@ -181,9 +201,9 @@ public class AttackState : IState
     public void OnEnter()
     {
         // 判断是否暴击
-        isCritical = Random.value < characterStats.CriticalChance;
-        Debugs.Instance["isCritical"] = isCritical.ToString();
-        parameter.animator.SetBool("IsCritical", isCritical);
+        characterStats.isCritical = Random.value < characterStats.CriticalChance;
+        Debugs.Instance["isCritical"] = characterStats.isCritical.ToString();
+        parameter.animator.SetBool("IsCritical", characterStats.isCritical);
         // 攻击开始时重置CD
         parameter.lastAttackTime = 0;
         // 停止移动

@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Animator animator;
+    private CharacterStats characterStats;
 
     private GameObject attackTarget;
 
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        characterStats = GetComponent<CharacterStats>();
     }
 
     private void Start()
@@ -49,9 +52,6 @@ public class PlayerController : MonoBehaviour
     {
         if (enemy != null)
         {
-            //StopAllCoroutines();
-            //agent.isStopped = true;
-            //agent.isStopped = false;
             attackTarget = enemy;
             StartCoroutine(MoveToAttackTarget());
         }
@@ -70,9 +70,18 @@ public class PlayerController : MonoBehaviour
         agent.isStopped = true;
         if (lastAttackTime < 0)
         {
+            characterStats.isCritical = UnityEngine.Random.value < characterStats.attackData.criticalChance;
+            animator.SetBool("IsCritical", characterStats.isCritical);
             animator.SetTrigger("Attack");
             lastAttackTime = attackCD;
         }
+    }
+
+    public void Attack()
+    {
+        var targetStats = attackTarget.GetComponent<CharacterStats>();
+
+        targetStats.TakeDamage(characterStats, targetStats);
     }
     #endregion
 }

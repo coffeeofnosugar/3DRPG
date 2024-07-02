@@ -88,6 +88,10 @@ public class FSM : MonoBehaviour
         currentState.OnUpdate();
     }
 
+    /// <summary>
+    /// 状态转换
+    /// </summary>
+    /// <param name="type"></param>
     public void TransitionState(StateType type)
     {
         IState newState = type switch
@@ -106,6 +110,7 @@ public class FSM : MonoBehaviour
         {
             currentState.OnExit();
             Debug.Log($"退出 {currentState} ，进入 {newState}");
+            Debugs.Instance["EnemyState"] = $"{newState}, lastState: {currentState}";
         }
         currentState = newState;
         currentState.OnEnter();
@@ -145,6 +150,14 @@ public class FSM : MonoBehaviour
             return false;
     }
 
+    public void Attack()
+    {
+        if (parameter.attackTarget)
+        {
+            var targetState = parameter.attackTarget.GetComponent<CharacterStats>();
+            targetState.TakeDamage(characterStats, targetState);
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {

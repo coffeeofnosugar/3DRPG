@@ -8,7 +8,14 @@ public class CharacterStats : MonoBehaviour
 
     public AttackData_SO attackData;
 
+    public bool isCritical;
+
     #region Read from CharacterData_SO
+    public bool IsOpenAI
+    {
+        get { if (characterData != null) { return characterData.isOpenAI; } else { return true; } }
+        set { characterData.isOpenAI = value; }
+    }
     public int MaxHealth
     {
         get { if (characterData != null) { return characterData.maxHealth; } else { return 0; } }
@@ -68,4 +75,22 @@ public class CharacterStats : MonoBehaviour
         set { attackData.criticalChance = value; }
     }
     #endregion
+
+
+
+
+    public void TakeDamage(CharacterStats attacker, CharacterStats defener)
+    {
+        float coreDamage = Random.Range(attacker.MinDange, attacker.MaxDange);
+        if (attacker.isCritical)
+        {
+            coreDamage *= attacker.CriticalMultiplier;
+            Debug.Log("±©»÷£¡" + coreDamage);
+        }
+
+        int damage = Mathf.Max((int)coreDamage - defener.CurrentDefence, 0);
+        defener.CurrentHealth = Mathf.Max(defener.CurrentHealth - damage, 0);
+        // Update UI
+        // ¾­ÑéUpdate
+    }
 }

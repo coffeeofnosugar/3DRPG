@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e837e946bfdb5e340bfa9aef06c72ef1, type: 3}
   m_Name: Slime Data
   m_EditorClassIdentifier: 
+  isOpenAI: 1
   maxHealth: 30
-  currentHealth: 30
+  currentHealth: 0
   baseDefence: 2
   currentDefence: 2

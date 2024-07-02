@@ -20,7 +20,7 @@ public class Debugs : UnitySingleton<Debugs>
                 data[key] = value;
             else
                 data.Add(key, value);
-            UpdataContent();
+            UpdateContent();
         }
         get
         {
@@ -28,7 +28,7 @@ public class Debugs : UnitySingleton<Debugs>
         }
     }
 
-    public void UpdataContent()
+    public void UpdateContent()
     {
         str = new StringBuilder();
         foreach (var item in data)
