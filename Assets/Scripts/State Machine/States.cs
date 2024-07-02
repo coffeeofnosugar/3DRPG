@@ -17,6 +17,7 @@ public class BaseIdleState : IState
     public void OnEnter()
     {
         parameter.agent.destination = manager.transform.position;
+        // 进入非战斗状态后，使Animator的Layer第二层权重设置为0，不播放该层的动画
         parameter.animator.SetLayerWeight(1, 0);
     }
 
@@ -99,6 +100,7 @@ public class FightIdleState : IState
 
     public void OnEnter()
     {
+        // 进入战斗状态后，使Animator的Layer第二层权重设置为1，完全覆盖其他层的动画
         parameter.animator.SetLayerWeight(1, 1);
     }
 
@@ -106,7 +108,7 @@ public class FightIdleState : IState
     {
         if (parameter.attackTarget)
         {
-            if (manager.IsArriveAttackRange())
+            if (manager.IsTargetInAttackRange())
             {
                 if (parameter.lastAttackTime >= parameter.attackCD)
                 {
@@ -118,10 +120,7 @@ public class FightIdleState : IState
         }
     }
 
-    public void OnExit()
-    {
-
-    }
+    public void OnExit() {  }
 }
 
 public class RunState : IState
@@ -146,7 +145,7 @@ public class RunState : IState
     {
         if (manager.IsFoundPlayer())
         {
-            if (manager.IsArriveAttackRange())
+            if (manager.IsTargetInAttackRange())
             {
                 manager.TransitionState(StateType.FightIdle);
             }
@@ -167,33 +166,43 @@ public class AttackState : IState
 {
     private FSM manager;
     private EnemyParameter parameter;
+    private CharacterStats characterStats;
 
     private AnimatorStateInfo info;
+    private bool isCritical;
 
     public AttackState(FSM manager)
     {
         this.manager = manager;
         this.parameter = manager.parameter;
+        this.characterStats = manager.characterStats;
     }
 
     public void OnEnter()
     {
+        // 判断是否暴击
+        isCritical = Random.value < characterStats.CriticalChance;
+        Debugs.Instance["isCritical"] = isCritical.ToString();
+        parameter.animator.SetBool("IsCritical", isCritical);
+        // 攻击开始时重置CD
         parameter.lastAttackTime = 0;
+        // 停止移动
         parameter.agent.destination = manager.transform.position;
+        // 朝向攻击目标
+        manager.transform.LookAt(parameter.attackTarget.transform);
+        // 播放攻击动画
         parameter.animator.SetTrigger("Attack");
     }
 
     public void OnUpdate()
     {
         info = parameter.animator.GetCurrentAnimatorStateInfo(1);
+        Debugs.Instance["info.normalizedTime"] = info.normalizedTime.ToString("f2");
         if (info.normalizedTime >= .95f)
             manager.TransitionState(StateType.FightIdle);
     }
 
-    public void OnExit()
-    {
-
-    }
+    public void OnExit() {  }
 }
 
 public class HitState : IState

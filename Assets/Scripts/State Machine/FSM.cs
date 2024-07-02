@@ -47,6 +47,7 @@ public class EnemyParameter
 public class FSM : MonoBehaviour
 {
     public EnemyParameter parameter;
+    public CharacterStats characterStats;
     public IState currentState;
 
     private BaseIdleState idleState;
@@ -61,6 +62,7 @@ public class FSM : MonoBehaviour
     {
         parameter.animator = GetComponent<Animator>();
         parameter.agent = GetComponent<NavMeshAgent>();
+        characterStats = GetComponent<CharacterStats>();
 
         parameter.originPosition = transform.position;
         parameter.lastAttackTime = parameter.attackCD;
@@ -82,6 +84,7 @@ public class FSM : MonoBehaviour
     private void Update()
     {
         parameter.lastAttackTime += Time.deltaTime;
+        Debugs.Instance["parameter.lastAttackTime"] = parameter.lastAttackTime.ToString("f2");
         currentState.OnUpdate();
     }
 
@@ -131,15 +134,12 @@ public class FSM : MonoBehaviour
     /// 判断Player与自己的距离是否满足攻击距离
     /// </summary>
     /// <returns></returns>
-    public bool IsArriveAttackRange()
+    public bool IsTargetInAttackRange()
     {
         if (parameter.attackTarget)
         {
-            // 小于攻击距离
-            if ((parameter.attackTarget.transform.position - transform.position).sqrMagnitude <= 1)
-                return true;
-            else
-                return false;
+            // 返回与玩家之间的距离是否小于攻击距离
+            return (parameter.attackTarget.transform.position - transform.position).sqrMagnitude <= 1;
         }
         else
             return false;
