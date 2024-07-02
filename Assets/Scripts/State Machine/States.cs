@@ -22,7 +22,7 @@ public class BaseIdleState : IState
 
     public void OnUpdate()
     {
-        if (manager.FoundPlayer())
+        if (manager.IsFoundPlayer())
             manager.TransitionState(StateType.FightIdle);
 
         if (parameter.isPatrol)
@@ -61,7 +61,7 @@ public class WalkState : IState
 
     public void OnUpdate()
     {
-        if (manager.FoundPlayer())
+        if (manager.IsFoundPlayer())
             manager.TransitionState(StateType.FightIdle);
 
         parameter.agent.destination = wayPoint;
@@ -106,11 +106,12 @@ public class FightIdleState : IState
     {
         if (parameter.attackTarget)
         {
-            var colliders = Physics.OverlapBox(parameter.attackPoint.position, parameter.attackSize, parameter.attackPoint.rotation, 1 << 6);
-            if (colliders.Length > 0)
+            if (manager.IsArriveAttackRange())
             {
                 if (parameter.lastAttackTime >= parameter.attackCD)
+                {
                     manager.TransitionState(StateType.Attack);
+                }
             }
             else
                 manager.TransitionState(StateType.Run);
@@ -143,13 +144,14 @@ public class RunState : IState
 
     public void OnUpdate()
     {
-        if (manager.FoundPlayer())
+        if (manager.IsFoundPlayer())
         {
-            var colliders = Physics.OverlapBox(parameter.attackPoint.position, parameter.attackSize, parameter.attackPoint.rotation, 1 << 6);
-            if (colliders.Length <= 0)
-                parameter.agent.destination = parameter.attackTarget.transform.position;
-            else
+            if (manager.IsArriveAttackRange())
+            {
                 manager.TransitionState(StateType.FightIdle);
+            }
+            else
+                parameter.agent.destination = parameter.attackTarget.transform.position;
         }
         else
             manager.TransitionState(StateType.BaseIdle);

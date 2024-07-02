@@ -33,11 +33,6 @@ public class EnemyParameter
     [Tooltip("攻击CD")]
     public float attackCD = 2;
 
-    [Tooltip("攻击范围中心点"), Space(10)]
-    public Transform attackPoint;
-    [Tooltip("攻击范围大小")]
-    public Vector3 attackSize = Vector3.one;
-
     [HideInInspector] public Animator animator;
     [HideInInspector] public NavMeshAgent agent;
 
@@ -113,7 +108,11 @@ public class FSM : MonoBehaviour
         currentState.OnEnter();
     }
 
-    public bool FoundPlayer()
+    /// <summary>
+    /// 判断Player是否在自己的追击范围内，并将Palyer赋值给attackTarget
+    /// </summary>
+    /// <returns></returns>
+    public bool IsFoundPlayer()
     {
         var colliders = Physics.OverlapSphere(transform.position, parameter.patrolRange, 1 << 6);
         if (colliders.Length > 0)
@@ -126,6 +125,24 @@ public class FSM : MonoBehaviour
             parameter.attackTarget = null;
             return false;
         }
+    }
+
+    /// <summary>
+    /// 判断Player与自己的距离是否满足攻击距离
+    /// </summary>
+    /// <returns></returns>
+    public bool IsArriveAttackRange()
+    {
+        if (parameter.attackTarget)
+        {
+            // 小于攻击距离
+            if ((parameter.attackTarget.transform.position - transform.position).sqrMagnitude <= 1)
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
     }
 
 
@@ -141,23 +158,23 @@ public class FSM : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, parameter.sightRadius);
         #endregion
 
-        #region 攻击范围
-        // 该方法无法设置方块的方向，永远是世界坐标的方向，故放弃
-        //Gizmos.DrawWireCube(parameter.attackPoint.position, parameter.attackSize);
+        #region 攻击范围，不使用方块，而直接使用距离判断
+        //// 该方法无法设置方块的方向，永远是世界坐标的方向，故放弃
+        ////Gizmos.DrawWireCube(parameter.attackPoint.position, parameter.attackSize);
 
-        Transform center = parameter.attackPoint;
-        Matrix4x4 oldMat = Gizmos.matrix;
-        //获取目标旋转矩阵
-        Matrix4x4 rotationMat = center.localToWorldMatrix;
-        //设置当前为旋转矩阵
-        Gizmos.matrix = rotationMat;
-        {
-            Gizmos.color = Color.red;
-            //这里的center是相对目标中心而言，因为旋转cube与目标位置相同所以是zero
-            Gizmos.DrawWireCube(center: Vector3.zero, size: parameter.attackSize);
-        }
-        //重置当前矩阵
-        Gizmos.matrix = oldMat;
+        //Transform center = parameter.attackPoint;
+        //Matrix4x4 oldMat = Gizmos.matrix;
+        ////获取目标旋转矩阵
+        //Matrix4x4 rotationMat = center.localToWorldMatrix;
+        ////设置当前为旋转矩阵
+        //Gizmos.matrix = rotationMat;
+        //{
+        //    Gizmos.color = Color.red;
+        //    //这里的center是相对目标中心而言，因为旋转cube与目标位置相同所以是zero
+        //    Gizmos.DrawWireCube(center: Vector3.zero, size: parameter.attackSize);
+        //}
+        ////重置当前矩阵
+        //Gizmos.matrix = oldMat;
         #endregion
 
         #region 追击范围
