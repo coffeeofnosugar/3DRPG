@@ -43,6 +43,11 @@ public class CharacterStats : MonoBehaviour
         get { if (characterData != null) { return characterData.destoryTime; } else { return 0; } }
         set { characterData.destoryTime = value; }
     }
+    public bool IsDeath
+    {
+        get { if (characterData != null) { return characterData.isDeath; } else { return true; } }
+        set { characterData.isDeath = value; }
+    }
     #endregion
 
     #region Read fron AttackData_SO

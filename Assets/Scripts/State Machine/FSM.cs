@@ -42,11 +42,11 @@ public class EnemyParameter
     [HideInInspector] public float lastAttackTime;
 }
 
-public class FSM : MonoBehaviour
+public class FSM : MonoBehaviour, IEndGameObserver
 {
     public EnemyParameter parameter;
-    public CharacterStats characterStats;
-    public Collider coll;
+    [HideInInspector] public CharacterStats characterStats;
+    [HideInInspector] public Collider coll;
 
     public IState currentState;
 
@@ -57,6 +57,7 @@ public class FSM : MonoBehaviour
     private AttackState attackState;
     private HitState hitState;
     private DieState dieState;
+    private WinState winState;
 
     private void Awake()
     {
@@ -79,9 +80,21 @@ public class FSM : MonoBehaviour
         attackState = new AttackState(this);
         hitState = new HitState(this);
         dieState = new DieState(this);
+        winState = new WinState(this);
 
         TransitionState(StateType.BaseIdle);
     }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.AddObserver(this);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.RemoveObserver(this);
+    }
+
 
     private void Update()
     {
@@ -105,13 +118,14 @@ public class FSM : MonoBehaviour
             StateType.Attack => attackState,
             StateType.Hit => hitState,
             StateType.Die => dieState,
+            StateType.Win => winState,
             _ => idleState
         };
 
         if (currentState != null)
         {
             currentState.OnExit();
-            Debug.Log($"退出 {currentState} ，进入 {newState}");
+            //Debug.Log($"退出 {currentState} ，进入 {newState}");
             Debugs.Instance["EnemyState"] = $"{newState}, lastState: {currentState}";
         }
         currentState = newState;
@@ -152,12 +166,17 @@ public class FSM : MonoBehaviour
             return false;
     }
 
+    /// <summary>
+    /// 播放攻击动画时调用此方法
+    /// </summary>
     public void Attack()
     {
         if (parameter.attackTarget)
         {
             var targetState = parameter.attackTarget.GetComponent<CharacterStats>();
             targetState.TakeDamage(characterStats, targetState);
+            var targerAnimator = parameter.attackTarget.GetComponent<Animator>();
+            targerAnimator.SetTrigger("Hit");
         }
     }
 
@@ -196,5 +215,13 @@ public class FSM : MonoBehaviour
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position, parameter.runRange);
         #endregion
+    }
+
+    public void EndNotify()
+    {
+        // 失败
+        // 结束移动
+        // 结束动画
+        TransitionState(StateType.Win);
     }
 }

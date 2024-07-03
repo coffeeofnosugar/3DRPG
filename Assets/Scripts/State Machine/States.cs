@@ -309,8 +309,36 @@ public class DieState : IState
     {
         parameter.agent.enabled = false;
         manager.coll.enabled = false;
+        parameter.attackTarget = null;
         parameter.animator.SetTrigger("Death");
         Object.Destroy(manager.gameObject, characterStats.DestoryTime);
+    }
+
+    public void OnUpdate() { }
+
+    public void OnExit() { }
+}
+public class WinState : IState
+{
+    private FSM manager;
+    private EnemyParameter parameter;
+    private CharacterStats characterStats;
+
+    public WinState(FSM manager)
+    {
+        this.manager = manager;
+        this.parameter = manager.parameter;
+        this.characterStats = manager.characterStats;
+    }
+
+    public void OnEnter()
+    {
+        parameter.agent.enabled = false;
+        manager.coll.enabled = false;
+        parameter.attackTarget = null;
+        // 进入非战斗状态后，使Animator的Layer第二层权重设置为0，不播放该层的动画
+        parameter.animator.SetLayerWeight(1, 0);
+        parameter.animator.SetTrigger("Win");
     }
 
     public void OnUpdate() { }

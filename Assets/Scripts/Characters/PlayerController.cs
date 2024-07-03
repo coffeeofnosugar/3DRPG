@@ -3,7 +3,7 @@ using System.Collections;
 using System.Data.Common;
 using UnityEngine;
 using UnityEngine.AI;
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IEndGameObserver
 {
     private NavMeshAgent agent;
     private Animator animator;
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private float lastAttackTime;
     [SerializeField] private float attackCD = 0.5f;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -24,10 +25,14 @@ public class PlayerController : MonoBehaviour
     {
         MouseManager.Instance.OnMouseClicked += MoveToPoint;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
+
+        GameManager.Instance.RigisterPlayer(characterStats);
     }
 
     private void Update()
     {
+        characterStats.IsDeath = characterStats.CurrentHealth <= 0;
+        animator.SetBool("Death", characterStats.IsDeath);
         SwitchAnimation();
         lastAttackTime -= Time.deltaTime;
     }
@@ -85,6 +90,13 @@ public class PlayerController : MonoBehaviour
 
             targetStats.TakeDamage(characterStats, targetStats);
         }
+    }
+
+    public void EndNotify()
+    {
+        // 胜利
+        // 结束移动
+        // 结束动画
     }
     #endregion
 }
