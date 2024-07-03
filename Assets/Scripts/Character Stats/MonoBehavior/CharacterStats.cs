@@ -25,13 +25,22 @@ public class CharacterStats : MonoBehaviour
     // 攻击时间间隔
     [HideInInspector] public float lastAttackTime;
 
+    [HideInInspector] public float lastSkillTime;
+
     [HideInInspector] public bool isCritical;
 
     [HideInInspector] public bool getHit;
 
     [HideInInspector] public bool isDeath;
 
+    /// <summary>
+    /// 技能和普通攻击，取其最小值的平方
+    /// </summary>
+    [HideInInspector] public float sqrDistance;
 
+
+    [HideInInspector] public float sqrSkillRange;
+    [HideInInspector] public float sqrAttack;
 
     private void Awake()
     {
@@ -39,6 +48,20 @@ public class CharacterStats : MonoBehaviour
         {
             characterData = Instantiate(templateData);
         }
+        animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        coll = GetComponent<Collider>();
+
+        originPosition = transform.position;
+        originRotation = transform.rotation;
+        lastAttackTime = CoolDown;
+        lastSkillTime = SkillCoolDown;
+
+        float nearestDistance = Mathf.Min(SkillRange, AttackRange);
+        sqrDistance = nearestDistance * nearestDistance;
+
+        sqrSkillRange = SkillRange * SkillRange;
+        sqrAttack = AttackRange * AttackRange;
     }
 
 
@@ -111,15 +134,20 @@ public class CharacterStats : MonoBehaviour
     #endregion
 
     #region Read fron AttackData_SO
+    public float CriticalMultiplier
+    {
+        get { if (attackData != null) { return attackData.criticalMultiplier; } else { return 0; } }
+        set { attackData.criticalMultiplier = value; }
+    }
+    public float CriticalChance
+    {
+        get { if (attackData != null) { return attackData.criticalChance; } else { return 0; } }
+        set { attackData.criticalChance = value; }
+    }
     public float AttackRange
     {
         get { if (attackData != null) { return attackData.attackRange; } else { return 0; } }
         set { attackData.attackRange = value; }
-    }
-    public float SkillRange
-    {
-        get { if (attackData != null) { return attackData.skillRange; } else { return 0; } }
-        set { attackData.skillRange = value; }
     }
     public float CoolDown
     {
@@ -136,21 +164,41 @@ public class CharacterStats : MonoBehaviour
         get { if (attackData != null) { return attackData.maxDamge; } else { return 0; } }
         set { attackData.maxDamge = value; }
     }
-    public float CriticalMultiplier
+    public float SkillRange
     {
-        get { if (attackData != null) { return attackData.criticalMultiplier; } else { return 0; } }
-        set { attackData.criticalMultiplier = value; }
+        get { if (attackData != null) { return attackData.skillRange; } else { return 0; } }
+        set { attackData.skillRange = value; }
     }
-    public float CriticalChance
+    public float KickForce
     {
-        get { if (attackData != null) { return attackData.criticalChance; } else { return 0; } }
-        set { attackData.criticalChance = value; }
+        get { if (attackData != null) { return attackData.kickForce; } else { return 0; } }
+        set { attackData.kickForce = value; }
+    }
+    public float SkillCoolDown
+    {
+        get { if (attackData != null) { return attackData.skillCoolDown; } else { return 0; } }
+        set { attackData.skillCoolDown = value; }
+    }
+    public float SkillMinDamge
+    {
+        get { if (attackData != null) { return attackData.skillMinDamge; } else { return 0; } }
+        set { attackData.skillMinDamge = value; }
+    }
+    public float SkillMaxDamge
+    {
+        get { if (attackData != null) { return attackData.skillMaxDamge; } else { return 0; } }
+        set { attackData.skillMaxDamge = value; }
     }
     #endregion
 
 
 
 
+    /// <summary>
+    /// 造成伤害
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="defener"></param>
     public void TakeDamage(CharacterStats attacker, CharacterStats defener)
     {
         defener.getHit = true;

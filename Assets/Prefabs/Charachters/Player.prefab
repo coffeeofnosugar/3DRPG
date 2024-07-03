@@ -226,10 +226,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd3f79fb8c1edf48bcfcea8a3866906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: c60e3730ef32eb548977286265366c34, type: 2}
+  templateData: {fileID: 11400000, guid: c60e3730ef32eb548977286265366c34, type: 2}
+  characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: ed66465c4ab75e744820bf5c20e1bb2e, type: 2}
+  animator: {fileID: 0}
+  agent: {fileID: 0}
+  coll: {fileID: 0}
+  originPosition: {x: 0, y: 0, z: 0}
+  originRotation: {x: 0, y: 0, z: 0, w: 0}
+  attackTarget: {fileID: 0}
+  lastAttackTime: 0
+  lastSkillTime: 0
   isCritical: 0
   getHit: 0
+  isDeath: 0
 --- !u!1 &232836259364044905
 GameObject:
   m_ObjectHideFlags: 0

@@ -175,8 +175,8 @@ GameObject:
   - component: {fileID: 2211744114189261124}
   - component: {fileID: 923239224243628298}
   - component: {fileID: 471640471950754976}
-  - component: {fileID: 530486111894676424}
   - component: {fileID: 5829536809513940512}
+  - component: {fileID: 241385711578638276}
   m_Layer: 7
   m_Name: SlimePolyart
   m_TagString: Enemy
@@ -266,35 +266,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &530486111894676424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247539653154516912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d57a81d13050f14c8d918685ab183e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parameter:
-    isPatrol: 1
-    walkSpeed: 1.5
-    idleTime: 2
-    patrolRange: 8
-    sightRadius: 10
-    runSpeed: 2.5
-    runRange: 20
-    attackCD: 2
-    animator: {fileID: 0}
-    agent: {fileID: 0}
-    originPosition: {x: 0, y: 0, z: 0}
-    originRotation: {x: 0, y: 0, z: 0, w: 0}
-    attackTarget: {fileID: 0}
-    lastAttackTime: 0
-  characterStats: {fileID: 0}
-  coll: {fileID: 0}
 --- !u!114 &5829536809513940512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,9 +281,29 @@ MonoBehaviour:
   templateData: {fileID: 11400000, guid: b321e9fae03d1d140be030ee5874c8c7, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 7cbbf5b03b9879d4b8fa4058490bf741, type: 2}
+  animator: {fileID: 0}
+  agent: {fileID: 0}
+  coll: {fileID: 0}
+  originPosition: {x: 0, y: 0, z: 0}
+  originRotation: {x: 0, y: 0, z: 0, w: 0}
+  attackTarget: {fileID: 0}
+  lastAttackTime: 0
   isCritical: 0
   getHit: 0
   isDeath: 0
+--- !u!114 &241385711578638276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4247539653154516912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f82bbf80f51bf4a9b3e7bd537f883f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterStats: {fileID: 0}
 --- !u!1 &5492864219113465190
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,4 +17,11 @@ MonoBehaviour:
   currentHealth: 10
   baseDefence: 2
   currentDefence: 2
-  destoryTime: 4
+  destoryTime: 5
+  isPatrol: 1
+  walkSpeed: 1.5
+  idleTime: 2
+  patrolRange: 8
+  sightRadius: 10
+  runSpeed: 2.5
+  runRange: 20

@@ -4,109 +4,108 @@ using System.Data.Common;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(CharacterStats))]
-public class PlayerController : MonoBehaviour, IEndGameObserver
+namespace Characters
 {
-    private NavMeshAgent agent;
-    private Animator animator;
-    private CharacterStats characterStats;
-
-    private GameObject attackTarget;
-
-    private float lastAttackTime;
-    [SerializeField] private float attackCD = 0.5f;
-
-    private void Awake()
+    [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(CharacterStats))]
+    public class PlayerController : MonoBehaviour, IEndGameObserver
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        characterStats = GetComponent<CharacterStats>();
-    }
+        private NavMeshAgent agent;
+        private Animator animator;
+        private CharacterStats characterStats;
 
-    private void Start()
-    {
-        MouseManager.Instance.OnMouseClicked += MoveToPoint;
-        MouseManager.Instance.OnEnemyClicked += EventAttack;
+        private GameObject attackTarget;
 
-        GameManager.Instance.RigisterPlayer(characterStats);
-    }
+        private float lastAttackTime;
+        [SerializeField] private float attackCD = 0.5f;
 
-    private void Update()
-    {
-        characterStats.isDeath = characterStats.CurrentHealth <= 0;
-        animator.SetBool("Death", characterStats.isDeath);
-        SwitchAnimation();
-        lastAttackTime -= Time.deltaTime;
-    }
-
-    private void SwitchAnimation()
-    {
-        float speed = agent.velocity.sqrMagnitude;
-        float maxSpeed = agent.speed;
-        
-        animator.SetFloat("Speed", speed / (maxSpeed * maxSpeed));
-    }
-
-    #region move and attack
-    private void MoveToPoint(Vector3 target)
-    {
-        StopAllCoroutines();
-        if (characterStats.isDeath) return;
-        agent.isStopped = false;
-        agent.destination = target;
-    }
-
-    private void EventAttack(GameObject enemy)
-    {
-        if (characterStats.isDeath) return;
-        if (enemy != null)
+        private void Awake()
         {
-            attackTarget = enemy;
-            StartCoroutine(MoveToAttackTarget());
-        }
-    }
-
-    private IEnumerator MoveToAttackTarget()
-    {
-        transform.LookAt(attackTarget.transform);
-
-        while ((transform.position - attackTarget.transform.position).sqrMagnitude > 1)
-        {
-            agent.destination = attackTarget.transform.position;
-            yield return null;
+            agent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
+            characterStats = GetComponent<CharacterStats>();
         }
 
-        agent.isStopped = true;
-        if (lastAttackTime < 0)
+        private void Start()
         {
-            characterStats.isCritical = UnityEngine.Random.value < characterStats.attackData.criticalChance;
-            animator.SetBool("IsCritical", characterStats.isCritical);
-            animator.SetTrigger("Attack");
-            lastAttackTime = attackCD;
-        }
-    }
+            MouseManager.Instance.OnMouseClicked += MoveToPoint;
+            MouseManager.Instance.OnEnemyClicked += EventAttack;
 
-    public void Attack()
-    {
-        if (attackTarget)
+            GameManager.Instance.RigisterPlayer(characterStats);
+        }
+
+        private void Update()
         {
-            var targetStats = attackTarget.GetComponent<CharacterStats>();
-
-            targetStats.TakeDamage(characterStats, targetStats);
+            characterStats.isDeath = characterStats.CurrentHealth <= 0;
+            animator.SetBool("Death", characterStats.isDeath);
+            SwitchAnimation();
+            lastAttackTime -= Time.deltaTime;
         }
-    }
-    #endregion
 
-    public void EndNotify()
-    {
-        // 胜利
-        // 结束移动
-        // 结束动画
-    }
+        private void SwitchAnimation()
+        {
+            float speed = agent.velocity.sqrMagnitude;
+            float maxSpeed = agent.speed;
 
-    private void Death()
-    {
+            animator.SetFloat("Speed", speed / (maxSpeed * maxSpeed));
+        }
 
+        #region move and attack
+        private void MoveToPoint(Vector3 target)
+        {
+            StopAllCoroutines();
+            if (characterStats.isDeath) return;
+            agent.isStopped = false;
+            agent.destination = target;
+        }
+
+        private void EventAttack(GameObject enemy)
+        {
+            if (characterStats.isDeath) return;
+            if (enemy != null)
+            {
+                attackTarget = enemy;
+                StartCoroutine(MoveToAttackTarget());
+            }
+        }
+
+        private IEnumerator MoveToAttackTarget()
+        {
+            transform.LookAt(attackTarget.transform);
+
+            while ((transform.position - attackTarget.transform.position).sqrMagnitude > 1)
+            {
+                agent.destination = attackTarget.transform.position;
+                yield return null;
+            }
+
+            agent.isStopped = true;
+            if (lastAttackTime < 0)
+            {
+                characterStats.isCritical = UnityEngine.Random.value < characterStats.attackData.criticalChance;
+                animator.SetBool("IsCritical", characterStats.isCritical);
+                animator.SetTrigger("Attack");
+                lastAttackTime = attackCD;
+            }
+        }
+
+        public void Attack()
+        {
+            if (attackTarget)
+            {
+                transform.LookAt(attackTarget.transform.position);
+                var targetStats = attackTarget.GetComponent<CharacterStats>();
+
+                targetStats.TakeDamage(characterStats, targetStats);
+            }
+        }
+        #endregion
+
+        public void EndNotify()
+        {
+            // 胜利
+            // 结束移动
+            // 结束动画
+        }
     }
 }
