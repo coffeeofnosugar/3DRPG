@@ -1,54 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[System.Serializable]
-public class EnemyParameter
-{
-
-    [Header("巡逻/站岗")]
-    [Tooltip("是巡逻怪物？")]
-    public bool isPatrol = true;
-    [Tooltip("巡逻速度（若isPatrol = false，则该数据无用）")]
-    public float walkSpeed = 1.5f;
-    [Tooltip("逗留时间（若isPatrol = false，则该数据无用）")]
-    public float idleTime = 2;
-    [Tooltip("巡逻范围")]
-    public float patrolRange = 8;
-
-
-    [Header("基础属性")]
-    [Tooltip("视野范围")]
-    public float sightRadius = 10;
-
-    [Tooltip("追击速度")]
-    public float runSpeed = 2.5f;
-
-    [Tooltip("追击范围")]
-    public float runRange = 20;
-
-    [Header("攻击")]
-    [Tooltip("攻击CD")]
-    public float attackCD = 2;
-
-    [HideInInspector] public Animator animator;
-    [HideInInspector] public NavMeshAgent agent;
-
-    // 出生点
-    [HideInInspector] public Vector3 originPosition;
-    [HideInInspector] public Quaternion originRotation;
-    // 攻击目标
-    [HideInInspector] public GameObject attackTarget;
-    // 攻击时间间隔
-    [HideInInspector] public float lastAttackTime;
-}
-
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CharacterStats))]
 public class FSM : MonoBehaviour, IEndGameObserver
 {
-    public EnemyParameter parameter;
     [HideInInspector] public CharacterStats characterStats;
-    [HideInInspector] public Collider coll;
 
     public IState currentState;
 
@@ -63,14 +20,14 @@ public class FSM : MonoBehaviour, IEndGameObserver
 
     private void Awake()
     {
-        parameter.animator = GetComponent<Animator>();
-        parameter.agent = GetComponent<NavMeshAgent>();
         characterStats = GetComponent<CharacterStats>();
-        coll = GetComponent<Collider>();
+        characterStats.animator = GetComponent<Animator>();
+        characterStats.agent = GetComponent<NavMeshAgent>();
+        characterStats.coll = GetComponent<Collider>();
 
-        parameter.originPosition = transform.position;
-        parameter.originRotation = transform.rotation;
-        parameter.lastAttackTime = parameter.attackCD;
+        characterStats.originPosition = transform.position;
+        characterStats.originRotation = transform.rotation;
+        characterStats.lastAttackTime = characterStats.CoolDown;
     }
 
     private void Start()
@@ -100,8 +57,8 @@ public class FSM : MonoBehaviour, IEndGameObserver
 
     private void Update()
     {
-        parameter.lastAttackTime += Time.deltaTime;
-        Debugs.Instance["parameter.lastAttackTime"] = parameter.lastAttackTime.ToString("f2");
+        characterStats.lastAttackTime += Time.deltaTime;
+        Debugs.Instance["parameter.lastAttackTime"] = characterStats.lastAttackTime.ToString("f2");
         currentState.OnUpdate();
     }
 
@@ -140,15 +97,15 @@ public class FSM : MonoBehaviour, IEndGameObserver
     /// <returns></returns>
     public bool IsFoundPlayer()
     {
-        var colliders = Physics.OverlapSphere(transform.position, parameter.patrolRange, 1 << 6);
+        var colliders = Physics.OverlapSphere(transform.position, characterStats.PatrolRange, 1 << 6);
         if (colliders.Length > 0)
         {
-            parameter.attackTarget = colliders[0].gameObject;
+            characterStats.attackTarget = colliders[0].gameObject;
             return true;
         }
         else
         {
-            parameter.attackTarget = null;
+            characterStats.attackTarget = null;
             return false;
         }
     }
@@ -159,10 +116,10 @@ public class FSM : MonoBehaviour, IEndGameObserver
     /// <returns></returns>
     public bool IsTargetInAttackRange()
     {
-        if (parameter.attackTarget)
+        if (characterStats.attackTarget)
         {
             // 返回与玩家之间的距离是否小于攻击距离
-            return (parameter.attackTarget.transform.position - transform.position).sqrMagnitude <= 1;
+            return (characterStats.attackTarget.transform.position - transform.position).sqrMagnitude <= 1;
         }
         else
             return false;
@@ -173,11 +130,11 @@ public class FSM : MonoBehaviour, IEndGameObserver
     /// </summary>
     public void Attack()
     {
-        if (parameter.attackTarget)
+        if (characterStats.attackTarget)
         {
-            var targetState = parameter.attackTarget.GetComponent<CharacterStats>();
+            var targetState = characterStats.attackTarget.GetComponent<CharacterStats>();
             targetState.TakeDamage(characterStats, targetState);
-            var targerAnimator = parameter.attackTarget.GetComponent<Animator>();
+            var targerAnimator = characterStats.attackTarget.GetComponent<Animator>();
             targerAnimator.SetTrigger("Hit");
         }
     }
@@ -185,16 +142,16 @@ public class FSM : MonoBehaviour, IEndGameObserver
     private void OnDrawGizmosSelected()
     {
         #region 巡逻范围，该显示主要是为编辑时展示用的，运行后显示的位置不对
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, parameter.patrolRange);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(transform.position, characterStats.PatrolRange);
         #endregion
 
         #region 视野范围
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, parameter.sightRadius);
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawWireSphere(transform.position, characterStats.SightRadius);
         #endregion
 
-        #region 攻击范围，不使用方块，而直接使用距离判断
+        #region 攻击范围，不使用方块，而直接使用距离判断，舍弃方案
         //// 该方法无法设置方块的方向，永远是世界坐标的方向，故放弃
         ////Gizmos.DrawWireCube(parameter.attackPoint.position, parameter.attackSize);
 
@@ -214,8 +171,8 @@ public class FSM : MonoBehaviour, IEndGameObserver
         #endregion
 
         #region 追击范围
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(transform.position, parameter.runRange);
+        //Gizmos.color = Color.black;
+        //Gizmos.DrawWireSphere(transform.position, characterStats.RunRange);
         #endregion
     }
 

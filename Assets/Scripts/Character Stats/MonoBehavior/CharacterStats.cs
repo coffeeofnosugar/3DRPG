@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -11,11 +12,25 @@ public class CharacterStats : MonoBehaviour
 
     public AttackData_SO attackData;
 
-    public bool isCritical;
 
-    public bool getHit;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public NavMeshAgent agent;
+    [HideInInspector] public Collider coll;
 
-    public bool isDeath;
+    // 出生点
+    [HideInInspector] public Vector3 originPosition;
+    [HideInInspector] public Quaternion originRotation;
+    // 攻击目标
+    [HideInInspector] public GameObject attackTarget;
+    // 攻击时间间隔
+    [HideInInspector] public float lastAttackTime;
+
+    [HideInInspector] public bool isCritical;
+
+    [HideInInspector] public bool getHit;
+
+    [HideInInspector] public bool isDeath;
+
 
 
     private void Awake()
@@ -57,6 +72,41 @@ public class CharacterStats : MonoBehaviour
     {
         get { if (characterData != null) { return characterData.destoryTime; } else { return 0; } }
         set { characterData.destoryTime = value; }
+    }
+    public bool IsPatrol
+    {
+        get { if (characterData != null) { return characterData.isPatrol; } else { return true; } }
+        set { characterData.isPatrol = value; }
+    }
+    public float WalkSpeed
+    {
+        get { if (characterData != null) { return characterData.walkSpeed; } else { return 0; } }
+        set { characterData.walkSpeed = value; }
+    }
+    public float IdleTime
+    {
+        get { if (characterData != null) { return characterData.idleTime; } else { return 0; } }
+        set { characterData.idleTime = value; }
+    }
+    public float PatrolRange
+    {
+        get { if (characterData != null) { return characterData.patrolRange; } else { return 0; } }
+        set { characterData.patrolRange = value; }
+    }
+    public float SightRadius
+    {
+        get { if (characterData != null) { return characterData.sightRadius; } else { return 0; } }
+        set { characterData.sightRadius = value; }
+    }
+    public float RunSpeed
+    {
+        get { if (characterData != null) { return characterData.runSpeed; } else { return 0; } }
+        set { characterData.runSpeed = value; }
+    }
+    public float RunRange
+    {
+        get { if (characterData != null) { return characterData.runRange; } else { return 0; } }
+        set { characterData.runRange = value; }
     }
     #endregion
 

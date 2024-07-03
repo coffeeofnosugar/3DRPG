@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpenAI: 0
   maxHealth: 100
-  currentHealth: 2
+  currentHealth: 100
   baseDefence: 2
   currentDefence: 2
   destoryTime: 999999
+  isPatrol: 1
+  walkSpeed: 1.5
+  idleTime: 2
+  patrolRange: 8
+  sightRadius: 10
+  runSpeed: 2.5
+  runRange: 20
