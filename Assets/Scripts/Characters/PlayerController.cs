@@ -3,6 +3,9 @@ using System.Collections;
 using System.Data.Common;
 using UnityEngine;
 using UnityEngine.AI;
+
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterStats))]
 public class PlayerController : MonoBehaviour, IEndGameObserver
 {
     private NavMeshAgent agent;
@@ -31,8 +34,8 @@ public class PlayerController : MonoBehaviour, IEndGameObserver
 
     private void Update()
     {
-        characterStats.IsDeath = characterStats.CurrentHealth <= 0;
-        animator.SetBool("Death", characterStats.IsDeath);
+        characterStats.isDeath = characterStats.CurrentHealth <= 0;
+        animator.SetBool("Death", characterStats.isDeath);
         SwitchAnimation();
         lastAttackTime -= Time.deltaTime;
     }
@@ -49,12 +52,14 @@ public class PlayerController : MonoBehaviour, IEndGameObserver
     private void MoveToPoint(Vector3 target)
     {
         StopAllCoroutines();
+        if (characterStats.isDeath) return;
         agent.isStopped = false;
         agent.destination = target;
     }
 
     private void EventAttack(GameObject enemy)
     {
+        if (characterStats.isDeath) return;
         if (enemy != null)
         {
             attackTarget = enemy;
@@ -91,6 +96,7 @@ public class PlayerController : MonoBehaviour, IEndGameObserver
             targetStats.TakeDamage(characterStats, targetStats);
         }
     }
+    #endregion
 
     public void EndNotify()
     {
@@ -98,5 +104,9 @@ public class PlayerController : MonoBehaviour, IEndGameObserver
         // 结束移动
         // 结束动画
     }
-    #endregion
+
+    private void Death()
+    {
+
+    }
 }

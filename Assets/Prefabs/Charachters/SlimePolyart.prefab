@@ -234,7 +234,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2
-  m_Acceleration: 8
+  m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 500
   m_StoppingDistance: 1
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameter:
-    isPatrol: 0
+    isPatrol: 1
     walkSpeed: 1.5
     idleTime: 2
     patrolRange: 8
@@ -307,10 +307,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd3f79fb8c1edf48bcfcea8a3866906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: b321e9fae03d1d140be030ee5874c8c7, type: 2}
+  templateData: {fileID: 11400000, guid: b321e9fae03d1d140be030ee5874c8c7, type: 2}
+  characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 7cbbf5b03b9879d4b8fa4058490bf741, type: 2}
   isCritical: 0
   getHit: 0
+  isDeath: 0
 --- !u!1 &5492864219113465190
 GameObject:
   m_ObjectHideFlags: 0

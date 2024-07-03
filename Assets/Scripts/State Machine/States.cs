@@ -28,16 +28,25 @@ public class BaseIdleState : IState
         if (characterStats.getHit)
             manager.TransitionState(StateType.Hit);
 
-        if (manager.IsFoundPlayer())
+        else if (manager.IsFoundPlayer())
             manager.TransitionState(StateType.FightIdle);
 
-        if (characterStats.IsOpenAI)
+        else if (characterStats.IsOpenAI)
         {
-            if (parameter.originPosition.x != manager.transform.position.x || parameter.originPosition.z != manager.transform.position.z)
+            if (parameter.isPatrol)
             {
                 time += Time.deltaTime;
                 if (time > parameter.idleTime)
                     manager.TransitionState(StateType.Walk);
+            }
+            else
+            {
+                if (parameter.originPosition.x != manager.transform.position.x || parameter.originPosition.z != manager.transform.position.z)
+                {
+                    time += Time.deltaTime;
+                    if (time > parameter.idleTime)
+                        manager.TransitionState(StateType.Walk);
+                }
             }
         }
     }

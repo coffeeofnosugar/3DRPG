@@ -17,5 +17,4 @@ MonoBehaviour:
   currentHealth: 2
   baseDefence: 2
   currentDefence: 2
-  destoryTime: 0
-  isDeath: 0
+  destoryTime: 999999

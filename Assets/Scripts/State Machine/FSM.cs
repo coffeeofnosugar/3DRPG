@@ -42,6 +42,8 @@ public class EnemyParameter
     [HideInInspector] public float lastAttackTime;
 }
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterStats))]
 public class FSM : MonoBehaviour, IEndGameObserver
 {
     public EnemyParameter parameter;
@@ -92,7 +94,7 @@ public class FSM : MonoBehaviour, IEndGameObserver
 
     private void OnDisable()
     {
-        GameManager.Instance.RemoveObserver(this);
+        GameManager.Instance?.RemoveObserver(this);
     }
 
 

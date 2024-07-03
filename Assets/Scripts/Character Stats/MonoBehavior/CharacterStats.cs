@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public CharacterData_SO templateData;
+
+    //[HideInInspector]
     public CharacterData_SO characterData;
 
     public AttackData_SO attackData;
@@ -11,6 +14,18 @@ public class CharacterStats : MonoBehaviour
     public bool isCritical;
 
     public bool getHit;
+
+    public bool isDeath;
+
+
+    private void Awake()
+    {
+        if (templateData != null)
+        {
+            characterData = Instantiate(templateData);
+        }
+    }
+
 
     #region Read from CharacterData_SO
     public bool IsOpenAI
@@ -42,11 +57,6 @@ public class CharacterStats : MonoBehaviour
     {
         get { if (characterData != null) { return characterData.destoryTime; } else { return 0; } }
         set { characterData.destoryTime = value; }
-    }
-    public bool IsDeath
-    {
-        get { if (characterData != null) { return characterData.isDeath; } else { return true; } }
-        set { characterData.isDeath = value; }
     }
     #endregion
 

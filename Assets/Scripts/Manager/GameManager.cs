@@ -10,7 +10,7 @@ public class GameManager : UnitySingleton<GameManager>
 
     private void Update()
     {
-        if (playerStats.IsDeath)
+        if (playerStats.isDeath)
         {
             Debug.Log("ÓÎÏ·½áÊø");
             NotifyObserver();
