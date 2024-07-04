@@ -15,6 +15,10 @@ public abstract class Node : ScriptableObject
     public State state = State.Running;
     public bool started = false;
     public string guid;
+    /// <summary>
+    /// 记录element元素在视图中的位置
+    /// </summary>
+    public Vector2 position;
 
     public State Update()
     {

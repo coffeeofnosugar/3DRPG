@@ -1,6 +1,10 @@
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.Experimental.GraphView;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
 
 /// <summary>
 /// 行为树视图右边区域
@@ -27,7 +31,7 @@ public class BehaviourTreeView : GraphView
         styleSheets.Add(styleSheet);
     }
 
-    // 更新视图
+    // 打开视图
     internal void PopulateView(BehaviorTree tree)
     {
         this.tree = tree;
@@ -39,6 +43,39 @@ public class BehaviourTreeView : GraphView
 
         // 逐一创建每个节点
         tree.nodes.ForEach(n => CreateNodeView(n));
+
+        // 逐一连接每个节点
+        tree.nodes.ForEach(n =>
+        {
+            var children = tree.GetChildren(n);
+            NodeView parentView = FindNodeView(n);
+            children.ForEach(c =>
+            {
+                NodeView childView = FindNodeView(c);
+
+                Edge edge = parentView.output.ConnectTo(childView.input);
+                AddElement(edge);
+            });
+        });
+    }
+
+    private NodeView FindNodeView(Node node)
+    {
+        return GetNodeByGuid(node.guid) as NodeView;
+    }
+
+    /// <summary>
+    /// 该方法能使行为树视图中的节点连接起来
+    /// </summary>
+    /// <param name="startPort"></param>
+    /// <param name="nodeAdapter"></param>
+    /// <returns></returns>
+    public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+    {
+        //return base.GetCompatiblePorts(startPort, nodeAdapter);
+        return ports.ToList().Where(endPort =>
+        endPort.direction != startPort.direction &&
+        endPort.node != startPort.node).ToList();
     }
 
     /// <summary>
@@ -48,18 +85,41 @@ public class BehaviourTreeView : GraphView
     /// <returns></returns>
     private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
     {
-        // 如果正在移除的元素不为空，在移除该元素的同时，移除ScriptableObject中对应的节点
+        // 如果正在移除的元素不为空
         if (graphViewChange.elementsToRemove != null)
         {
             graphViewChange.elementsToRemove.ForEach(elem =>
             {
+                // 在移除该元素的同时，移除ScriptableObject中对应的节点
                 NodeView nodeView = elem as NodeView;
                 if (nodeView != null)
                 {
                     tree.DeleteNode(nodeView.node);
                 }
+
+                // 移除的同时，移除他的父级的child
+                Edge edge = elem as Edge;
+                if (edge != null)
+                {
+                    NodeView parentView = edge.output.node as NodeView;
+                    NodeView childView = edge.input.node as NodeView;
+
+                    tree.RemoveChild(parentView.node, childView.node);
+                }
             });
         }
+
+        // 当连线的同时，在ScriptableObject中添加子节点
+        if (graphViewChange.edgesToCreate != null)
+        {
+            graphViewChange.edgesToCreate.ForEach(edge =>
+            {
+                NodeView parentView = edge.output.node as NodeView;
+                NodeView childView = edge.input.node as NodeView;
+                tree.AddChild(parentView.node, childView.node);
+            });
+        }
+
         return graphViewChange;
     }
 

@@ -34,8 +34,14 @@ public class BehaviourTreeEditor : EditorWindow
 
         treeView = root.Q<BehaviourTreeView>();
         inspectorView = root.Q<InspectorView>();
+
+        // 确保我们在选中ScriptableObject时打开视图，能直接将选中的内容显示到视图中
+        OnSelectionChange();
     }
 
+    /// <summary>
+    /// 选择Hierarchy和Project时会执行该方法
+    /// </summary>
     private void OnSelectionChange()
     {
         BehaviorTree tree = Selection.activeObject as BehaviorTree;
