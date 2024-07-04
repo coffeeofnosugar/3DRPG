@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -34,6 +35,7 @@ public class BehaviourTreeEditor : EditorWindow
 
         treeView = root.Q<BehaviourTreeView>();
         inspectorView = root.Q<InspectorView>();
+        treeView.OnNodeSelected = OnNodeSelectionChanged;
 
         // 确保我们在选中ScriptableObject时打开视图，能直接将选中的内容显示到视图中
         OnSelectionChange();
@@ -50,5 +52,10 @@ public class BehaviourTreeEditor : EditorWindow
         {
             treeView.PopulateView(tree);
         }
+    }
+
+    private void OnNodeSelectionChanged(NodeView nodeView)
+    {
+        inspectorView.UpdateSelection(nodeView);
     }
 }

@@ -12,13 +12,13 @@ public abstract class Node : ScriptableObject
         Success
     }
 
-    public State state = State.Running;
-    public bool started = false;
-    public string guid;
+    [HideInInspector] public State state = State.Running;
+    [HideInInspector] public bool started = false;
+    [HideInInspector] public string guid;
     /// <summary>
     /// 记录element元素在视图中的位置
     /// </summary>
-    public Vector2 position;
+    [HideInInspector] public Vector2 position;
 
     public State Update()
     {

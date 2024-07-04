@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine.UIElements;
 
 /// <summary>
@@ -7,8 +8,21 @@ public class InspectorView : VisualElement
 {
     public new class UxmlFactory : UxmlFactory<InspectorView, VisualElement.UxmlTraits> { }
 
+    private Editor editor;
+
     public InspectorView()
     {
 
+    }
+
+    internal void UpdateSelection(NodeView nodeView)
+    {
+        Clear();
+
+        UnityEngine.Object.DestroyImmediate(editor);
+        editor = Editor.CreateEditor(nodeView.node);
+        // 创建一个容器，并将节点的Inspector窗口上的内容显示到左侧窗口
+        IMGUIContainer container = new IMGUIContainer(() => { editor.OnInspectorGUI(); });
+        Add(container);
     }
 }

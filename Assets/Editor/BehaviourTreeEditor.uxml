@@ -3,13 +3,13 @@
     <uie:Toolbar>
         <uie:ToolbarMenu tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="Assets" />
     </uie:Toolbar>
-    <SplitView fixed-pane-initial-dimension="150">
+    <SplitView fixed-pane-initial-dimension="300">
         <ui:VisualElement name="left-panel" style="flex-grow: 1; -unity-slice-scale: 0;">
-            <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-background-image-tint-color: rgb(60, 60, 60); background-color: rgb(37, 37, 37); color: rgb(196, 196, 196); -unity-slice-scale: 1px; flex-shrink: 0; flex-grow: 0; font-size: 14px; -unity-text-align: upper-left; white-space: nowrap; text-overflow: clip; -unity-background-scale-mode: stretch-to-fill; border-top-width: 0; -unity-text-outline-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-left: 0; padding-bottom: 0;" />
+            <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-background-image-tint-color: rgb(60, 60, 60); background-color: rgb(37, 37, 37); color: rgb(196, 196, 196); -unity-slice-scale: 1px; flex-shrink: 0; flex-grow: 0; font-size: 14px; -unity-text-align: upper-left; white-space: nowrap; text-overflow: clip; -unity-background-scale-mode: stretch-to-fill; border-top-width: 0; -unity-text-outline-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-left: 0; padding-bottom: 0; border-left-width: 5px;" />
             <InspectorView style="flex-grow: 1; background-color: rgb(56, 56, 56);" />
         </ui:VisualElement>
         <ui:VisualElement name="right-panel" style="flex-grow: 1;">
-            <ui:Label tabindex="-1" text="TreeView" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37); color: rgb(196, 196, 196); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <ui:Label tabindex="-1" text="TreeView" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37); color: rgb(196, 196, 196); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; border-left-width: 5px;" />
             <BehaviourTreeView focusable="true" style="flex-grow: 1;" />
         </ui:VisualElement>
     </SplitView>
