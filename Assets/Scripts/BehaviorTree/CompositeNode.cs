@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BehaviorTree
+/// <summary>
+/// 复合节点
+/// 类似控制流，for  if等
+/// 多个子节点
+/// </summary>
+public abstract class CompositeNode : Node
 {
-    /// <summary>
-    /// 复合节点
-    /// 类似控制流，for  if等
-    /// 多个子节点
-    /// </summary>
-    public abstract class CompositeNode : Node
-    {
-        public List<Node> children = new List<Node>();
-    }
+    public List<Node> children = new List<Node>();
 }
