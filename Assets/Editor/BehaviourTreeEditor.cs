@@ -47,8 +47,9 @@ public class BehaviourTreeEditor : EditorWindow
     private void OnSelectionChange()
     {
         BehaviorTree tree = Selection.activeObject as BehaviorTree;
-
-        if (tree)       // 选中的是行为树，更改视图中所展示的内容，变成最新选中的行为树
+        // 选中的是行为树，更改视图中所展示的内容，变成最新选中的行为树
+        // 后半部分的判断是防止，在创建新的行为树，但unity还没准备好就选择，会报错
+        if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
         {
             treeView.PopulateView(tree);
         }

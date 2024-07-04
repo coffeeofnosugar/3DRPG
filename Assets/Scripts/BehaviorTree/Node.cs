@@ -39,6 +39,17 @@ public abstract class Node : ScriptableObject
         return state;
     }
 
+    /// <summary>
+    /// 克隆节点
+    /// 如果不同的怪使用了同一个ScriptableObject行为树，那么他们之间运行的时候会相互影响
+    /// 可以克隆一遍节点
+    /// </summary>
+    /// <returns></returns>
+    public virtual Node Clone()
+    {
+        return Instantiate(this);
+    }
+
     protected abstract void OnStart();
     protected abstract void OnStop();
     protected abstract State OnUpdate();

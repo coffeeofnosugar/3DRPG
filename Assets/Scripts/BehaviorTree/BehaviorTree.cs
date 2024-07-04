@@ -16,11 +16,19 @@ public class BehaviorTree : ScriptableObject
 
     public Node.State Update()
     {
+        Debug.Log(rootNode.name);
         if (rootNode.state == Node.State.Running)
         {
             treeState = rootNode.Update();
         }
         return treeState;
+    }
+
+    public BehaviorTree Clone()
+    {
+        BehaviorTree tree = Instantiate(this);
+        tree.rootNode = tree.rootNode.Clone();
+        return tree;
     }
 
     /// <summary>
@@ -58,6 +66,12 @@ public class BehaviorTree : ScriptableObject
     /// <param name="child"></param>
     public void AddChild(Node parent, Node child)
     {
+        RootNode rootNode = parent as RootNode;
+        if (rootNode)
+        {
+            rootNode.child = child;
+        }
+
         CompositeNode composite = parent as CompositeNode;
         if (composite)
         {
@@ -73,6 +87,12 @@ public class BehaviorTree : ScriptableObject
 
     public void RemoveChild(Node parent, Node child)
     {
+        RootNode rootNode = parent as RootNode;
+        if (rootNode)
+        {
+            rootNode.child = null;
+        }
+
         CompositeNode composite = parent as CompositeNode;
         if (composite)
         {
@@ -90,6 +110,12 @@ public class BehaviorTree : ScriptableObject
     {
         List<Node> children = new List<Node>();
 
+        RootNode rootNode = parent as RootNode;
+        if (rootNode && rootNode.child != null)
+        {
+            children.Add(rootNode.child);
+        }
+
         CompositeNode composite = parent as CompositeNode;
         if (composite)
         {
@@ -97,7 +123,7 @@ public class BehaviorTree : ScriptableObject
         }
 
         DecoratorNode decorator = parent as DecoratorNode;
-        if (decorator)
+        if (decorator && decorator.child != null)
         {
             children.Add(decorator.child);
         }
