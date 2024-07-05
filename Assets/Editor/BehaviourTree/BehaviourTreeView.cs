@@ -14,7 +14,7 @@ public class BehaviourTreeView : GraphView
     public Action<NodeView> OnNodeSelected;
     public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
 
-    BehaviorTree tree;
+    BehaviourTree tree;
     public BehaviourTreeView()
     {
         Insert(0, new GridBackground());
@@ -28,12 +28,15 @@ public class BehaviourTreeView : GraphView
         // 可框中选择
         this.AddManipulator(new RectangleSelector());
 
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
+        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
         styleSheets.Add(styleSheet);
     }
 
-    // 打开视图
-    internal void PopulateView(BehaviorTree tree)
+    /// <summary>
+    /// 将ScriptableObject中的内容显示到视图中，并注册委托：在视图中发生更改时执行`OnGraphViewChanged`方法
+    /// </summary>
+    /// <param name="tree"></param>
+    internal void PopulateView(BehaviourTree tree)
     {
         this.tree = tree;
 
@@ -71,13 +74,19 @@ public class BehaviourTreeView : GraphView
         });
     }
 
+    /// <summary>
+    /// 通过节点的guid查找与其对应的节点元素
+    /// </summary>
+    /// <param name="node"></param>
+    /// <returns></returns>
     private NodeView FindNodeView(Node node)
     {
         return GetNodeByGuid(node.guid) as NodeView;
     }
 
     /// <summary>
-    /// 该方法能使行为树视图中的节点连接起来，不使用该方法将无法连接
+    /// 重写父类方法
+    /// 该方法能让视图中的节点相互连接，如果不写该方法将无法连接
     /// </summary>
     /// <param name="startPort"></param>
     /// <param name="nodeAdapter"></param>
@@ -135,7 +144,10 @@ public class BehaviourTreeView : GraphView
         return graphViewChange;
     }
 
-    // 添加右键菜单内容
+    /// <summary>
+    /// 添加右键菜单内容
+    /// </summary>
+    /// <param name="evt"></param>
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
         //base.BuildContextualMenu(evt);

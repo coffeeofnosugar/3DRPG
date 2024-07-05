@@ -8,7 +8,7 @@ using UnityEngine;
 /// 一个怪物的行为树
 /// </summary>
 [CreateAssetMenu()]
-public class BehaviorTree : ScriptableObject
+public class BehaviourTree : ScriptableObject
 {
     public Node rootNode;
     public Node.State treeState = Node.State.Running;
@@ -16,7 +16,6 @@ public class BehaviorTree : ScriptableObject
 
     public Node.State Update()
     {
-        Debug.Log(rootNode.name);
         if (rootNode.state == Node.State.Running)
         {
             treeState = rootNode.Update();
@@ -24,12 +23,14 @@ public class BehaviorTree : ScriptableObject
         return treeState;
     }
 
-    public BehaviorTree Clone()
+    public BehaviourTree Clone()
     {
-        BehaviorTree tree = Instantiate(this);
+        BehaviourTree tree = Instantiate(this);
         tree.rootNode = tree.rootNode.Clone();
         return tree;
     }
+
+    #region 为视图服务的方法
 
     /// <summary>
     /// 创建节点ScriptableObject类
@@ -129,4 +130,5 @@ public class BehaviorTree : ScriptableObject
         }
         return children;
     }
+    #endregion
 }

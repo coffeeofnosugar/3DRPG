@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 行为树启动器
+/// 行为树执行器
 /// </summary>
-public class BehaviorTreeRunner : MonoBehaviour
+public class BehaviourTreeRunner : MonoBehaviour
 {
-    public BehaviorTree tree;
+    public BehaviourTree tree;
 
     private void Start()
     {

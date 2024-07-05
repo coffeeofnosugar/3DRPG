@@ -10,7 +10,8 @@ using static Unity.VisualScripting.Metadata;
 /// </summary>
 public abstract class DecoratorNode : Node
 {
-    [HideInInspector] public Node child;
+    //[HideInInspector] 
+    public Node child;
 
 
     public override Node Clone()

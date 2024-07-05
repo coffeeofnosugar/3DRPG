@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaitNode : ActionNode
 {
-    public float duration = 1;
+    [SerializeField] private float duration = 1;
     float startTime;
     protected override void OnStart()
     {

@@ -1,6 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7513378297908887679
+--- !u!114 &-4156198604516826931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: ff86cabeada49814eab17af06250af7d
+  position: {x: 0, y: 0}
+  children: []
+--- !u!114 &-1773967020051384564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,9 +29,8 @@ MonoBehaviour:
   m_Name: DebugLogNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
-  guid: 88b130f70a2201846869310f62b821f4
-  position: {x: 948, y: 326.5}
+  guid: 27eb7e7434f2d1e4e87c2fd85e0a6470
+  position: {x: 900, y: 384}
   startMessage: 01
   stopMessage: 01
   updateMessage: 01
@@ -35,29 +50,10 @@ MonoBehaviour:
   treeState: 0
   nodes:
   - {fileID: 8694799038170617301}
-  - {fileID: -7513378297908887679}
   - {fileID: 5575965957988236804}
-  - {fileID: 566683364008944306}
   - {fileID: 7761823362460203905}
---- !u!114 &566683364008944306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: a51e7874f4030cb4dbf1ef25ac4f880c
-  position: {x: 620, y: 269.5}
-  children:
-  - {fileID: 5575965957988236804}
-  - {fileID: -7513378297908887679}
+  - {fileID: -1773967020051384564}
+  - {fileID: -4156198604516826931}
 --- !u!114 &5575965957988236804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +67,6 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
   guid: 4e36372774017be439a6202c725ac658
   position: {x: 948, y: 201.32}
   duration: 2
@@ -88,9 +83,8 @@ MonoBehaviour:
   m_Name: RepeatNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
   guid: 3d6fcd4c0f8fd3a43b7d33cd40b5d09b
-  position: {x: 0, y: 0}
+  position: {x: 428, y: 270}
   child: {fileID: 0}
 --- !u!114 &8694799038170617301
 MonoBehaviour:
@@ -105,7 +99,6 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
   guid: f9fe53cdfe7f1d847aac7d38317f2470
   position: {x: 240, y: 270}
-  child: {fileID: 566683364008944306}
+  child: {fileID: 7761823362460203905}

@@ -30,7 +30,7 @@ public class BehaviourTreeEditor : EditorWindow
         //root.Add(labelFromUXML);
         m_VisualTreeAsset.CloneTree(root);
 
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
+        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
         root.styleSheets.Add(styleSheet);
 
         treeView = root.Q<BehaviourTreeView>();
@@ -46,7 +46,7 @@ public class BehaviourTreeEditor : EditorWindow
     /// </summary>
     private void OnSelectionChange()
     {
-        BehaviorTree tree = Selection.activeObject as BehaviorTree;
+        BehaviourTree tree = Selection.activeObject as BehaviourTree;
         // 选中的是行为树，更改视图中所展示的内容，变成最新选中的行为树
         // 后半部分的判断是防止，在创建新的行为树，但unity还没准备好就选择，会报错
         if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))

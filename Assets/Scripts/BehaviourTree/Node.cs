@@ -12,8 +12,17 @@ public abstract class Node : ScriptableObject
         Success
     }
 
+    /// <summary>
+    /// 标志，用来判断执行OnStart还是OnStop
+    /// </summary>
+    private bool started = false;
+    /// <summary>
+    /// 当前节点的状态
+    /// </summary>
     [HideInInspector] public State state = State.Running;
-    [HideInInspector] public bool started = false;
+    /// <summary>
+    /// guid，节点唯一标识
+    /// </summary>
     [HideInInspector] public string guid;
     /// <summary>
     /// 记录element元素在视图中的位置

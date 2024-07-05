@@ -15,6 +15,10 @@ public class InspectorView : VisualElement
 
     }
 
+    /// <summary>
+    /// 显示当前选中的节点元素的Inspector内容
+    /// </summary>
+    /// <param name="nodeView"></param>
     internal void UpdateSelection(NodeView nodeView)
     {
         Clear();
