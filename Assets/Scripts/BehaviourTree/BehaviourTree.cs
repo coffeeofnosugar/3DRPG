@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,6 +15,7 @@ namespace BehaviourTree
         public Node rootNode;
         public Node.State treeState = Node.State.Running;
         public List<Node> nodes = new List<Node>();
+        [HideInInspector] public Transform transform;
 
         public Node.State Update()
         {
@@ -26,10 +26,11 @@ namespace BehaviourTree
             return treeState;
         }
 
-        public BehaviourTree Clone()
+        public BehaviourTree Clone(Transform t)
         {
             BehaviourTree tree = Instantiate(this);
-            tree.rootNode = tree.rootNode.Clone();
+            tree.rootNode = tree.rootNode.Clone(t);
+            this.transform = t;
             return tree;
         }
 

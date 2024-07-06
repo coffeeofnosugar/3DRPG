@@ -12,6 +12,7 @@ namespace BehaviourTree
         public string updateMessage;
         protected override void OnStart()
         {
+            startMessage = name;
             Debug.Log($"OnStart{startMessage}");
         }
 

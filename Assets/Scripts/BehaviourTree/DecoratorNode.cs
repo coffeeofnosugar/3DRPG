@@ -17,10 +17,10 @@ namespace BehaviourTree
         public Node child;
 
 
-        public override Node Clone()
+        public override Node Clone(Transform t)
         {
             DecoratorNode node = Instantiate(this);
-            node.child = child.Clone();
+            node.child = child.Clone(t);
             return node;
         }
     }

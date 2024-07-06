@@ -12,9 +12,19 @@ namespace BehaviourTree
     {
         public BehaviourTree tree;
 
+        private void Awake()
+        {
+            if (tree == null)
+            {
+                Debug.Log($"{transform.name} Î´ÅäÖÃÐÐÎªÊ÷");
+                return;
+            }
+            tree = tree.Clone(transform);
+        }
+
         private void Start()
         {
-            tree = tree.Clone();
+
         }
 
         private void Update()

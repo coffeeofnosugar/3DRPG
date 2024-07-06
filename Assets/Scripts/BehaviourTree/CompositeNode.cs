@@ -12,13 +12,13 @@ namespace BehaviourTree
     /// </summary>
     public abstract class CompositeNode : Node
     {
-        //[HideInInspector] 
+        //[HideInInspector]
         public List<Node> children = new List<Node>();
 
-        public override Node Clone()
+        public override Node Clone(Transform t)
         {
             CompositeNode node = Instantiate(this);
-            node.children = children.ConvertAll(c => c.Clone());
+            node.children = children.ConvertAll(c => c.Clone(t));
             return node;
         }
     }

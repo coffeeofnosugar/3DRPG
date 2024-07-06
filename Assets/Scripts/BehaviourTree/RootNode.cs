@@ -7,7 +7,8 @@ namespace BehaviourTree
 {
     public class RootNode : Node
     {
-        [HideInInspector] public Node child;
+        //[HideInInspector] 
+        public Node child;
         protected override void OnStart()
         {
 
@@ -22,10 +23,10 @@ namespace BehaviourTree
         {
             return child.Update();
         }
-        public override Node Clone()
+        public override Node Clone(Transform t)
         {
             RootNode node = Instantiate(this);
-            node.child = child.Clone();
+            node.child = child.Clone(t);
             return node;
         }
     }
