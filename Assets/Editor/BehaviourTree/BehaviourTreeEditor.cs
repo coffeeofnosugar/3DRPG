@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.Callbacks;
+using static PlasticGui.PlasticTableColumn;
 
 
 namespace BehaviourTree
@@ -62,6 +63,42 @@ namespace BehaviourTree
             OnSelectionChange();
         }
 
+
+        // 确保不会双重订阅
+        private void OnEnable()
+        {
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        }
+
+        private void OnDisable()
+        {
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+        }
+
+        /// <summary>
+        /// 这个方法是为了在退出PlayMode时，依然显示克隆版本的行为树视图
+        /// </summary>
+        /// <param name="change"></param>
+        private void OnPlayModeStateChanged(PlayModeStateChange change)
+        {
+            switch (change)
+            {
+                case PlayModeStateChange.EnteredEditMode:
+                    OnSelectionChange();
+                    break;
+                case PlayModeStateChange.ExitingEditMode:
+                    break;
+
+                case PlayModeStateChange.EnteredPlayMode:
+                    OnSelectionChange();
+                    break;
+                case PlayModeStateChange.ExitingPlayMode:
+                    break;
+            }
+        }
+
+
         /// <summary>
         /// 选择Hierarchy和Project时会执行该方法
         /// </summary>
@@ -82,6 +119,10 @@ namespace BehaviourTree
                         tree = runner.tree;
                     }
                 }
+            }
+            else
+            {
+                Debug.Log("Project" + tree.name);
             }
 
             if (Application.isPlaying)

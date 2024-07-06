@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace BehaviourTree
             {
                 visiter.Invoke(node);
                 var children = GetChildren(node);
-                children.ForEach((n) => { Traverse(n, visiter); });
+                children.ForEach((n) => { Traverse(n.Clone(), visiter); });
             }
         }
 
@@ -71,7 +72,10 @@ namespace BehaviourTree
             Undo.RecordObject(this, "Behaviour Tree (CreateNode)");     // 添加节点元素时，不仅仅只改变了视图中的还涉及到了整个行为树，所以需要传入这个ScriptableObject类
             nodes.Add(node);
 
-            AssetDatabase.AddObjectToAsset(node, this);
+            if (!Application.isPlaying)     // 在PlayMode模式下无法添加节点
+            {
+                AssetDatabase.AddObjectToAsset(node, this);
+            }
             Undo.RegisterCreatedObjectUndo(this, "Behaviour Tree (CreateNode)");        // 涉及到Project中的创建需要使用这个
             AssetDatabase.SaveAssets();
             return node;

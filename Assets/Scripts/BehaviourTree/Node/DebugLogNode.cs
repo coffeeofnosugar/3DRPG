@@ -7,23 +7,20 @@ namespace BehaviourTree
 {
     public class DebugLogNode : ActionNode
     {
-        public string startMessage;
-        public string stopMessage;
-        public string updateMessage;
+        public string message;
         protected override void OnStart()
         {
-            startMessage = name;
-            Debug.Log($"OnStart{startMessage}");
+            Debug.Log($"OnStart{message}");
         }
 
         protected override void OnStop()
         {
-            Debug.Log($"OnStop{stopMessage}");
+            Debug.Log($"OnStop{message}");
         }
 
         protected override State OnUpdate()
         {
-            Debug.Log($"OnUpdate{updateMessage}");
+            Debug.Log($"OnUpdate{message}");
             return State.Success;
         }
     }
