@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using System;
-
+using UnityEngine.UIElements;
+using UnityEditor;
 
 namespace BehaviourTree
 {
@@ -12,7 +13,7 @@ namespace BehaviourTree
         public Port input;
         public Port output;
 
-        public NodeView(Node node)
+        public NodeView(Node node) : base("Assets/Editor/BehaviourTree/NodeView.uxml")
         {
             this.node = node;
             this.title = node.name;
@@ -23,6 +24,30 @@ namespace BehaviourTree
 
             CreateInputPorts();
             CreateOutputPorts();
+            SetupClasses();
+        }
+
+        /// <summary>
+        /// 给节点添加uss标签，以便更改uxml中的显示颜色等
+        /// </summary>
+        private void SetupClasses()
+        {
+            if (node is ActionNode)
+            {
+                AddToClassList("action");
+            }
+            else if (node is CompositeNode)
+            {
+                AddToClassList("composite");
+            }
+            else if (node is DecoratorNode)
+            {
+                AddToClassList("decorator");
+            }
+            else if (node is RootNode)
+            {
+                AddToClassList("root");
+            }
         }
 
         /// <summary>
@@ -34,15 +59,15 @@ namespace BehaviourTree
             if (node is ActionNode)
             {
                 //                      水平                    方向            单个                    类型
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (node is CompositeNode)
             {
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (node is DecoratorNode)
             {
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (node is RootNode)
             {
@@ -53,6 +78,8 @@ namespace BehaviourTree
             if (input != null)
             {
                 input.portName = "";
+                // 设置input的布局为从上到下
+                input.style.flexDirection = FlexDirection.Column;
                 inputContainer.Add(input);
             }
         }
@@ -65,20 +92,22 @@ namespace BehaviourTree
             }
             else if (node is CompositeNode)
             {
-                output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
             }
             else if (node is DecoratorNode)
             {
-                output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
             else if (node is RootNode)
             {
-                output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
 
             if (output != null)
             {
                 output.portName = "";
+                // 设置input的布局为从下到上
+                output.style.flexDirection = FlexDirection.ColumnReverse;
                 outputContainer.Add(output);
             }
         }
@@ -91,10 +120,13 @@ namespace BehaviourTree
         public override void SetPosition(Rect newPos)
         {
             base.SetPosition(newPos);
+            // 时移动节点元素可以使用Ctrl+Z撤回
+            Undo.RecordObject(node, "Behaviour Tree (Set Position)");
             // UnityEngine.Rect 无法直接转换成Vector2，需要使用Rect的方法
             // 保存位置信息到ScriptableObject
             node.position.x = newPos.xMin;
             node.position.y = newPos.yMin;
+            EditorUtility.SetDirty(node);       // 这个方法有助于程序集保存
         }
 
         /// <summary>
