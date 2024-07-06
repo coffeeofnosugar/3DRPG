@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// 行为树执行器
-/// </summary>
-public class BehaviourTreeRunner : MonoBehaviour
+
+namespace BehaviourTree
 {
-    public BehaviourTree tree;
-
-    private void Start()
+    /// <summary>
+    /// 行为树执行器
+    /// </summary>
+    public class BehaviourTreeRunner : MonoBehaviour
     {
-        tree = tree.Clone();
-    }
+        public BehaviourTree tree;
 
-    private void Update()
-    {
-        tree.Update();
+        private void Start()
+        {
+            tree = tree.Clone();
+        }
+
+        private void Update()
+        {
+            tree.Update();
+        }
     }
 }
