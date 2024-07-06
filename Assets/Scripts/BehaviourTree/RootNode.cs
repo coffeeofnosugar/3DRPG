@@ -23,10 +23,9 @@ namespace BehaviourTree
         {
             return child.Update();
         }
-        public override Node Clone(Transform t)
+        public override Node Clone()
         {
             RootNode node = Instantiate(this);
-            node.child = child.Clone(t);
             return node;
         }
     }

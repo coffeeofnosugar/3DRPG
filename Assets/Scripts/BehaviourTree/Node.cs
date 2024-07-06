@@ -32,8 +32,6 @@ namespace BehaviourTree
         /// </summary>
         [HideInInspector] public Vector2 position;
 
-        [HideInInspector] public Transform transform;
-
         public State Update()
         {
             if (!started)
@@ -59,9 +57,8 @@ namespace BehaviourTree
         /// 可以克隆一遍节点
         /// </summary>
         /// <returns></returns>
-        public virtual Node Clone(Transform t)
+        public virtual Node Clone()
         {
-            this.transform = t;
             return Instantiate(this);
         }
 

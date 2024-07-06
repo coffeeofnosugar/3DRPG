@@ -15,10 +15,10 @@ namespace BehaviourTree
         //[HideInInspector]
         public List<Node> children = new List<Node>();
 
-        public override Node Clone(Transform t)
+        public override Node Clone()
         {
             CompositeNode node = Instantiate(this);
-            node.children = children.ConvertAll(c => c.Clone(t));
+            node.children = children.ConvertAll(c => c.Clone());
             return node;
         }
     }
