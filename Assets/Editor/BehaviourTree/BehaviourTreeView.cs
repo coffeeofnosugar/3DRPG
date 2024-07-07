@@ -152,6 +152,16 @@ namespace BehaviourTree
                 });
             }
 
+            // 移动节点元素时，排序其子节点
+            if (graphViewChange.movedElements != null)
+            {
+                nodes.ForEach((n) =>
+                {
+                    NodeView view = n as NodeView;
+                    view.SortChildren();
+                });
+            }
+
             return graphViewChange;
         }
 

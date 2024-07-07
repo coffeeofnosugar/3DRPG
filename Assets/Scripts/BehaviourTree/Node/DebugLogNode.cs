@@ -15,12 +15,12 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            Debug.Log($"OnStop{message}");
+            //Debug.Log($"OnStop{message}");
         }
 
         protected override State OnUpdate()
         {
-            Debug.Log($"OnUpdate{message}");
+            //Debug.Log($"OnUpdate{message}");
             return State.Success;
         }
     }

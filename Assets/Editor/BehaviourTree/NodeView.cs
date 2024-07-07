@@ -145,5 +145,31 @@ namespace BehaviourTree
                 OnNodeSelected.Invoke(this);
             }
         }
+
+        /// <summary>
+        /// 给子节点排序
+        /// </summary>
+        public void SortChildren()
+        {
+            CompositeNode composite = node as CompositeNode;
+            if (composite != null)
+            {
+                composite.children.Sort(SortByHorizontalPosition);
+            }
+        }
+
+        /// <summary>
+        /// return 1 : 位置不变
+        /// return 0 : 位置不变
+        /// return -1 : right与left换位置
+        /// 这里虽然写的是left和right，但是在实际的调试中可以看到，前面的参数其实在右边的参数后面
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        private int SortByHorizontalPosition(Node left, Node right)
+        {
+            return left.position.x < right.position.x ? -1 : 1;
+        }
     }
 }
