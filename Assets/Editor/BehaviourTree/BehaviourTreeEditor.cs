@@ -77,7 +77,8 @@ namespace BehaviourTree
         }
 
         /// <summary>
-        /// 这个方法是为了在退出PlayMode时，依然显示克隆版本的行为树视图
+        /// 这个方法是为了防止程序崩溃：
+        /// 在退出PlayMode时，依然显示克隆版本的行为树视图，如果鼠标点击克隆的节点元素，程序会崩溃
         /// </summary>
         /// <param name="change"></param>
         private void OnPlayModeStateChanged(PlayModeStateChange change)
@@ -91,7 +92,8 @@ namespace BehaviourTree
                     break;
 
                 case PlayModeStateChange.EnteredPlayMode:
-                    OnSelectionChange();
+                    // 在进入playmode时，系统会自动刷新一遍BehaviourTreeEditor窗口，所以不用调用
+                    //OnSelectionChange();
                     break;
                 case PlayModeStateChange.ExitingPlayMode:
                     break;
@@ -119,10 +121,6 @@ namespace BehaviourTree
                         tree = runner.tree;
                     }
                 }
-            }
-            else
-            {
-                Debug.Log("Project" + tree.name);
             }
 
             if (Application.isPlaying)
