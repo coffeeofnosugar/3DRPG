@@ -15,7 +15,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: d11b70c7248dd2d4aa6f4dd777f84af1
-  position: {x: 362, y: 401}
+  position: {x: 191, y: 640}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -43,7 +43,30 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
   characterStats: {fileID: 0}
-  child: {fileID: -5759699880718156367}
+  child: {fileID: -7308205673091560060}
+--- !u!114 &-7308205673091560060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  started: 0
+  state: 0
+  guid: 672cbfdeede70e14e9dbb39139699d4a
+  position: {x: 789, y: 188}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  characterStats: {fileID: 0}
+  children:
+  - {fileID: -5759699880718156367}
 --- !u!114 &-5759699880718156367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +82,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: cc00bc0f1b5f6f74f805862e51af6b8a
-  position: {x: 789, y: 187}
+  position: {x: 439, y: 335}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -90,6 +113,7 @@ MonoBehaviour:
   - {fileID: 88388482666435051}
   - {fileID: -8047854357355331176}
   - {fileID: 509420290819515028}
+  - {fileID: -7308205673091560060}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -108,7 +132,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 040fb54d2431c154a97b1dc588d70db5
-  position: {x: 623, y: 401}
+  position: {x: 474, y: 640}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -129,7 +153,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 45628c2dc8eed1649904ecf3a64ddc3f
-  position: {x: 955, y: 401}
+  position: {x: 752, y: 640}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}

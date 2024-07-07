@@ -66,16 +66,15 @@ namespace BehaviourTree
             // 注册输入
             if (node is ActionNode)
             {
-                //                      水平                    方向            单个                    类型
-                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = new NodePort(Direction.Input, Port.Capacity.Single);
             }
             else if (node is CompositeNode)
             {
-                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = new NodePort(Direction.Input, Port.Capacity.Single);
             }
             else if (node is DecoratorNode)
             {
-                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = new NodePort(Direction.Input, Port.Capacity.Single);
             }
             else if (node is Root)
             {
@@ -100,15 +99,15 @@ namespace BehaviourTree
             }
             else if (node is CompositeNode)
             {
-                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                output = new NodePort(Direction.Output, Port.Capacity.Multi);
             }
             else if (node is DecoratorNode)
             {
-                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
+                output = new NodePort(Direction.Output, Port.Capacity.Single);
             }
             else if (node is Root)
             {
-                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
+                output = new NodePort(Direction.Output, Port.Capacity.Single);
             }
 
             if (output != null)
