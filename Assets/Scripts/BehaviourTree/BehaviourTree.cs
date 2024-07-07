@@ -16,7 +16,7 @@ namespace BehaviourTree
         public Node rootNode;
         public Node.State treeState = Node.State.Running;
         public List<Node> nodes = new List<Node>();
-        [HideInInspector] public Transform transform;
+        public Blackboard blackboard = new Blackboard();
 
         public Node.State Update()
         {
@@ -58,6 +58,18 @@ namespace BehaviourTree
             });
             return tree;
         }
+
+        /// <summary>
+        /// 绑定黑板
+        /// </summary>
+        public void Bind()
+        {
+            Traverse(rootNode, (n) =>
+            {
+                n.blackboard = blackboard;
+            });
+        }
+
 
 #if UNITY_EDITOR
         #region 为视图服务的方法

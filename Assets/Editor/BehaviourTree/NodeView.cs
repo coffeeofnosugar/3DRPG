@@ -171,5 +171,40 @@ namespace BehaviourTree
         {
             return left.position.x < right.position.x ? -1 : 1;
         }
+
+        /// <summary>
+        /// 实时给每个节点添加标签running\failure\success
+        /// </summary>
+        public void UpdateState()
+        {
+            // 先清除掉标签
+            RemoveFromClassList("running");
+            RemoveFromClassList("failure");
+            RemoveFromClassList("success");
+
+            // 在playmode模式下根据其节点的状态添加标签
+            if (Application.isPlaying)
+            {
+                switch (node.state)
+                {
+                    case Node.State.Running:
+                        // 节点的默认state是Running，有些状态从来没有运行过其状态也是Running
+                        // 这里判断started的作用就是为了不给这个从来没有运行过的节点添加Running状态
+                        if (node.started)
+                        {
+                            AddToClassList("running");
+                        }
+                        break;
+                    case Node.State.Failure:
+                        AddToClassList("failure");
+                        break;
+                    case Node.State.Success:
+                        AddToClassList("success");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }

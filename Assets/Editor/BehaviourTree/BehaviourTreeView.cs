@@ -155,6 +155,7 @@ namespace BehaviourTree
             // 移动节点元素时，排序其子节点
             if (graphViewChange.movedElements != null)
             {
+                // 这里的nodes是内置的属性，表示当前所有在本视图中的节点
                 nodes.ForEach((n) =>
                 {
                     NodeView view = n as NodeView;
@@ -216,6 +217,16 @@ namespace BehaviourTree
             NodeView nodeView = new NodeView(node);
             nodeView.OnNodeSelected = OnNodeSelected;
             AddElement(nodeView);
+        }
+
+        public void UpdateNodeStates()
+        {
+            // 这里的nodes是内置的属性，表示当前所有在本视图中的节点
+            nodes.ForEach((n) =>
+            {
+                NodeView nodeView = n as NodeView;
+                nodeView.UpdateState();
+            });
         }
     }
 }

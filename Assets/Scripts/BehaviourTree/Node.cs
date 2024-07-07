@@ -18,7 +18,7 @@ namespace BehaviourTree
         /// <summary>
         /// 标志，用来判断执行OnStart还是OnStop
         /// </summary>
-        private bool started = false;
+        [HideInInspector] public bool started = false;
         /// <summary>
         /// 当前节点的状态
         /// </summary>
@@ -31,6 +31,9 @@ namespace BehaviourTree
         /// 记录element元素在视图中的位置
         /// </summary>
         [HideInInspector] public Vector2 position;
+
+        [HideInInspector] public Blackboard blackboard;
+        //[HideInInspector] public AiAgent agent;
 
         public State Update()
         {

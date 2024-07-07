@@ -11,6 +11,8 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             Debug.Log($"OnStart{message}");
+            Debug.Log($"Blackboard: {blackboard.moveToPosition}");
+            blackboard.moveToPosition.x += 1;
         }
 
         protected override void OnStop()

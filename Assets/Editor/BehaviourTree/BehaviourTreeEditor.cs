@@ -15,6 +15,13 @@ namespace BehaviourTree
     {
         BehaviourTreeView treeView;
         InspectorView inspectorView;
+        IMGUIContainer blackboardView;
+
+        /// <summary>
+        /// BehaviourTree的映射对象，BehaviourTree的改变时，treeObject会同步的改变
+        /// </summary>
+        SerializedObject treeObject;
+        SerializedProperty blackboardProperty;
 
         [SerializeField]
         private VisualTreeAsset m_VisualTreeAsset = default;
@@ -57,6 +64,17 @@ namespace BehaviourTree
 
             treeView = root.Q<BehaviourTreeView>();
             inspectorView = root.Q<InspectorView>();
+            blackboardView = root.Q<IMGUIContainer>();
+            blackboardView.onGUIHandler = () =>
+            {
+                // 更新treeObject
+                treeObject.Update();
+                // 显示tree的blackboard属性
+                EditorGUILayout.PropertyField(blackboardProperty);
+                // 应用并保存更改
+                treeObject.ApplyModifiedProperties();
+            };
+
             treeView.OnNodeSelected = OnNodeSelectionChanged;
 
             // 确保我们在选中ScriptableObject时打开视图，能直接将选中的内容显示到视图中
@@ -139,11 +157,27 @@ namespace BehaviourTree
                     treeView.PopulateView(tree);
                 }
             }
+
+            if (tree)
+            {
+                // 创建一个要检查的对象
+                treeObject = new SerializedObject(tree);
+                // 获取BehaviourTree中的blackboard属性
+                blackboardProperty = treeObject.FindProperty("blackboard");
+            }
         }
 
         private void OnNodeSelectionChanged(NodeView nodeView)
         {
             inspectorView.UpdateSelection(nodeView);
+        }
+
+        /// <summary>
+        /// 以每秒10帧的速度更新节点元素的标签
+        /// </summary>
+        private void OnInspectorUpdate()
+        {
+            treeView?.UpdateNodeStates();
         }
     }
 }

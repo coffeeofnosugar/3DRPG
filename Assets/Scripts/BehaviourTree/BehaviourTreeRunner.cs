@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.InputManagerEntry;
 
 
 namespace BehaviourTree
@@ -24,6 +25,7 @@ namespace BehaviourTree
         private void Start()
         {
             tree = tree.Clone();
+            tree.Bind();
         }
 
         private void Update()
