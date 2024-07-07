@@ -34,7 +34,7 @@ namespace BehaviourTree
 
         [HideInInspector] public Blackboard blackboard;
         //[HideInInspector] public AiAgent agent;
-
+        [TextArea] public string description;
         public State Update()
         {
             if (!started)

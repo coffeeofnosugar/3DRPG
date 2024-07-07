@@ -3,6 +3,7 @@ using UnityEditor.Experimental.GraphView;
 using System;
 using UnityEngine.UIElements;
 using UnityEditor;
+using UnityEditor.UIElements;
 
 namespace BehaviourTree
 {
@@ -25,6 +26,13 @@ namespace BehaviourTree
             CreateInputPorts();
             CreateOutputPorts();
             SetupClasses();
+
+            // 抓取description元素
+            Label descriptionLabel = this.Q<Label>("description");
+            // 这里的"description"表示的就是node.description字段
+            descriptionLabel.bindingPath = "description";
+            // 创建并绑定需要检测对象的副本
+            descriptionLabel.Bind(new SerializedObject(node));
         }
 
         /// <summary>
