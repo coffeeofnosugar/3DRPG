@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 8390a7d1f5e6d7e4590cc3ce54ba5438
-  position: {x: 988, y: 494}
+  position: {x: 987, y: 494}
   duration: 1
 --- !u!114 &-4387536537701181767
 MonoBehaviour:
@@ -70,7 +70,7 @@ MonoBehaviour:
   state: 2
   guid: 3b329975ab7da1f4cb547aa0e308c3b6
   position: {x: 728, y: 494}
-  message: Hello
+  message: 1111
 --- !u!114 &4631751720182713582
 MonoBehaviour:
   m_ObjectHideFlags: 0

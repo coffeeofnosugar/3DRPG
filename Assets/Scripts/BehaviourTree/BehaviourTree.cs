@@ -39,15 +39,19 @@ namespace BehaviourTree
             {
                 visiter.Invoke(node);
                 var children = GetChildren(node);
-                children.ForEach((n) => { Traverse(n.Clone(), visiter); });
+                children.ForEach((n) => { Traverse(n, visiter); });
             }
         }
 
         public BehaviourTree Clone()
         {
+            // 克隆行为树
             BehaviourTree tree = Instantiate(this);
+            // 克隆根节点
             tree.rootNode = tree.rootNode.Clone();
+            // 初始化克隆后的节点列表
             tree.nodes = new List<Node>();      // 列表的克隆有点麻烦
+
             Traverse(tree.rootNode, (n) =>
             {
                 tree.nodes.Add(n);

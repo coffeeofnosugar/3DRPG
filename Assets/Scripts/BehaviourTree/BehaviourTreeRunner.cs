@@ -19,12 +19,11 @@ namespace BehaviourTree
                 Debug.Log($"{transform.name} Î´ÅäÖÃÐÐÎªÊ÷");
                 return;
             }
-            tree = tree.Clone();
         }
 
         private void Start()
         {
-
+            tree = tree.Clone();
         }
 
         private void Update()
