@@ -62,10 +62,11 @@ namespace BehaviourTree
         /// <summary>
         /// °ó¶¨ºÚ°å
         /// </summary>
-        public void Bind()
+        public void Bind(CharacterStats character)
         {
             Traverse(rootNode, (n) =>
             {
+                n.characterStats = character;
                 n.blackboard = blackboard;
             });
         }
@@ -118,7 +119,7 @@ namespace BehaviourTree
         /// <param name="child"></param>
         public void AddChild(Node parent, Node child)
         {
-            RootNode rootNode = parent as RootNode;
+            Root rootNode = parent as Root;
             if (rootNode)
             {
                 Undo.RecordObject(rootNode, "Behaviour Tree (AddChild)");
@@ -145,7 +146,7 @@ namespace BehaviourTree
 
         public void RemoveChild(Node parent, Node child)
         {
-            RootNode rootNode = parent as RootNode;
+            Root rootNode = parent as Root;
             if (rootNode)
             {
                 Undo.RecordObject(rootNode, "Behaviour Tree (AddChild)");
@@ -174,7 +175,7 @@ namespace BehaviourTree
         {
             List<Node> children = new List<Node>();
 
-            RootNode rootNode = parent as RootNode;
+            Root rootNode = parent as Root;
             if (rootNode && rootNode.child != null)
             {
                 children.Add(rootNode.child);

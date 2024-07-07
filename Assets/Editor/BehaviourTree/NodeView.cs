@@ -52,7 +52,7 @@ namespace BehaviourTree
             {
                 AddToClassList("decorator");
             }
-            else if (node is RootNode)
+            else if (node is Root)
             {
                 AddToClassList("root");
             }
@@ -77,7 +77,7 @@ namespace BehaviourTree
             {
                 input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
-            else if (node is RootNode)
+            else if (node is Root)
             {
 
             }
@@ -106,7 +106,7 @@ namespace BehaviourTree
             {
                 output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
-            else if (node is RootNode)
+            else if (node is Root)
             {
                 output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }

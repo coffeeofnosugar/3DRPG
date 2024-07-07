@@ -18,11 +18,13 @@ namespace BehaviourTree
         /// <summary>
         /// 标志，用来判断执行OnStart还是OnStop
         /// </summary>
-        [HideInInspector] public bool started = false;
+        //[HideInInspector] 
+        public bool started = false;
         /// <summary>
         /// 当前节点的状态
         /// </summary>
-        [HideInInspector] public State state = State.Running;
+        //[HideInInspector] 
+        public State state = State.Running;
         /// <summary>
         /// guid，节点唯一标识
         /// </summary>
@@ -31,10 +33,14 @@ namespace BehaviourTree
         /// 记录element元素在视图中的位置
         /// </summary>
         [HideInInspector] public Vector2 position;
-
-        [HideInInspector] public Blackboard blackboard;
-        //[HideInInspector] public AiAgent agent;
+        /// <summary>
+        /// 节点元素的备注
+        /// </summary>
         [TextArea] public string description;
+
+        
+        [HideInInspector] public Blackboard blackboard;
+        [HideInInspector] public CharacterStats characterStats;
         public State Update()
         {
             if (!started)
@@ -45,7 +51,7 @@ namespace BehaviourTree
 
             state = OnUpdate();
 
-            if (state == State.Failure || state == State.Success)
+            if (state != State.Running)
             {
                 OnStop();
                 started = false;

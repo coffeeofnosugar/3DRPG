@@ -59,7 +59,7 @@ namespace BehaviourTree
             // 在打开视图时，没有根节点（比如刚创建的新行为树），就创建一个根节点并赋值给行为树
             if (tree.rootNode == null)
             {
-                tree.rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
+                tree.rootNode = tree.CreateNode(typeof(Root)) as Root;
                 // 修改一个prefab的MonoBehaviour或ScriptableObject变量，必须告诉Unity该值已经改变。
                 // 每当一个属性发生变化，Unity内置组件在内部调用setDirty。
                 // MonoBehaviour或ScriptableObject不自动做这个，因此如果你想值被保存，必须调用SetDirty。
@@ -172,27 +172,30 @@ namespace BehaviourTree
         /// <param name="evt"></param>
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
+
             //base.BuildContextualMenu(evt);
+            // 获取鼠标位置坐标
+            Vector2 mousePosition = this.ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);
             {
                 var types = TypeCache.GetTypesDerivedFrom<ActionNode>();        // 返回派生类的无序集合
                 foreach (var type in types)
                 {
                     // 将查找到的类赋给菜单，并绑定创建事件
-                    evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+                    evt.menu.AppendAction($"[ActionNode]/{type.Name}", (a) => CreateNode(type, mousePosition));
                 }
             }
             {
                 var types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
                 foreach (var type in types)
                 {
-                    evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+                    evt.menu.AppendAction($"[CompositeNode]/{type.Name}", (a) => CreateNode(type, mousePosition));
                 }
             }
             {
                 var types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
                 foreach (var type in types)
                 {
-                    evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+                    evt.menu.AppendAction($"[DecoratorNode]/{type.Name}", (a) => CreateNode(type, mousePosition));
                 }
             }
         }
@@ -201,10 +204,10 @@ namespace BehaviourTree
         /// 在行为树中创建节点，并在视图中创建elements节点元素
         /// </summary>
         /// <param name="type"></param>
-        private void CreateNode(System.Type type)
+        private void CreateNode(System.Type type, Vector2 position)
         {
             Node node = tree.CreateNode(type);
-
+            node.position = position;
             CreateNodeView(node);
         }
 

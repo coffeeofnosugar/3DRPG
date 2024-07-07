@@ -67,12 +67,15 @@ namespace BehaviourTree
             blackboardView = root.Q<IMGUIContainer>();
             blackboardView.onGUIHandler = () =>
             {
-                // 更新treeObject
-                treeObject.Update();
-                // 显示tree的blackboard属性
-                EditorGUILayout.PropertyField(blackboardProperty);
-                // 应用并保存更改
-                treeObject.ApplyModifiedProperties();
+                if (treeObject != null && treeObject.targetObject != null)
+                {
+                    // 更新treeObject
+                    treeObject.Update();
+                    // 显示tree的blackboard属性
+                    EditorGUILayout.PropertyField(blackboardProperty);
+                    // 应用并保存更改
+                    treeObject.ApplyModifiedProperties();
+                }
             };
 
             treeView.OnNodeSelected = OnNodeSelectionChanged;
