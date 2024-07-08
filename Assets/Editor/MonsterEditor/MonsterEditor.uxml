@@ -24,6 +24,7 @@
                 <ui:IntegerField label="SightRange" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
                 <ui:IntegerField label="CriticalMultiplier" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
                 <ui:IntegerField label="CriticalChance" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
+                <ui:IntegerField label="DestoryTime" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
                 <ui:VisualElement style="flex-grow: 1;">
                     <ui:Label tabindex="-1" text="技能" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(196, 196, 196); -unity-font-style: bold;" />
                     <ui:Foldout text="技能1" style="color: rgb(196, 196, 196);">

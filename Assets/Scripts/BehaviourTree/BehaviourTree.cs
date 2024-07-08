@@ -97,13 +97,13 @@ namespace BehaviourTree
         /// </summary>
         public void RunCooldown()
         {
-            characterStats.LastAttackTime += Time.deltaTime;
-            characterStats.LastSkillTime += Time.deltaTime;
+            //characterStats.LastAttackTime += Time.deltaTime;
+            //characterStats.LastSkillTime += Time.deltaTime;
         }
 
         public void Debug()
         {
-            Debugs.Instance["cooldonw"] = characterStats.LastAttackTime.ToString();
+            //Debugs.Instance["cooldonw"] = characterStats.LastAttackTime.ToString();
             Debugs.Instance["movePosition"] = characterStats.agent.destination.ToString();
             if (blackboard.target)
             {

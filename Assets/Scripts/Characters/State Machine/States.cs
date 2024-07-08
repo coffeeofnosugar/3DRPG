@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+
+/*
 namespace Characters
 {
     public class BaseIdleState : IState
@@ -395,3 +397,5 @@ namespace Characters
         public void OnExit() { }
     }
 }
+
+*/

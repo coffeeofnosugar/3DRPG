@@ -10,7 +10,7 @@ namespace BehaviourTree
         private bool flag = false;
         protected override void OnStart()
         {
-            if (blackboard.target && characterStats.LastAttackTime >= characterStats.CoolDown)
+            if (blackboard.target) //  && characterStats.LastAttackTime >= characterStats.CoolDown)
             {
                 characterStats.animator.SetBool("Run", false);
                 // Õ£÷π“∆∂Ø
@@ -20,7 +20,7 @@ namespace BehaviourTree
                 // ≤•∑≈π•ª˜∂Øª≠
                 characterStats.animator.SetTrigger(animatorParameter);
                 // ÷ÿ÷√cd
-                characterStats.LastAttackTime = 0;
+                //characterStats.LastAttackTime = 0;
                 flag = true;
             }
         }

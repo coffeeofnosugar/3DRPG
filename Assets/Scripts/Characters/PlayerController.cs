@@ -36,7 +36,7 @@ namespace Characters
 
         private void Update()
         {
-            characterStats.isDeath = characterStats.CurrentHealth <= 0;
+            characterStats.isDeath = characterStats.currentHealth <= 0;
             animator.SetBool("Death", characterStats.isDeath);
             SwitchAnimation();
             lastAttackTime -= Time.deltaTime;
@@ -82,7 +82,7 @@ namespace Characters
             agent.isStopped = true;
             if (lastAttackTime < 0)
             {
-                characterStats.isCritical = UnityEngine.Random.value < characterStats.attackData.criticalChance;
+                characterStats.isCritical = UnityEngine.Random.value < characterStats.CriticalChance;
                 animator.SetBool("IsCritical", characterStats.isCritical);
                 animator.SetTrigger("Attack");
                 lastAttackTime = attackCD;

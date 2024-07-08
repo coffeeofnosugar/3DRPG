@@ -8,8 +8,7 @@ public class CharacterStats : MonoBehaviour
 {
     public CharacterData_SO templateData;
 
-    //[HideInInspector]
-    public CharacterData_SO characterData;
+    [HideInInspector] public CharacterData_SO characterData;
 
     public AttackData_SO attackData;
 
@@ -21,19 +20,14 @@ public class CharacterStats : MonoBehaviour
     // 出生点
     [HideInInspector] public Vector3 originPosition;
     [HideInInspector] public Quaternion originRotation;
-    // 攻击目标
-    [HideInInspector] public GameObject attackTarget;
 
-    [HideInInspector] public bool isCritical;
+    public bool getHit;
+    public bool isDeath;
+    public bool isCritical;
 
-    [HideInInspector] public bool getHit;
-
-    [HideInInspector] public bool isDeath;
-
-    /// <summary>
-    /// 技能和普通攻击，取其最小值的平方
-    /// </summary>
-    [HideInInspector] public float sqrDistance;
+    public int currentHealth;
+    public int currentDefence;
+    public Dictionary<string, float> lastAttackTime = new Dictionary<string, float>();
 
 
     private void Awake()
@@ -48,158 +42,10 @@ public class CharacterStats : MonoBehaviour
 
         originPosition = transform.position;
         originRotation = transform.rotation;
-        LastAttackTime = CoolDown;
-        LastSkillTime = SkillCoolDown;
 
-        float nearestDistance = Mathf.Min(SkillRange, AttackRange);
-        sqrDistance = nearestDistance * nearestDistance;
+        currentHealth = MaxHealth;
+        currentDefence = BaseDefence;
     }
-
-
-    #region Read from CharacterData_SO
-    public bool IsOpenAI
-    {
-        get { if (characterData != null) { return characterData.isOpenAI; } else { return true; } }
-        set { characterData.isOpenAI = value; }
-    }
-    public int MaxHealth
-    {
-        get { if (characterData != null) { return characterData.maxHealth; } else { return 0; } }
-        set { characterData.maxHealth = value; }
-    }
-    public int CurrentHealth
-    {
-        get { if (characterData != null) { return characterData.currentHealth; } else { return 0; } }
-        set { characterData.currentHealth = value; }
-    }
-    public int BaseDefence
-    {
-        get { if (characterData != null) { return characterData.baseDefence; } else { return 0; } }
-        set { characterData.baseDefence = value; }
-    }
-    public int CurrentDefence
-    {
-        get { if (characterData != null) { return characterData.currentDefence; } else { return 0; } }
-        set { characterData.baseDefence = value; }
-    }
-    public float DestoryTime
-    {
-        get { if (characterData != null) { return characterData.destoryTime; } else { return 0; } }
-        set { characterData.destoryTime = value; }
-    }
-    public bool IsPatrol
-    {
-        get { if (characterData != null) { return characterData.isPatrol; } else { return true; } }
-        set { characterData.isPatrol = value; }
-    }
-    public float WalkSpeed
-    {
-        get { if (characterData != null) { return characterData.walkSpeed; } else { return 0; } }
-        set { characterData.walkSpeed = value; }
-    }
-    public float IdleTime
-    {
-        get { if (characterData != null) { return characterData.idleTime; } else { return 0; } }
-        set { characterData.idleTime = value; }
-    }
-    public float PatrolRange
-    {
-        get { if (characterData != null) { return characterData.patrolRange; } else { return 0; } }
-        set { characterData.patrolRange = value; }
-    }
-    public float SightRadius
-    {
-        get { if (characterData != null) { return characterData.sightRadius; } else { return 0; } }
-        set { characterData.sightRadius = value; }
-    }
-    public float RunSpeed
-    {
-        get { if (characterData != null) { return characterData.runSpeed; } else { return 0; } }
-        set { characterData.runSpeed = value; }
-    }
-    public float RunRange
-    {
-        get { if (characterData != null) { return characterData.runRange; } else { return 0; } }
-        set { characterData.runRange = value; }
-    }
-    #endregion
-
-    #region Read fron AttackData_SO
-    public float CriticalMultiplier
-    {
-        get { if (attackData != null) { return attackData.criticalMultiplier; } else { return 0; } }
-        set { attackData.criticalMultiplier = value; }
-    }
-    public float CriticalChance
-    {
-        get { if (attackData != null) { return attackData.criticalChance; } else { return 0; } }
-        set { attackData.criticalChance = value; }
-    }
-    public float AttackRange
-    {
-        get { if (attackData != null) { return attackData.attackRange; } else { return 0; } }
-        set { attackData.attackRange = value; }
-    }
-    public float SqrAttackRange
-    {
-        get { return AttackRange * AttackRange; }
-    }
-    public float CoolDown
-    {
-        get { if (attackData != null) { return attackData.coolDown; } else { return 0; } }
-        set { attackData.coolDown = value; }
-    }
-    public float LastAttackTime
-    {
-        get { if (attackData != null) { return attackData.lastAttackTime; } else { return 0; } }
-        set { attackData.lastAttackTime = value; }
-    }
-
-    public int MinDange
-    {
-        get { if (attackData != null) { return attackData.minDamge; } else { return 0; } }
-        set { attackData.minDamge = value; }
-    }
-    public int MaxDange
-    {
-        get { if (attackData != null) { return attackData.maxDamge; } else { return 0; } }
-        set { attackData.maxDamge = value; }
-    }
-    public float SkillRange
-    {
-        get { if (attackData != null) { return attackData.skillRange; } else { return 0; } }
-        set { attackData.skillRange = value; }
-    }
-    public float SqrSkillRange
-    {
-        get { return SkillRange * SkillRange; }
-    }
-    public float KickForce
-    {
-        get { if (attackData != null) { return attackData.kickForce; } else { return 0; } }
-        set { attackData.kickForce = value; }
-    }
-    public float SkillCoolDown
-    {
-        get { if (attackData != null) { return attackData.skillCoolDown; } else { return 0; } }
-        set { attackData.skillCoolDown = value; }
-    }
-    public float LastSkillTime
-    {
-        get { if (attackData != null) { return attackData.lastSkillTime; } else { return 0; } }
-        set { attackData.lastSkillTime = value; }
-    }
-    public float SkillMinDamge
-    {
-        get { if (attackData != null) { return attackData.skillMinDamge; } else { return 0; } }
-        set { attackData.skillMinDamge = value; }
-    }
-    public float SkillMaxDamge
-    {
-        get { if (attackData != null) { return attackData.skillMaxDamge; } else { return 0; } }
-        set { attackData.skillMaxDamge = value; }
-    }
-    #endregion
 
 
 
@@ -219,9 +65,92 @@ public class CharacterStats : MonoBehaviour
             Debug.Log("暴击！" + coreDamage);
         }
 
-        int damage = Mathf.Max((int)coreDamage - defener.CurrentDefence, 0);
-        defener.CurrentHealth = Mathf.Max(defener.CurrentHealth - damage, 0);
+        int damage = Mathf.Max((int)coreDamage - defener.currentDefence, 0);
+        defener.currentHealth = Mathf.Max(defener.currentHealth - damage, 0);
         // Update UI
         // 经验Update
     }
+
+    #region Read from CharacterData_SO
+    public int MaxHealth
+    {
+        get { if (characterData != null) { return characterData.maxHealth; } else { return 0; } }
+        set { characterData.maxHealth = value; }
+    }
+    public int BaseDefence
+    {
+        get { if (characterData != null) { return characterData.baseDefence; } else { return 0; } }
+        set { characterData.baseDefence = value; }
+    }
+    public float WalkSpeed
+    {
+        get { if (characterData != null) { return characterData.walkSpeed; } else { return 0; } }
+        set { characterData.walkSpeed = value; }
+    }
+    public float PatrolRange
+    {
+        get { if (characterData != null) { return characterData.patrolRange; } else { return 0; } }
+        set { characterData.patrolRange = value; }
+    }
+    public float SightRadius
+    {
+        get { if (characterData != null) { return characterData.sightRadius; } else { return 0; } }
+        set { characterData.sightRadius = value; }
+    }
+    public float RunSpeed
+    {
+        get { if (characterData != null) { return characterData.runSpeed; } else { return 0; } }
+        set { characterData.runSpeed = value; }
+    }
+    public float CriticalMultiplier
+    {
+        get { if (characterData != null) { return characterData.criticalMultiplier; } else { return 0; } }
+        set { characterData.criticalMultiplier = value; }
+    }
+    public float CriticalChance
+    {
+        get { if (characterData != null) { return characterData.criticalChance; } else { return 0; } }
+        set { characterData.criticalChance = value; }
+    }
+    public float DestoryTime
+    {
+        get { if (characterData != null) { return characterData.destoryTime; } else { return 0; } }
+        set { characterData.destoryTime = value; }
+    }
+    #endregion
+
+    #region Read fron AttackData_SO
+    public float AttackRange
+    {
+        get { if (attackData != null) { return attackData.attackRange; } else { return 0; } }
+        set { attackData.attackRange = value; }
+    }
+    /// <summary>
+    /// AttackRange的平方
+    /// </summary>
+    public float SqrAttackRange
+    {
+        get { return AttackRange * AttackRange; }
+    }
+    public float CoolDown
+    {
+        get { if (attackData != null) { return attackData.coolDown; } else { return 0; } }
+        set { attackData.coolDown = value; }
+    }
+    public int MinDange
+    {
+        get { if (attackData != null) { return attackData.minDamge; } else { return 0; } }
+        set { attackData.minDamge = value; }
+    }
+    public int MaxDange
+    {
+        get { if (attackData != null) { return attackData.maxDamge; } else { return 0; } }
+        set { attackData.maxDamge = value; }
+    }
+    public float KickForce
+    {
+        get { if (attackData != null) { return attackData.kickForce; } else { return 0; } }
+        set { attackData.kickForce = value; }
+    }
+    #endregion
 }

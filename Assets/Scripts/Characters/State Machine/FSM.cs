@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-
+/*
 namespace Characters
 {
     [RequireComponent(typeof(NavMeshAgent))]
@@ -174,3 +174,4 @@ namespace Characters
 
 
 }
+*/
