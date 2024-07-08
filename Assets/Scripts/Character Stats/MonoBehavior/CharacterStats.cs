@@ -36,9 +36,6 @@ public class CharacterStats : MonoBehaviour
     [HideInInspector] public float sqrDistance;
 
 
-    [HideInInspector] public float sqrSkillRange;
-    [HideInInspector] public float sqrAttack;
-
     private void Awake()
     {
         if (templateData != null)
@@ -56,9 +53,6 @@ public class CharacterStats : MonoBehaviour
 
         float nearestDistance = Mathf.Min(SkillRange, AttackRange);
         sqrDistance = nearestDistance * nearestDistance;
-
-        sqrSkillRange = SkillRange * SkillRange;
-        sqrAttack = AttackRange * AttackRange;
     }
 
 
@@ -146,6 +140,10 @@ public class CharacterStats : MonoBehaviour
         get { if (attackData != null) { return attackData.attackRange; } else { return 0; } }
         set { attackData.attackRange = value; }
     }
+    public float SqrAttackRange
+    {
+        get { return AttackRange * AttackRange; }
+    }
     public float CoolDown
     {
         get { if (attackData != null) { return attackData.coolDown; } else { return 0; } }
@@ -171,6 +169,10 @@ public class CharacterStats : MonoBehaviour
     {
         get { if (attackData != null) { return attackData.skillRange; } else { return 0; } }
         set { attackData.skillRange = value; }
+    }
+    public float SqrSkillRange
+    {
+        get { return SkillRange * SkillRange; }
     }
     public float KickForce
     {

@@ -7,6 +7,7 @@ namespace BehaviourTree
     public class PlayAnimation : ActionNode
     {
         public string animatorParameter;
+        private bool flag = false;
         protected override void OnStart()
         {
             if (blackboard.target && characterStats.LastAttackTime >= characterStats.CoolDown)
@@ -20,22 +21,31 @@ namespace BehaviourTree
                 characterStats.animator.SetTrigger(animatorParameter);
                 // ÖØÖÃcd
                 characterStats.LastAttackTime = 0;
+                flag = true;
             }
         }
 
         protected override void OnStop()
         {
-
+            flag = false;
         }
 
         protected override State OnUpdate()
         {
             var info = characterStats.animator.GetCurrentAnimatorStateInfo(1);
-            if (info.normalizedTime >= 0.95f)
+            string animatorNmae = characterStats.animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
+
+            characterStats.agent.destination = characterStats.transform.position;
+            if (flag)
             {
-                return State.Success;
+                flag = false;
+                return State.Running;
             }
-            return State.Running;
+            if (animatorNmae == animatorParameter && info.normalizedTime <= 0.95f)
+            {
+                return State.Running;
+            }
+            return State.Success;
         }
     }
 }

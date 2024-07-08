@@ -16,10 +16,12 @@ MonoBehaviour:
   criticalChance: 0.2
   attackRange: 1
   coolDown: 2
+  lastAttackTime: 1.2176431
   minDamge: 2
   maxDamge: 4
   skillRange: 2
   kickForce: 0
   skillCoolDown: 4
+  lastSkillTime: 27.231892
   skillMinDamge: 4
   skillMaxDamge: 5

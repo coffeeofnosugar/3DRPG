@@ -26,8 +26,8 @@ namespace BehaviourTree
             if (blackboard.target)
             {
                 characterStats.agent.destination = blackboard.target.transform.position;
-                float distance = characterStats.agent.remainingDistance;
-                if (distance < characterStats.AttackRange)
+                // 上一行代码设置了目的地，但是agent还没有反应过来，不能使用agent的距离测量来判断
+                if ((blackboard.target.transform.position - characterStats.transform.position).sqrMagnitude < characterStats.SqrAttackRange)
                 {
                     return State.Success;
                 }

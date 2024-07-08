@@ -157,11 +157,11 @@ namespace Characters
             {
                 float sqrMagnitude = (characterStats.attackTarget.transform.position - manager.transform.position).sqrMagnitude;
 
-                if (characterStats.LastSkillTime >= characterStats.SkillCoolDown && sqrMagnitude <= characterStats.sqrSkillRange)
+                if (characterStats.LastSkillTime >= characterStats.SkillCoolDown && sqrMagnitude <= characterStats.SqrSkillRange)
                 {
                     manager.TransitionState(StateType.Skill);
                 }
-                else if (characterStats.LastAttackTime >= characterStats.CoolDown && sqrMagnitude <= characterStats.sqrAttack)
+                else if (characterStats.LastAttackTime >= characterStats.CoolDown && sqrMagnitude <= characterStats.SqrAttackRange)
                 {
                     manager.TransitionState(StateType.Attack);
                 }
@@ -202,11 +202,11 @@ namespace Characters
             {
                 float sqrMagnitude = (characterStats.attackTarget.transform.position - manager.transform.position).sqrMagnitude;
 
-                if (characterStats.LastSkillTime >= characterStats.SkillCoolDown && sqrMagnitude <= characterStats.sqrSkillRange)
+                if (characterStats.LastSkillTime >= characterStats.SkillCoolDown && sqrMagnitude <= characterStats.SqrSkillRange)
                 {
                     manager.TransitionState(StateType.Skill);
                 }
-                else if (characterStats.LastAttackTime >= characterStats.CoolDown && sqrMagnitude <= characterStats.sqrAttack)
+                else if (characterStats.LastAttackTime >= characterStats.CoolDown && sqrMagnitude <= characterStats.SqrAttackRange)
                 {
                     manager.TransitionState(StateType.Attack);
                 }

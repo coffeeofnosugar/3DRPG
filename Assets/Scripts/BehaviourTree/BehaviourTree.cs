@@ -82,6 +82,7 @@ namespace BehaviourTree
             if (colliders.Length > 0)
             {
                 blackboard.target = colliders[0].gameObject;
+                blackboard.distanceTarget = characterStats.agent.remainingDistance;
                 characterStats.animator.SetLayerWeight(1, 1);
             }
             else
@@ -103,9 +104,10 @@ namespace BehaviourTree
         public void Debug()
         {
             Debugs.Instance["cooldonw"] = characterStats.LastAttackTime.ToString();
+            Debugs.Instance["movePosition"] = characterStats.agent.destination.ToString();
             if (blackboard.target)
             {
-                Debugs.Instance["distance"] = Vector3.Distance(characterStats.transform.position, blackboard.target.transform.position).ToString();
+                Debugs.Instance["distance"] = blackboard.distanceTarget.ToString();
             }
         }
 
