@@ -78,7 +78,7 @@ namespace BehaviourTree
         /// </summary>
         public void FoundTarget()
         {
-            var colliders = Physics.OverlapSphere(characterStats.transform.position, characterStats.PatrolRange, 1 << 6);
+            var colliders = Physics.OverlapSphere(characterStats.transform.position, characterStats.SightRadius, 1 << 6);
             if (colliders.Length > 0)
             {
                 blackboard.target = colliders[0].gameObject;
