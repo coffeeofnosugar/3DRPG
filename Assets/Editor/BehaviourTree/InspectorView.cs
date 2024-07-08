@@ -30,7 +30,7 @@ namespace BehaviourTree
             editor = Editor.CreateEditor(nodeView.node);
             // 创建一个容器，并将节点的Inspector窗口上的内容显示到左侧窗口
             IMGUIContainer container = new IMGUIContainer(() => {
-                if (editor.target)  // 如果选择的节点元素还存在
+                if (editor && editor.target)  // 如果选择的节点元素还存在
                 {
                     editor.OnInspectorGUI();
                 }

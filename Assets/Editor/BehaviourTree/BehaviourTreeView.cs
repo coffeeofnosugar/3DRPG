@@ -31,6 +31,8 @@ namespace BehaviourTree
             // ¿É¿òÖÐÑ¡Ôñ
             this.AddManipulator(new RectangleSelector());
 
+            //this.AddManipulator(new DoubleClickSelection());
+
             var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
             styleSheets.Add(styleSheet);
 

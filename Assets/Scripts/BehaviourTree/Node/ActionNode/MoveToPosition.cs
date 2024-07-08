@@ -21,13 +21,18 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
+            if (blackboard.target)
+            {
+                return State.Failure;
+            }
+
             // 正在计算路径
             if (characterStats.agent.pathPending)
             {
                 return State.Running;
             }
 
-            // 与终点的距离
+            // 与终点的距离的距离小于tolerance
             if (characterStats.agent.remainingDistance < tolerance)
             {
                 return State.Success;

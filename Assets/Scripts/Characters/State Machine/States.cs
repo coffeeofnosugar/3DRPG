@@ -157,11 +157,11 @@ namespace Characters
             {
                 float sqrMagnitude = (characterStats.attackTarget.transform.position - manager.transform.position).sqrMagnitude;
 
-                if (characterStats.lastSkillTime >= characterStats.SkillCoolDown && sqrMagnitude <= characterStats.sqrSkillRange)
+                if (characterStats.LastSkillTime >= characterStats.SkillCoolDown && sqrMagnitude <= characterStats.sqrSkillRange)
                 {
                     manager.TransitionState(StateType.Skill);
                 }
-                else if (characterStats.lastAttackTime >= characterStats.CoolDown && sqrMagnitude <= characterStats.sqrAttack)
+                else if (characterStats.LastAttackTime >= characterStats.CoolDown && sqrMagnitude <= characterStats.sqrAttack)
                 {
                     manager.TransitionState(StateType.Attack);
                 }
@@ -202,11 +202,11 @@ namespace Characters
             {
                 float sqrMagnitude = (characterStats.attackTarget.transform.position - manager.transform.position).sqrMagnitude;
 
-                if (characterStats.lastSkillTime >= characterStats.SkillCoolDown && sqrMagnitude <= characterStats.sqrSkillRange)
+                if (characterStats.LastSkillTime >= characterStats.SkillCoolDown && sqrMagnitude <= characterStats.sqrSkillRange)
                 {
                     manager.TransitionState(StateType.Skill);
                 }
-                else if (characterStats.lastAttackTime >= characterStats.CoolDown && sqrMagnitude <= characterStats.sqrAttack)
+                else if (characterStats.LastAttackTime >= characterStats.CoolDown && sqrMagnitude <= characterStats.sqrAttack)
                 {
                     manager.TransitionState(StateType.Attack);
                 }
@@ -246,7 +246,7 @@ namespace Characters
             characterStats.isCritical = Random.value < characterStats.CriticalChance;
 
             // 攻击开始时重置CD
-            characterStats.lastAttackTime = 0;
+            characterStats.LastAttackTime = 0;
             // 停止移动
             characterStats.agent.destination = manager.transform.position;
             // 朝向攻击目标
@@ -288,7 +288,7 @@ namespace Characters
             //Debugs.Instance["isCritical"] = characterStats.isCritical.ToString();
 
             // 攻击开始时重置CD
-            characterStats.lastSkillTime = 0;
+            characterStats.LastSkillTime = 0;
             // 停止移动
             characterStats.agent.destination = manager.transform.position;
             // 朝向攻击目标

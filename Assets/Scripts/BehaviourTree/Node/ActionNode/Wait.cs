@@ -21,6 +21,10 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
+            if (blackboard.target)
+            {
+                return State.Failure;
+            }
             if (Time.time - startTime > duration)
             {
                 return State.Success;

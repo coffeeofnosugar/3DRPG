@@ -17,6 +17,7 @@ namespace BehaviourTree
         public Node.State treeState = Node.State.Running;
         public List<Node> nodes = new List<Node>();
         public Blackboard blackboard = new Blackboard();
+        public CharacterStats characterStats;
 
         public Node.State Update()
         {
@@ -64,11 +65,48 @@ namespace BehaviourTree
         /// </summary>
         public void Bind(CharacterStats character)
         {
+            this.characterStats = character;
             Traverse(rootNode, (n) =>
             {
                 n.characterStats = character;
                 n.blackboard = blackboard;
             });
+        }
+
+        /// <summary>
+        /// 寻找攻击目标
+        /// </summary>
+        public void FoundTarget()
+        {
+            var colliders = Physics.OverlapSphere(characterStats.transform.position, characterStats.PatrolRange, 1 << 6);
+            if (colliders.Length > 0)
+            {
+                blackboard.target = colliders[0].gameObject;
+                characterStats.animator.SetLayerWeight(1, 1);
+            }
+            else
+            {
+                blackboard.target = null;
+                characterStats.animator.SetLayerWeight(1, 0);
+            }
+        }
+
+        /// <summary>
+        /// cooldown计时器
+        /// </summary>
+        public void RunCooldown()
+        {
+            characterStats.LastAttackTime += Time.deltaTime;
+            characterStats.LastSkillTime += Time.deltaTime;
+        }
+
+        public void Debug()
+        {
+            Debugs.Instance["cooldonw"] = characterStats.LastAttackTime.ToString();
+            if (blackboard.target)
+            {
+                Debugs.Instance["distance"] = Vector3.Distance(characterStats.transform.position, blackboard.target.transform.position).ToString();
+            }
         }
 
 

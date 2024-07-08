@@ -9,7 +9,8 @@ namespace BehaviourTree
     /// 定序节点
     /// 按顺序执行第一个节点
     /// 如果该节点在这一帧返回running，则下一帧依然直接该节点
-    /// 如果该节点在这一帧返回success\failure，则下一针执行下一个子节点
+    /// 除非该节点在这一帧返回success\failure，下一针才会执行下一个子节点
+    /// 直到执行完所有子节点后本节点才会返回
     /// </summary>
     public class Sequencer : CompositeNode
     {

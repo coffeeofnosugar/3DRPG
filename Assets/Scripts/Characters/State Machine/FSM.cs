@@ -56,8 +56,8 @@ namespace Characters
 
         private void Update()
         {
-            characterStats.lastAttackTime += Time.deltaTime;
-            characterStats.lastSkillTime += Time.deltaTime;
+            characterStats.LastAttackTime += Time.deltaTime;
+            characterStats.LastSkillTime += Time.deltaTime;
 
             currentState.OnUpdate();
         }

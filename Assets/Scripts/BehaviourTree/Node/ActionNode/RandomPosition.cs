@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,6 +20,11 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
+            if (blackboard.target)
+            {
+                return State.Failure;
+            }
+
             float randomX = Random.Range(-characterStats.PatrolRange, characterStats.PatrolRange);
             float randomZ = Random.Range(-characterStats.PatrolRange, characterStats.PatrolRange);
 

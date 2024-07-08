@@ -17,12 +17,16 @@ public class AttackData_SO : ScriptableObject
 
     [Tooltip("攻击冷却时间")]
     public float coolDown;
+    
+    [Tooltip("最后普攻时间")]
+    public float lastAttackTime;
 
     [Tooltip("最小伤害")]
     public int minDamge;
 
     [Tooltip("最大伤害")]
     public int maxDamge;
+
 
     [Header("技能攻击")]
     [Tooltip("技能攻击范围")]
@@ -33,6 +37,9 @@ public class AttackData_SO : ScriptableObject
 
     [Tooltip("技能冷却时间")]
     public float skillCoolDown;
+
+    [Tooltip("最后释放技能时间")]
+    public float lastSkillTime;
 
     [Tooltip("技能最小伤害")]
     public float skillMinDamge;

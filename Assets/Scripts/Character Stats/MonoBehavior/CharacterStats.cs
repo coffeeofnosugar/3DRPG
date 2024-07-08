@@ -23,10 +23,6 @@ public class CharacterStats : MonoBehaviour
     [HideInInspector] public Quaternion originRotation;
     // 攻击目标
     [HideInInspector] public GameObject attackTarget;
-    // 攻击时间间隔
-    [HideInInspector] public float lastAttackTime;
-
-    [HideInInspector] public float lastSkillTime;
 
     [HideInInspector] public bool isCritical;
 
@@ -55,8 +51,8 @@ public class CharacterStats : MonoBehaviour
 
         originPosition = transform.position;
         originRotation = transform.rotation;
-        lastAttackTime = CoolDown;
-        lastSkillTime = SkillCoolDown;
+        LastAttackTime = CoolDown;
+        LastSkillTime = SkillCoolDown;
 
         float nearestDistance = Mathf.Min(SkillRange, AttackRange);
         sqrDistance = nearestDistance * nearestDistance;
@@ -155,6 +151,12 @@ public class CharacterStats : MonoBehaviour
         get { if (attackData != null) { return attackData.coolDown; } else { return 0; } }
         set { attackData.coolDown = value; }
     }
+    public float LastAttackTime
+    {
+        get { if (attackData != null) { return attackData.lastAttackTime; } else { return 0; } }
+        set { attackData.lastAttackTime = value; }
+    }
+
     public int MinDange
     {
         get { if (attackData != null) { return attackData.minDamge; } else { return 0; } }
@@ -179,6 +181,11 @@ public class CharacterStats : MonoBehaviour
     {
         get { if (attackData != null) { return attackData.skillCoolDown; } else { return 0; } }
         set { attackData.skillCoolDown = value; }
+    }
+    public float LastSkillTime
+    {
+        get { if (attackData != null) { return attackData.lastSkillTime; } else { return 0; } }
+        set { attackData.lastSkillTime = value; }
     }
     public float SkillMinDamge
     {
