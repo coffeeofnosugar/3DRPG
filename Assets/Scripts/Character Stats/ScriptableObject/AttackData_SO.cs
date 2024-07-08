@@ -6,17 +6,17 @@ using UnityEngine;
 public class AttackData_SO : ScriptableObject
 {
     [Tooltip("¹¥»÷·¶Î§")]
-    public float attackRange;
+    public float attackRange = 1;
 
     [Tooltip("¹¥»÷ÀäÈ´Ê±¼ä")]
-    public float coolDown;
+    public float coolDown = 2;
 
     [Tooltip("×îĞ¡ÉËº¦")]
-    public int minDamge;
+    public int minDamge = 3;
 
     [Tooltip("×î´óÉËº¦")]
-    public int maxDamge;
+    public int maxDamge = 5;
 
     [Tooltip("»÷ÍË¾àÀë")]
-    public float kickForce;
+    public float kickForce = 0;
 }

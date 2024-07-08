@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e837e946bfdb5e340bfa9aef06c72ef1, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
-  isOpenAI: 0
+  id: 0
+  monsterName: Player
+  prefab: 
   maxHealth: 100
-  currentHealth: 100
   baseDefence: 2
-  currentDefence: 2
-  destoryTime: 999999
-  isPatrol: 1
   walkSpeed: 1.5
-  idleTime: 2
+  runSpeed: 2.5
   patrolRange: 8
   sightRadius: 10
-  runSpeed: 2.5
-  runRange: 20
+  criticalMultiplier: 0
+  criticalChance: 0
+  destoryTime: 999999
+  attackList: []

@@ -1,13 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Data", menuName = "Character Stats/Data")]
 public class CharacterData_SO : ScriptableObject
 {
+    public int id = 0000;
+
+    public string monsterName = "Template";
+
+    public string prefab;
+
     [Tooltip("最大血量")]
-    public int maxHealth;
+    public int maxHealth = 30;
 
     [Tooltip("基础防御值")]
-    public int baseDefence;
+    public int baseDefence = 2;
 
     [Tooltip("巡逻速度（若isPatrol = false，则该数据无用）")]
     public float walkSpeed = 1.5f;
@@ -22,11 +29,13 @@ public class CharacterData_SO : ScriptableObject
     public float sightRadius = 10;
 
     [Tooltip("暴击值")]
-    public float criticalMultiplier;
+    public float criticalMultiplier = 2;
 
     [Tooltip("暴击率")]
-    public float criticalChance;
+    public float criticalChance = 0.2f;
 
     [Tooltip("死亡后，多久时间后摧毁")]
-    public float destoryTime;
+    public float destoryTime = 5;
+
+    public List<AttackData_SO> attackList;
 }
