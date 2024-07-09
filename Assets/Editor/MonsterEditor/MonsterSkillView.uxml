@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
         <ui:Foldout text="Foldout" name="Foldout" style="width: 374%;">
+            <ui:TextField picking-mode="Ignore" label="SkillName" value="filler text" name="SkillNameTextField" />
             <ui:TextField picking-mode="Ignore" label="AnimationText" value="filler text" name="AnimationTextField" />
             <ui:FloatField label="AttackRange" value="42.2" name="AttackRangeFloatField" />
             <ui:FloatField label="CoolDown" value="42.2" name="CoolDownFloatField" />

@@ -45,7 +45,7 @@ public class CharacterData_SO : ScriptableObject
     public SkillData_SO CreateSkill()
     {
         SkillData_SO skill =ScriptableObject.CreateInstance<SkillData_SO>();
-        skill.name = skill.skillName;
+        skill.name = skill.skillname;
         skillList.Add(skill);
         AssetDatabase.AddObjectToAsset(skill, this);
         AssetDatabase.SaveAssets();

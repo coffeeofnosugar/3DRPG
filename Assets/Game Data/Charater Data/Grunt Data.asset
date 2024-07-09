@@ -19,6 +19,25 @@ MonoBehaviour:
   minDamge: 3
   maxDamge: 5
   kickForce: 0
+--- !u!114 &-5437386436442630530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811b3e78d5a15d245b29ba2f3a3037d6, type: 3}
+  m_Name: Temp
+  m_EditorClassIdentifier: 
+  skillName: 02
+  animation: temp
+  attackRange: 1
+  coolDown: 2
+  minDamge: 3
+  maxDamge: 5
+  kickForce: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,9 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e837e946bfdb5e340bfa9aef06c72ef1, type: 3}
   m_Name: Grunt Data
   m_EditorClassIdentifier: 
-  id: 0
+  id: 8
   monsterName: Grunt
-  prefab: 
+  prefab: Temp
   maxHealth: 60
   baseDefence: 5
   walkSpeed: 1.5
@@ -42,8 +61,9 @@ MonoBehaviour:
   sightRadius: 10
   criticalMultiplier: 2
   criticalChance: 0.2
-  destoryTime: 5
-  skillList: []
+  destoryTime: 14
+  skillList:
+  - {fileID: -5437386436442630530}
 --- !u!114 &6521726973682451458
 MonoBehaviour:
   m_ObjectHideFlags: 0

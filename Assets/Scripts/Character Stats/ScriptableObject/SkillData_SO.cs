@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Attack", menuName = "Attack/Attack Data")]
 public class SkillData_SO : ScriptableObject
 {
     [Tooltip("技能名称")]
-    public string skillName = "Temp";
+    public string skillname = "Temp";
 
     [Tooltip("动画名称")]
     public string animation;

@@ -23,5 +23,5 @@ MonoBehaviour:
   sightRadius: 10
   criticalMultiplier: 0
   criticalChance: 0
-  destoryTime: 999999
-  attackList: []
+  destoryTime: 999651
+  skillList: []

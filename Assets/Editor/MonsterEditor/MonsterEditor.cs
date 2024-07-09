@@ -2,6 +2,7 @@ using Codice.Client.Common;
 using System;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
@@ -48,18 +49,30 @@ namespace MonsterEditor
             addSkillButton = root.Q<Button>("AddSkillButton");
 
             idIntegerField = root.Q<IntegerField>("IdIntegerField");
+            idIntegerField.bindingPath = "id";
             nameTextField = root.Q<TextField>("NameTextField");
+            nameTextField.bindingPath = "monsterName";
             prefabTextField = root.Q<TextField>("PrefabTextField");
+            prefabTextField.bindingPath = "prefab";
 
             maxHealthIntegerField = root.Q<IntegerField>("MaxHealthIntegerField");
+            maxHealthIntegerField.bindingPath = "maxHealth";
             baseDefenceIntegerField = root.Q<IntegerField>("BaseDefenceIntegerField");
+            baseDefenceIntegerField.bindingPath = "baseDefence";
             walkSpeedFloatField = root.Q<FloatField>("WalkSpeedFloatField");
+            walkSpeedFloatField.bindingPath = "walkSpeed";
             runSpeedFloatField = root.Q<FloatField>("RunSpeedFloatField");
+            runSpeedFloatField.bindingPath = "runSpeed";
             patrolRangeFloatField = root.Q<FloatField>("PatrolRangeFloatField");
+            patrolRangeFloatField.bindingPath = "patrolRange";
             sightRangeFloatField = root.Q<FloatField>("SightRangeFloatField");
+            sightRangeFloatField.bindingPath = "sightRadius";
             criticalMultiplierFloatField = root.Q<FloatField>("CriticalMultiplierFloatField");
+            criticalMultiplierFloatField.bindingPath = "criticalMultiplier";
             criticalChanceFloatField = root.Q<FloatField>("CriticalChanceFloatField");
+            criticalChanceFloatField.bindingPath = "criticalChance";
             destoryTimeIntegerField = root.Q<IntegerField>("DestoryTimeIntegerField");
+            destoryTimeIntegerField.bindingPath = "destoryTime";
 
             // 添加菜单绑定事件
             addButton.clicked += AddButton_onClick;
@@ -71,22 +84,21 @@ namespace MonsterEditor
 
             addSkillButton.clicked += () => {
                 // 创建AttackData_SO
-                SkillData_SO so = currentMonster.CreateSkill();
-                CreateSkillView(so);
+                SkillData_SO skill = currentMonster.CreateSkill();
+                CreateSkillView(skill);
             };
         }
 
         /// <summary>
         /// 添加怪物
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         private void AddButton_onClick()
         {
-            var so = ScriptableObject.CreateInstance<CharacterData_SO>();
-            var b = new MonsterNameButton(so);
+            var character = ScriptableObject.CreateInstance<CharacterData_SO>();
+            var b = new MonsterNameButton(character);
             leftPanel.Add(b);
             // 创建
-            AssetDatabase.CreateAsset(so, $"Assets/Game Data/Charater Data/{so.monsterName} Data.asset");
+            AssetDatabase.CreateAsset(character, $"Assets/Game Data/Charater Data/{character.monsterName} Data.asset");
             // 保存
             AssetDatabase.SaveAssets();
             // 编译刷新
@@ -109,32 +121,47 @@ namespace MonsterEditor
             }
         }
 
-        private void ShowCharacterData(CharacterData_SO so)
+        private void ShowCharacterData(CharacterData_SO character)
         {
-            currentMonster = so;
-            idIntegerField.value = so.id;
-            nameTextField.value = so.monsterName;
-            prefabTextField.value = so.prefab;
-            maxHealthIntegerField.value = so.maxHealth;
-            baseDefenceIntegerField.value = so.baseDefence;
-            walkSpeedFloatField.value = so.walkSpeed;
-            runSpeedFloatField.value = so.runSpeed;
-            patrolRangeFloatField.value = so.patrolRange;
-            sightRangeFloatField.value = so.sightRadius;
-            criticalMultiplierFloatField.value = so.criticalMultiplier;
-            criticalChanceFloatField.value = so.criticalChance;
-            destoryTimeIntegerField.value = so.destoryTime;
+            currentMonster = character;
+
+            idIntegerField.value = character.id;
+            nameTextField.value = character.monsterName;
+            prefabTextField.value = character.prefab;
+            maxHealthIntegerField.value = character.maxHealth;
+            baseDefenceIntegerField.value = character.baseDefence;
+            walkSpeedFloatField.value = character.walkSpeed;
+            runSpeedFloatField.value = character.runSpeed;
+            patrolRangeFloatField.value = character.patrolRange;
+            sightRangeFloatField.value = character.sightRadius;
+            criticalMultiplierFloatField.value = character.criticalMultiplier;
+            criticalChanceFloatField.value = character.criticalChance;
+            destoryTimeIntegerField.value = character.destoryTime;
+
+            SerializedObject so = new SerializedObject(character);
+            idIntegerField.Bind(so);
+            nameTextField.Bind(so);
+            prefabTextField.Bind(so);
+            maxHealthIntegerField.Bind(so);
+            baseDefenceIntegerField.Bind(so);
+            walkSpeedFloatField.Bind(so);
+            runSpeedFloatField.Bind(so);
+            patrolRangeFloatField.Bind(so);
+            sightRangeFloatField.Bind(so);
+            criticalMultiplierFloatField.Bind(so);
+            criticalChanceFloatField.Bind(so);
+            destoryTimeIntegerField.Bind(so);
 
             skillView.Clear();
-            for (int i = 0; i < so.skillList.Count; i++)
+            for (int i = 0; i < character.skillList.Count; i++)
             {
-                CreateSkillView(so.skillList[i]);
+                CreateSkillView(character.skillList[i]);
             }
         }
 
         private void CreateSkillView(SkillData_SO skill)
         {
-            // 创建视图
+            // 创建技能视图
             MonsterSkillView monsterSkillView = new MonsterSkillView(skill);
             monsterSkillView.DeleteSkillButton_onClick = () => {
                 skillView.Remove(monsterSkillView);
@@ -145,7 +172,7 @@ namespace MonsterEditor
 
         /// <summary>
         /// 寻找指定路径下所有指定ScriptableObject类的文件
-        /// </summary>
+        /// </summary>c
         /// <typeparam name="T"></typeparam>
         /// <param name="folderPath"></param>
         /// <returns></returns>
