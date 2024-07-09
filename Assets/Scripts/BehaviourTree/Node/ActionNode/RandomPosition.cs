@@ -32,7 +32,6 @@ namespace BehaviourTree
 
             // NavMesh.SamplePosition该函数是防止取的点没有被mesh覆盖，然后取其最靠近的点
             blackboard.moveToPosition = NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1, 1) ? hit.position : characterStats.transform.position;
-
             return State.Success;
         }
     }

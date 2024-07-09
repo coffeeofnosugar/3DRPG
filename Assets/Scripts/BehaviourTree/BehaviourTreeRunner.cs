@@ -34,7 +34,7 @@ namespace BehaviourTree
 
         private void Update()
         {
-            tree.Debug();
+            tree.DebugShow();
             // 攻击CD计时器
             tree.RunCooldown();
             // 每时每刻都寻找玩家的位置

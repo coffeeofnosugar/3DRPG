@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
 public class CharacterStats : MonoBehaviour
 {
     public CharacterData_SO templateData;
@@ -35,6 +36,10 @@ public class CharacterStats : MonoBehaviour
         if (templateData != null)
         {
             characterData = Instantiate(templateData);
+        }
+        else
+        {
+            Debug.LogError("Î´ÅäÖÃ½ÇÉ«Êý¾Ý");
         }
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();

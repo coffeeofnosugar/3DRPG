@@ -101,7 +101,7 @@ namespace BehaviourTree
             //characterStats.LastSkillTime += Time.deltaTime;
         }
 
-        public void Debug()
+        public void DebugShow()
         {
             //Debugs.Instance["cooldonw"] = characterStats.LastAttackTime.ToString();
             Debugs.Instance["movePosition"] = characterStats.agent.destination.ToString();
@@ -173,6 +173,9 @@ namespace BehaviourTree
                 Undo.RecordObject(composite, "Behaviour Tree (AddChild)");
                 composite.children.Add(child);
                 EditorUtility.SetDirty(composite);
+                Weight weight = parent as Weight;
+                if (weight)
+                    weight.weights.Add(1);
             }
 
             DecoratorNode decorator = parent as DecoratorNode;
@@ -200,6 +203,9 @@ namespace BehaviourTree
                 Undo.RecordObject(composite, "Behaviour Tree (AddChild)");
                 composite.children.Remove(child);
                 EditorUtility.SetDirty(composite);
+                Weight weight = parent as Weight;
+                if (weight)
+                    weight.weights.Remove(weight.weights[0]);
             }
 
             DecoratorNode decorator = parent as DecoratorNode;

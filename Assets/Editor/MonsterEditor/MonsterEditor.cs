@@ -1,12 +1,9 @@
-using Codice.Client.BaseCommands.CheckIn.Progress;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Profiling;
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
 namespace MonsterEditor
@@ -34,6 +31,17 @@ namespace MonsterEditor
         {
             MonsterEditor wnd = GetWindow<MonsterEditor>();
             wnd.titleContent = new GUIContent("MonsterEditor");
+        }
+
+        [OnOpenAsset]
+        public static bool OnOpenAsset(int instanceId)
+        {
+            if (Selection.activeObject is CharacterData_SO)
+            {
+                OpenWindow();
+                return true;
+            }
+            return false;
         }
 
         public void CreateGUI()
