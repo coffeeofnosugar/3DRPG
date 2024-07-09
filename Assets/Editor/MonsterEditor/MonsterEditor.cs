@@ -113,6 +113,7 @@ namespace MonsterEditor
         private void DeleteButton_onClick()
         {
             leftPanel.Remove(currentMonster);
+            monsterList.Remove(currentMonster);
             AssetDatabase.DeleteAsset($"Assets/Game Data/Monster Data/{currentMonster.character.monsterName} Data.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
