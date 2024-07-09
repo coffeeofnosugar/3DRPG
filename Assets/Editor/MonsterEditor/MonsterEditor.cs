@@ -96,7 +96,7 @@ namespace MonsterEditor
         private void AddButton_onClick()
         {
             var character = ScriptableObject.CreateInstance<CharacterData_SO>();
-            AssetDatabase.CreateAsset(character, $"Assets/Game Data/Charater Data/{character.monsterName} Data.asset");
+            AssetDatabase.CreateAsset(character, $"Assets/Game Data/Monster Data/{character.monsterName} Data.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             var b = new MonsterNameButton(character);
@@ -113,7 +113,7 @@ namespace MonsterEditor
         private void DeleteButton_onClick()
         {
             leftPanel.Remove(currentMonster);
-            AssetDatabase.DeleteAsset($"Assets/Game Data/Charater Data/{currentMonster.character.monsterName} Data.asset");
+            AssetDatabase.DeleteAsset($"Assets/Game Data/Monster Data/{currentMonster.character.monsterName} Data.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
@@ -126,7 +126,7 @@ namespace MonsterEditor
         /// </summary>
         private void ShowListButton()
         {
-            var sos = FindAllScriptableObjects<CharacterData_SO>("Assets/Game Data/Charater Data/");
+            var sos = FindAllScriptableObjects<CharacterData_SO>("Assets/Game Data/Monster Data/");
 
             for (int i = 0; i < sos.Length; i++)
             {
@@ -159,6 +159,13 @@ namespace MonsterEditor
             SerializedObject so = new SerializedObject(character);
             idIntegerField.Bind(so);
             nameTextField.Bind(so);
+            nameTextField.RegisterValueChangedCallback(evt =>
+            {
+                currentMonster.text = evt.newValue;
+                string assetPath = AssetDatabase.GetAssetPath(character);
+                AssetDatabase.RenameAsset(assetPath, $"{evt.newValue} Data");
+                AssetDatabase.SaveAssets();
+            });
             maxHealthIntegerField.Bind(so);
             baseDefenceIntegerField.Bind(so);
             walkSpeedFloatField.Bind(so);

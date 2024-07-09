@@ -1,6 +1,8 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
 namespace MonsterEditor
@@ -8,6 +10,8 @@ namespace MonsterEditor
     public class MonsterSkillView : UnityEngine.UIElements.VisualElement
     {
         public System.Action DeleteSkillButton_onClick;
+        
+        Foldout foldout;
 
         TextField skillNameTextField, animationTextField;
         FloatField rangeFloatFied, coolDownFloatFied;
@@ -23,8 +27,9 @@ namespace MonsterEditor
 
             // 将加载的内容添加到当前元素
             this.Add(root);
-
+            string assetPath = AssetDatabase.GetAssetPath(skill);
             // 获取组件
+            foldout = this.Q<Foldout>("Foldout");
             skillNameTextField = this.Q<TextField>("SkillNameTextField");
             skillNameTextField.bindingPath = "skillName";
             animationTextField = this.Q<TextField>("AnimationTextField");
@@ -47,6 +52,13 @@ namespace MonsterEditor
 
             SerializedObject so = new SerializedObject(skill);
             skillNameTextField.Bind(so);
+            // 当skillNameTextField更改时同步更改foldout
+            skillNameTextField.RegisterValueChangedCallback(evt =>
+            {
+                skill.name = evt.newValue;
+                AssetDatabase.SaveAssets();
+                foldout.text = evt.newValue;
+            });
             animationTextField.Bind(so);
             rangeFloatFied.Bind(so);
             coolDownFloatFied.Bind(so);
