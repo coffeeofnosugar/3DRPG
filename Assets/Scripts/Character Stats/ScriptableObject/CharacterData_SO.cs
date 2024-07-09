@@ -8,8 +8,6 @@ public class CharacterData_SO : ScriptableObject
 
     public string monsterName = "Template";
 
-    public string prefab;
-
     [Tooltip("×î´óÑªÁ¿")]
     public int maxHealth = 30;
 

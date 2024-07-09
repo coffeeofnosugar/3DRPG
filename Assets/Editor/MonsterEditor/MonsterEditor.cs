@@ -17,7 +17,7 @@ namespace MonsterEditor
         Button addButton, deleteButton, addSkillButton;
 
         IntegerField idIntegerField;
-        TextField nameTextField, prefabTextField;
+        TextField nameTextField;
 
         MonsterNameButton currentMonster;
         List<MonsterNameButton> monsterList = new List<MonsterNameButton>();
@@ -64,8 +64,6 @@ namespace MonsterEditor
             idIntegerField.bindingPath = "id";
             nameTextField = root.Q<TextField>("NameTextField");
             nameTextField.bindingPath = "monsterName";
-            prefabTextField = root.Q<TextField>("PrefabTextField");
-            prefabTextField.bindingPath = "prefab";
 
             maxHealthIntegerField = root.Q<IntegerField>("MaxHealthIntegerField");
             maxHealthIntegerField.bindingPath = "maxHealth";
@@ -148,7 +146,6 @@ namespace MonsterEditor
 
             idIntegerField.value = character.id;
             nameTextField.value = character.monsterName;
-            prefabTextField.value = character.prefab;
             maxHealthIntegerField.value = character.maxHealth;
             baseDefenceIntegerField.value = character.baseDefence;
             walkSpeedFloatField.value = character.walkSpeed;
@@ -162,7 +159,6 @@ namespace MonsterEditor
             SerializedObject so = new SerializedObject(character);
             idIntegerField.Bind(so);
             nameTextField.Bind(so);
-            prefabTextField.Bind(so);
             maxHealthIntegerField.Bind(so);
             baseDefenceIntegerField.Bind(so);
             walkSpeedFloatField.Bind(so);

@@ -3,7 +3,6 @@
     <uie:Toolbar>
         <uie:ToolbarButton text="Add" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddToolbarButton" />
         <uie:ToolbarButton text="Delete" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteToolbarButton" />
-        <uie:ToolbarButton text="Update" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UpdateToolbarButton" />
     </uie:Toolbar>
     <SplitView>
         <ui:VisualElement name="left-panel" style="flex-grow: 1; background-color: rgb(56, 56, 56);" />
@@ -11,7 +10,6 @@
             <ui:VisualElement>
                 <ui:IntegerField label="id" value="42" name="IdIntegerField" style="color: rgb(196, 196, 196);" />
                 <ui:TextField picking-mode="Ignore" label="Name" value="filler text" name="NameTextField" style="color: rgb(196, 196, 196);" />
-                <ui:TextField picking-mode="Ignore" label="Prefab" value="filler text" name="PrefabTextField" style="color: rgb(196, 196, 196);" />
             </ui:VisualElement>
             <ui:VisualElement name="divider" class="vertical" />
             <ui:VisualElement style="flex-grow: 1;">
