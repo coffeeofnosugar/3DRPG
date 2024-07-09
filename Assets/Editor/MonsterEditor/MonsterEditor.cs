@@ -4,21 +4,23 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.PlayerSettings;
 
 namespace MonsterEditor
 {
     public class MonsterEditor : EditorWindow
     {
-        Button addButton, deleteButton, updateButton;
+        VisualElement leftPanel, skillView;
+        Button addButton, deleteButton, updateButton, addSkillButton;
 
         IntegerField idIntegerField;
         TextField nameTextField, prefabTextField;
 
+        CharacterData_SO currentMonster;
 
-        IntegerField maxHealthIntegerField, baseDefenceIntegerField, walkSpeedIntegerField, runSpeedIntegerField, patrolRangeIntegerField, sightRangeIntegerField, criticalMultiplierIntegerField, criticalChanceIntegerField, destoryTimeIntegerField;
-        
-        VisualElement leftPanel;
-
+        IntegerField maxHealthIntegerField, baseDefenceIntegerField;
+        FloatField walkSpeedFloatField, runSpeedFloatField, patrolRangeFloatField, sightRangeFloatField, criticalMultiplierFloatField, criticalChanceFloatField;
+        IntegerField destoryTimeIntegerField;
 
         [SerializeField]
         private VisualTreeAsset m_VisualTreeAsset = default;
@@ -37,10 +39,13 @@ namespace MonsterEditor
 
             m_VisualTreeAsset.CloneTree(root);
 
+            leftPanel = root.Q<VisualElement>("left-panel");
+            skillView = root.Q<VisualElement>("skill-view");
+
             addButton = root.Q<Button>("AddToolbarButton");
             deleteButton = root.Q<Button>("DeleteToolbarButton");
             updateButton = root.Q<Button>("UpdateToolbarButton");
-            leftPanel = root.Q<VisualElement>("left-panel");
+            addSkillButton = root.Q<Button>("AddSkillButton");
 
             idIntegerField = root.Q<IntegerField>("IdIntegerField");
             nameTextField = root.Q<TextField>("NameTextField");
@@ -48,16 +53,27 @@ namespace MonsterEditor
 
             maxHealthIntegerField = root.Q<IntegerField>("MaxHealthIntegerField");
             baseDefenceIntegerField = root.Q<IntegerField>("BaseDefenceIntegerField");
-            walkSpeedIntegerField = root.Q<IntegerField>("WalkSpeedIntegerField");
-            runSpeedIntegerField = root.Q<IntegerField>("RunSpeedIntegerField");
-            patrolRangeIntegerField = root.Q<IntegerField>("PatrolRangeIntegerField");
-            sightRangeIntegerField = root.Q<IntegerField>("SightRangeIntegerField");
-            criticalMultiplierIntegerField = root.Q<IntegerField>("CriticalMultiplierIntegerField");
-            criticalChanceIntegerField = root.Q<IntegerField>("CriticalChanceIntegerField");
+            walkSpeedFloatField = root.Q<FloatField>("WalkSpeedFloatField");
+            runSpeedFloatField = root.Q<FloatField>("RunSpeedFloatField");
+            patrolRangeFloatField = root.Q<FloatField>("PatrolRangeFloatField");
+            sightRangeFloatField = root.Q<FloatField>("SightRangeFloatField");
+            criticalMultiplierFloatField = root.Q<FloatField>("CriticalMultiplierFloatField");
+            criticalChanceFloatField = root.Q<FloatField>("CriticalChanceFloatField");
             destoryTimeIntegerField = root.Q<IntegerField>("DestoryTimeIntegerField");
 
+            // 添加菜单绑定事件
             addButton.clicked += AddButton_onClick;
+            // 展示所有怪物的按钮
             ShowListButton();
+            // 获取第一个怪物按钮并展示其内容
+            var button = root.Q<MonsterNameButton>("MonsterNameButton");
+            button.ShowCharacterData();
+
+            addSkillButton.clicked += () => {
+                // 创建AttackData_SO
+                AttackData_SO so = currentMonster.CreateAttackData_SO();
+                CreateSkillView(so);
+            };
         }
 
         /// <summary>
@@ -87,15 +103,42 @@ namespace MonsterEditor
             for (int i = 0; i < sos.Length; i++)
             {
                 var b = new MonsterNameButton(sos[i]);
-                leftPanel.Add(b);
+                // 注册点击事件，执行ShowCharacterData方法
                 b.OnButtonClick = ShowCharacterData;
+                leftPanel.Add(b);
             }
         }
 
         private void ShowCharacterData(CharacterData_SO so)
         {
+            currentMonster = so;
+            idIntegerField.value = so.id;
             nameTextField.value = so.monsterName;
+            prefabTextField.value = so.prefab;
+            maxHealthIntegerField.value = so.maxHealth;
+            baseDefenceIntegerField.value = so.baseDefence;
+            walkSpeedFloatField.value = so.walkSpeed;
+            runSpeedFloatField.value = so.runSpeed;
+            patrolRangeFloatField.value = so.patrolRange;
+            sightRangeFloatField.value = so.sightRadius;
+            criticalMultiplierFloatField.value = so.criticalMultiplier;
+            criticalChanceFloatField.value = so.criticalChance;
+            destoryTimeIntegerField.value = so.destoryTime;
+
+            skillView.Clear();
+            for (int i = 0; i < so.skillList.Count; i++)
+            {
+                CreateSkillView(so.skillList[i]);
+            }
         }
+
+        private void CreateSkillView(AttackData_SO so)
+        {
+            // 创建视图
+            MonsterSkillView monsterSkillView = new MonsterSkillView(so);
+            skillView.Add(monsterSkillView);
+        }
+
         /// <summary>
         /// 寻找指定路径下所有指定ScriptableObject类的文件
         /// </summary>

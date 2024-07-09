@@ -7,33 +7,31 @@
     </uie:Toolbar>
     <SplitView>
         <ui:VisualElement name="left-panel" style="flex-grow: 1; background-color: rgb(56, 56, 56);" />
-        <ui:VisualElement name="right-panel" style="flex-grow: 1; background-color: rgb(56, 56, 56);">
+        <ui:VisualElement name="right-panel" style="flex-grow: 1; background-color: rgb(56, 56, 56); margin-left: 3px;">
             <ui:VisualElement>
                 <ui:IntegerField label="id" value="42" name="IdIntegerField" style="color: rgb(196, 196, 196);" />
                 <ui:TextField picking-mode="Ignore" label="Name" value="filler text" name="NameTextField" style="color: rgb(196, 196, 196);" />
                 <ui:TextField picking-mode="Ignore" label="Prefab" value="filler text" name="PrefabTextField" style="color: rgb(196, 196, 196);" />
             </ui:VisualElement>
+            <ui:VisualElement name="divider" class="vertical" />
             <ui:VisualElement style="flex-grow: 1;">
                 <ui:Label tabindex="-1" text="属性" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(196, 196, 196); -unity-font-style: bold;" />
                 <ui:IntegerField label="MaxHealth" value="42" name="MaxHealthIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
                 <ui:IntegerField label="BaseDefence" value="42" name="BaseDefenceIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                <ui:IntegerField label="WalkSpeed" value="42" name="WalkSpeedIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                <ui:IntegerField label="RunSpeed" value="42" name="RunSpeedIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                <ui:IntegerField label="PatrolRange" value="42" name="PatrolRangeIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                <ui:IntegerField label="SightRange" value="42" name="SightRangeIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                <ui:IntegerField label="CriticalMultiplier" value="42" name="CriticalMultiplierIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                <ui:IntegerField label="CriticalChance" value="42" name="CriticalChanceIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
+                <ui:FloatField label="WalkSpeed" value="42.2" name="WalkSpeedFloatField" style="margin-left: 13px;" />
+                <ui:FloatField label="RunSpeed" value="42.2" name="RunSpeedFloatField" style="margin-left: 13px;" />
+                <ui:FloatField label="PatrolRange" value="42.2" name="PatrolRangeFloatField" style="margin-left: 13px;" />
+                <ui:FloatField label="SightRange" value="42.2" name="SightRangeFloatField" style="margin-left: 13px;" />
+                <ui:FloatField label="CriticalMultiplier" value="42.2" name="CriticalMultiplierFloatField" style="margin-left: 13px;" />
+                <ui:FloatField label="CriticalChance" value="42.2" name="CriticalChanceFloatField" style="margin-left: 13px;" />
                 <ui:IntegerField label="DestoryTime" value="42" name="DestoryTimeIntegerField" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                <ui:VisualElement name="skill-panel" style="flex-grow: 1;">
-                    <ui:Label tabindex="-1" text="技能" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(196, 196, 196); -unity-font-style: bold;" />
-                    <ui:Foldout text="技能1" style="color: rgb(196, 196, 196);">
-                        <ui:IntegerField label="Range" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                        <ui:IntegerField label="CoolDown" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                        <ui:IntegerField label="MinDamge" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                        <ui:IntegerField label="MaxDamge" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                        <ui:IntegerField label="KickForce" value="42" style="margin-left: 13px; color: rgb(196, 196, 196);" />
-                    </ui:Foldout>
-                    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddSkillButton" />
+                <ui:VisualElement name="divider" class="vertical" />
+                <ui:VisualElement name="skill-panel" style="flex-grow: 1; margin-top: 3px;">
+                    <ui:VisualElement style="flex-direction: row; height: 24px; -unity-text-align: middle-left;">
+                        <ui:Label tabindex="-1" text="技能" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(196, 196, 196); -unity-font-style: bold;" />
+                        <ui:Button text="AddSkill" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddSkillButton" style="right: 0; position: absolute;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="skill-view" style="flex-grow: 1;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

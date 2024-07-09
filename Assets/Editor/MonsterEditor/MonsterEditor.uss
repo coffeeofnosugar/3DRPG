@@ -13,3 +13,10 @@
 #MonsterNameButton {
     height: 40px;
 }
+
+#divider {
+    background-color: rgba(96, 96, 96, 0.53);
+    height: 1px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}

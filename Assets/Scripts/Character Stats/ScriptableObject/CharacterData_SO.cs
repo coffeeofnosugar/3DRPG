@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Data", menuName = "Character Stats/Data")]
@@ -35,7 +36,20 @@ public class CharacterData_SO : ScriptableObject
     public float criticalChance = 0.2f;
 
     [Tooltip("死亡后，多久时间后摧毁")]
-    public float destoryTime = 5;
+    public int destoryTime = 5;
 
-    public List<AttackData_SO> attackList;
+    public List<AttackData_SO> skillList = new List<AttackData_SO>();
+
+
+#if UNITY_EDITOR
+    public AttackData_SO CreateAttackData_SO()
+    {
+        AttackData_SO so =ScriptableObject.CreateInstance<AttackData_SO>();
+        so.name = so.skillName;
+        skillList.Add(so);
+        AssetDatabase.AddObjectToAsset(so, this);
+        AssetDatabase.SaveAssets();
+        return so;
+    }
+#endif
 }

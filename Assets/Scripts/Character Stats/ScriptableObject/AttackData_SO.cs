@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Attack", menuName = "Attack/Attack Data")]
 public class AttackData_SO : ScriptableObject
 {
+    [Tooltip("技能名称")]
+    public string skillName = "Temp";
+
+    [Tooltip("动画名称")]
+    public string animation;
+
     [Tooltip("攻击范围")]
     public float attackRange = 1;
 

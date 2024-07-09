@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
+        <ui:Foldout text="Foldout" name="Foldout" style="width: 374%;">
+            <ui:TextField picking-mode="Ignore" label="AnimationText" value="filler text" name="AnimationTextField" />
+            <ui:FloatField label="AttackRange" value="42.2" name="AttackRangeFloatField" />
+            <ui:FloatField label="CoolDown" value="42.2" name="CoolDownFloatField" />
+            <ui:IntegerField label="MinDamge" value="42" name="MinDamgeIntegerField" />
+            <ui:IntegerField label="MaxDamge" value="42" name="MaxDamgeIntegerField" />
+            <ui:FloatField label="FickForce" value="42.2" name="KickForceFloatField" />
+        </ui:Foldout>
+        <ui:Button text="Delete" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSkillButton" style="position: absolute; right: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -19,7 +19,7 @@ namespace MonsterEditor
             this.clicked += () => ShowCharacterData();
         }
 
-        private void ShowCharacterData()
+        public void ShowCharacterData()
         {
             OnButtonClick?.Invoke(so);
         }

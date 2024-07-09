@@ -112,7 +112,7 @@ public class CharacterStats : MonoBehaviour
         get { if (characterData != null) { return characterData.criticalChance; } else { return 0; } }
         set { characterData.criticalChance = value; }
     }
-    public float DestoryTime
+    public int DestoryTime
     {
         get { if (characterData != null) { return characterData.destoryTime; } else { return 0; } }
         set { characterData.destoryTime = value; }
