@@ -43,9 +43,7 @@ MonoBehaviour:
   criticalMultiplier: 2
   criticalChance: 0.2
   destoryTime: 5
-  skillList:
-  - {fileID: 6521726973682451458}
-  - {fileID: -8493198517887417395}
+  skillList: []
 --- !u!114 &6521726973682451458
 MonoBehaviour:
   m_ObjectHideFlags: 0

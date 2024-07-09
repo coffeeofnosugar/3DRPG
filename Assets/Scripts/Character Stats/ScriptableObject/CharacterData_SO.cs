@@ -38,18 +38,26 @@ public class CharacterData_SO : ScriptableObject
     [Tooltip("死亡后，多久时间后摧毁")]
     public int destoryTime = 5;
 
-    public List<AttackData_SO> skillList = new List<AttackData_SO>();
+    public List<SkillData_SO> skillList = new List<SkillData_SO>();
 
 
 #if UNITY_EDITOR
-    public AttackData_SO CreateAttackData_SO()
+    public SkillData_SO CreateSkill()
     {
-        AttackData_SO so =ScriptableObject.CreateInstance<AttackData_SO>();
-        so.name = so.skillName;
-        skillList.Add(so);
-        AssetDatabase.AddObjectToAsset(so, this);
+        SkillData_SO skill =ScriptableObject.CreateInstance<SkillData_SO>();
+        skill.name = skill.skillName;
+        skillList.Add(skill);
+        AssetDatabase.AddObjectToAsset(skill, this);
         AssetDatabase.SaveAssets();
-        return so;
+        return skill;
+    }
+
+    public void DeleteSkill(SkillData_SO skill)
+    {
+        skillList.Remove(skill);
+
+        AssetDatabase.RemoveObjectFromAsset(skill);
+        AssetDatabase.SaveAssets();
     }
 #endif
 }

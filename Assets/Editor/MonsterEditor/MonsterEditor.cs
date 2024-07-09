@@ -71,7 +71,7 @@ namespace MonsterEditor
 
             addSkillButton.clicked += () => {
                 // 创建AttackData_SO
-                AttackData_SO so = currentMonster.CreateAttackData_SO();
+                SkillData_SO so = currentMonster.CreateSkill();
                 CreateSkillView(so);
             };
         }
@@ -132,10 +132,14 @@ namespace MonsterEditor
             }
         }
 
-        private void CreateSkillView(AttackData_SO so)
+        private void CreateSkillView(SkillData_SO skill)
         {
             // 创建视图
-            MonsterSkillView monsterSkillView = new MonsterSkillView(so);
+            MonsterSkillView monsterSkillView = new MonsterSkillView(skill);
+            monsterSkillView.DeleteSkillButton_onClick = () => {
+                skillView.Remove(monsterSkillView);
+                currentMonster.DeleteSkill(skill);
+            };
             skillView.Add(monsterSkillView);
         }
 

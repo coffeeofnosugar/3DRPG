@@ -6,14 +6,16 @@ namespace MonsterEditor
 {
     public class MonsterSkillView : UnityEngine.UIElements.VisualElement
     {
+        public System.Action DeleteSkillButton_onClick;
+
         TextField animationText;
         FloatField rangeFloatFied, coolDownFloatFied;
         IntegerField minDamge, maxDamge;
         FloatField kickForceFloatField;
         Button deleteSkillButton;
 
-        AttackData_SO so;
-        public MonsterSkillView(AttackData_SO so)
+        SkillData_SO skill;
+        public MonsterSkillView(SkillData_SO skill)
         {
             // 加载 UXML 文件
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/MonsterEditor/MonsterSkillView.uxml");
@@ -22,7 +24,7 @@ namespace MonsterEditor
             // 将加载的内容添加到当前元素
             this.Add(root);
 
-            this.so = so;
+            this.skill = skill;
 
             // 获取组件
             animationText = this.Q<TextField>("AnimationTextField");
@@ -32,11 +34,8 @@ namespace MonsterEditor
             maxDamge = this.Q<IntegerField>("MaxDamge");
             kickForceFloatField = this.Q<FloatField>("KickForceFloatField");
             deleteSkillButton = this.Q<Button>("DeleteSkillButton");
-        }
 
-        public void DeleteSkill()
-        {
-
+            deleteSkillButton.clicked += () => DeleteSkillButton_onClick?.Invoke();
         }
     }
 }

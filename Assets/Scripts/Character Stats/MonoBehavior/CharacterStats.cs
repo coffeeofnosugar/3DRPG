@@ -10,7 +10,7 @@ public class CharacterStats : MonoBehaviour
 
     [HideInInspector] public CharacterData_SO characterData;
 
-    public AttackData_SO attackData;
+    public SkillData_SO attackData;
 
 
     [HideInInspector] public Animator animator;

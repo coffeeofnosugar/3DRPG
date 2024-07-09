@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Attack", menuName = "Attack/Attack Data")]
-public class AttackData_SO : ScriptableObject
+public class SkillData_SO : ScriptableObject
 {
     [Tooltip("¼¼ÄÜÃû³Æ")]
     public string skillName = "Temp";
