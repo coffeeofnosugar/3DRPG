@@ -140,6 +140,8 @@ namespace MonsterEditor
             }
         }
 
+        //private EventCallback<ChangeEvent>
+
         private void ShowCharacterData(CharacterData_SO character, MonsterNameButton monsterNameButton)
         {
             currentMonster = monsterNameButton;
@@ -159,13 +161,8 @@ namespace MonsterEditor
             SerializedObject so = new SerializedObject(character);
             idIntegerField.Bind(so);
             nameTextField.Bind(so);
-            nameTextField.RegisterValueChangedCallback(evt =>
-            {
-                currentMonster.text = evt.newValue;
-                string assetPath = AssetDatabase.GetAssetPath(character);
-                AssetDatabase.RenameAsset(assetPath, $"{evt.newValue} Data");
-                AssetDatabase.SaveAssets();
-            });
+            nameTextField.UnregisterValueChangedCallback(NameTextFieldCallback);
+            nameTextField.RegisterValueChangedCallback(NameTextFieldCallback);
             maxHealthIntegerField.Bind(so);
             baseDefenceIntegerField.Bind(so);
             walkSpeedFloatField.Bind(so);
@@ -181,6 +178,14 @@ namespace MonsterEditor
             {
                 CreateSkillView(character.skillList[i]);
             }
+        }
+
+        private void NameTextFieldCallback(ChangeEvent<string> evt)
+        {
+            currentMonster.text = evt.newValue;
+            string assetPath = AssetDatabase.GetAssetPath(currentMonster.character);
+            AssetDatabase.RenameAsset(assetPath, $"{evt.newValue} Data");
+            AssetDatabase.SaveAssets();
         }
 
         private void CreateSkillView(SkillData_SO skill)
