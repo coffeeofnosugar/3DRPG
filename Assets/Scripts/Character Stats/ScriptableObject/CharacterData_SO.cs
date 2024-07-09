@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Data", menuName = "Character Stats/Data")]
 public class CharacterData_SO : ScriptableObject
 {
     public int id = 0000;
@@ -45,7 +44,7 @@ public class CharacterData_SO : ScriptableObject
     public SkillData_SO CreateSkill()
     {
         SkillData_SO skill =ScriptableObject.CreateInstance<SkillData_SO>();
-        skill.name = skill.skillname;
+        skill.name = skill.skillName;
         skillList.Add(skill);
         AssetDatabase.AddObjectToAsset(skill, this);
         AssetDatabase.SaveAssets();

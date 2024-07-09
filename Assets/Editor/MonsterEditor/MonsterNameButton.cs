@@ -8,8 +8,8 @@ namespace MonsterEditor
 {
     public class MonsterNameButton : UnityEngine.UIElements.Button
     {
-        public System.Action<CharacterData_SO> OnButtonClick;
-        CharacterData_SO character;
+        public System.Action<CharacterData_SO, MonsterNameButton> OnButtonClick;
+        public CharacterData_SO character;
 
         public MonsterNameButton(CharacterData_SO character)
         {
@@ -21,7 +21,7 @@ namespace MonsterEditor
 
         public void ShowCharacterData()
         {
-            OnButtonClick?.Invoke(character);
+            OnButtonClick?.Invoke(character, this);
         }
     }
 }

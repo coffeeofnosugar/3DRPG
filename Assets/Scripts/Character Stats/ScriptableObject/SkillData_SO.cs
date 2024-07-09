@@ -6,7 +6,7 @@ using UnityEngine;
 public class SkillData_SO : ScriptableObject
 {
     [Tooltip("技能名称")]
-    public string skillname = "Temp";
+    public string skillName = "Temp";
 
     [Tooltip("动画名称")]
     public string animation;

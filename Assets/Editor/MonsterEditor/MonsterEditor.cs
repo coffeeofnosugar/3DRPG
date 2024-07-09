@@ -1,23 +1,26 @@
-using Codice.Client.Common;
+using Codice.Client.BaseCommands.CheckIn.Progress;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Unity.Profiling;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 namespace MonsterEditor
 {
     public class MonsterEditor : EditorWindow
     {
         VisualElement leftPanel, skillView;
-        Button addButton, deleteButton, updateButton, addSkillButton;
+        Button addButton, deleteButton, addSkillButton;
 
         IntegerField idIntegerField;
         TextField nameTextField, prefabTextField;
 
-        CharacterData_SO currentMonster;
+        MonsterNameButton currentMonster;
+        List<MonsterNameButton> monsterList = new List<MonsterNameButton>();
 
         IntegerField maxHealthIntegerField, baseDefenceIntegerField;
         FloatField walkSpeedFloatField, runSpeedFloatField, patrolRangeFloatField, sightRangeFloatField, criticalMultiplierFloatField, criticalChanceFloatField;
@@ -43,10 +46,19 @@ namespace MonsterEditor
             leftPanel = root.Q<VisualElement>("left-panel");
             skillView = root.Q<VisualElement>("skill-view");
 
+            // 添加菜单绑定事件
             addButton = root.Q<Button>("AddToolbarButton");
+            addButton.clicked += AddButton_onClick;
+
             deleteButton = root.Q<Button>("DeleteToolbarButton");
-            updateButton = root.Q<Button>("UpdateToolbarButton");
+            deleteButton.clicked += DeleteButton_onClick;
+
             addSkillButton = root.Q<Button>("AddSkillButton");
+            addSkillButton.clicked += () => {
+                // 创建SkillData_SO
+                SkillData_SO skill = currentMonster.character.CreateSkill();
+                CreateSkillView(skill);
+            };
 
             idIntegerField = root.Q<IntegerField>("IdIntegerField");
             idIntegerField.bindingPath = "id";
@@ -74,19 +86,10 @@ namespace MonsterEditor
             destoryTimeIntegerField = root.Q<IntegerField>("DestoryTimeIntegerField");
             destoryTimeIntegerField.bindingPath = "destoryTime";
 
-            // 添加菜单绑定事件
-            addButton.clicked += AddButton_onClick;
             // 展示所有怪物的按钮
             ShowListButton();
             // 获取第一个怪物按钮并展示其内容
-            var button = root.Q<MonsterNameButton>("MonsterNameButton");
-            button.ShowCharacterData();
-
-            addSkillButton.clicked += () => {
-                // 创建AttackData_SO
-                SkillData_SO skill = currentMonster.CreateSkill();
-                CreateSkillView(skill);
-            };
+            monsterList[0].ShowCharacterData();
         }
 
         /// <summary>
@@ -95,14 +98,29 @@ namespace MonsterEditor
         private void AddButton_onClick()
         {
             var character = ScriptableObject.CreateInstance<CharacterData_SO>();
-            var b = new MonsterNameButton(character);
-            leftPanel.Add(b);
-            // 创建
             AssetDatabase.CreateAsset(character, $"Assets/Game Data/Charater Data/{character.monsterName} Data.asset");
-            // 保存
             AssetDatabase.SaveAssets();
-            // 编译刷新
             AssetDatabase.Refresh();
+            var b = new MonsterNameButton(character);
+            // 注册点击事件，执行ShowCharacterData方法
+            b.OnButtonClick = ShowCharacterData;
+            // 设置按钮位置
+            leftPanel.Add(b);
+            // 存储对象
+            monsterList.Add(b);
+
+            b.ShowCharacterData();
+        }
+
+        private void DeleteButton_onClick()
+        {
+            leftPanel.Remove(currentMonster);
+            AssetDatabase.DeleteAsset($"Assets/Game Data/Charater Data/{currentMonster.character.monsterName} Data.asset");
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            // 获取第一个怪物按钮并展示其内容
+            monsterList[0].ShowCharacterData();
         }
 
         /// <summary>
@@ -117,13 +135,16 @@ namespace MonsterEditor
                 var b = new MonsterNameButton(sos[i]);
                 // 注册点击事件，执行ShowCharacterData方法
                 b.OnButtonClick = ShowCharacterData;
+                // 设置按钮位置
                 leftPanel.Add(b);
+                // 存储对象
+                monsterList.Add(b);
             }
         }
 
-        private void ShowCharacterData(CharacterData_SO character)
+        private void ShowCharacterData(CharacterData_SO character, MonsterNameButton monsterNameButton)
         {
-            currentMonster = character;
+            currentMonster = monsterNameButton;
 
             idIntegerField.value = character.id;
             nameTextField.value = character.monsterName;
@@ -165,7 +186,7 @@ namespace MonsterEditor
             MonsterSkillView monsterSkillView = new MonsterSkillView(skill);
             monsterSkillView.DeleteSkillButton_onClick = () => {
                 skillView.Remove(monsterSkillView);
-                currentMonster.DeleteSkill(skill);
+                currentMonster.character.DeleteSkill(skill);
             };
             skillView.Add(monsterSkillView);
         }
