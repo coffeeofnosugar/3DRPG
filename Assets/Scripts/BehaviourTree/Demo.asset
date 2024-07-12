@@ -45,7 +45,7 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
   characterStats: {fileID: 0}
-  child: {fileID: 1815305626461446211}
+  child: {fileID: 8638810895584425954}
 --- !u!114 &-7720684544507252302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,14 +61,14 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: a3d69f9ec1eb473468a4c6f00539a57d
-  position: {x: 1329.5502, y: 715.00006}
+  position: {x: 1381.7001, y: 841.15204}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
     distanceTarget: 0
   characterStats: {fileID: 0}
-  animatorParameter: Attack01
+  animatorParameter: Attack02
 --- !u!114 &-5759699880718156367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 48bff8edebc0ce940964507c382ec1e6
-  position: {x: 702.00006, y: 431}
+  position: {x: 765.48, y: 549.99994}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -142,12 +142,13 @@ MonoBehaviour:
   - {fileID: 3948809940361315275}
   - {fileID: -7720684544507252302}
   - {fileID: 5759702568086830824}
-  - {fileID: 1815305626461446211}
   - {fileID: -3401950067484961537}
   - {fileID: 2567352755174516806}
   - {fileID: 3863007519867383695}
   - {fileID: 6395460211941623659}
   - {fileID: 4894125196703160420}
+  - {fileID: 8638810895584425954}
+  - {fileID: 5253840988457618402}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -198,32 +199,6 @@ MonoBehaviour:
     distanceTarget: 0
   characterStats: {fileID: 0}
   tolerance: 1
---- !u!114 &1815305626461446211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adeadabbe3866cd478b495686ce0f586, type: 3}
-  m_Name: Selector
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 13e5bf2543838564d8aa77ee742f80c5
-  position: {x: 701.6, y: 271.85}
-  description: 
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-  characterStats: {fileID: 0}
-  children:
-  - {fileID: -5759699880718156367}
-  - {fileID: -3401950067484961537}
-  - {fileID: 4894125196703160420}
 --- !u!114 &2567352755174516806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +214,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: fb6310b9817a38f4cb1d0cdfc81bd676
-  position: {x: 1216.6, y: 559}
+  position: {x: 1280.7002, y: 685.152}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -264,14 +239,14 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 5bf004219cdc3004fb7fe08120788042
-  position: {x: 940, y: 715}
+  position: {x: 1003.70013, y: 841.15204}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
     distanceTarget: 0
   characterStats: {fileID: 0}
-  animatorParameter: Attack02
+  animatorParameter: Attack01
 --- !u!114 &3948809940361315275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,14 +262,14 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: ed49748a11386114f86527face6c2781
-  position: {x: 1135.0001, y: 715.00006}
+  position: {x: 1205.7001, y: 841.15204}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
     distanceTarget: 0
   characterStats: {fileID: 0}
-  distance: 1
+  distance: 2
 --- !u!114 &4894125196703160420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +285,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 8b7b51573714d7343a38aa7960f5dfa1
-  position: {x: 1049.4, y: 407.0001}
+  position: {x: 1078.48, y: 525.99994}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -320,7 +295,32 @@ MonoBehaviour:
   children:
   - {fileID: 5759702568086830824}
   - {fileID: 2567352755174516806}
-  weights: 0100000002000000
+  weights: 0100000001000000
+--- !u!114 &5253840988457618402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  started: 0
+  state: 0
+  guid: 69046d295761e224f895dfb0611e7e59
+  position: {x: 938, y: 381.74393}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+  characterStats: {fileID: 0}
+  children:
+  - {fileID: -3401950067484961537}
+  - {fileID: 4894125196703160420}
 --- !u!114 &5759702568086830824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: e7b1adb34f42fe3458b0a040fac4e909
-  position: {x: 852, y: 559}
+  position: {x: 915.7001, y: 685.152}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -361,14 +361,14 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 7ac00e886b2e2d0458c90b19ddadc3aa
-  position: {x: 725, y: 715}
+  position: {x: 788.7001, y: 841.15204}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
     distanceTarget: 0
   characterStats: {fileID: 0}
-  distance: 2
+  distance: 1
 --- !u!114 &7172138586286853968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,3 +392,28 @@ MonoBehaviour:
     distanceTarget: 0
   characterStats: {fileID: 0}
   child: {fileID: -7834003847682511681}
+--- !u!114 &8638810895584425954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adeadabbe3866cd478b495686ce0f586, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  started: 0
+  state: 0
+  guid: 6652312ec8f7c7448914d118aad098de
+  position: {x: 789, y: 229.75002}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+  characterStats: {fileID: 0}
+  children:
+  - {fileID: -5759699880718156367}
+  - {fileID: 5253840988457618402}

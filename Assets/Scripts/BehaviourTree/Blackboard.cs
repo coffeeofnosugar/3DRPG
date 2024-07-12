@@ -11,4 +11,5 @@ public class Blackboard
     public Vector3 moveToPosition;
     public GameObject target;
     public float distanceTarget;
+    public bool isAttacking;
 }

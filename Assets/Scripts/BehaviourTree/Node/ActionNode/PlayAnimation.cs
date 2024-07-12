@@ -7,7 +7,6 @@ namespace BehaviourTree
     public class PlayAnimation : ActionNode
     {
         public string animatorParameter;
-        private bool flag = false;
         protected override void OnStart()
         {
             if (blackboard.target) //  && characterStats.LastAttackTime >= characterStats.CoolDown)
@@ -21,13 +20,12 @@ namespace BehaviourTree
                 characterStats.animator.SetTrigger(animatorParameter);
                 // ÷ÿ÷√cd
                 //characterStats.LastAttackTime = 0;
-                flag = true;
             }
         }
 
         protected override void OnStop()
         {
-            flag = false;
+
         }
 
         protected override State OnUpdate()
@@ -36,9 +34,8 @@ namespace BehaviourTree
             string animatorNmae = characterStats.animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
 
             characterStats.agent.destination = characterStats.transform.position;
-            if (flag)
+            if (animatorNmae != animatorParameter)
             {
-                flag = false;
                 return State.Running;
             }
             if (animatorNmae == animatorParameter && info.normalizedTime <= 0.95f)

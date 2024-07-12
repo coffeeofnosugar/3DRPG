@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Name: 02
   m_EditorClassIdentifier: 
   skillName: 02
-  animation: temp
+  animation: Attack01
   attackRange: 1
   coolDown: 2
   minDamge: 3
