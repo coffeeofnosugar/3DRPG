@@ -103,9 +103,9 @@ namespace Characters
 
         public void EndNotify()
         {
-            // 胜利
-            // 结束移动
-            // 结束动画
+            // 鑳滃埄
+            // 缁撴潫绉诲姩
+            // 缁撴潫鍔ㄧ敾
         }
     }
 }

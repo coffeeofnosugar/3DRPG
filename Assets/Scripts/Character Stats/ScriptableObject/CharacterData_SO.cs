@@ -8,31 +8,31 @@ public class CharacterData_SO : ScriptableObject
 
     public string monsterName = "Template";
 
-    [Tooltip("×î´óÑªÁ¿")]
+    [Tooltip("æœ€å¤§è¡€é‡")]
     public int maxHealth = 30;
 
-    [Tooltip("»ù´¡·ÀÓùÖµ")]
+    [Tooltip("åŸºç¡€é˜²å¾¡å€¼")]
     public int baseDefence = 2;
 
-    [Tooltip("Ñ²ÂßËÙ¶È£¨ÈôisPatrol = false£¬Ôò¸ÃÊı¾İÎŞÓÃ£©")]
+    [Tooltip("å·¡é€»é€Ÿåº¦ï¼ˆè‹¥isPatrol = falseï¼Œåˆ™è¯¥æ•°æ®æ— ç”¨ï¼‰")]
     public float walkSpeed = 1.5f;
 
-    [Tooltip("×·»÷ËÙ¶È")]
+    [Tooltip("è¿½å‡»é€Ÿåº¦")]
     public float runSpeed = 2.5f;
 
-    [Tooltip("Ñ²Âß·¶Î§")]
+    [Tooltip("å·¡é€»èŒƒå›´")]
     public float patrolRange = 8;
 
-    [Tooltip("ÊÓÒ°·¶Î§")]
+    [Tooltip("è§†é‡èŒƒå›´")]
     public float sightRadius = 10;
 
-    [Tooltip("±©»÷Öµ")]
+    [Tooltip("æš´å‡»å€¼")]
     public float criticalMultiplier = 2;
 
-    [Tooltip("±©»÷ÂÊ")]
+    [Tooltip("æš´å‡»ç‡")]
     public float criticalChance = 0.2f;
 
-    [Tooltip("ËÀÍöºó£¬¶à¾ÃÊ±¼äºó´İ»Ù")]
+    [Tooltip("æ­»äº¡åï¼Œå¤šä¹…æ—¶é—´åæ‘§æ¯")]
     public int destoryTime = 5;
 
     public List<SkillData_SO> skillList = new List<SkillData_SO>();

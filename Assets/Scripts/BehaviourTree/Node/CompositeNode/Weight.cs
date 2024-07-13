@@ -30,7 +30,6 @@ namespace BehaviourTree
                     break;
                 }
             }
-            Debug.Log($"Ö´ÐÐ{selectIndex}");
         }
 
         protected override void OnStop()

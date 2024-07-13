@@ -33,6 +33,7 @@ namespace MonsterEditor
             wnd.titleContent = new GUIContent("MonsterEditor");
         }
 
+        
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId)
         {
