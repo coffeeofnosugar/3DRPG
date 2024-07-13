@@ -23,7 +23,7 @@ namespace BehaviourTree
                 
                 _flag = false;
                 _lastPlayTime = Time.time;
-                characterStats.animator.SetBool("Run", false);
+                // characterStats.animator.SetBool("Run", false);
                 // 停止移动
                 characterStats.agent.destination = characterStats.transform.position;
                 // 朝向攻击目标
