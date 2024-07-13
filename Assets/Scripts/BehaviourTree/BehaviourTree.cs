@@ -66,6 +66,7 @@ namespace BehaviourTree
         public void Bind(CharacterStats character)
         {
             this.characterStats = character;
+            character.blackbord = blackboard;
             Traverse(rootNode, (n) =>
             {
                 n.characterStats = character;

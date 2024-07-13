@@ -15,12 +15,26 @@ public class CharacterStats : MonoBehaviour
     [HideInInspector] public Animator animator;
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Collider coll;
+    [HideInInspector] public Blackboard blackbord;
 
     // 出生点
     [HideInInspector] public Vector3 originPosition;
     [HideInInspector] public Quaternion originRotation;
 
-    public bool getHit;
+    public bool _getHit;
+
+    public bool GetHit
+    {
+        get => _getHit;
+        set
+        {
+            _getHit = value;
+            if (blackbord != null)
+            {
+                blackbord.getHit = value;
+            }
+        }
+    }
     public bool isDeath;
     public bool isCritical;
 
@@ -73,18 +87,18 @@ public class CharacterStats : MonoBehaviour
     /// <param name="defener"></param>
     public void TakeDamage(CharacterStats attacker, CharacterStats defener)
     {
-        //defener.getHit = true;
-        //float coreDamage = Random.Range(attacker.MinDange, attacker.MaxDange);
-        //if (attacker.isCritical)
-        //{
-        //    coreDamage *= attacker.CriticalMultiplier;
-        //    Debug.Log("暴击！" + coreDamage);
-        //}
-
-        //int damage = Mathf.Max((int)coreDamage - defener.currentDefence, 0);
-        //defener.currentHealth = Mathf.Max(defener.currentHealth - damage, 0);
-        // Update UI
-        // 经验Update
+        defener.GetHit = true;
+        // float coreDamage = Random.Range(attacker.MinDange, attacker.MaxDange);
+        // if (attacker.isCritical)
+        // {
+        //     coreDamage *= attacker.CriticalMultiplier;
+        //     Debug.Log("暴击！" + coreDamage);
+        // }
+        //
+        // int damage = Mathf.Max((int)coreDamage - defener.currentDefence, 0);
+        // defener.currentHealth = Mathf.Max(defener.currentHealth - damage, 0);
+         // Update UI
+         // 经验Update
     }
 
     #region Read from CharacterData_SO

@@ -12,4 +12,6 @@ public class Blackboard
     public GameObject target;
     public float distanceTarget;
     public bool isAttacking;
+    public bool getHit;
+    public bool isDeath;
 }

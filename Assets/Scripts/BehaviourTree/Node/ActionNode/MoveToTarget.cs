@@ -12,7 +12,6 @@ namespace BehaviourTree
         {
             if (blackboard.target)
             {
-                Debug.Log("start");
                 characterStats.animator.SetBool("Run", true);
                 characterStats.agent.speed = characterStats.RunSpeed;
             }
@@ -22,7 +21,6 @@ namespace BehaviourTree
         {
             if (_flag)
             {
-                Debug.Log("stop");
                 characterStats.animator.SetBool("Run", false);
             }
         }

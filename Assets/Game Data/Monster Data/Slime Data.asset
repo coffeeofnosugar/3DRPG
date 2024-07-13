@@ -15,7 +15,7 @@ MonoBehaviour:
   skillName: Attack02
   animation: Attack02
   attackRange: 2
-  coolDown: 10
+  coolDown: 5
   minDamge: 5
   maxDamge: 6
   kickForce: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   skillName: Attack01
   animation: Attack01
   attackRange: 1
-  coolDown: 10
+  coolDown: 2
   minDamge: 3
   maxDamge: 5
   kickForce: 0

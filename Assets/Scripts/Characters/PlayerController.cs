@@ -83,8 +83,7 @@ namespace Characters
             if (lastAttackTime < 0)
             {
                 characterStats.isCritical = UnityEngine.Random.value < characterStats.CriticalChance;
-                animator.SetBool("IsCritical", characterStats.isCritical);
-                animator.SetTrigger("Attack");
+                animator.SetTrigger("Attack01");
                 lastAttackTime = attackCD;
             }
         }
