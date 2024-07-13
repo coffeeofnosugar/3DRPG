@@ -258,8 +258,8 @@ MonoBehaviour:
     isAttacking: 0
   characterStats: {fileID: 0}
   children:
-  - {fileID: 3948809940361315275}
   - {fileID: -7720684544507252302}
+  - {fileID: 3948809940361315275}
 --- !u!114 &3863007519867383695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,8 +357,8 @@ MonoBehaviour:
     isAttacking: 0
   characterStats: {fileID: 0}
   children:
-  - {fileID: -3401950067484961537}
   - {fileID: -653420237528412281}
+  - {fileID: -3401950067484961537}
 --- !u!114 &5759702568086830824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,8 +383,8 @@ MonoBehaviour:
     isAttacking: 0
   characterStats: {fileID: 0}
   children:
-  - {fileID: 6395460211941623659}
   - {fileID: 3863007519867383695}
+  - {fileID: 6395460211941623659}
 --- !u!114 &6395460211941623659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,5 +457,5 @@ MonoBehaviour:
     isAttacking: 0
   characterStats: {fileID: 0}
   children:
-  - {fileID: -5759699880718156367}
   - {fileID: 5253840988457618402}
+  - {fileID: -5759699880718156367}

@@ -14,6 +14,8 @@ public class SkillData_SO : ScriptableObject
     [Tooltip("¹¥»÷·¶Î§")]
     public float attackRange = 1;
 
+    public float attackRangeSqr => attackRange * attackRange;
+
     [Tooltip("¹¥»÷ÀäÈ´Ê±¼ä")]
     public float coolDown = 2;
 

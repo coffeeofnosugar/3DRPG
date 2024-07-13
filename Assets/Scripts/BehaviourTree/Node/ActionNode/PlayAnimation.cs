@@ -16,7 +16,8 @@ namespace BehaviourTree
         {
             if (blackboard.target)
             {
-                if (Time.time - _lastPlayTime <= characterStats.skillDict[animatorParameter].coolDown)
+                if (Time.time - _lastPlayTime <= characterStats.skillDict[animatorParameter].coolDown
+                    || (characterStats.transform.position - blackboard.target.transform.position).sqrMagnitude >= characterStats.skillDict[animatorParameter].attackRangeSqr)
                 {
                     _flag = true;
                     return;
