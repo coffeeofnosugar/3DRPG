@@ -17,7 +17,7 @@ namespace MonsterEditor
         TextField nameTextField;
 
         MonsterNameButton currentMonster;
-        List<MonsterNameButton> monsterList = new List<MonsterNameButton>();
+        static List<MonsterNameButton> monsterList = new List<MonsterNameButton>();
 
         IntegerField maxHealthIntegerField, baseDefenceIntegerField;
         FloatField walkSpeedFloatField, runSpeedFloatField, patrolRangeFloatField, sightRangeFloatField, criticalMultiplierFloatField, criticalChanceFloatField;
@@ -33,13 +33,25 @@ namespace MonsterEditor
             wnd.titleContent = new GUIContent("MonsterEditor");
         }
 
-        
+        /// <summary>
+        /// 双击Project中的物体打开窗口
+        /// </summary>
+        /// <param name="instanceId"></param>
+        /// <returns></returns>
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId)
         {
             if (Selection.activeObject is CharacterData_SO)
             {
                 OpenWindow();
+                string name = Selection.activeObject.name;
+                foreach (var monster in monsterList)
+                {
+                    if (monster.character.name == name)
+                    {
+                        monster.ShowCharacterData();
+                    }
+                }
                 return true;
             }
             return false;
