@@ -7,6 +7,9 @@ namespace BehaviourTree
     public class PlayAnimation : ActionNode
     {
         public string animatorParameter;
+
+        // public bool isCustomizeParameter;
+        // public float cusCoolDown;
         private float _lastPlayTime;
         private bool _flag;
         protected override void OnStart()

@@ -91,23 +91,12 @@ namespace BehaviourTree
                 characterStats.animator.SetLayerWeight(1, 0);
             }
         }
-
-        /// <summary>
-        /// cooldown计时器
-        /// </summary>
-        public void RunCooldown()
-        {
-            //characterStats.LastAttackTime += Time.deltaTime;
-            //characterStats.LastSkillTime += Time.deltaTime;
-        }
-
         public void DebugShow()
         {
-            //Debugs.Instance["cooldonw"] = characterStats.LastAttackTime.ToString();
             Debugs.Instance["movePosition"] = characterStats.agent.destination.ToString();
             if (blackboard.target)
             {
-                Debugs.Instance["distance"] = blackboard.distanceTarget.ToString();
+                Debugs.Instance["distance00"] = Vector3.Distance(characterStats.transform.position, blackboard.target.transform.position).ToString();
             }
         }
 
