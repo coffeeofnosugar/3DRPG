@@ -26,7 +26,8 @@ public class CharacterStats : MonoBehaviour
 
     public int currentHealth;
     public int currentDefence;
-    public Dictionary<string, float> lastAttackTime = new Dictionary<string, float>();
+
+    public Dictionary<string, SkillData_SO> skillDict = new Dictionary<string, SkillData_SO>();
 
 
     private void Awake()
@@ -48,6 +49,11 @@ public class CharacterStats : MonoBehaviour
 
         currentHealth = MaxHealth;
         currentDefence = BaseDefence;
+
+        foreach (var skillData in characterData.skillList)
+        {
+            skillDict.Add(skillData.name, skillData);
+        }
     }
 
 
@@ -129,11 +135,6 @@ public class CharacterStats : MonoBehaviour
     {
         get => characterData ? characterData.destoryTime : 0;
         set => characterData.destoryTime = value;
-    }
-    public List<SkillData_SO> SkillList
-    {
-        get => characterData ? characterData.skillList : null;
-        set => characterData.skillList = value;
     }
     #endregion
 }

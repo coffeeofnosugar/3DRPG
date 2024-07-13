@@ -37,7 +37,6 @@ public class CharacterData_SO : ScriptableObject
 
     public List<SkillData_SO> skillList = new List<SkillData_SO>();
 
-
 #if UNITY_EDITOR
     public SkillData_SO CreateSkill()
     {

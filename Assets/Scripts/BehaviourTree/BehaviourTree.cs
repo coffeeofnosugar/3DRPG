@@ -8,7 +8,7 @@ using UnityEngine;
 namespace BehaviourTree
 {
     /// <summary>
-    /// Ò»¸ö¹ÖÎïµÄĞĞÎªÊ÷
+    /// ä¸€ä¸ªæ€ªç‰©çš„è¡Œä¸ºæ ‘
     /// </summary>
     [CreateAssetMenu()]
     public class BehaviourTree : ScriptableObject
@@ -29,8 +29,8 @@ namespace BehaviourTree
         }
 
         /// <summary>
-        /// »Øµ÷º¯Êı + µİ¹éº¯Êı µÄ×éºÏ
-        /// ÍêÈ«±éÀúËùÓĞ½Úµã
+        /// å›è°ƒå‡½æ•° + é€’å½’å‡½æ•° çš„ç»„åˆ
+        /// å®Œå…¨éå†æ‰€æœ‰èŠ‚ç‚¹
         /// </summary>
         /// <param name="node"></param>
         /// <param name="visiter"></param>
@@ -46,12 +46,12 @@ namespace BehaviourTree
 
         public BehaviourTree Clone()
         {
-            // ¿ËÂ¡ĞĞÎªÊ÷
+            // å…‹éš†è¡Œä¸ºæ ‘
             BehaviourTree tree = Instantiate(this);
-            // ¿ËÂ¡¸ù½Úµã
+            // å…‹éš†æ ¹èŠ‚ç‚¹
             tree.rootNode = tree.rootNode.Clone();
-            // ³õÊ¼»¯¿ËÂ¡ºóµÄ½ÚµãÁĞ±í
-            tree.nodes = new List<Node>();      // ÁĞ±íµÄ¿ËÂ¡ÓĞµãÂé·³
+            // åˆå§‹åŒ–å…‹éš†åçš„èŠ‚ç‚¹åˆ—è¡¨
+            tree.nodes = new List<Node>();      // åˆ—è¡¨çš„å…‹éš†æœ‰ç‚¹éº»çƒ¦
 
             Traverse(tree.rootNode, (n) =>
             {
@@ -61,7 +61,7 @@ namespace BehaviourTree
         }
 
         /// <summary>
-        /// °ó¶¨ºÚ°å
+        /// ç»‘å®šé»‘æ¿
         /// </summary>
         public void Bind(CharacterStats character)
         {
@@ -74,7 +74,7 @@ namespace BehaviourTree
         }
 
         /// <summary>
-        /// Ñ°ÕÒ¹¥»÷Ä¿±ê
+        /// å¯»æ‰¾æ”»å‡»ç›®æ ‡
         /// </summary>
         public void FoundTarget()
         {
@@ -93,7 +93,7 @@ namespace BehaviourTree
         }
 
         /// <summary>
-        /// cooldown¼ÆÊ±Æ÷
+        /// cooldownè®¡æ—¶å™¨
         /// </summary>
         public void RunCooldown()
         {
@@ -113,10 +113,10 @@ namespace BehaviourTree
 
 
 #if UNITY_EDITOR
-        #region ÎªÊÓÍ¼·şÎñµÄ·½·¨
+        #region ä¸ºè§†å›¾æœåŠ¡çš„æ–¹æ³•
 
         /// <summary>
-        /// ´´½¨½ÚµãScriptableObjectÀà
+        /// åˆ›å»ºèŠ‚ç‚¹ScriptableObjectç±»
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -126,20 +126,20 @@ namespace BehaviourTree
             node.name = type.Name;
             node.guid = GUID.Generate().ToString();
 
-            Undo.RecordObject(this, "Behaviour Tree (CreateNode)");     // Ìí¼Ó½ÚµãÔªËØÊ±£¬²»½ö½öÖ»¸Ä±äÁËÊÓÍ¼ÖĞµÄ»¹Éæ¼°µ½ÁËÕû¸öĞĞÎªÊ÷£¬ËùÒÔĞèÒª´«ÈëÕâ¸öScriptableObjectÀà
+            Undo.RecordObject(this, "Behaviour Tree (CreateNode)");     // æ·»åŠ èŠ‚ç‚¹å…ƒç´ æ—¶ï¼Œä¸ä»…ä»…åªæ”¹å˜äº†è§†å›¾ä¸­çš„è¿˜æ¶‰åŠåˆ°äº†æ•´ä¸ªè¡Œä¸ºæ ‘ï¼Œæ‰€ä»¥éœ€è¦ä¼ å…¥è¿™ä¸ªScriptableObjectç±»
             nodes.Add(node);
 
-            if (!Application.isPlaying)     // ÔÚPlayModeÄ£Ê½ÏÂÎŞ·¨Ìí¼Ó½Úµã
+            if (!Application.isPlaying)     // åœ¨PlayModeæ¨¡å¼ä¸‹æ— æ³•æ·»åŠ èŠ‚ç‚¹
             {
                 AssetDatabase.AddObjectToAsset(node, this);
             }
-            Undo.RegisterCreatedObjectUndo(this, "Behaviour Tree (CreateNode)");        // Éæ¼°µ½ProjectÖĞµÄ´´½¨ĞèÒªÊ¹ÓÃÕâ¸ö
+            Undo.RegisterCreatedObjectUndo(this, "Behaviour Tree (CreateNode)");        // æ¶‰åŠåˆ°Projectä¸­çš„åˆ›å»ºéœ€è¦ä½¿ç”¨è¿™ä¸ª
             AssetDatabase.SaveAssets();
             return node;
         }
 
         /// <summary>
-        /// É¾³ı½ÚµãScriptableObjectÀà
+        /// åˆ é™¤èŠ‚ç‚¹ScriptableObjectç±»
         /// </summary>
         /// <param name="node"></param>
         public void DeleteNode(Node node)
@@ -148,12 +148,12 @@ namespace BehaviourTree
             nodes.Remove(node);
 
             //AssetDatabase.RemoveObjectFromAsset(node);
-            Undo.DestroyObjectImmediate(node);      // ´úÌæÉÏÒ»¾ä´úÂë
+            Undo.DestroyObjectImmediate(node);      // ä»£æ›¿ä¸Šä¸€å¥ä»£ç 
             AssetDatabase.SaveAssets();
         }
 
         /// <summary>
-        /// ÔÚScriptableObjectÖĞÌí¼Ó×Ó½Úµã
+        /// åœ¨ScriptableObjectä¸­æ·»åŠ å­èŠ‚ç‚¹
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="child"></param>
