@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: sword and shield crouch block idle
+      name: crouch block idle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0

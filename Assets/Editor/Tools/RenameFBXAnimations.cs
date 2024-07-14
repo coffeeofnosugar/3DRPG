@@ -78,6 +78,7 @@ public class RenameFBXAnimations : EditorWindow
         {
             string fbxName = Path.GetFileNameWithoutExtension(fbxPath);
             ModelImporter modelImporter = AssetImporter.GetAtPath(fbxPath) as ModelImporter;
+            fbxName = fbxName.Replace("sword and shield ", "").Trim();
 
             if (modelImporter != null)
             {
