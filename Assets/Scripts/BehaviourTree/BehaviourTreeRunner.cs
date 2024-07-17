@@ -20,7 +20,7 @@ namespace BehaviourTree
         {
             if (tree == null)
             {
-                Debug.Log($"{transform.name} Î´ÅäÖÃÐÐÎªÊ÷");
+                Debug.LogError($"{transform.name} Î´ÅäÖÃÐÐÎªÊ÷");
                 return;
             }
             characterStats = GetComponent<CharacterStats>();

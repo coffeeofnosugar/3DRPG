@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace PlayerController
+namespace Player
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
