@@ -6,16 +6,15 @@ using UnityEngine.InputSystem;
 
 namespace PlayerController
 {
-    public class PlayerInputController : MonoBehaviour
+    public class PlayerInputController
     {
         public Vector2 currentMovementInput;
         public bool isRun;
-        public Action onJumpTrigger;
-        
+        public bool isJump;
         
         private PlayerInput _playerInput;
 
-        private void Awake()
+        public PlayerInputController()
         {
             _playerInput = new PlayerInput();
 
@@ -26,7 +25,8 @@ namespace PlayerController
             _playerInput.CharacterControls.Run.started += onRunInput;
             _playerInput.CharacterControls.Run.canceled += onRunInput;
 
-            _playerInput.CharacterControls.Jump.started += (obj) => { onJumpTrigger?.Invoke(); };
+            _playerInput.CharacterControls.Jump.started += (obj) => { isJump = obj.ReadValueAsButton(); Debug.Log("Jump"); };
+
         }
 
         private void onRunInput(InputAction.CallbackContext obj)
@@ -37,6 +37,7 @@ namespace PlayerController
         private void onMoveInput(InputAction.CallbackContext obj)
         {
             currentMovementInput = obj.ReadValue<Vector2>();
+            Debug.Log(currentMovementInput);
         }
 
         private void OnEnable()
@@ -48,7 +49,5 @@ namespace PlayerController
         {
             _playerInput.CharacterControls.Disable();
         }
-        
-        
     }
 }
