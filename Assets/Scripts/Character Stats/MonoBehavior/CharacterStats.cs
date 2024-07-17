@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PlayerController;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(Animator))]
+
 public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private CharacterData_SO templateData;
 
     private CharacterData_SO characterData;
+    
+    [Header("黑板数据")]
+    public Blackboard blackboard;
 
     [HideInInspector] public Animator animator;
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Collider coll;
-    [HideInInspector] public Blackboard blackbord;
+    [HideInInspector] public new Rigidbody rigidbody;
+    [HideInInspector] public PlayerInputController PlayerInputController;
 
     // 出生点
     [HideInInspector] public Vector3 originPosition;
@@ -29,9 +33,9 @@ public class CharacterStats : MonoBehaviour
         set
         {
             _getHit = value;
-            if (blackbord != null)
+            if (blackboard != null)
             {
-                blackbord.getHit = value;
+                blackboard.getHit = value;
             }
         }
     }
@@ -49,16 +53,15 @@ public class CharacterStats : MonoBehaviour
     private void Awake()
     {
         if (templateData != null)
-        {
             characterData = Instantiate(templateData);
-        }
         else
-        {
             Debug.LogError("未配置角色数据");
-        }
+        
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         coll = GetComponent<Collider>();
+        rigidbody = GetComponent<Rigidbody>();
+        PlayerInputController = GetComponent<PlayerInputController>();
 
         originPosition = transform.position;
         originRotation = transform.rotation;
@@ -122,6 +125,7 @@ public class CharacterStats : MonoBehaviour
         get => characterData ? characterData.baseDefence : 0;
         set => characterData.baseDefence = value;
     }
+
     public float WalkSpeed
     {
         get => characterData ? characterData.walkSpeed : 0;

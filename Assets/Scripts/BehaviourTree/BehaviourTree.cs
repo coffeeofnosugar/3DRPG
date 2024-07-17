@@ -66,7 +66,7 @@ namespace BehaviourTree
         public void Bind(CharacterStats character)
         {
             this.characterStats = character;
-            character.blackbord = blackboard;
+            character.blackboard = blackboard;
             Traverse(rootNode, (n) =>
             {
                 n.characterStats = character;
@@ -90,14 +90,6 @@ namespace BehaviourTree
             {
                 blackboard.target = null;
                 characterStats.animator.SetLayerWeight(1, 0);
-            }
-        }
-        public void DebugShow()
-        {
-            Debugs.Instance["movePosition"] = characterStats.agent.destination.ToString();
-            if (blackboard.target)
-            {
-                Debugs.Instance["distance00"] = Vector3.Distance(characterStats.transform.position, blackboard.target.transform.position).ToString();
             }
         }
 

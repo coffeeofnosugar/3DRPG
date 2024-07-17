@@ -54,7 +54,7 @@ MonoBehaviour:
   monsterName: Player
   maxHealth: 100
   baseDefence: 2
-  walkSpeed: 1.5
+  walkSpeed: 1.8
   runSpeed: 2.5
   patrolRange: 8
   sightRadius: 10

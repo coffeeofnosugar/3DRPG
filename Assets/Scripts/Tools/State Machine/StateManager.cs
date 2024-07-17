@@ -11,7 +11,7 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
         CurrentState.EnterState();
     }
 
-    private void Update()
+    public void Update()
     {
         EState nextStateKey = CurrentState.GetNextState();
 

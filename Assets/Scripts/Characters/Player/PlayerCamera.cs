@@ -8,15 +8,17 @@ namespace PlayerController
     public class PlayerCamera : MonoBehaviour
     {
         [SerializeField] private Transform player;
-        [SerializeField] private Vector3 offset = new Vector3(0.5f, 0.1f, -5f);
+        [SerializeField] private float xOffset = 0.3f;
+        [SerializeField] private float yOffset = 0.6f;
+        [SerializeField] private float zOffset = 1.9f;
         /// <summary>
         /// 摄像机速度
         /// </summary>
-        [SerializeField, Range(1, 50)] private float speed = 5;
+        [SerializeField, Range(1, 50)] private float speed = 1;
         /// <summary>
         /// 鼠标移动速度
         /// </summary>
-        [SerializeField, Range(0, 50)] private float linearSpeed = 1;
+        [SerializeField, Range(0, 1)] private float linearSpeed = 1;
         
         private CapsuleCollider _capsuleCollider;
         private Rigidbody _rigidbody;
@@ -30,8 +32,8 @@ namespace PlayerController
 
         private void LateUpdate()
         {
-            _xMouse = Input.GetAxis("Mouse X") * linearSpeed;
-            _yMouse = Input.GetAxis("Mouse Y") * linearSpeed;
+            _xMouse += Input.GetAxis("Mouse X") * linearSpeed;
+            _yMouse -= Input.GetAxis("Mouse Y") * linearSpeed;
             // 限制垂直方向的角度
             _yMouse = Mathf.Clamp(_yMouse, -30, 80);
             // 滑轮
@@ -39,10 +41,10 @@ namespace PlayerController
             // offset.z = Mathf.Clamp(offset.z, -2, -15);
             
             Quaternion targetRotation = Quaternion.Euler(_yMouse, _xMouse, 0);
-            Vector3 targetPostion = player.position + targetRotation * offset + _capsuleCollider.center * 1.75f;
-            transform.position = Vector3.Lerp(transform.position, targetPostion, Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime);
-            speed = _rigidbody.velocity.magnitude > 0.1f ? Mathf.Lerp(speed, 5, 5f * Time.deltaTime): Mathf.Lerp(speed, 25, 5f * Time.deltaTime);
+            Vector3 targetPostion = player.position + targetRotation * new Vector3(xOffset, yOffset, -zOffset) + _capsuleCollider.center;
+            speed = _rigidbody.velocity.sqrMagnitude > 0.01f ? Mathf.Lerp(speed, 10, 5f * Time.deltaTime): Mathf.Lerp(speed, 25, 5f * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetPostion, speed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 25 * Time.deltaTime);
         }
         
     //     private void CamCheck(out RaycastHit raycast, out float dis)

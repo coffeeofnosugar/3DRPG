@@ -34,7 +34,6 @@ namespace BehaviourTree
 
         private void Update()
         {
-            tree.DebugShow();
             // 每时每刻都寻找玩家的位置
             tree.FoundTarget();
             // 执行行为树
