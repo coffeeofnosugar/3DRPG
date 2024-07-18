@@ -59,9 +59,6 @@ namespace BehaviourTree
             //root.Add(labelFromUXML);
             m_VisualTreeAsset.CloneTree(root);
 
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
-            root.styleSheets.Add(styleSheet);
-
             treeView = root.Q<BehaviourTreeView>();
             inspectorView = root.Q<InspectorView>();
             blackboardView = root.Q<IMGUIContainer>();

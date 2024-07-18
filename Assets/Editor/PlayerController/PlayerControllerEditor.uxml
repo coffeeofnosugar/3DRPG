@@ -17,7 +17,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="right-panel" style="flex-grow: 1;">
             <ui:Label tabindex="-1" text="TreeView" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37); color: rgb(196, 196, 196); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; border-left-width: 5px;" />
-            <BehaviourTree.BehaviourTreeView focusable="true" style="flex-grow: 1;" />
+            <Player.PlayerController.PlayerControllerView focusable="true" style="flex-grow: 1;" />
         </ui:VisualElement>
     </SplitView>
 </ui:UXML>
