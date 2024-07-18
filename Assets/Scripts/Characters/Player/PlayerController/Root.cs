@@ -4,33 +4,33 @@ using UnityEngine;
 
 namespace Player.PlayerController
 {
-    public class Log : DecoratorNode
+    public class Root : Node
     {
-        [SerializeField] private string message = "null";
+        public Node child;
         protected override void EnterState()
         {
-            Debug.Log($"enter {message}");
+            
         }
 
         protected override void ExitState()
         {
-            Debug.Log($"exit {message}");
+            
         }
 
         protected override void FixeUpdateState()
         {
-            Debug.Log($"fixe {message}");
+            
         }
 
         protected override State UpdateState()
         {
-            Debug.Log($"update {message}");
-            return State.Success;
+            child.Update();
+            return State.Running;
         }
 
         protected override void LateUpdateState()
         {
-            Debug.Log($"lateupdate {message}");
+            
         }
     }
 }

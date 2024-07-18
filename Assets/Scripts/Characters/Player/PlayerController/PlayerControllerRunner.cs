@@ -11,6 +11,7 @@ namespace Player.PlayerController
         public PlayerController controller;
 
         private CharacterStats _characterStats;
+        private PlayerInputController _playerInputController;
 
         private void Awake()
         {
@@ -19,16 +20,22 @@ namespace Player.PlayerController
             //     Debug.LogError($"{transform.name} Œ¥≈‰÷√øÿ÷∆∆˜");
             //     return;
             // }
-            // _characterStats = GetComponent<CharacterStats>();
+            _characterStats = GetComponent<CharacterStats>();
+            _playerInputController = GetComponent<PlayerInputController>();
         }
 
         private void Start()
         {
-            var listener = ScriptableObject.CreateInstance<LogicKeyListener>();
-
-            
             controller = ScriptableObject.CreateInstance<PlayerController>();
-            controller.rootNode = listener;
+            
+            var root = ScriptableObject.CreateInstance<Root>();
+            var listener = ScriptableObject.CreateInstance<LogicKeyListener>();
+            listener._playerInputController = _playerInputController;
+            // var log = ScriptableObject.CreateInstance<Log>();
+            
+            controller.rootNode = root;
+            root.child = listener;
+
         }
 
         private void FixedUpdate()

@@ -15,6 +15,9 @@ namespace Player.PlayerController
         public string guid;
         public Vector2 position;
         public string description;
+        
+        private CharacterStats _characterStats;
+        public PlayerInputController _playerInputController;
 
         public State Update()
         {
