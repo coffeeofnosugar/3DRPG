@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3097150841179140667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab4607af15ade24686c2dfc5965a892, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: 
+  started: 0
+  state: 0
+  guid: e11cb10450327dd49a24f1e06e801428
+  position: {x: 599, y: 328}
+  description: 
+  _playerInputController: {fileID: 0}
+  child: {fileID: 0}
+  message: null
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c3892d7c15fec47b8136085a51edab, type: 3}
+  m_Name: New Player Controller
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 4625316897240000220}
+  controllerState: 0
+  nodes:
+  - {fileID: 4625316897240000220}
+  - {fileID: 1005773285273735655}
+  - {fileID: -3097150841179140667}
+--- !u!114 &1005773285273735655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdba599e126d7e4f9e520bc8e293692, type: 3}
+  m_Name: LogicKeyListener
+  m_EditorClassIdentifier: 
+  started: 0
+  state: 0
+  guid: dea3bb7c902178a42b752a24916b4995
+  position: {x: 312, y: 328}
+  description: 
+  _playerInputController: {fileID: 0}
+  children:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: -3097150841179140667}
+  - {fileID: 0}
+  checkKeyAction: 0
+--- !u!114 &4625316897240000220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ce67bedcfb1614d867e0dd1f180351, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  started: 0
+  state: 0
+  guid: 56fde27ce1bd65042841b7fa9e7279b9
+  position: {x: 89.79999, y: 328}
+  description: 
+  _playerInputController: {fileID: 0}
+  child: {fileID: 1005773285273735655}

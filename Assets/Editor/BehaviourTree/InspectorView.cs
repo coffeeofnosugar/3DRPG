@@ -27,7 +27,7 @@ public class InspectorView : VisualElement
 
         UnityEngine.Object.DestroyImmediate(editor);
 
-        if (node is NodeView nodeView)
+        if (node is BehaviourTree.NodeView nodeView)
             editor = Editor.CreateEditor(nodeView.node);
         
         // 创建一个容器，并将节点的Inspector窗口上的内容显示到左侧窗口

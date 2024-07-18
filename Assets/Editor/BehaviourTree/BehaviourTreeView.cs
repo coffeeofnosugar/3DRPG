@@ -39,6 +39,9 @@ namespace BehaviourTree
             Undo.undoRedoPerformed += OnUndoRedo;
         }
 
+        /// <summary>
+        /// 在使用撤销后刷新界面并保存内容
+        /// </summary>
         private void OnUndoRedo()
         {
             PopulateView(tree);
