@@ -8,21 +8,20 @@ namespace BehaviourTree
     {
         public string animatorParameter;
 
-        private float _lastPlayTime;
         private bool _flag;
         protected override void OnStart()
         {
             if (blackboard.target)
             {
-                if (Time.time - _lastPlayTime <= characterStats.skillDict[animatorParameter].coolDown
+                if (blackboard.lastAttackTime[animatorParameter] <= characterStats.skillDict[animatorParameter].coolDown
                     || (characterStats.transform.position - blackboard.target.transform.position).sqrMagnitude >= characterStats.skillDict[animatorParameter].attackRangeSqr)
                 {
                     _flag = true;
                     return;
                 }
-                
+
+                blackboard.lastAttackTime[animatorParameter] = 0;
                 _flag = false;
-                _lastPlayTime = Time.time;
                 // characterStats.animator.SetBool("Run", false);
                 // 停止移动
                 characterStats.agent.destination = characterStats.transform.position;
@@ -48,6 +47,7 @@ namespace BehaviourTree
             string animatorNmae = characterStats.animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
 
             characterStats.agent.destination = characterStats.transform.position;
+            characterStats.transform.LookAt(blackboard.target.transform);       // 怪物会莫名的旋转，故添加这行代码
             if (animatorNmae != animatorParameter)
             {
                 return State.Running;

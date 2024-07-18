@@ -21,6 +21,11 @@ namespace BehaviourTree
 
         public Node.State Update()
         {
+            var keys = new List<string>(blackboard.lastAttackTime.Keys);
+            for (int i = 0; i < keys.Count; i++)
+            {
+                blackboard.lastAttackTime[keys[i]] += Time.deltaTime;
+            }
             if (rootNode.state == Node.State.Running)
             {
                 treeState = rootNode.Update();
@@ -83,7 +88,7 @@ namespace BehaviourTree
             if (colliders.Length > 0)
             {
                 blackboard.target = colliders[0].gameObject;
-                blackboard.distanceTarget = characterStats.agent.remainingDistance;
+                blackboard.distanceTarget = Vector3.Distance(characterStats.transform.position, blackboard.target.transform.position);
                 characterStats.animator.SetLayerWeight(1, 1);
             }
             else

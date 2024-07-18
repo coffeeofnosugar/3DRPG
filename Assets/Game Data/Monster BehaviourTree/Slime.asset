@@ -22,6 +22,8 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   child: {fileID: -2126242177950122235}
 --- !u!114 &-7855510110079360905
@@ -46,6 +48,8 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   tolerance: 1
 --- !u!114 &-6465275317586015839
@@ -63,15 +67,17 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 23e507cbfb4421c46b80437896f9700b
-  position: {x: 0.0000076293945, y: 604}
+  position: {x: 33.00004, y: 604.00006}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
-  tolerance: 1
+  tolerance: 2
 --- !u!114 &-2590252864520987470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +100,8 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
 --- !u!114 &-2126242177950122235
 MonoBehaviour:
@@ -117,6 +125,8 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   child: {fileID: -1986982665808209055}
 --- !u!114 &-1986982665808209055
@@ -141,10 +151,39 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   children:
   - {fileID: 4711538500666313139}
   - {fileID: 582124139208481210}
+--- !u!114 &-636630985017530442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d6f9fa299f7f143861c58f26636e47, type: 3}
+  m_Name: Weight
+  m_EditorClassIdentifier: 
+  started: 0
+  state: 0
+  guid: 704208360f2588d41b24abcaf8622de9
+  position: {x: 443.26022, y: 580.00006}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  characterStats: {fileID: 0}
+  children: []
+  weights: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,11 +211,14 @@ MonoBehaviour:
   - {fileID: 3889467843482978773}
   - {fileID: 4088941201081563669}
   - {fileID: 2223528865140522689}
+  - {fileID: -636630985017530442}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
 --- !u!114 &582124139208481210
 MonoBehaviour:
@@ -200,6 +242,8 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   children:
   - {fileID: -6465275317586015839}
@@ -226,6 +270,8 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   animatorParameter: Attack01
 --- !u!114 &3889467843482978773
@@ -250,6 +296,8 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   children:
   - {fileID: 4088941201081563669}
@@ -276,6 +324,8 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   animatorParameter: Attack02
 --- !u!114 &4711538500666313139
@@ -293,13 +343,15 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: a849b552d126d8441bf5f0b619afb909
-  position: {x: -356.35007, y: 455.00003}
+  position: {x: -356, y: 465}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   children:
   - {fileID: 6776659942449182264}
@@ -327,5 +379,7 @@ MonoBehaviour:
     target: {fileID: 0}
     distanceTarget: 0
     isAttacking: 0
+    getHit: 0
+    isDeath: 0
   characterStats: {fileID: 0}
   duration: 1
