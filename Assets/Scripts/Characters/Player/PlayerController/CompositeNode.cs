@@ -6,6 +6,6 @@ namespace Player.PlayerController
 {
     public abstract class CompositeNode : Node
     {
-        public List<Node> children = new List<Node>();
+        public Node[] children = new Node[4];
     }
 }

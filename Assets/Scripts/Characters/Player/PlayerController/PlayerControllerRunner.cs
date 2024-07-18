@@ -14,17 +14,21 @@ namespace Player.PlayerController
 
         private void Awake()
         {
-            if (controller == null)
-            {
-                Debug.LogError($"{transform.name} Œ¥≈‰÷√øÿ÷∆∆˜");
-                return;
-            }
-            _characterStats = GetComponent<CharacterStats>();
+            // if (controller == null)
+            // {
+            //     Debug.LogError($"{transform.name} Œ¥≈‰÷√øÿ÷∆∆˜");
+            //     return;
+            // }
+            // _characterStats = GetComponent<CharacterStats>();
         }
 
         private void Start()
         {
+            var listener = ScriptableObject.CreateInstance<LogicKeyListener>();
+
             
+            controller = ScriptableObject.CreateInstance<PlayerController>();
+            controller.rootNode = listener;
         }
 
         private void FixedUpdate()
@@ -34,7 +38,7 @@ namespace Player.PlayerController
 
         private void Update()
         {
-            
+            controller.Update();
         }
 
         private void LateUpdate()
