@@ -13,7 +13,7 @@ namespace Player.PlayerController
         public Port[] inputs;
         public Port[] outputs;
 
-        public NodeView(Node node)// : base("Assets/Editor/PlayerController/NodeView.uxml")
+        public NodeView(Node node) : base("Assets/Editor/PlayerController/NodeView.uxml")
         {
             this.node = node;
             this.title = node.name;
@@ -24,6 +24,19 @@ namespace Player.PlayerController
 
             CreateInputPorts();
             CreateOutPorts();
+            SetupClasses();
+        }
+
+        private void SetupClasses()
+        {
+            if (node is Root)
+                AddToClassList("root");
+            else if (node is CompositeNode)
+                AddToClassList("composite");
+            else if (node is DecoratorNode)
+                AddToClassList("decorator");
+            else if (node is WhetherNode)
+                AddToClassList("whether");
         }
 
 
@@ -64,7 +77,7 @@ namespace Player.PlayerController
             if (node is Root)
             {
                 outputs = new Port[] { InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool)) };
-                outputs[0].portName = "";
+                outputs[0].portName = "Output";
             }
             else if (node is CompositeNode)
             {

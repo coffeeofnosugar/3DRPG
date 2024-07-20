@@ -15,7 +15,7 @@ MonoBehaviour:
   started: 0
   state: 2
   guid: e11cb10450327dd49a24f1e06e801428
-  position: {x: 599, y: 328}
+  position: {x: 598, y: 365.5}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -70,7 +70,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: dea3bb7c902178a42b752a24916b4995
-  position: {x: 316, y: 437}
+  position: {x: 324, y: 392}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -82,11 +82,11 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   children:
+  - {fileID: -3097150841179140667}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  checkKeyAction: 0
+  checkKeyAction: 2
 --- !u!114 &4625316897240000220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   started: 1
   state: 0
   guid: 56fde27ce1bd65042841b7fa9e7279b9
-  position: {x: 89.79999, y: 328}
+  position: {x: 98, y: 369}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -113,4 +113,4 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   _playerInputController: {fileID: 0}
-  child: {fileID: -3097150841179140667}
+  child: {fileID: 1005773285273735655}

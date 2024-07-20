@@ -12,7 +12,11 @@ namespace Player.PlayerController
         [SerializeField] private KeyAction checkKeyAction;
         protected override void EnterState()
         {
-            
+            state = JudgeKey();
+            if (state != State.Failure)
+            {
+                children[0].Update();
+            }
         }
 
         protected override void ExitState()
@@ -27,6 +31,17 @@ namespace Player.PlayerController
 
         protected override State UpdateState()
         {
+            return state;
+        }
+
+        protected override void LateUpdateState()
+        {
+            
+        }
+
+        private State JudgeKey()
+        {
+            
             switch (checkKeyAction)
             {
                 case KeyAction.Move:
@@ -48,11 +63,6 @@ namespace Player.PlayerController
                     throw new ArgumentOutOfRangeException();
             }
             return State.Failure;
-        }
-
-        protected override void LateUpdateState()
-        {
-            
         }
     }
 }

@@ -1,5 +1,96 @@
-.custom-label {
-    font-size: 20px;
+#node-border {
+    background-color: rgb(56, 56, 56);
+}
+
+#selection-border {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-left-color: rgb(0, 165, 255);
+    border-right-color: rgb(0, 165, 255);
+    border-top-color: rgb(0, 165, 255);
+    border-bottom-color: rgb(0, 165, 255);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+:hover > #selection-border {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+:selected > #selection-border {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+:hover:selected > #selection-border {
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+#title-label {
     -unity-font-style: bold;
-    color: rgb(68, 138, 255);
+    font-size: 14px;
+    height: 25px;
+    -unity-text-align: middle-center;
+    color: rgb(0, 0, 0);
+}
+
+#description {
+    font-size: 10px;
+    -unity-text-align: upper-center;
+}
+
+#divider {
+    min-height: 1px;
+    background-color: rgb(73, 73, 73);
+    min-width: 1px;
+}
+
+#top {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.root #top {
+    background-color: rgb(47, 45, 46);
+}
+
+#input {
+    background-color: rgb(56, 56, 56);
+}
+
+#output {
+    background-color: rgb(47, 45, 46);
+}
+
+.root #title {
+    background-color: rgb(69, 81, 238);
+}
+
+.composite #title {
+    background-color: rgb(180, 153, 31);
+}
+
+.decorator #title {
+    background-color: rgb(149, 36, 61);
+}
+
+.whether #title {
+    background-color: rgb(68, 113, 15);
 }
