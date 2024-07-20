@@ -14,4 +14,5 @@ public class Blackboard
     public bool isAttacking;
     public bool getHit;
     public bool isDeath;
+    public Dictionary<string, float> lastAttackTime = new Dictionary<string, float>();
 }

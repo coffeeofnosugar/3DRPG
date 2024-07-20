@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,10 @@ public class CharacterStats : MonoBehaviour
 
         currentHealth = MaxHealth;
         currentDefence = BaseDefence;
+    }
 
+    private void Start()
+    {
         if (SkillList.Count != 0)
         {
             responseDistance = SkillList[0].attackRange;
@@ -76,11 +80,26 @@ public class CharacterStats : MonoBehaviour
             {
                 responseDistance = skillData.attackRange > responseDistance ? skillData.attackRange : responseDistance;
                 skillDict.Add(skillData.name, skillData);
+                blackbord.lastAttackTime.Add(skillData.name, 999f);
             }
         }
     }
 
-
+    /// <summary>
+    /// 判断是否有技能的CD和技能满足攻击条件
+    /// </summary>
+    /// <returns></returns>
+    public bool CouldAttack()
+    {
+        foreach (var key in blackbord.lastAttackTime.Keys)
+        {
+            if (blackbord.lastAttackTime[key] >= skillDict[key].coolDown && blackbord.distanceTarget <= skillDict[key].attackRange)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     /// <summary>
