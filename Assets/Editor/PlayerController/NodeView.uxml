@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <Style src="project://database/Assets/Editor/PlayerController/NodeView.uss?fileID=7433441132597879392&amp;guid=6df14fd770ebef54bbda01735dcd2ccf&amp;type=3#NodeView" />
+    <ui:VisualElement name="node-state" />
     <ui:VisualElement name="node-border">
         <ui:VisualElement name="title">
             <ui:Label name="title-label" text="Root" class="unity-text-element unity-label" />

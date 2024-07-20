@@ -174,5 +174,15 @@ namespace Player.PlayerController
             nodeView.OnNodeSelected = OnNodeSelected;
             AddElement(nodeView);
         }
+
+        public void UpdateNodeStates()
+        {
+            // 这里的nodes是内置属性，指的是在view中所有的节点
+            nodes.ForEach(n =>
+            {
+                NodeView nodeView = n as NodeView;
+                nodeView.UpdateState();
+            });
+        }
     }
 }

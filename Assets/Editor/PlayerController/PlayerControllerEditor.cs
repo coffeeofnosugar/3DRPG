@@ -130,5 +130,10 @@ namespace Player.PlayerController
         {
             inspectorView.UpdateSelection(nodeView);
         }
+
+        private void OnInspectorUpdate()
+        {
+            controllerView?.UpdateNodeStates();
+        }
     }
 }

@@ -133,5 +133,26 @@ namespace Player.PlayerController
             base.OnSelected();
             OnNodeSelected?.Invoke(this);
         }
+
+        public void UpdateState()
+        {
+            RemoveFromClassList("running");
+            if (Application.isPlaying)
+            {
+                switch (node.state)
+                {
+                    case Node.State.Running:
+                        if (node.started)
+                            AddToClassList("running");
+                        break;
+                    case Node.State.Failure:
+                        break;
+                    case Node.State.Success:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
     }
 }
