@@ -16,6 +16,12 @@ namespace Player.PlayerController
         public Blackboard blackboard = new Blackboard();
         public CharacterStats characterStats;
         public PlayerInputController playerInputController;
+
+        public void FixeUpdate()
+        {
+            if (rootNode.state == Node.State.Running)
+                rootNode.FixeUpdate();
+        }
         
         public Node.State Update()
         {
@@ -24,6 +30,12 @@ namespace Player.PlayerController
                 controllerState = rootNode.Update();
             }
             return controllerState;
+        }
+
+        public void LateUpdate()
+        {
+            if (rootNode.state == Node.State.Running)
+                rootNode.LateUpdate();
         }
         
         public void Bind(CharacterStats characterStats, PlayerInputController playerInputController)

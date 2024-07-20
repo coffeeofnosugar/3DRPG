@@ -32,15 +32,15 @@ namespace Player.PlayerController
                 case KeyAction.Move:
                     var movement = _playerInputController.currentMovementInput;
                     if (movement.x != 0 || movement.y != 0)
-                        return State.Success;
+                        return State.Running;
                     break;
                 case KeyAction.Run:
                     if (_playerInputController.isRun)
-                        return State.Success;
+                        return State.Running;
                     break;
                 case KeyAction.Jump:
                     if (_playerInputController.isJump)
-                        return State.Success;
+                        return State.Running;
                     break;
                 case KeyAction.Attack:
                     break;

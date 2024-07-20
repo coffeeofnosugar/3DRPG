@@ -19,7 +19,7 @@ namespace Player.PlayerController
 
         protected override void FixeUpdateState()
         {
-            
+            child.FixeUpdate();
         }
 
         protected override State UpdateState()
@@ -30,7 +30,7 @@ namespace Player.PlayerController
 
         protected override void LateUpdateState()
         {
-            
+            child.LateUpdate();
         }
 
         public override Node Clone()

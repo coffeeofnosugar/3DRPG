@@ -20,6 +20,16 @@ namespace Player.PlayerController
         public Blackboard blackboard;
         public PlayerInputController _playerInputController;
 
+        public void FixeUpdate()
+        {
+            FixeUpdateState();
+        }
+
+        public void LateUpdate()
+        {
+            LateUpdateState();
+        }
+
         public State Update()
         {
             if (!started)

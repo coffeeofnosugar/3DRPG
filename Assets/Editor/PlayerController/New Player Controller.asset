@@ -17,6 +17,14 @@ MonoBehaviour:
   guid: e11cb10450327dd49a24f1e06e801428
   position: {x: 599, y: 328}
   description: 
+  _characterStats: {fileID: 0}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
   _playerInputController: {fileID: 0}
   child: {fileID: 0}
   message: null
@@ -38,6 +46,15 @@ MonoBehaviour:
   - {fileID: 4625316897240000220}
   - {fileID: 1005773285273735655}
   - {fileID: -3097150841179140667}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  characterStats: {fileID: 0}
+  playerInputController: {fileID: 0}
 --- !u!114 &1005773285273735655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,12 +70,20 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: dea3bb7c902178a42b752a24916b4995
-  position: {x: 304, y: 427}
+  position: {x: 316, y: 437}
   description: 
+  _characterStats: {fileID: 0}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
   _playerInputController: {fileID: 0}
   children:
   - {fileID: 0}
-  - {fileID: -3097150841179140667}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   checkKeyAction: 0
@@ -79,5 +104,13 @@ MonoBehaviour:
   guid: 56fde27ce1bd65042841b7fa9e7279b9
   position: {x: 89.79999, y: 328}
   description: 
+  _characterStats: {fileID: 0}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
   _playerInputController: {fileID: 0}
-  child: {fileID: 1005773285273735655}
+  child: {fileID: -3097150841179140667}

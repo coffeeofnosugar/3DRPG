@@ -9,28 +9,28 @@ namespace Player.PlayerController
         [SerializeField] private string message = "null";
         protected override void EnterState()
         {
-            Debug.Log($"enter {message}");
+            Debug.Log($"EnterState {message}");
         }
 
         protected override void ExitState()
         {
-            Debug.Log($"exit {message}");
+            Debug.Log($"ExitState {message}");
         }
 
         protected override void FixeUpdateState()
         {
-            Debug.Log($"fixe {message}");
+            Debug.Log($"FixeUpdateState {message}");
         }
 
         protected override State UpdateState()
         {
-            Debug.Log($"update {message}");
+            Debug.Log($"UpdateState {message}");
             return State.Success;
         }
 
         protected override void LateUpdateState()
         {
-            Debug.Log($"lateupdate {message}");
+            Debug.Log($"LateUpdateState {message}");
         }
     }
 }

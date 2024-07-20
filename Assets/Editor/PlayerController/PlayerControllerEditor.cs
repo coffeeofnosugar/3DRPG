@@ -55,6 +55,37 @@ namespace Player.PlayerController
             
             OnSelectionChange();
         }
+        
+        // 确保不会双重订阅
+        private void OnEnable()
+        {
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        }
+
+        private void OnDisable()
+        {
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+        }
+
+        private void OnPlayModeStateChanged(PlayModeStateChange change)
+        {
+            switch (change)
+            {
+                case PlayModeStateChange.EnteredEditMode:
+                    OnSelectionChange();
+                    break;
+                case PlayModeStateChange.ExitingEditMode:
+                    break;
+
+                case PlayModeStateChange.EnteredPlayMode:
+                    // 在进入playmode时，系统会自动刷新一遍BehaviourTreeEditor窗口，所以不用调用
+                    //OnSelectionChange();
+                    break;
+                case PlayModeStateChange.ExitingPlayMode:
+                    break;
+            }
+        }
 
         private void OnSelectionChange()
         {
