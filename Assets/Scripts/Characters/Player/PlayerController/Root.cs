@@ -32,5 +32,12 @@ namespace Player.PlayerController
         {
             
         }
+
+        public override Node Clone()
+        {
+            Root node = Instantiate(this);
+            node.child = child.Clone();
+            return node;
+        }
     }
 }

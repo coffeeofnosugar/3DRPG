@@ -1919,7 +1919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc919a199106dd4bbd98db9ff0b5867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: 11400000, guid: 0877a5046d6d1174087a377c8337e0ae, type: 2}
 --- !u!1001 &915767308
 PrefabInstance:
   m_ObjectHideFlags: 0

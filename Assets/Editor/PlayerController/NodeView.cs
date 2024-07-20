@@ -1,3 +1,4 @@
+using System;
 using BehaviourTree;
 using UnityEditor;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Player.PlayerController
 {
     public class NodeView : UnityEditor.Experimental.GraphView.Node
     {
+        public Action<NodeView> OnNodeSelected;
         public Node node;
         public Port[] inputs;
         public Port[] outputs;
@@ -23,6 +25,7 @@ namespace Player.PlayerController
             CreateInputPorts();
             CreateOutPorts();
         }
+
 
         private void CreateInputPorts()
         {
@@ -110,6 +113,12 @@ namespace Player.PlayerController
             node.position.x = newPos.xMin;
             node.position.y = newPos.yMin;
             EditorUtility.SetDirty(node);
+        }
+
+        public override void OnSelected()
+        {
+            base.OnSelected();
+            OnNodeSelected?.Invoke(this);
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Log
   m_EditorClassIdentifier: 
   started: 0
-  state: 0
+  state: 2
   guid: e11cb10450327dd49a24f1e06e801428
   position: {x: 599, y: 328}
   description: 
@@ -53,13 +53,13 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: dea3bb7c902178a42b752a24916b4995
-  position: {x: 312, y: 328}
+  position: {x: 304, y: 427}
   description: 
   _playerInputController: {fileID: 0}
   children:
   - {fileID: 0}
-  - {fileID: 0}
   - {fileID: -3097150841179140667}
+  - {fileID: 0}
   - {fileID: 0}
   checkKeyAction: 0
 --- !u!114 &4625316897240000220
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ce67bedcfb1614d867e0dd1f180351, type: 3}
   m_Name: Root
   m_EditorClassIdentifier: 
-  started: 0
+  started: 1
   state: 0
   guid: 56fde27ce1bd65042841b7fa9e7279b9
   position: {x: 89.79999, y: 328}

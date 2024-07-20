@@ -13,7 +13,6 @@ public class CharacterStats : MonoBehaviour
 
     private CharacterData_SO characterData;
     
-    [Header("ºÚ°åÊý¾Ý")]
     public Blackboard blackboard;
 
     [HideInInspector] public Animator animator;
@@ -80,7 +79,8 @@ public class CharacterStats : MonoBehaviour
             {
                 responseDistance = skillData.attackRange > responseDistance ? skillData.attackRange : responseDistance;
                 skillDict.Add(skillData.name, skillData);
-                blackbord.lastAttackTime.Add(skillData.name, 999f);
+                blackboard.lastAttackTime.Add(skillData.name, 999f);
+                
             }
         }
     }
@@ -91,9 +91,9 @@ public class CharacterStats : MonoBehaviour
     /// <returns></returns>
     public bool CouldAttack()
     {
-        foreach (var key in blackbord.lastAttackTime.Keys)
+        foreach (var key in blackboard.lastAttackTime.Keys)
         {
-            if (blackbord.lastAttackTime[key] >= skillDict[key].coolDown && blackbord.distanceTarget <= skillDict[key].attackRange)
+            if (blackboard.lastAttackTime[key] >= skillDict[key].coolDown && blackboard.distanceTarget <= skillDict[key].attackRange)
             {
                 return true;
             }

@@ -26,31 +26,13 @@ namespace Player.PlayerController
 
         private void Start()
         {
-            controller = ScriptableObject.CreateInstance<PlayerController>();
-            
-            var root = ScriptableObject.CreateInstance<Root>();
-            var listener = ScriptableObject.CreateInstance<LogicKeyListener>();
-            listener._playerInputController = _playerInputController;
-            // var log = ScriptableObject.CreateInstance<Log>();
-            
-            controller.rootNode = root;
-            root.child = listener;
-
-        }
-
-        private void FixedUpdate()
-        {
-            
+            controller = controller.Clone();
+            controller.Bind(_characterStats, _playerInputController);
         }
 
         private void Update()
         {
             controller.Update();
-        }
-
-        private void LateUpdate()
-        {
-            
         }
     }
 }

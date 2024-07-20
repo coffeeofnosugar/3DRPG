@@ -7,5 +7,15 @@ namespace Player.PlayerController
     public abstract class CompositeNode : Node
     {
         public Node[] children = new Node[4];
+
+        public override Node Clone()
+        {
+            CompositeNode node = Instantiate(this);
+            for (int i = 0; i < children.Length; i++)
+            {
+                node.children[i] = children[i]?.Clone();
+            }
+            return node;
+        }
     }
 }

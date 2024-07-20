@@ -16,7 +16,8 @@ namespace Player.PlayerController
         public Vector2 position;
         public string description;
         
-        private CharacterStats _characterStats;
+        public CharacterStats _characterStats;
+        public Blackboard blackboard;
         public PlayerInputController _playerInputController;
 
         public State Update()
@@ -35,6 +36,11 @@ namespace Player.PlayerController
             }
 
             return state;
+        }
+
+        public virtual Node Clone()
+        {
+            return Instantiate(this);
         }
 
         protected abstract void EnterState();

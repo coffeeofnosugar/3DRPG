@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -12,6 +13,10 @@ namespace Player.PlayerController
         public Node.State controllerState = Node.State.Running;
         public List<Node> nodes = new List<Node>();
 
+        public Blackboard blackboard = new Blackboard();
+        public CharacterStats characterStats;
+        public PlayerInputController playerInputController;
+        
         public Node.State Update()
         {
             if (rootNode.state == Node.State.Running)
@@ -20,8 +25,44 @@ namespace Player.PlayerController
             }
             return controllerState;
         }
+        
+        public void Bind(CharacterStats characterStats, PlayerInputController playerInputController)
+        {
+            this.characterStats = characterStats;
+            this.playerInputController = playerInputController;
+            characterStats.blackboard = blackboard;
+            Traverse(rootNode, n =>
+            {
+                n._characterStats = characterStats;
+                n._playerInputController = playerInputController;
+                n.blackboard = blackboard;
+            });
+        }
+
+        public PlayerController Clone()
+        {
+            PlayerController controller = Instantiate(this);
+            controller.rootNode = controller.rootNode.Clone();
+            controller.nodes = new List<Node>();
+            Traverse(controller.rootNode, node =>
+            {
+                controller.nodes.Add(node);
+            });
+            return controller;
+        }
+
+        private void Traverse(Node node, Action<Node> visiter)
+        {
+            if (node)
+            {
+                visiter.Invoke(node);
+                var children = GetChildren(node);
+                children.ForEach(n => Traverse(n, visiter));
+            }
+        }
 
 #if UNITY_EDITOR
+        #region Îªview·þÎñ
         public Node CreateNode(System.Type type)
         {
             Node node = ScriptableObject.CreateInstance(type) as Node;
@@ -146,6 +187,7 @@ namespace Player.PlayerController
             }
             return children;
         }
+        #endregion
 #endif
     }
 }

@@ -11,9 +11,11 @@ namespace Player.PlayerController
 {
     public class PlayerControllerView : GraphView
     {
+        public Action<NodeView> OnNodeSelected;
+        
         public new class UxmlFactory : UxmlFactory<PlayerControllerView, GraphView.UxmlTraits> { }
 
-        private PlayerController playerController;
+        private PlayerController controller;
         public PlayerControllerView()
         {
             Insert(0, new GridBackground());
@@ -34,12 +36,12 @@ namespace Player.PlayerController
 
         private void OnUndoRedo()
         {
-            PopulateView(playerController);
+            PopulateView(controller);
             AssetDatabase.SaveAssets();
         }
         public void PopulateView(PlayerController playerController)
         {
-            this.playerController = playerController;
+            this.controller = playerController;
             graphViewChanged -= OnGraphViewChanged;
             // 删除视图中所有的内容
             DeleteElements(graphElements);
@@ -101,7 +103,7 @@ namespace Player.PlayerController
                     NodeView nodeView = elem as NodeView;
                     if (nodeView != null)
                     {
-                        playerController.DeleteNode(nodeView.node);
+                        controller.DeleteNode(nodeView.node);
                     }
                     
                     Edge edge = elem as Edge;
@@ -110,7 +112,7 @@ namespace Player.PlayerController
                         NodeView parentView = edge.output.node as NodeView;
                         NodeView childView = edge.input.node as NodeView;
 
-                        playerController.RemoveChild(parentView.node, childView.node, edge.output.tabIndex);
+                        controller.RemoveChild(parentView.node, childView.node, edge.output.tabIndex);
                     }
                 });
             }
@@ -121,7 +123,7 @@ namespace Player.PlayerController
                 {
                     NodeView parentView = edge.output.node as NodeView;
                     NodeView childView = edge.input.node as NodeView;
-                    playerController.AddChild(parentView.node, childView.node, edge.output.tabIndex);
+                    controller.AddChild(parentView.node, childView.node, edge.output.tabIndex);
                 });
             }
 
@@ -161,7 +163,7 @@ namespace Player.PlayerController
 
         private void CreateNode(Type type, Vector2 position)
         {
-            Node node = playerController.CreateNode(type);
+            Node node = controller.CreateNode(type);
             node.position = position;
             CreateNodeView(node);
         }
@@ -169,6 +171,7 @@ namespace Player.PlayerController
         private void CreateNodeView(Node node)
         {
             NodeView nodeView = new NodeView(node);
+            nodeView.OnNodeSelected = OnNodeSelected;
             AddElement(nodeView);
         }
     }

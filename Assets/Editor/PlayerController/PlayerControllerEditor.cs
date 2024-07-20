@@ -8,11 +8,12 @@ namespace Player.PlayerController
 {
     public class PlayerControllerEditor : EditorWindow
     {
-        private PlayerControllerView playerControllerView;
+        private PlayerControllerView controllerView;
         private InspectorView inspectorView;
         private IMGUIContainer blackboardView;
 
-        private SerializedObject playerControllerObject;
+        private SerializedObject controllerObject;
+        private SerializedProperty blackboardProperty;
         
         [SerializeField]
         private VisualTreeAsset m_VisualTreeAsset = default;
@@ -46,23 +47,57 @@ namespace Player.PlayerController
             VisualElement root = rootVisualElement;
 
             m_VisualTreeAsset.CloneTree(root);
-            playerControllerView = root.Q<PlayerControllerView>();
+            controllerView = root.Q<PlayerControllerView>();
             inspectorView = root.Q<InspectorView>();
             blackboardView = root.Q<IMGUIContainer>();
 
+            controllerView.OnNodeSelected = OnNodeSelectionChanged;
+            
             OnSelectionChange();
         }
 
         private void OnSelectionChange()
         {
-            PlayerController playerController = Selection.activeObject as PlayerController;
+            PlayerController controller = Selection.activeObject as PlayerController;
 
-            // 后半部分的判断是防止，在创建新的行为树时点击该行为树，但unity还没准备好就选择，会报错
-            if (playerController && AssetDatabase.CanOpenAssetInEditor(playerController.GetInstanceID()))
+            if (!controller)
             {
-                playerControllerView.PopulateView(playerController);
-                playerControllerObject = new SerializedObject(playerController);
+                if (Selection.activeGameObject)
+                {
+                    PlayerControllerRunner runner = Selection.activeGameObject.GetComponent<PlayerControllerRunner>();
+                    if (runner)
+                    {
+                        controller = runner.controller;
+                    }
+                }
             }
+
+            if (Application.isPlaying)
+            {
+                if (controller)
+                {
+                    controllerView.PopulateView(controller);
+                }
+            }
+            else
+            {
+                // 后半部分的判断是防止，在创建新的行为树时点击该行为树，但unity还没准备好就选择，会报错
+                if (controller && AssetDatabase.CanOpenAssetInEditor(controller.GetInstanceID()))
+                {
+                    controllerView.PopulateView(controller);
+                }
+            }
+
+            if (controller)
+            {
+                controllerObject = new SerializedObject(controller);
+                blackboardProperty = controllerObject.FindProperty("blackboard");
+            }
+        }
+
+        private void OnNodeSelectionChanged(NodeView nodeView)
+        {
+            inspectorView.UpdateSelection(nodeView);
         }
     }
 }
