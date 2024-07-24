@@ -142,8 +142,8 @@ MonoBehaviour:
   _playerInputController: {fileID: 0}
   children:
   - {fileID: -3097150841179140667}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5120752829993494630}
+  - {fileID: -6732068227315298144}
   - {fileID: 0}
   checkKeyAction: 2
 --- !u!114 &4625316897240000220

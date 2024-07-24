@@ -20,7 +20,7 @@ namespace Player.PlayerController
         protected override State FixeUpdateState()
         {
             Debug.Log($"UpdateState {message}");
-            return State.Success;
+            return base.FixeUpdateState();
         }
     }
 }

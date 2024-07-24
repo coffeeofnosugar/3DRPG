@@ -10,10 +10,17 @@ namespace Player.PlayerController
         public enum KeyAction { Move, Run, Jump, Attack }
 
         [SerializeField] private KeyAction checkKeyAction;
+
+        private bool _started;
         protected override void EnterState()
         {
+            if (children[0])
+                children[0].isTrigger = true;
+            if (children[1])
+                children[1].isTrigger = false;
+            if (children[2])
+                children[2].isTrigger = true;
             state = JudgeKey();
-            
         }
 
         protected override void ExitState()
@@ -23,7 +30,25 @@ namespace Player.PlayerController
 
         protected override State FixeUpdateState()
         {
-            return State.Success;
+            if (state != State.Running)
+                return state;
+            
+            state = JudgeKey();
+            if (!_started)
+            {
+                children[0].FixedUpdate();
+                _started = true;
+            }
+
+            if (state == State.Running)
+                state = children[1].FixedUpdate();
+
+            if (state != State.Running)
+            {
+                children[2].FixedUpdate();
+                _started = false;
+            }
+            return state;
         }
         
         /// <summary>
@@ -46,11 +71,7 @@ namespace Player.PlayerController
                     break;
                 case KeyAction.Jump:
                     if (_playerInputController.isJump)
-                    {
-                        // _playerInputController.PlayerInput.CharacterControls.Jump.started += ;
-                        // _playerInputController.PlayerInput.CharacterControls.Jump.canceled += onJumpInput;
-                    }
-                    return State.Running;
+                        return State.Running;
                     break;
                 case KeyAction.Attack:
                     break;

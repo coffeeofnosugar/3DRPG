@@ -12,6 +12,8 @@ namespace Player.PlayerController
 
         public State state = State.Running;
 
+        public bool isTrigger;
+
         public string guid;
         public Vector2 position;
         public string description;
