@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 0
   state: 0
-  isTrigger: 0
   guid: f54c2a032bb91d54dbe98f85e007deb2
-  position: {x: 573, y: 480}
+  position: {x: 751, y: 512}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -28,7 +27,8 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   child: {fileID: 0}
-  message: end
+  isTrigger: 1
+  message: 2
 --- !u!114 &-3097150841179140667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,9 +43,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 0
   state: 2
-  isTrigger: 0
   guid: e11cb10450327dd49a24f1e06e801428
-  position: {x: 553, y: 293}
+  position: {x: 751, y: 287}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -57,7 +56,8 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   child: {fileID: 0}
-  message: start
+  isTrigger: 1
+  message: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 0
   state: 0
-  isTrigger: 0
   guid: dea3bb7c902178a42b752a24916b4995
   position: {x: 324, y: 373}
   description: 
@@ -118,7 +117,7 @@ MonoBehaviour:
   - {fileID: -3097150841179140667}
   - {fileID: 5120752829993494630}
   - {fileID: -6732068227315298144}
-  checkKeyAction: 2
+  checkKeyAction: 0
 --- !u!114 &4625316897240000220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 1
   state: 0
-  isTrigger: 0
   guid: 56fde27ce1bd65042841b7fa9e7279b9
   position: {x: 113, y: 373}
   description: 
@@ -161,9 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 0
   state: 0
-  isTrigger: 0
   guid: 0d1aa952675d6d44fb2226ec2a51c6be
-  position: {x: 573, y: 386.68}
+  position: {x: 750.5, y: 409}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -175,4 +172,5 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   child: {fileID: 0}
-  message: update
+  isTrigger: 0
+  message: 1

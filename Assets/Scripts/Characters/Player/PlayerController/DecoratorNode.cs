@@ -16,13 +16,5 @@ namespace Player.PlayerController
                 node.child = node.Clone();
             return node;
         }
-
-        protected override State FixeUpdateState()
-        {
-            if (isTrigger)
-                return child != null ? child.FixedUpdate() : State.Success;
-            else
-                return child != null ? child.FixedUpdate() : State.Running;
-        }
     }
 }

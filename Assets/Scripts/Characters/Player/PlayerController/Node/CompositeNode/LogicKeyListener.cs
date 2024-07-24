@@ -10,17 +10,12 @@ namespace Player.PlayerController
         public enum KeyAction { Move, Run, Jump, Attack }
 
         [Header("节点参数")]
-        [SerializeField] private KeyAction checkKeyAction;
+        [SerializeField] public KeyAction checkKeyAction;
 
-        private bool _started;
+        private int index;
         protected override void EnterState()
         {
-            if (children[0])
-                children[0].isTrigger = true;
-            if (children[1])
-                children[1].isTrigger = false;
-            if (children[2])
-                children[2].isTrigger = true;
+            index = 0;
             state = JudgeKey();
         }
 
@@ -34,20 +29,30 @@ namespace Player.PlayerController
             if (state != State.Running)
                 return state;
             
-            state = JudgeKey();
-            if (!_started)
+            State _state = JudgeKey();
+            if (children[0] && index == 0)
             {
+                children[0].state = State.Success;
                 children[0].FixedUpdate();
-                _started = true;
+                index++;
             }
 
-            if (state == State.Running)
-                state = children[1].FixedUpdate();
-
-            if (state != State.Running)
+            if (children[1] && index == 1)
             {
+                children[1].state = _state;
+                if (_state != State.Running)
+                {
+                    children[1].state = _state;
+                    index++;
+                }
+                state = children[1].FixedUpdate();
+            }
+            
+            if (children[2] && index == 2)
+            {
+                children[2].state = State.Success;
                 children[2].FixedUpdate();
-                _started = false;
+                index++;
             }
             return state;
         }

@@ -10,6 +10,7 @@ namespace Player
 {
     public class PlayerInputController : MonoBehaviour
     {
+        public enum InputParameter { Movement, IsRun, IsJump }
         [Header("input parameter")]
         public Vector2 currentMovementInput;
         public bool isRun;

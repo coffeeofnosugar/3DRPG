@@ -1,8 +1,8 @@
 using System;
-using BehaviourTree;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 namespace Player.PlayerController
 {
@@ -25,6 +25,43 @@ namespace Player.PlayerController
             CreateInputPorts();
             CreateOutPorts();
             SetupClasses();
+
+            SetupDescription();
+        }
+
+        private void SetupDescription()
+        {
+            Label descriptionLabel = this.Q<Label>("description");
+            
+            if (node is Root)
+            {
+                descriptionLabel.text = "";
+            }
+            else if (node is CompositeNode)
+            {
+                if (node is LogicKeyListener logicKeyListenerNode)
+                {
+                    descriptionLabel.text = $"Key:{logicKeyListenerNode.checkKeyAction}";
+                }
+            }
+            else if (node is DecoratorNode)
+            {
+                if (node is ChangeCharacterState changeCharacterStateNode)
+                {
+                    descriptionLabel.text = $"{changeCharacterStateNode.animatorParameter}";
+                }
+                else if (node is Log logNode)
+                {
+                    descriptionLabel.text = $"{logNode.message}";
+                }
+            }
+            else if (node is WhetherNode)
+            {
+                if (node is CheckValue checkValueNode)
+                {
+                    descriptionLabel.text = $"{checkValueNode.key}=={checkValueNode.vector2Value}";
+                }
+            }
         }
 
         private void SetupClasses()

@@ -7,7 +7,7 @@ namespace Player.PlayerController
     public class Log : DecoratorNode
     {
         [Header("节点参数")]
-        [SerializeField] private string message = "null";
+        [SerializeField] public string message = "null";
         protected override void EnterState()
         {
             Debug.Log($"EnterState {message}");
@@ -21,7 +21,7 @@ namespace Player.PlayerController
         protected override State FixeUpdateState()
         {
             Debug.Log($"UpdateState {message}");
-            return base.FixeUpdateState();
+            return state;
         }
     }
 }
