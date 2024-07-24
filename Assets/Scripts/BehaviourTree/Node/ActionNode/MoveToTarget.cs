@@ -7,6 +7,7 @@ namespace BehaviourTree
     public class MoveToTarget : ActionNode
     {
         public float tolerance = 1;
+        private bool _flag;
         protected override void OnStart()
         {
             if (blackboard.target)
@@ -18,11 +19,15 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            characterStats.animator.SetBool("Run", false);
+            if (_flag)
+            {
+                characterStats.animator.SetBool("Run", false);
+            }
         }
 
         protected override State OnUpdate()
         {
+            _flag = true;
             if (blackboard.target)
             {
                 characterStats.agent.destination = blackboard.target.transform.position;
@@ -33,6 +38,7 @@ namespace BehaviourTree
                 }
                 if (characterStats.CouldAttack())
                 {
+                    _flag = false;
                     return State.Success;
                 }
             }
@@ -51,6 +57,7 @@ namespace BehaviourTree
             // ”Î÷’µ„µƒæ‡¿Î
             if (characterStats.agent.remainingDistance < tolerance)
             {
+                _flag = true;
                 return State.Success;
             }
 

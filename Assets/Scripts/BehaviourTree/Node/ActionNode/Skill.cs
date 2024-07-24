@@ -13,8 +13,7 @@ namespace BehaviourTree
         {
             if (blackboard.target)
             {
-                if (blackboard.lastAttackTime[animatorParameter] <= characterStats.skillDict[animatorParameter].coolDown
-                    || (characterStats.transform.position - blackboard.target.transform.position).sqrMagnitude >= characterStats.skillDict[animatorParameter].attackRangeSqr)
+                if (characterStats.CouldAttack(animatorParameter))
                 {
                     _flag = true;
                     return;
@@ -22,7 +21,7 @@ namespace BehaviourTree
 
                 blackboard.lastAttackTime[animatorParameter] = 0;
                 _flag = false;
-                // characterStats.animator.SetBool("Run", false);
+                characterStats.animator.SetBool("Run", false);
                 // 停止移动
                 characterStats.agent.destination = characterStats.transform.position;
                 // 朝向攻击目标
