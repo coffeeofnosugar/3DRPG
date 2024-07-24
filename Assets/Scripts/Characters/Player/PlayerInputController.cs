@@ -82,7 +82,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            MovePlayer();
+            // MovePlayer();
         }
 
         private void Update()
@@ -98,7 +98,7 @@ namespace Player
             Vector3 moveDirection =
                 _cameraTransform.forward * currentMovementInput.y + _cameraTransform.right * currentMovementInput.x;
             moveDirection.y = 0;
-
+            
             if (currentMovementInput.y != 0 || currentMovementInput.x != 0)
                 transform.eulerAngles = Quaternion.LookRotation(moveDirection).eulerAngles;
             

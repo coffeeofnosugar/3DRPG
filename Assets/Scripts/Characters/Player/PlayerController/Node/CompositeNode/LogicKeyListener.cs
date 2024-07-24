@@ -29,7 +29,12 @@ namespace Player.PlayerController
             if (state != State.Running)
                 return state;
             
-            State _state = JudgeKey();
+            state = JudgeKey();
+            Debug.Log(state);
+            if (state != State.Running)
+            {
+                index = 2;
+            }
             if (children[0] && index == 0)
             {
                 children[0].state = State.Success;
@@ -39,12 +44,7 @@ namespace Player.PlayerController
 
             if (children[1] && index == 1)
             {
-                children[1].state = _state;
-                if (_state != State.Running)
-                {
-                    children[1].state = _state;
-                    index++;
-                }
+                children[1].state = state;
                 state = children[1].FixedUpdate();
             }
             

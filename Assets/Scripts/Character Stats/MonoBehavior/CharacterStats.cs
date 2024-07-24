@@ -21,6 +21,7 @@ public class CharacterStats : MonoBehaviour
     [HideInInspector] public Collider coll;
     [HideInInspector] public new Rigidbody rigidbody;
     [HideInInspector] public PlayerInputController PlayerInputController;
+    [HideInInspector] public Transform cameraTransform;
 
     // ³öÉúµã
     [HideInInspector] public Vector3 originPosition;
@@ -66,6 +67,7 @@ public class CharacterStats : MonoBehaviour
 
         originPosition = transform.position;
         originRotation = transform.rotation;
+        cameraTransform = Camera.main.transform;
 
         currentHealth = MaxHealth;
         currentDefence = BaseDefence;

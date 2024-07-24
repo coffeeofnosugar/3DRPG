@@ -10,18 +10,18 @@ namespace Player.PlayerController
         [SerializeField] public string message = "null";
         protected override void EnterState()
         {
-            Debug.Log($"EnterState {message}");
+            Debug.Log($"EnterState {message}  {state}");
         }
 
         protected override void ExitState()
         {
-            Debug.Log($"ExitState {message}");
+            Debug.Log($"ExitState {message}  {state}");
         }
 
         protected override State FixeUpdateState()
         {
-            Debug.Log($"UpdateState {message}");
-            return state;
+            Debug.Log($"UpdateState {message}  {state}");
+            return State.Success;
         }
     }
 }

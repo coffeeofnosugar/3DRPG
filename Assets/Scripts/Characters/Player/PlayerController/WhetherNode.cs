@@ -13,7 +13,8 @@ namespace Player.PlayerController
             WhetherNode node = Instantiate(this);
             for (int i = 0; i < children.Length; i++)
             {
-                node.children[i] = children[i].Clone();
+                if (node.children[i])
+                    node.children[i] = children[i].Clone();
             }
             return node;
         }
