@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -88,14 +89,28 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// 判断是否有技能的CD和技能满足攻击条件
     /// </summary>
+    /// <param name="animatorText">
+    /// 传入指定技能时判断该技能是否达到释放条件;
+    /// 传入null时判断所有技能，如果有一个技能达到释放条件便返回true
+    /// </param>
     /// <returns></returns>
-    public bool CouldAttack()
+    public bool CouldAttack(string animatorText = null)
     {
-        foreach (var key in blackboard.lastAttackTime.Keys)
+        if (animatorText != null)
         {
-            if (blackboard.lastAttackTime[key] >= skillDict[key].coolDown && blackboard.distanceTarget <= skillDict[key].attackRange)
+            if (blackboard.lastAttackTime[animatorText] >= skillDict[animatorText].coolDown && blackboard.distanceTarget <= skillDict[animatorText].attackRange)
             {
                 return true;
+            }
+        }
+        else
+        {
+            foreach (var key in blackboard.lastAttackTime.Keys)
+            {
+                if (blackboard.lastAttackTime[key] >= skillDict[key].coolDown && blackboard.distanceTarget <= skillDict[key].attackRange)
+                {
+                    return true;
+                }
             }
         }
         return false;

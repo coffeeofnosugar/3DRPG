@@ -20,17 +20,7 @@ namespace Player.PlayerController
         public Blackboard blackboard;
         public PlayerInputController _playerInputController;
 
-        public void FixeUpdate()
-        {
-            FixeUpdateState();
-        }
-
-        public void LateUpdate()
-        {
-            LateUpdateState();
-        }
-
-        public State Update()
+        public State FixedUpdate()
         {
             if (!started)
             {
@@ -38,7 +28,7 @@ namespace Player.PlayerController
                 started = true;
             }
 
-            state = UpdateState();
+            state = FixeUpdateState();
             if (state != State.Running)
             {
                 ExitState();
@@ -55,8 +45,6 @@ namespace Player.PlayerController
 
         protected abstract void EnterState();
         protected abstract void ExitState();
-        protected abstract void FixeUpdateState();
-        protected abstract State UpdateState();
-        protected abstract void LateUpdateState();
+        protected abstract State FixeUpdateState();
     }
 }

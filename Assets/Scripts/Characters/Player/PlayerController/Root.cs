@@ -17,20 +17,10 @@ namespace Player.PlayerController
             
         }
 
-        protected override void FixeUpdateState()
+        protected override State FixeUpdateState()
         {
-            child.FixeUpdate();
-        }
-
-        protected override State UpdateState()
-        {
-            child.Update();
+            child.FixedUpdate();
             return State.Running;
-        }
-
-        protected override void LateUpdateState()
-        {
-            child.LateUpdate();
         }
 
         public override Node Clone()

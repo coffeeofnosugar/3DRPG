@@ -110,3 +110,10 @@
 .running #node-state {
     background-color: rgb(116, 255, 0);
 }
+
+.node {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}

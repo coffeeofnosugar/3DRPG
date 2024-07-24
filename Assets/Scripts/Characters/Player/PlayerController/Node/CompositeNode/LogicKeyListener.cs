@@ -13,10 +13,7 @@ namespace Player.PlayerController
         protected override void EnterState()
         {
             state = JudgeKey();
-            if (state != State.Failure)
-            {
-                children[0].Update();
-            }
+            
         }
 
         protected override void ExitState()
@@ -24,24 +21,18 @@ namespace Player.PlayerController
             
         }
 
-        protected override void FixeUpdateState()
+        protected override State FixeUpdateState()
         {
-            
+            return State.Success;
         }
-
-        protected override State UpdateState()
-        {
-            return state;
-        }
-
-        protected override void LateUpdateState()
-        {
-            
-        }
-
+        
+        /// <summary>
+        /// ÅÐ¶Ï¼üÎ»
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private State JudgeKey()
         {
-            
             switch (checkKeyAction)
             {
                 case KeyAction.Move:
@@ -55,7 +46,11 @@ namespace Player.PlayerController
                     break;
                 case KeyAction.Jump:
                     if (_playerInputController.isJump)
-                        return State.Running;
+                    {
+                        // _playerInputController.PlayerInput.CharacterControls.Jump.started += ;
+                        // _playerInputController.PlayerInput.CharacterControls.Jump.canceled += onJumpInput;
+                    }
+                    return State.Running;
                     break;
                 case KeyAction.Attack:
                     break;

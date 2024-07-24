@@ -24,24 +24,25 @@ namespace Player
         [SerializeField] private float runSpeed;
         [SerializeField] private float currentSpeed;
         
-        private PlayerInput _playerInput;
+        public PlayerInput PlayerInput;
         
 
         private void Awake()
         {
-            _playerInput = new PlayerInput();
+            PlayerInput = new PlayerInput();
             _rigidbody = GetComponent<Rigidbody>();
             _characterStats = GetComponent<CharacterStats>();
             _cameraTransform = Camera.main.transform;
 
-            _playerInput.CharacterControls.Move.started += onMoveInput;
-            _playerInput.CharacterControls.Move.canceled += onMoveInput;
-            _playerInput.CharacterControls.Move.performed += onMoveInput;
+            PlayerInput.CharacterControls.Move.started += onMoveInput;
+            PlayerInput.CharacterControls.Move.canceled += onMoveInput;
+            PlayerInput.CharacterControls.Move.performed += onMoveInput;
 
-            _playerInput.CharacterControls.Run.started += onRunInput;
-            _playerInput.CharacterControls.Run.canceled += onRunInput;
+            PlayerInput.CharacterControls.Run.started += onRunInput;
+            PlayerInput.CharacterControls.Run.canceled += onRunInput;
 
-            _playerInput.CharacterControls.Jump.started += onJumpInput;
+            PlayerInput.CharacterControls.Jump.started += onJumpInput;
+            PlayerInput.CharacterControls.Jump.canceled += onJumpInput;
         }
 
         private void Start()
@@ -52,9 +53,6 @@ namespace Player
         }
 
         #region input event
-
-        
-
         private void onRunInput(InputAction.CallbackContext obj)
         {
             isRun = obj.ReadValueAsButton();
@@ -72,12 +70,12 @@ namespace Player
 
         private void OnEnable()
         {
-            _playerInput.CharacterControls.Enable();
+            PlayerInput.CharacterControls.Enable();
         }
 
         private void OnDisable()
         {
-            _playerInput.CharacterControls.Disable();
+            PlayerInput.CharacterControls.Disable();
         }
         #endregion
 

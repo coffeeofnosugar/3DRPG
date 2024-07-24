@@ -17,27 +17,15 @@ namespace Player.PlayerController
         public CharacterStats characterStats;
         public PlayerInputController playerInputController;
 
-        public void FixeUpdate()
-        {
-            if (rootNode.state == Node.State.Running)
-                rootNode.FixeUpdate();
-        }
-        
-        public Node.State Update()
+        public Node.State FixedUpdate()
         {
             if (rootNode.state == Node.State.Running)
             {
-                controllerState = rootNode.Update();
+                controllerState = rootNode.FixedUpdate();
             }
             return controllerState;
         }
 
-        public void LateUpdate()
-        {
-            if (rootNode.state == Node.State.Running)
-                rootNode.LateUpdate();
-        }
-        
         public void Bind(CharacterStats characterStats, PlayerInputController playerInputController)
         {
             this.characterStats = characterStats;

@@ -77,7 +77,7 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   characterStats: {fileID: 0}
-  tolerance: 2
+  tolerance: 1
 --- !u!114 &-2590252864520987470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: b9521d8477a57c946b56ce80167e2666
-  position: {x: 150.00003, y: 763}
+  position: {x: 150, y: 764.15015}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}

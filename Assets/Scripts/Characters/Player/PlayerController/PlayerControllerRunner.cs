@@ -29,20 +29,10 @@ namespace Player.PlayerController
             controller = controller.Clone();
             controller.Bind(_characterStats, _playerInputController);
         }
-
+        
         private void FixedUpdate()
         {
-            controller.FixeUpdate();
-        }
-
-        private void Update()
-        {
-            controller.Update();
-        }
-
-        private void LateUpdate()
-        {
-            controller.LateUpdate();
+            controller.FixedUpdate();
         }
     }
 }

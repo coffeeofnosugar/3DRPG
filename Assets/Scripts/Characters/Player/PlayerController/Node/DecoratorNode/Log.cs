@@ -17,20 +17,10 @@ namespace Player.PlayerController
             Debug.Log($"ExitState {message}");
         }
 
-        protected override void FixeUpdateState()
-        {
-            Debug.Log($"FixeUpdateState {message}");
-        }
-
-        protected override State UpdateState()
+        protected override State FixeUpdateState()
         {
             Debug.Log($"UpdateState {message}");
             return State.Success;
-        }
-
-        protected override void LateUpdateState()
-        {
-            Debug.Log($"LateUpdateState {message}");
         }
     }
 }
