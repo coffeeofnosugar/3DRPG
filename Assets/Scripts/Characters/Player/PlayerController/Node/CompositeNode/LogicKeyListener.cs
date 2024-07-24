@@ -9,6 +9,7 @@ namespace Player.PlayerController
     {
         public enum KeyAction { Move, Run, Jump, Attack }
 
+        [Header("节点参数")]
         [SerializeField] private KeyAction checkKeyAction;
 
         private bool _started;

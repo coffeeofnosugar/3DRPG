@@ -85,13 +85,11 @@ namespace Player.PlayerController
                 {
                     InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool)),
                     InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool)),
-                    InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool)),
                     InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool))
                 };
                 outputs[0].portName = "OnStart";
                 outputs[1].portName = "OnUpdate";
                 outputs[2].portName = "OnEnd";
-                outputs[3].portName = "OnTrigger";
             }
             else if (node is DecoratorNode)
             {

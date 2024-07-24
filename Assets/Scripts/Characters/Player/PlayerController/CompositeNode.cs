@@ -6,7 +6,7 @@ namespace Player.PlayerController
 {
     public abstract class CompositeNode : Node
     {
-        public Node[] children = new Node[4];
+        public Node[] children = new Node[3];
 
         public override Node Clone()
         {

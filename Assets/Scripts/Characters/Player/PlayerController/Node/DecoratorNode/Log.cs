@@ -6,6 +6,7 @@ namespace Player.PlayerController
 {
     public class Log : DecoratorNode
     {
+        [Header("节点参数")]
         [SerializeField] private string message = "null";
         protected override void EnterState()
         {

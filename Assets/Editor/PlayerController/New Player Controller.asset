@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 0
   state: 0
+  isTrigger: 0
   guid: f54c2a032bb91d54dbe98f85e007deb2
   position: {x: 573, y: 480}
   description: 
@@ -42,6 +43,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 0
   state: 2
+  isTrigger: 0
   guid: e11cb10450327dd49a24f1e06e801428
   position: {x: 553, y: 293}
   description: 
@@ -56,34 +58,6 @@ MonoBehaviour:
   _playerInputController: {fileID: 0}
   child: {fileID: 0}
   message: start
---- !u!114 &-2645891388010899236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab4607af15ade24686c2dfc5965a892, type: 3}
-  m_Name: Log
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 45ca260f0f14ebf4fb1f2b66e7748fc1
-  position: {x: 583, y: 579}
-  description: 
-  _characterStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  message: trigger
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +78,6 @@ MonoBehaviour:
   - {fileID: -3097150841179140667}
   - {fileID: 5120752829993494630}
   - {fileID: -6732068227315298144}
-  - {fileID: -2645891388010899236}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -128,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 0
   state: 0
+  isTrigger: 0
   guid: dea3bb7c902178a42b752a24916b4995
   position: {x: 324, y: 373}
   description: 
@@ -144,7 +118,6 @@ MonoBehaviour:
   - {fileID: -3097150841179140667}
   - {fileID: 5120752829993494630}
   - {fileID: -6732068227315298144}
-  - {fileID: 0}
   checkKeyAction: 2
 --- !u!114 &4625316897240000220
 MonoBehaviour:
@@ -160,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 1
   state: 0
+  isTrigger: 0
   guid: 56fde27ce1bd65042841b7fa9e7279b9
   position: {x: 113, y: 373}
   description: 
@@ -187,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   started: 0
   state: 0
+  isTrigger: 0
   guid: 0d1aa952675d6d44fb2226ec2a51c6be
   position: {x: 573, y: 386.68}
   description: 
