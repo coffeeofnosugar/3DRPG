@@ -30,25 +30,44 @@ namespace Player.PlayerController
                 return state;
             
             state = JudgeKey();
-            Debug.Log(state);
-            if (state != State.Running)
+            
+            if (children[0])
+            {
+                if (index == 0)
+                {
+                    children[0].state = State.Success;
+                    children[0].FixedUpdate();
+                    index = 1;
+                }
+            }
+            else
+            {
+                index = 1;
+            }
+            
+
+            if (children[1])
+            {
+                if (index == 1)
+                {
+                    children[1].state = state;
+                    state = children[1].FixedUpdate();
+                    if (state != State.Running)
+                    {
+                        index = 2;
+                    }
+                }
+            }
+            else
             {
                 index = 2;
             }
-            if (children[0] && index == 0)
-            {
-                children[0].state = State.Success;
-                children[0].FixedUpdate();
-                index++;
-            }
-
-            if (children[1] && index == 1)
-            {
-                children[1].state = state;
-                state = children[1].FixedUpdate();
-            }
             
-            if (children[2] && index == 2)
+            // if (state != State.Running)
+            // {
+            //     index = 2;
+            // }
+            if (children[2] && index == 2 && state != State.Running)
             {
                 children[2].state = State.Success;
                 children[2].FixedUpdate();
