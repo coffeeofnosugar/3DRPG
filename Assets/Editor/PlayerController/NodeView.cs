@@ -14,7 +14,6 @@ namespace Player.PlayerController
         public Port[] inputs;
         public Port[] outputs;
 
-        private float time;
         private Timer runningTimer;
         public NodeView(Node node) : base("Assets/Editor/PlayerController/NodeView.uxml")
         {
@@ -33,25 +32,17 @@ namespace Player.PlayerController
 
             node.AddRunningClass += () =>
             {
-                time = Time.time;
                 AddToClassList("running");
             };
             node.RemoveRunningClass += () =>
             {
-                if (Time.time - time < 0.01f)
-                {
-                    runningTimer = new Timer(300);
-                    runningTimer.Elapsed += (sender, e) =>
-                    {
-                        RemoveFromClassList("running");
-                    };
-                    runningTimer.AutoReset = false;
-                    runningTimer.Start();
-                }
-                else
+                runningTimer = new Timer(300);
+                runningTimer.Elapsed += (sender, e) =>
                 {
                     RemoveFromClassList("running");
-                }
+                };
+                runningTimer.AutoReset = false;
+                runningTimer.Start();
             };
         }
 
