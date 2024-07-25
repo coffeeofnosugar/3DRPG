@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ namespace Player.PlayerController
         public CharacterStats _characterStats;
         public Blackboard blackboard;
         public PlayerInputController _playerInputController;
+
+        public Action AddRunningClass;
+        public Action RemoveRunningClass;
 
         public State FixedUpdate()
         {
@@ -43,8 +47,19 @@ namespace Player.PlayerController
             return Instantiate(this);
         }
 
-        protected abstract void EnterState();
-        protected abstract void ExitState();
+        protected virtual void EnterState()
+        {
+            if (state is State.Running or State.Success)
+            {
+                Debug.Log(name);
+                AddRunningClass?.Invoke();
+            }
+        }
+
+        protected virtual void ExitState()
+        {
+            RemoveRunningClass?.Invoke();
+        }
         protected abstract State FixeUpdateState();
     }
 }

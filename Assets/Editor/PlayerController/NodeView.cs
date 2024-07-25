@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
+using System.Timers;
 
 namespace Player.PlayerController
 {
@@ -13,6 +14,8 @@ namespace Player.PlayerController
         public Port[] inputs;
         public Port[] outputs;
 
+        private float time;
+        private Timer runningTimer;
         public NodeView(Node node) : base("Assets/Editor/PlayerController/NodeView.uxml")
         {
             this.node = node;
@@ -27,6 +30,29 @@ namespace Player.PlayerController
             SetupClasses();
 
             SetupDescription();
+
+            node.AddRunningClass += () =>
+            {
+                time = Time.time;
+                AddToClassList("running");
+            };
+            node.RemoveRunningClass += () =>
+            {
+                if (Time.time - time < 0.01f)
+                {
+                    runningTimer = new Timer(300);
+                    runningTimer.Elapsed += (sender, e) =>
+                    {
+                        RemoveFromClassList("running");
+                    };
+                    runningTimer.AutoReset = false;
+                    runningTimer.Start();
+                }
+                else
+                {
+                    RemoveFromClassList("running");
+                }
+            };
         }
 
         private void SetupDescription()
@@ -183,25 +209,26 @@ namespace Player.PlayerController
             return left.position.y < right.position.y ? -1 : 1;
         }
         
-        public void UpdateState()
-        {
-            RemoveFromClassList("running");
-            if (Application.isPlaying)
-            {
-                switch (node.state)
-                {
-                    case Node.State.Running:
-                        if (node.started)
-                            AddToClassList("running");
-                        break;
-                    case Node.State.Failure:
-                        break;
-                    case Node.State.Success:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-        }
+        // 舍弃该方法，直接在进入离开节点使改变标签
+        // public void UpdateState()
+        // {
+        //     RemoveFromClassList("running");
+        //     if (Application.isPlaying)
+        //     {
+        //         switch (node.state)
+        //         {
+        //             case Node.State.Running:
+        //                 if (node.started)
+        //                     AddToClassList("running");
+        //                 break;
+        //             case Node.State.Failure:
+        //                 break;
+        //             case Node.State.Success:
+        //                 break;
+        //             default:
+        //                 throw new ArgumentOutOfRangeException();
+        //         }
+        //     }
+        // }
     }
 }

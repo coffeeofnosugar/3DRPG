@@ -13,12 +13,12 @@ namespace Player.PlayerController
         public bool boolValue;
         protected override void EnterState()
         {
-            
+            base.EnterState();
         }
 
         protected override void ExitState()
         {
-            
+            base.ExitState();
         }
 
         protected override State FixeUpdateState()
@@ -30,15 +30,14 @@ namespace Player.PlayerController
                 case AnimatorControllerParameterType.Int:
                     break;
                 case AnimatorControllerParameterType.Bool:
-                    Debug.Log("¸ü¸Ä¶¯»­");
                     _characterStats.animator.SetBool(animatorParameter, boolValue);
-                    break;
+                    return State.Success;
                 case AnimatorControllerParameterType.Trigger:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            return state;
+            return State.Failure;
         }
     }
 }

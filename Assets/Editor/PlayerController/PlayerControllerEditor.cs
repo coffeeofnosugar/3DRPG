@@ -131,9 +131,10 @@ namespace Player.PlayerController
             inspectorView.UpdateSelection(nodeView);
         }
 
-        private void OnInspectorUpdate()
-        {
-            controllerView?.UpdateNodeStates();
-        }
+        // 舍弃该方法，直接在进入离开节点使改变标签
+        // private void OnInspectorUpdate()
+        // {
+        //     controllerView?.UpdateNodeStates();
+        // }
     }
 }

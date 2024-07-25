@@ -17,11 +17,12 @@ namespace Player.PlayerController
         {
             index = 0;
             state = JudgeKey();
+            base.EnterState();
         }
 
         protected override void ExitState()
         {
-            
+            base.ExitState();
         }
 
         protected override State FixeUpdateState()

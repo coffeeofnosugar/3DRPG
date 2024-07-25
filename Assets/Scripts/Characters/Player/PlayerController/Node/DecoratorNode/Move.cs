@@ -9,17 +9,19 @@ namespace Player.PlayerController
         [SerializeField] private float currentSpeed;
         protected override void EnterState()
         {
-            
+            base.EnterState();
         }
 
         protected override void ExitState()
         {
-            
+            base.ExitState();
         }
 
         protected override State FixeUpdateState()
         {
             MovePlayer();
+            if (child)
+                child.state = state;
             return state;
         }
 

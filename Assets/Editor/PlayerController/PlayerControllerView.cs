@@ -198,14 +198,15 @@ namespace Player.PlayerController
             AddElement(nodeView);
         }
 
-        public void UpdateNodeStates()
-        {
-            // 这里的nodes是内置属性，指的是在view中所有的节点
-            nodes.ForEach(n =>
-            {
-                NodeView nodeView = n as NodeView;
-                nodeView.UpdateState();
-            });
-        }
+        // 舍弃该方法，直接在进入离开节点使改变标签
+        // public void UpdateNodeStates()
+        // {
+        //     // 这里的nodes是内置属性，指的是在view中所有的节点
+        //     nodes.ForEach(n =>
+        //     {
+        //         NodeView nodeView = n as NodeView;
+        //         nodeView.UpdateState();
+        //     });
+        // }
     }
 }

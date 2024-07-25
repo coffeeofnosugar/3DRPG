@@ -14,12 +14,12 @@ namespace Player.PlayerController
         private bool _bool;
         protected override void EnterState()
         {
-            
+            base.EnterState();
         }
 
         protected override void ExitState()
         {
-            
+            base.ExitState();
         }
 
         protected override State FixeUpdateState()
@@ -39,10 +39,12 @@ namespace Player.PlayerController
 
             if (_bool && children[0])
             {
+                children[0].state = state;
                 children[0].FixedUpdate();
             }
             else if (!_bool && children[1])
             {
+                children[1].state = state;
                 children[1].FixedUpdate();
             }
             return state;
