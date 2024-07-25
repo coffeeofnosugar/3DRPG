@@ -95,7 +95,7 @@ namespace Player.PlayerController
             if (rootNode)
             {
                 Undo.RecordObject(rootNode,  "Player Controller (AddChild)");
-                rootNode.child = child;
+                rootNode.children.Add(child);
                 EditorUtility.SetDirty(rootNode);
             }
             
@@ -130,7 +130,7 @@ namespace Player.PlayerController
             if (rootNode)
             {
                 Undo.RecordObject(rootNode,  "Player Controller (RemoveChild)");
-                rootNode.child = null;
+                rootNode.children.Remove(child);
                 EditorUtility.SetDirty(rootNode);
             }
             
@@ -164,9 +164,9 @@ namespace Player.PlayerController
             List<Node> children = new List<Node>();
 
             Root rootNode = parent as Root;
-            if (rootNode && rootNode.child != null)
+            if (rootNode && rootNode.children.Count != 0)
             {
-                children.Add(rootNode.child);
+                children = rootNode.children;
             }
             CompositeNode composite = parent as CompositeNode;
             if (composite)

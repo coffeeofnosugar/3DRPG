@@ -61,13 +61,26 @@ namespace Player.PlayerController
             {
                 var children = playerController.GetChildren(n);
                 NodeView parentView = FindNodeView(n);
-                for (int i = 0; i < children.Count; i++)
+                
+                if (parentView.node is Root root)
                 {
-                    if (children[i] != null)
+                    children.ForEach(c =>
                     {
-                        NodeView childView = FindNodeView(children[i]);
-                        Edge edge = parentView.outputs[i].ConnectTo(childView.inputs[0]);
+                        NodeView childView = FindNodeView(c);
+                        Edge edge = parentView.outputs[0].ConnectTo(childView.inputs[0]);
                         AddElement(edge);
+                    });
+                }
+                else
+                {
+                    for (int i = 0; i < children.Count; i++)
+                    {
+                        if (children[i] != null)
+                        {
+                            NodeView childView = FindNodeView(children[i]);
+                            Edge edge = parentView.outputs[i].ConnectTo(childView.inputs[0]);
+                            AddElement(edge);
+                        }
                     }
                 }
             });
@@ -124,6 +137,16 @@ namespace Player.PlayerController
                     NodeView parentView = edge.output.node as NodeView;
                     NodeView childView = edge.input.node as NodeView;
                     controller.AddChild(parentView.node, childView.node, edge.output.tabIndex);
+                });
+            }
+            
+            // 移动节点元素时，排序其子节点
+            if (graphViewChange.movedElements != null)
+            {
+                nodes.ForEach(n =>
+                {
+                    NodeView view = n as NodeView;
+                    view.SortChildren();
                 });
             }
 

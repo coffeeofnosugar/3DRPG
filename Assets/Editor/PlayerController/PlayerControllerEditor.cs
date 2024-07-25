@@ -79,7 +79,7 @@ namespace Player.PlayerController
                     break;
 
                 case PlayModeStateChange.EnteredPlayMode:
-                    // 在进入playmode时，系统会自动刷新一遍BehaviourTreeEditor窗口，所以不用调用
+                    // 在进入PlayMode时，系统会自动刷新一遍BehaviourTreeEditor窗口，所以不用调用
                     //OnSelectionChange();
                     break;
                 case PlayModeStateChange.ExitingPlayMode:

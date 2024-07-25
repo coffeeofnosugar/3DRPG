@@ -113,7 +113,7 @@ namespace Player.PlayerController
         {
             if (node is Root)
             {
-                outputs = new Port[] { InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool)) };
+                outputs = new Port[] { InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool)) };
                 outputs[0].portName = "Output";
             }
             else if (node is CompositeNode)
@@ -168,7 +168,21 @@ namespace Player.PlayerController
             base.OnSelected();
             OnNodeSelected?.Invoke(this);
         }
+        
+        public void SortChildren()
+        {
+            Root composite = node as Root;
+            if (composite != null)
+            {
+                composite.children.Sort(SortByHorizontalPosition);
+            }
+        }
 
+        private int SortByHorizontalPosition(Node left, Node right)
+        {
+            return left.position.y < right.position.y ? -1 : 1;
+        }
+        
         public void UpdateState()
         {
             RemoveFromClassList("running");
