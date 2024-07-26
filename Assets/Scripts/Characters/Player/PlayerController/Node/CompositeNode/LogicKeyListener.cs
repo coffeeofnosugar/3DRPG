@@ -64,10 +64,6 @@ namespace Player.PlayerController
                 index = 2;
             }
             
-            // if (state != State.Running)
-            // {
-            //     index = 2;
-            // }
             if (children[2] && index == 2 && state != State.Running)
             {
                 children[2].state = State.Success;

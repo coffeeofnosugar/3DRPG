@@ -51,14 +51,16 @@ namespace Player.PlayerController
         {
             if (state is State.Running or State.Success)
             {
-                Debug.Log(name);
                 AddRunningClass?.Invoke();
             }
         }
 
         protected virtual void ExitState()
         {
-            RemoveRunningClass?.Invoke();
+            if (state is State.Failure or State.Success)
+            {
+                RemoveRunningClass?.Invoke();
+            }
         }
         protected abstract State FixeUpdateState();
     }
