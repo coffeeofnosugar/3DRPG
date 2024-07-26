@@ -777,9 +777,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 873067112}
-  xOffset: 0.3
-  yOffset: 0.6
-  zOffset: 1.9
+  xOffset: 0
+  yOffset: 0.73
+  zOffset: 2.83
   speed: 1
   linearSpeed: 1
   _xMouse: 0

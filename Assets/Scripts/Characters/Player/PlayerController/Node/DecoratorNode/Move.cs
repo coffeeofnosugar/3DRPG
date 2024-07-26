@@ -6,7 +6,9 @@ namespace Player.PlayerController
 {
     public class Move : DecoratorNode
     {
+        [Header("节点参数")]
         [SerializeField] private float currentSpeed;
+        [SerializeField] private float coefficient = 20f;
         protected override void EnterState()
         {
             base.EnterState();
@@ -30,7 +32,7 @@ namespace Player.PlayerController
 
         private void MovePlayer()
         {
-            Debug.Log(_characterStats.PlayerInputController.isRun);
+            // Debug.Log(_characterStats.PlayerInputController.isRun);
             currentSpeed = _characterStats.PlayerInputController.isRun ? _characterStats.RunSpeed : _characterStats.WalkSpeed;
             
             // 获取移动方向向量——相机在水平上的投影
@@ -41,7 +43,7 @@ namespace Player.PlayerController
             if (_characterStats.PlayerInputController.currentMovementInput.y != 0 || _characterStats.PlayerInputController.currentMovementInput.x != 0)
                 _characterStats.transform.eulerAngles = Quaternion.LookRotation(moveDirection).eulerAngles;
             
-            _characterStats.rigidbody.AddForce(moveDirection.normalized * (currentSpeed * 10f), ForceMode.Force);
+            _characterStats.rigidbody.AddForce(moveDirection.normalized * (currentSpeed * coefficient), ForceMode.Force);
         }
     }
 }

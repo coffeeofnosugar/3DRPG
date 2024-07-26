@@ -24,6 +24,7 @@ namespace Player.PlayerController
         {
             for (int i = current; i < children.Count; i++)
             {
+                // Debug.Log(current);
                 current = i;
                 var child = children[current];
 

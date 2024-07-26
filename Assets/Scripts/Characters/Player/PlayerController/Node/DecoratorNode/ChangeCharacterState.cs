@@ -33,6 +33,7 @@ namespace Player.PlayerController
                     _characterStats.animator.SetBool(animatorParameter, boolValue);
                     break;
                 case AnimatorControllerParameterType.Trigger:
+                    _characterStats.animator.SetTrigger(animatorParameter);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
