@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Player.PlayerController
 {
-    public class ChangeCharacterState : DecoratorNode
+    public class ChangeCharacterState : ActionNode
     {
         [Header("节点参数")]
         public string animatorParameter;

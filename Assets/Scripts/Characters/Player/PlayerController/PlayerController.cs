@@ -104,12 +104,12 @@ namespace Player.PlayerController
                 EditorUtility.SetDirty(compositeNode);
             }
             
-            DecoratorNode decoratorNode = parent as DecoratorNode;
-            if (decoratorNode)
+            ActionNode actionNode = parent as ActionNode;
+            if (actionNode)
             {
-                Undo.RecordObject(decoratorNode, "Player Controller (AddChild)");
-                decoratorNode.child = child;
-                EditorUtility.SetDirty(decoratorNode);
+                Undo.RecordObject(actionNode, "Player Controller (AddChild)");
+                actionNode.child = child;
+                EditorUtility.SetDirty(actionNode);
             }
             
             WhetherNode whetherNode = parent as WhetherNode;
@@ -139,12 +139,12 @@ namespace Player.PlayerController
                 EditorUtility.SetDirty(compositeNode);
             }
             
-            DecoratorNode decoratorNode = parent as DecoratorNode;
-            if (decoratorNode)
+            ActionNode actionNode = parent as ActionNode;
+            if (actionNode)
             {
-                Undo.RecordObject(decoratorNode, "Player Controller (RemoveChild)");
-                decoratorNode.child = null;
-                EditorUtility.SetDirty(decoratorNode);
+                Undo.RecordObject(actionNode, "Player Controller (RemoveChild)");
+                actionNode.child = null;
+                EditorUtility.SetDirty(actionNode);
             }
             
             WhetherNode whetherNode = parent as WhetherNode;
@@ -171,10 +171,10 @@ namespace Player.PlayerController
                 children = new List<Node>(composite.children);
             }
             
-            DecoratorNode decorator = parent as DecoratorNode;
-            if (decorator && decorator.child != null)
+            ActionNode action = parent as ActionNode;
+            if (action && action.child != null)
             {
-                children.Add(decorator.child);
+                children.Add(action.child);
             }
             
             WhetherNode whetherNode = parent as WhetherNode;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player.PlayerController
 {
-    public class Jump : DecoratorNode
+    public class Jump : ActionNode
     {
         [Header("节点参数")]
         public float jumpForce = 14;

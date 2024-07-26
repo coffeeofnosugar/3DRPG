@@ -85,7 +85,7 @@ namespace Player.PlayerController
                     descriptionLabel.text = $"Key:{logicKeyListenerNode.checkKeyAction}";
                 }
             }
-            else if (node is DecoratorNode)
+            else if (node is ActionNode)
             {
                 if (node is ChangeCharacterState changeCharacterStateNode)
                 {
@@ -111,7 +111,7 @@ namespace Player.PlayerController
                 AddToClassList("root");
             else if (node is CompositeNode)
                 AddToClassList("composite");
-            else if (node is DecoratorNode)
+            else if (node is ActionNode)
                 AddToClassList("decorator");
             else if (node is WhetherNode)
                 AddToClassList("whether");
@@ -129,7 +129,7 @@ namespace Player.PlayerController
                 inputs = new Port[] { InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool)) };
                 inputs[0].portName = "Input";
             }
-            else if (node is DecoratorNode)
+            else if (node is ActionNode)
             {
                 inputs = new Port[] { InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool)) };
                 inputs[0].portName = "Input";
@@ -169,7 +169,7 @@ namespace Player.PlayerController
                 outputs[1].portName = "OnUpdate";
                 outputs[2].portName = "OnEnd";
             }
-            else if (node is DecoratorNode)
+            else if (node is ActionNode)
             {
                 outputs = new Port[] { InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool)) };
                 outputs[0].portName = "Output";

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player.PlayerController
 {
-    public class Log : DecoratorNode
+    public class Log : ActionNode
     {
         [Header("节点参数")]
         [SerializeField] public string message = "null";

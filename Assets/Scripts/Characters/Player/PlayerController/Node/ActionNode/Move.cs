@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player.PlayerController
 {
-    public class Move : DecoratorNode
+    public class Move : ActionNode
     {
         [Header("节点参数")]
         [SerializeField] private float currentSpeed;

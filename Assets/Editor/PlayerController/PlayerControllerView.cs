@@ -169,7 +169,7 @@ namespace Player.PlayerController
                 }
             }
             {
-                var types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
+                var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
                 foreach (var type in types)
                 {
                     evt.menu.AppendAction($"[DecoratorNode]/{type.Name}", (a) => CreateNode(type, mousePosition));
