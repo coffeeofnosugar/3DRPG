@@ -7,8 +7,9 @@ public abstract class CharacterStats : MonoBehaviour
     [SerializeField] private CharacterData_SO templateData;
     private CharacterData_SO characterData;
     public Blackboard blackboard;
-
+    
     [HideInInspector] public Animator animator;
+    [HideInInspector] public new Transform transform;
     
     // ³öÉúµã
     [HideInInspector] public Vector3 originPosition;
@@ -46,6 +47,8 @@ public abstract class CharacterStats : MonoBehaviour
         
         animator = GetComponent<Animator>();
 
+        transform = ((Component)this).transform;
+        
         originPosition = transform.position;
         originRotation = transform.rotation;
 

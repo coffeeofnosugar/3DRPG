@@ -23,15 +23,15 @@ namespace Player.PlayerController
             return controllerState;
         }
 
-        public void Bind(CharacterStats characterStats, PlayerInputController playerInputController)
+        public void Bind(PlayerStats playerStats, PlayerInputController playerInputController)
         {
-            this.characterStats = characterStats;
+            this.characterStats = playerStats;
             this.playerInputController = playerInputController;
-            characterStats.blackboard = blackboard;
+            playerStats.blackboard = blackboard;
             Traverse(rootNode, n =>
             {
-                n.playerStats = characterStats as PlayerStats;
-                n._playerInputController = playerInputController;
+                n.playerStats = playerStats;
+                n.playerInputController = playerInputController;
                 n.blackboard = blackboard;
             });
         }

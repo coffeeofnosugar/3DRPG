@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyStats : CharacterStats
+public class MonsterStats : CharacterStats
 {
     [HideInInspector] public NavMeshAgent agent;
 

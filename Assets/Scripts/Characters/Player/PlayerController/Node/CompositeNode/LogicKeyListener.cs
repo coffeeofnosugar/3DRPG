@@ -83,16 +83,16 @@ namespace Player.PlayerController
             switch (checkKeyAction)
             {
                 case KeyAction.Move:
-                    var movement = _playerInputController.currentMovementInput;
+                    var movement = playerInputController.currentMovementInput;
                     if (movement.x != 0 || movement.y != 0)
                         return State.Running;
                     break;
                 case KeyAction.Run:
-                    if (_playerInputController.isRun)
+                    if (playerInputController.isRun)
                         return State.Running;
                     break;
                 case KeyAction.Jump:
-                    if (_playerInputController.isJump)
+                    if (playerInputController.isJump)
                         return State.Running;
                     break;
                 case KeyAction.Attack:

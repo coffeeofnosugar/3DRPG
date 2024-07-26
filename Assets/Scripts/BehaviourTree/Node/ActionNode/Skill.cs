@@ -13,7 +13,7 @@ namespace BehaviourTree
         {
             if (blackboard.target)
             {
-                if (characterStats.CouldAttack(animatorParameter))
+                if (monsterStats.CouldAttack(animatorParameter))
                 {
                     _flag = true;
                     return;
@@ -21,13 +21,13 @@ namespace BehaviourTree
 
                 blackboard.lastAttackTime[animatorParameter] = 0;
                 _flag = false;
-                characterStats.animator.SetBool("Run", false);
+                monsterStats.animator.SetBool("Run", false);
                 // 停止移动
-                characterStats.agent.destination = characterStats.transform.position;
+                monsterStats.agent.destination = monsterStats.transform.position;
                 // 朝向攻击目标
-                characterStats.transform.LookAt(blackboard.target.transform);
+                monsterStats.transform.LookAt(blackboard.target.transform);
                 // 播放攻击动画
-                characterStats.animator.SetTrigger(animatorParameter);
+                monsterStats.animator.SetTrigger(animatorParameter);
             }
         }
 
@@ -42,11 +42,11 @@ namespace BehaviourTree
             {
                 return State.Success;
             }
-            var info = characterStats.animator.GetCurrentAnimatorStateInfo(1);
-            string animatorNmae = characterStats.animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
+            var info = monsterStats.animator.GetCurrentAnimatorStateInfo(1);
+            string animatorNmae = monsterStats.animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
 
-            characterStats.agent.destination = characterStats.transform.position;
-            characterStats.transform.LookAt(blackboard.target.transform);       // 怪物会莫名的旋转，故添加这行代码
+            monsterStats.agent.destination = monsterStats.transform.position;
+            monsterStats.transform.LookAt(blackboard.target.transform);       // 怪物会莫名的旋转，故添加这行代码
             if (animatorNmae != animatorParameter)
             {
                 return State.Running;

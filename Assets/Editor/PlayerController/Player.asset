@@ -17,7 +17,7 @@ MonoBehaviour:
   guid: c948d2d7edb3f3647ba5679bdba763dc
   position: {x: 761.00006, y: 151.00002}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   guid: 4ed9b54c768dbc24f9e00ac23d1e0918
   position: {x: 761.00006, y: 246}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
   guid: c8f1dc02b2383fc40abc3df98d3cac78
   position: {x: 371, y: 12}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   guid: e708256b210eedb4697be8ce4783afad
   position: {x: 574.85004, y: 57.00004}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -136,7 +136,7 @@ MonoBehaviour:
   guid: d0c4439deaf1406418b76c9b8f6152d0
   position: {x: 761.00006, y: 364.00003}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
   guid: 2a348c067e87ff54f932e597b251fad5
   position: {x: 558.0501, y: 281}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   guid: dea3bb7c902178a42b752a24916b4995
   position: {x: 111, y: 186}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -245,9 +245,9 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   children:
-  - {fileID: 5775860665699242110}
+  - {fileID: 0}
   - {fileID: 7499189815392884148}
-  - {fileID: 1449589984089367478}
+  - {fileID: 0}
   checkKeyAction: 0
 --- !u!114 &1449589984089367478
 MonoBehaviour:
@@ -266,7 +266,7 @@ MonoBehaviour:
   guid: 52ade6be76140e9478276f19342eb493
   position: {x: 335, y: 304}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -296,7 +296,7 @@ MonoBehaviour:
   guid: 8eb691d0fd2879e4e8d5746fa9051343
   position: {x: 371, y: -80}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -326,7 +326,7 @@ MonoBehaviour:
   guid: a4bab62c3aff4f04ca5f4540d18dd020
   position: {x: 741.6501, y: 57}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -354,9 +354,9 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 56fde27ce1bd65042841b7fa9e7279b9
-  position: {x: -5, y: 165}
+  position: {x: -32.23999, y: 186}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -366,7 +366,6 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   children:
-  - {fileID: 6723515058692008792}
   - {fileID: 1005773285273735655}
 --- !u!114 &5775860665699242110
 MonoBehaviour:
@@ -385,7 +384,7 @@ MonoBehaviour:
   guid: 23b2c89ec1071f045b54661a24da4892
   position: {x: 335, y: 116}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -415,7 +414,7 @@ MonoBehaviour:
   guid: 08dedf4d3a6400f48b450c5f5da0100a
   position: {x: 126, y: -2}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -446,7 +445,7 @@ MonoBehaviour:
   guid: 3267432b575bb6544bfb98f9c11ad447
   position: {x: 335, y: 211}
   description: 
-  _characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -455,6 +454,6 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   _playerInputController: {fileID: 0}
-  child: {fileID: -4302380425081455519}
+  child: {fileID: 0}
   currentSpeed: 0
   coefficient: 20

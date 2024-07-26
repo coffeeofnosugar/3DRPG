@@ -9,12 +9,12 @@ namespace BehaviourTree
     /// <summary>
     /// 行为树执行器
     /// </summary>
-    [RequireComponent(typeof(EnemyStats))]
+    [RequireComponent(typeof(MonsterStats))]
     public class BehaviourTreeRunner : MonoBehaviour
     {
         public BehaviourTree tree;
 
-        private CharacterStats characterStats;
+        private MonsterStats monsterStats;
 
         private void Awake()
         {
@@ -23,13 +23,13 @@ namespace BehaviourTree
                 Debug.LogError($"{transform.name} 未配置行为树");
                 return;
             }
-            characterStats = GetComponent<CharacterStats>();
+            monsterStats = GetComponent<MonsterStats>();
         }
 
         private void Start()
         {
             tree = tree.Clone();
-            tree.Bind(characterStats);
+            tree.Bind(monsterStats);
         }
 
         private void Update()

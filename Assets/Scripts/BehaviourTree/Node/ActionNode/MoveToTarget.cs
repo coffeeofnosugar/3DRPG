@@ -12,8 +12,8 @@ namespace BehaviourTree
         {
             if (blackboard.target)
             {
-                characterStats.animator.SetBool("Run", true);
-                characterStats.agent.speed = characterStats.RunSpeed;
+                monsterStats.animator.SetBool("Run", true);
+                monsterStats.agent.speed = monsterStats.RunSpeed;
             }
         }
 
@@ -21,7 +21,7 @@ namespace BehaviourTree
         {
             if (_flag)
             {
-                characterStats.animator.SetBool("Run", false);
+                monsterStats.animator.SetBool("Run", false);
             }
         }
 
@@ -30,13 +30,13 @@ namespace BehaviourTree
             _flag = true;
             if (blackboard.target)
             {
-                characterStats.agent.destination = blackboard.target.transform.position;
+                monsterStats.agent.destination = blackboard.target.transform.position;
                 // 与终点的距离
-                if (characterStats.agent.remainingDistance < tolerance)
+                if (monsterStats.agent.remainingDistance < tolerance)
                 {
                     return State.Success;
                 }
-                if (characterStats.CouldAttack())
+                if (monsterStats.CouldAttack())
                 {
                     _flag = false;
                     return State.Success;
@@ -44,25 +44,25 @@ namespace BehaviourTree
             }
             else
             {
-                characterStats.agent.destination = characterStats.transform.position;
+                monsterStats.agent.destination = monsterStats.transform.position;
                 return State.Failure;
             }
 
             // 正在计算路径
-            if (characterStats.agent.pathPending)
+            if (monsterStats.agent.pathPending)
             {
                 return State.Running;
             }
 
             // 与终点的距离
-            if (characterStats.agent.remainingDistance < tolerance)
+            if (monsterStats.agent.remainingDistance < tolerance)
             {
                 _flag = true;
                 return State.Success;
             }
 
             // 路径无效
-            if (characterStats.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
+            if (monsterStats.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
             {
                 return State.Failure;
             }

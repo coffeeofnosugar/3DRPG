@@ -20,7 +20,7 @@ namespace Player.PlayerController
         
         public PlayerStats playerStats;
         public Blackboard blackboard;
-        public PlayerInputController _playerInputController;
+        public PlayerInputController playerInputController;
 
         public Action AddRunningClass;
         public Action RemoveRunningClass;

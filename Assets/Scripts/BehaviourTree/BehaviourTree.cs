@@ -68,13 +68,13 @@ namespace BehaviourTree
         /// <summary>
         /// 绑定黑板
         /// </summary>
-        public void Bind(CharacterStats character)
+        public void Bind(MonsterStats character)
         {
             this.characterStats = character;
             character.blackboard = blackboard;
             Traverse(rootNode, (n) =>
             {
-                n.characterStats = character as EnemyStats;
+                n.monsterStats = character;
                 n.blackboard = blackboard;
             });
         }

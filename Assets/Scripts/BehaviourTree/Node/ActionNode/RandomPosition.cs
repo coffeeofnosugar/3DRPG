@@ -25,13 +25,13 @@ namespace BehaviourTree
                 return State.Failure;
             }
 
-            float randomX = Random.Range(-characterStats.PatrolRange, characterStats.PatrolRange);
-            float randomZ = Random.Range(-characterStats.PatrolRange, characterStats.PatrolRange);
+            float randomX = Random.Range(-monsterStats.PatrolRange, monsterStats.PatrolRange);
+            float randomZ = Random.Range(-monsterStats.PatrolRange, monsterStats.PatrolRange);
 
-            Vector3 randomPoint = new Vector3(characterStats.originPosition.x + randomX, characterStats.transform.position.y, characterStats.originPosition.z + randomZ);
+            Vector3 randomPoint = new Vector3(monsterStats.originPosition.x + randomX, monsterStats.transform.position.y, monsterStats.originPosition.z + randomZ);
 
             // NavMesh.SamplePosition该函数是防止取的点没有被mesh覆盖，然后取其最靠近的点
-            blackboard.moveToPosition = NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1, 1) ? hit.position : characterStats.transform.position;
+            blackboard.moveToPosition = NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1, 1) ? hit.position : monsterStats.transform.position;
             return State.Success;
         }
     }

@@ -20,7 +20,7 @@ namespace BehaviourTree
 
         protected override State OnUpdate()
         {
-            if (blackboard.target && characterStats.agent.remainingDistance <= distance)
+            if (blackboard.target && monsterStats.agent.remainingDistance <= distance)
             {
                 return State.Failure;
             }

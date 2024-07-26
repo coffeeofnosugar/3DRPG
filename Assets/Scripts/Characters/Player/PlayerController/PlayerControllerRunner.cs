@@ -10,7 +10,7 @@ namespace Player.PlayerController
     {
         public PlayerController controller;
 
-        private CharacterStats _characterStats;
+        private PlayerStats playerStats;
         private PlayerInputController _playerInputController;
 
         private void Awake()
@@ -20,14 +20,14 @@ namespace Player.PlayerController
             //     Debug.LogError($"{transform.name} Œ¥≈‰÷√øÿ÷∆∆˜");
             //     return;
             // }
-            _characterStats = GetComponent<CharacterStats>();
+            playerStats = GetComponent<PlayerStats>();
             _playerInputController = GetComponent<PlayerInputController>();
         }
 
         private void Start()
         {
             controller = controller.Clone();
-            controller.Bind(_characterStats, _playerInputController);
+            controller.Bind(playerStats, _playerInputController);
         }
         
         private void FixedUpdate()
