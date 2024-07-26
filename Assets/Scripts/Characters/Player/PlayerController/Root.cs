@@ -50,7 +50,7 @@ namespace Player.PlayerController
             for (int i = 0; i < children.Count; i++)
             {
                 if (node.children[i])
-                    node.children[i] = children[i]?.Clone();
+                    node.children[i] = children[i].Clone();
             }
             return node;
         }

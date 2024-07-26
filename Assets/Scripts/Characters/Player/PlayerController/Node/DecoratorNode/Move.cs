@@ -21,7 +21,10 @@ namespace Player.PlayerController
         {
             MovePlayer();
             if (child)
+            {
                 child.state = state;
+                child.FixedUpdate();
+            }
             return state;
         }
 

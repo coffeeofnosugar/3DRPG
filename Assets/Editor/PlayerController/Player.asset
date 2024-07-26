@@ -15,7 +15,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 2a348c067e87ff54f932e597b251fad5
-  position: {x: 225.4321, y: 18.773956}
+  position: {x: 608.3501, y: 220.70003}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -30,71 +30,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  checkKeyAction: 2
---- !u!114 &-1909928618506167844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1a9a2dc101012469c8a27d92c52f80, type: 3}
-  m_Name: CheckValue
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: b170cc0df73ccd64692e38a7d29d7260
-  position: {x: 447.43213, y: 332.77393}
-  description: 
-  _characterStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  children:
-  - {fileID: 1449589984089367478}
-  - {fileID: 0}
-  key: 0
-  vector2Value: {x: 0, y: 0}
-  boolValue: 0
---- !u!114 &-1142751739071557396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1a9a2dc101012469c8a27d92c52f80, type: 3}
-  m_Name: CheckValue
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 4dee2c6cb931eb446988773a721f196c
-  position: {x: 445.43207, y: 198.77393}
-  description: 
-  _characterStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  children:
-  - {fileID: 0}
-  - {fileID: 7499189815392884148}
-  key: 0
-  vector2Value: {x: 0, y: 0}
-  boolValue: 0
+  checkKeyAction: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,13 +48,9 @@ MonoBehaviour:
   nodes:
   - {fileID: 4625316897240000220}
   - {fileID: 1005773285273735655}
-  - {fileID: 6028792735448244582}
   - {fileID: 5775860665699242110}
-  - {fileID: -1909928618506167844}
   - {fileID: 1449589984089367478}
   - {fileID: 7499189815392884148}
-  - {fileID: -1142751739071557396}
-  - {fileID: 5612992617095550564}
   - {fileID: -2528420630876811135}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -144,7 +76,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: dea3bb7c902178a42b752a24916b4995
-  position: {x: 181.43207, y: 198.77393}
+  position: {x: 198, y: 339}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -156,9 +88,9 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   children:
-  - {fileID: 6028792735448244582}
-  - {fileID: -1142751739071557396}
-  - {fileID: -1909928618506167844}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   checkKeyAction: 0
 --- !u!114 &1449589984089367478
 MonoBehaviour:
@@ -175,7 +107,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 52ade6be76140e9478276f19342eb493
-  position: {x: 628.43207, y: 332.77393}
+  position: {x: 385, y: 304}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -217,38 +149,7 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   children:
-  - {fileID: 1005773285273735655}
---- !u!114 &5612992617095550564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfdba599e126d7e4f9e520bc8e293692, type: 3}
-  m_Name: LogicKeyListener
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 05bca2a8033f7ab41af5e3836bab5171
-  position: {x: 845.432, y: 222.77399}
-  description: 
-  _characterStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  children:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  checkKeyAction: 1
+  - {fileID: 7499189815392884148}
 --- !u!114 &5775860665699242110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,10 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213883b8fe585c24ab6647438aced409, type: 3}
   m_Name: ChangeCharacterState
   m_EditorClassIdentifier: 
-  started: 0
+  started: 1
   state: 0
   guid: 23b2c89ec1071f045b54661a24da4892
-  position: {x: 646.4321, y: 84.773926}
+  position: {x: 376, y: 22}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -279,38 +180,6 @@ MonoBehaviour:
   animatorParameter: isWalk
   type: 4
   boolValue: 1
---- !u!114 &6028792735448244582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1a9a2dc101012469c8a27d92c52f80, type: 3}
-  m_Name: CheckValue
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 584363fa2c9897046a6457840d56ffa5
-  position: {x: 445.43207, y: 60.773987}
-  description: 
-  _characterStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  children:
-  - {fileID: 0}
-  - {fileID: 5775860665699242110}
-  key: 0
-  vector2Value: {x: 0, y: 0}
-  boolValue: 0
 --- !u!114 &7499189815392884148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +195,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 3267432b575bb6544bfb98f9c11ad447
-  position: {x: 661.4321, y: 222.77399}
+  position: {x: 400, y: 199}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -337,5 +206,5 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   _playerInputController: {fileID: 0}
-  child: {fileID: 0}
+  child: {fileID: -2528420630876811135}
   currentSpeed: 0

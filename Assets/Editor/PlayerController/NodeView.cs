@@ -38,7 +38,10 @@ namespace Player.PlayerController
                 AddToClassList("running");
                 _bool = true;
             };
-            node.RemoveRunningClass += async () =>
+
+            node.RemoveRunningClass += OnNodeRemoveRunningClass;
+
+            async void OnNodeRemoveRunningClass()
             {
                 if (_bool)
                 {
@@ -58,12 +61,12 @@ namespace Player.PlayerController
                         // 如果报错是任务被取消，忽略
                         if (e is not TaskCanceledException)
                         {
-                            Console.WriteLine(e);
+                            Debug.LogError(e);
                             throw;
                         }
                     }
                 }
-            };
+            }
         }
 
         private void SetupDescription()

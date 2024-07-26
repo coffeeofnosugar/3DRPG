@@ -13,7 +13,7 @@ namespace Player.PlayerController
         {
             DecoratorNode node = Instantiate(this);
             if (child)
-                node.child = node.Clone();
+                node.child = child.Clone();
             return node;
         }
     }
