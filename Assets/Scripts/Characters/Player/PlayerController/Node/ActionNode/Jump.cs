@@ -12,18 +12,18 @@ namespace Player.PlayerController
         protected override void EnterState()
         {
             base.EnterState();
-            _characterStats.rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerStats.rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
         protected override State FixeUpdateState()
         {
-            Ray _ray = new Ray(_characterStats.transform.position, Vector3.down);
+            Ray _ray = new Ray(playerStats.transform.position, Vector3.down);
             if (Physics.Raycast(_ray, out RaycastHit _hit, landHigh))
             {
-                AnimationClip clip = _characterStats.animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+                AnimationClip clip = playerStats.animator.GetCurrentAnimatorClipInfo(0)[0].clip;
                 if (clip.name.Contains("loop"))
                 {
-                    _characterStats.animator.SetTrigger("isLand");
+                    playerStats.animator.SetTrigger("isLand");
                     state = State.Success;
                 }
             }

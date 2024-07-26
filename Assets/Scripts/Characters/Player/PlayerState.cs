@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
-{
+{/*
     public class IdleState : BaseState<PlayStateMachine.PlayerState>
     {
         private readonly PlayStateMachine _fsm;
-        private readonly CharacterStats _characterStats;
+        private readonly PlayerStats playerStats;
         public IdleState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(key)
         {
             this._fsm = fsm;
-            _characterStats = fsm.characterStats;
+            playerStats = fsm.characterStats as PlayerStats;
         }
 
         public override void EnterState()
         {
             // _characterStats.animator.SetLayerWeight(1, 0);
-            _characterStats.animator.SetBool("isWalk", false);
-            _characterStats.animator.SetBool("isRun", false);
+            playerStats.animator.SetBool("isWalk", false);
+            playerStats.animator.SetBool("isRun", false);
         }
 
         public override void ExitState()
@@ -33,10 +33,10 @@ namespace Player
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (_characterStats.PlayerInputController.currentMovementInput.x != 0
-                || _characterStats.PlayerInputController.currentMovementInput.y != 0)
+            if (playerStats.PlayerInputController.currentMovementInput.x != 0
+                || playerStats.PlayerInputController.currentMovementInput.y != 0)
             {
-                if (_characterStats.PlayerInputController.isRun)
+                if (playerStats.PlayerInputController.isRun)
                 {
                     return PlayStateMachine.PlayerState.Run;
                 }
@@ -49,16 +49,16 @@ namespace Player
     public class WalkState : BaseState<PlayStateMachine.PlayerState>
     {
         private readonly PlayStateMachine _fsm;
-        private readonly CharacterStats _characterStats;
+        private readonly PlayerStats playerStats;
         public WalkState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(key)
         {
             this._fsm = fsm;
-            _characterStats = fsm.characterStats;
+            playerStats = fsm.characterStats as PlayerStats;
         }
 
         public override void EnterState()
         {
-            _characterStats.animator.SetBool("isWalk", true);
+            playerStats.animator.SetBool("isWalk", true);
         }
 
         public override void ExitState()
@@ -73,10 +73,10 @@ namespace Player
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (_characterStats.PlayerInputController.currentMovementInput.x != 0
-                || _characterStats.PlayerInputController.currentMovementInput.y != 0)
+            if (playerStats.PlayerInputController.currentMovementInput.x != 0
+                || playerStats.PlayerInputController.currentMovementInput.y != 0)
             {
-                if (_characterStats.PlayerInputController.isRun)
+                if (playerStats.PlayerInputController.isRun)
                 {
                     return PlayStateMachine.PlayerState.Run;
                 }
@@ -89,21 +89,21 @@ namespace Player
     public class RunState : BaseState<PlayStateMachine.PlayerState>
     {
         private readonly PlayStateMachine _fsm;
-        private readonly CharacterStats _characterStats;
+        private readonly PlayerStats playerStats;
         public RunState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(key)
         {
             this._fsm = fsm;
-            _characterStats = fsm.characterStats;
+            playerStats = fsm.characterStats as PlayerStats;
         }
 
         public override void EnterState()
         {
-            _characterStats.animator.SetBool("isRun", true);
+            playerStats.animator.SetBool("isRun", true);
         }
 
         public override void ExitState()
         {
-            _characterStats.animator.SetBool("isRun", false);
+            playerStats.animator.SetBool("isRun", false);
         }
 
         public override void UpdateState()
@@ -113,10 +113,10 @@ namespace Player
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (_characterStats.PlayerInputController.currentMovementInput.x != 0
-                || _characterStats.PlayerInputController.currentMovementInput.y != 0)
+            if (playerStats.PlayerInputController.currentMovementInput.x != 0
+                || playerStats.PlayerInputController.currentMovementInput.y != 0)
             {
-                if (_characterStats.PlayerInputController.isRun)
+                if (playerStats.PlayerInputController.isRun)
                 {
                     return PlayStateMachine.PlayerState.Run;
                 }
@@ -124,5 +124,5 @@ namespace Player
             }
             return PlayStateMachine.PlayerState.Idle;
         }
-    }
+    }*/
 }

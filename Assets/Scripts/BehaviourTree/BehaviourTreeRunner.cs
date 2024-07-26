@@ -9,7 +9,7 @@ namespace BehaviourTree
     /// <summary>
     /// ÐÐÎªÊ÷Ö´ÐÐÆ÷
     /// </summary>
-    [RequireComponent(typeof(CharacterStats))]
+    [RequireComponent(typeof(EnemyStats))]
     public class BehaviourTreeRunner : MonoBehaviour
     {
         public BehaviourTree tree;

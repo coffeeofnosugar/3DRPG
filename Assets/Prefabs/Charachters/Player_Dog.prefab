@@ -107,9 +107,8 @@ GameObject:
   - component: {fileID: 3052423744947152380}
   - component: {fileID: 8986168075722031862}
   - component: {fileID: 4923258816765445564}
-  - component: {fileID: 8700100632075834173}
   - component: {fileID: 7368881331535450433}
-  - component: {fileID: 2472296326431882585}
+  - component: {fileID: 8233389849059373384}
   m_Layer: 6
   m_Name: Player_Dog
   m_TagString: Player
@@ -178,19 +177,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8700100632075834173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132879108444336126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1710b3fb4e37b44badc1e0003d325e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCD: 1
 --- !u!136 &7368881331535450433
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -214,7 +200,7 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: 0}
---- !u!114 &2472296326431882585
+--- !u!114 &8233389849059373384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,23 +209,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 132879108444336126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd3f79fb8c1edf48bcfcea8a3866906, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fcc0f40eaf1e954d888e9ae13e4433b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   templateData: {fileID: 11400000, guid: c60e3730ef32eb548977286265366c34, type: 2}
-  characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: ed66465c4ab75e744820bf5c20e1bb2e, type: 2}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
   animator: {fileID: 0}
-  agent: {fileID: 0}
-  coll: {fileID: 0}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0, w: 0}
-  attackTarget: {fileID: 0}
-  lastAttackTime: 0
-  lastSkillTime: 0
-  isCritical: 0
-  getHit: 0
+  _getHit: 0
   isDeath: 0
+  currentHealth: 0
+  responseDistance: 0
+  rigidbody: {fileID: 0}
+  PlayerInputController: {fileID: 0}
+  cameraTransform: {fileID: 0}
 --- !u!1 &232836259364044905
 GameObject:
   m_ObjectHideFlags: 0

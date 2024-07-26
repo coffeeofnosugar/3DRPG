@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.PlayerController
 {
@@ -17,7 +18,7 @@ namespace Player.PlayerController
         public Vector2 position;
         public string description;
         
-        public CharacterStats _characterStats;
+        public PlayerStats playerStats;
         public Blackboard blackboard;
         public PlayerInputController _playerInputController;
 

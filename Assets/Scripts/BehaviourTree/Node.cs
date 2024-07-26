@@ -40,7 +40,7 @@ namespace BehaviourTree
 
         
         [HideInInspector] public Blackboard blackboard;
-        [HideInInspector] public CharacterStats characterStats;
+        [HideInInspector] public EnemyStats characterStats;
         public State Update()
         {
             if (!started)

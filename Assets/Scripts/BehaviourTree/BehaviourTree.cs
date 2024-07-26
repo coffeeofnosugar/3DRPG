@@ -74,7 +74,7 @@ namespace BehaviourTree
             character.blackboard = blackboard;
             Traverse(rootNode, (n) =>
             {
-                n.characterStats = character;
+                n.characterStats = character as EnemyStats;
                 n.blackboard = blackboard;
             });
         }

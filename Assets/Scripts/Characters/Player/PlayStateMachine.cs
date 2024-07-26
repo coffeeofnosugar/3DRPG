@@ -2,11 +2,10 @@ using System;
 using UnityEngine;
 
 namespace Player
-{
+{/*
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(PlayerInputController))]
-    [RequireComponent(typeof(CharacterStats))]
     [RequireComponent(typeof(Animator))]
     public class PlayStateMachine : StateManager<PlayStateMachine.PlayerState>
     {
@@ -46,5 +45,5 @@ namespace Player
             };
             return newState;
         }
-    }
+    }*/
 }

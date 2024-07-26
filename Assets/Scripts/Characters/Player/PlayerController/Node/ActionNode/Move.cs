@@ -33,17 +33,17 @@ namespace Player.PlayerController
         private void MovePlayer()
         {
             // Debug.Log(_characterStats.PlayerInputController.isRun);
-            currentSpeed = _characterStats.PlayerInputController.isRun ? _characterStats.RunSpeed : _characterStats.WalkSpeed;
+            currentSpeed = playerStats.PlayerInputController.isRun ? playerStats.RunSpeed : playerStats.WalkSpeed;
             
             // 获取移动方向向量——相机在水平上的投影
             Vector3 moveDirection =
-                _characterStats.cameraTransform.forward * _characterStats.PlayerInputController.currentMovementInput.y + _characterStats.cameraTransform.right * _characterStats.PlayerInputController.currentMovementInput.x;
+                playerStats.cameraTransform.forward * playerStats.PlayerInputController.currentMovementInput.y + playerStats.cameraTransform.right * playerStats.PlayerInputController.currentMovementInput.x;
             moveDirection.y = 0;
             
-            if (_characterStats.PlayerInputController.currentMovementInput.y != 0 || _characterStats.PlayerInputController.currentMovementInput.x != 0)
-                _characterStats.transform.eulerAngles = Quaternion.LookRotation(moveDirection).eulerAngles;
+            if (playerStats.PlayerInputController.currentMovementInput.y != 0 || playerStats.PlayerInputController.currentMovementInput.x != 0)
+                playerStats.transform.eulerAngles = Quaternion.LookRotation(moveDirection).eulerAngles;
             
-            _characterStats.rigidbody.AddForce(moveDirection.normalized * (currentSpeed * coefficient), ForceMode.Force);
+            playerStats.rigidbody.AddForce(moveDirection.normalized * (currentSpeed * coefficient), ForceMode.Force);
         }
     }
 }

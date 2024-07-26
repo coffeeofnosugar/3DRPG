@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 2211744114189261124}
   - component: {fileID: 923239224243628298}
   - component: {fileID: 471640471950754976}
-  - component: {fileID: 5829536809513940512}
+  - component: {fileID: 3967522022328867473}
   - component: {fileID: 2566025821110513875}
   m_Layer: 7
   m_Name: SlimePolyart
@@ -266,7 +266,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &5829536809513940512
+--- !u!114 &3967522022328867473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,22 +275,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4247539653154516912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd3f79fb8c1edf48bcfcea8a3866906, type: 3}
+  m_Script: {fileID: 11500000, guid: 0460602ec5a522049a0f86502e750569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateData: {fileID: 11400000, guid: b321e9fae03d1d140be030ee5874c8c7, type: 2}
-  characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 7cbbf5b03b9879d4b8fa4058490bf741, type: 2}
+  templateData: {fileID: 11400000, guid: f4b587323e40b68429d5cf66188228d4, type: 2}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
   animator: {fileID: 0}
-  agent: {fileID: 0}
-  coll: {fileID: 0}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0, w: 0}
-  getHit: 0
+  _getHit: 0
   isDeath: 0
-  isCritical: 0
   currentHealth: 0
-  currentDefence: 0
+  responseDistance: 0
+  agent: {fileID: 0}
 --- !u!114 &2566025821110513875
 MonoBehaviour:
   m_ObjectHideFlags: 0

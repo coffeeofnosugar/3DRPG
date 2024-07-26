@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_Name
-      value: Rio_NoBone
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_Controller
@@ -72,13 +72,10 @@ PrefabInstance:
       addedObject: {fileID: 5664827109095961856}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8999660444507861375}
+      addedObject: {fileID: 4005153970657396854}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6064248532016198808}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2957152650174524285}
   m_SourcePrefab: {fileID: 100100000, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
 --- !u!1 &2305487488703464172 stripped
 GameObject:
@@ -135,7 +132,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &8999660444507861375
+--- !u!114 &4005153970657396854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,10 +141,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2305487488703464172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9ed4047fe299442ae234f32a07b3f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fcc0f40eaf1e954d888e9ae13e4433b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 0}
+  templateData: {fileID: 11400000, guid: c60e3730ef32eb548977286265366c34, type: 2}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  animator: {fileID: 0}
+  originPosition: {x: 0, y: 0, z: 0}
+  originRotation: {x: 0, y: 0, z: 0, w: 0}
+  _getHit: 0
+  isDeath: 0
+  currentHealth: 0
+  responseDistance: 0
+  rigidbody: {fileID: 0}
+  PlayerInputController: {fileID: 0}
+  cameraTransform: {fileID: 0}
 --- !u!114 &6064248532016198808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,38 +177,3 @@ MonoBehaviour:
   currentMovementInput: {x: 0, y: 0}
   isRun: 0
   isJump: 0
-  walkSpeed: 0
-  runSpeed: 0
---- !u!114 &2957152650174524285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2305487488703464172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd3f79fb8c1edf48bcfcea8a3866906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  templateData: {fileID: 11400000, guid: c60e3730ef32eb548977286265366c34, type: 2}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  animator: {fileID: 0}
-  agent: {fileID: 0}
-  coll: {fileID: 0}
-  rigidbody: {fileID: 0}
-  PlayerInputController: {fileID: 0}
-  originPosition: {x: 0, y: 0, z: 0}
-  originRotation: {x: 0, y: 0, z: 0, w: 0}
-  _getHit: 0
-  isDeath: 0
-  isCritical: 0
-  currentHealth: 0
-  currentDefence: 0
-  responseDistance: 0

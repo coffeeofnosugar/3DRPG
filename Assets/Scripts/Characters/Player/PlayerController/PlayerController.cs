@@ -30,7 +30,7 @@ namespace Player.PlayerController
             characterStats.blackboard = blackboard;
             Traverse(rootNode, n =>
             {
-                n._characterStats = characterStats;
+                n.playerStats = characterStats as PlayerStats;
                 n._playerInputController = playerInputController;
                 n.blackboard = blackboard;
             });

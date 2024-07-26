@@ -1,32 +1,19 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
-using Player;
 using UnityEngine;
-using UnityEngine.AI;
 
 
-public class CharacterStats : MonoBehaviour
+public abstract class CharacterStats : MonoBehaviour
 {
     [SerializeField] private CharacterData_SO templateData;
-
     private CharacterData_SO characterData;
-    
     public Blackboard blackboard;
 
     [HideInInspector] public Animator animator;
-    [HideInInspector] public NavMeshAgent agent;
-    [HideInInspector] public Collider coll;
-    [HideInInspector] public new Rigidbody rigidbody;
-    [HideInInspector] public PlayerInputController PlayerInputController;
-    [HideInInspector] public Transform cameraTransform;
-
+    
     // 出生点
     [HideInInspector] public Vector3 originPosition;
     [HideInInspector] public Quaternion originRotation;
-
+    
     public bool _getHit;
 
     public bool GetHit
@@ -42,17 +29,15 @@ public class CharacterStats : MonoBehaviour
         }
     }
     public bool isDeath;
-    public bool isCritical;
 
     public int currentHealth;
-    public int currentDefence;
 
-    public Dictionary<string, SkillData_SO> skillDict = new Dictionary<string, SkillData_SO>();
+    public Dictionary<string, SkillData_SO> skillDict { get; private set; } = new Dictionary<string, SkillData_SO>();
 
     public float responseDistance;
     public float responseDistanceSqr => responseDistance * responseDistance;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (templateData != null)
             characterData = Instantiate(templateData);
@@ -60,20 +45,14 @@ public class CharacterStats : MonoBehaviour
             Debug.LogError("未配置角色数据");
         
         animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
-        coll = GetComponent<Collider>();
-        rigidbody = GetComponent<Rigidbody>();
-        PlayerInputController = GetComponent<PlayerInputController>();
 
         originPosition = transform.position;
         originRotation = transform.rotation;
-        cameraTransform = Camera.main.transform;
 
         currentHealth = MaxHealth;
-        currentDefence = BaseDefence;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (SkillList.Count != 0)
         {
@@ -141,66 +120,29 @@ public class CharacterStats : MonoBehaviour
     }
 
     #region Read from CharacterData_SO
-    public int Id
-    {
-        get => characterData ? characterData.id : 0;
-        set => characterData.id = value;
-    }
-    public string MonsterName
-    {
-        get => characterData ? characterData.monsterName : string.Empty;
-        set => characterData.monsterName = value;
-    }
-    public int MaxHealth
-    {
-        get => characterData ? characterData.maxHealth : 0;
-        set => characterData.maxHealth = value;
-    }
-    public int BaseDefence
-    {
-        get => characterData ? characterData.baseDefence : 0;
-        set => characterData.baseDefence = value;
-    }
+    public int Id => characterData ? characterData.id : 0;
 
-    public float WalkSpeed
-    {
-        get => characterData ? characterData.walkSpeed : 0;
-        set => characterData.walkSpeed = value;
-    }
-    public float PatrolRange
-    {
-        get => characterData ? characterData.patrolRange : 0;
-        set => characterData.patrolRange = value;
-    }
-    public float SightRadius
-    {
-        get => characterData ? characterData.sightRadius : 0;
-        set => characterData.sightRadius = value;
-    }
-    public float RunSpeed
-    {
-        get => characterData ? characterData.runSpeed : 0;
-        set => characterData.runSpeed = value;
-    }
-    public float CriticalMultiplier
-    {
-        get => characterData ? characterData.criticalMultiplier : 0;
-        set => characterData.criticalMultiplier = value;
-    }
-    public float CriticalChance
-    {
-        get => characterData ? characterData.criticalChance : 0;
-        set => characterData.criticalChance = value;
-    }
-    public int DestoryTime
-    {
-        get => characterData ? characterData.destoryTime : 0;
-        set => characterData.destoryTime = value;
-    }
-    public List<SkillData_SO> SkillList
-    {
-        get => characterData ? characterData.skillList : null;
-        set => characterData.skillList = value;
-    }
+    public string MonsterName => characterData ? characterData.monsterName : string.Empty;
+
+    public int MaxHealth => characterData ? characterData.maxHealth : 0;
+
+    public int BaseDefence => characterData ? characterData.baseDefence : 0;
+
+    public float WalkSpeed => characterData ? characterData.walkSpeed : 0;
+
+    public float PatrolRange => characterData ? characterData.patrolRange : 0;
+
+    public float SightRadius => characterData ? characterData.sightRadius : 0;
+
+    public float RunSpeed => characterData ? characterData.runSpeed : 0;
+
+    public float CriticalMultiplier => characterData ? characterData.criticalMultiplier : 0;
+
+    public float CriticalChance => characterData ? characterData.criticalChance : 0;
+
+    public int DestoryTime => characterData ? characterData.destoryTime : 0;
+
+    private List<SkillData_SO> SkillList => characterData ? characterData.skillList : null;
+
     #endregion
 }
