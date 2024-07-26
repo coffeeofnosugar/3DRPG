@@ -53,7 +53,8 @@ namespace Player.PlayerController
                         await Task.Delay(300, _cts.Token);
                         lock (this)
                         {
-                            RemoveFromClassList("running");
+                            if (node.state != Node.State.Running)
+                                RemoveFromClassList("running");
                         }
                     }
                     catch (Exception e)

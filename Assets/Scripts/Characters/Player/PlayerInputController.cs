@@ -19,11 +19,6 @@ namespace Player
         private Rigidbody _rigidbody;
         private CharacterStats _characterStats;
         private Transform _cameraTransform;
-
-        [Header("control parameter")]
-        [SerializeField] private float walkSpeed;
-        [SerializeField] private float runSpeed;
-        [SerializeField] private float currentSpeed;
         
         public PlayerInput PlayerInput;
         
@@ -45,12 +40,10 @@ namespace Player
             PlayerInput.CharacterControls.Jump.started += onJumpInput;
             PlayerInput.CharacterControls.Jump.canceled += onJumpInput;
         }
-
-        private void Start()
+        
+        private void Update()
         {
-            walkSpeed = _characterStats.WalkSpeed;
-            runSpeed = _characterStats.RunSpeed;
-            currentSpeed = walkSpeed;
+            Debugs.Instance["Speed"] = _rigidbody.velocity.magnitude.ToString("f2");
         }
 
         #region input event
@@ -79,30 +72,5 @@ namespace Player
             PlayerInput.CharacterControls.Disable();
         }
         #endregion
-
-        private void FixedUpdate()
-        {
-            // MovePlayer();
-        }
-
-        private void Update()
-        {
-            Debugs.Instance["Speed"] = _rigidbody.velocity.magnitude.ToString("f2");
-        }
-
-        private void MovePlayer()
-        {
-            currentSpeed = isRun ? runSpeed : walkSpeed;
-            
-            // 获取移动方向向量——相机在水平上的投影
-            Vector3 moveDirection =
-                _cameraTransform.forward * currentMovementInput.y + _cameraTransform.right * currentMovementInput.x;
-            moveDirection.y = 0;
-            
-            if (currentMovementInput.y != 0 || currentMovementInput.x != 0)
-                transform.eulerAngles = Quaternion.LookRotation(moveDirection).eulerAngles;
-            
-            _rigidbody.AddForce(moveDirection.normalized * (currentSpeed * 10f), ForceMode.Force);
-        }
     }
 }

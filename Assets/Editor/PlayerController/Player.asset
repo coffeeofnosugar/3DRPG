@@ -15,7 +15,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 2a348c067e87ff54f932e597b251fad5
-  position: {x: 608.3501, y: 220.70003}
+  position: {x: 111, y: 28.720001}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -76,7 +76,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: dea3bb7c902178a42b752a24916b4995
-  position: {x: 198, y: 339}
+  position: {x: 111, y: 186}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -88,9 +88,9 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   children:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5775860665699242110}
+  - {fileID: 7499189815392884148}
+  - {fileID: 1449589984089367478}
   checkKeyAction: 0
 --- !u!114 &1449589984089367478
 MonoBehaviour:
@@ -107,7 +107,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 52ade6be76140e9478276f19342eb493
-  position: {x: 385, y: 304}
+  position: {x: 335, y: 304}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ce67bedcfb1614d867e0dd1f180351, type: 3}
   m_Name: Root
   m_EditorClassIdentifier: 
-  started: 1
+  started: 0
   state: 0
   guid: 56fde27ce1bd65042841b7fa9e7279b9
-  position: {x: 54.43213, y: 198.77393}
+  position: {x: -5, y: 165}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -149,7 +149,8 @@ MonoBehaviour:
     isDeath: 0
   _playerInputController: {fileID: 0}
   children:
-  - {fileID: 7499189815392884148}
+  - {fileID: -2528420630876811135}
+  - {fileID: 1005773285273735655}
 --- !u!114 &5775860665699242110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +166,7 @@ MonoBehaviour:
   started: 1
   state: 0
   guid: 23b2c89ec1071f045b54661a24da4892
-  position: {x: 376, y: 22}
+  position: {x: 335, y: 116}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -192,10 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74db709742f9464685335b349baa4ba, type: 3}
   m_Name: Move
   m_EditorClassIdentifier: 
-  started: 0
+  started: 1
   state: 0
   guid: 3267432b575bb6544bfb98f9c11ad447
-  position: {x: 400, y: 199}
+  position: {x: 335, y: 211}
   description: 
   _characterStats: {fileID: 0}
   blackboard:
@@ -206,5 +207,5 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   _playerInputController: {fileID: 0}
-  child: {fileID: -2528420630876811135}
+  child: {fileID: 0}
   currentSpeed: 0

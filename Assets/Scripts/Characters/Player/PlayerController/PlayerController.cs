@@ -19,10 +19,7 @@ namespace Player.PlayerController
 
         public Node.State FixedUpdate()
         {
-            if (rootNode.state == Node.State.Running)
-            {
-                controllerState = rootNode.FixedUpdate();
-            }
+            controllerState = rootNode.FixedUpdate();
             return controllerState;
         }
 

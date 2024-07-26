@@ -30,6 +30,7 @@ namespace Player.PlayerController
 
         private void MovePlayer()
         {
+            Debug.Log(_characterStats.PlayerInputController.isRun);
             currentSpeed = _characterStats.PlayerInputController.isRun ? _characterStats.RunSpeed : _characterStats.WalkSpeed;
             
             // 获取移动方向向量——相机在水平上的投影

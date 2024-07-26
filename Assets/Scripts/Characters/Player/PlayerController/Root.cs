@@ -12,13 +12,11 @@ namespace Player.PlayerController
         protected override void EnterState()
         {
             current = 0;
-            Debug.Log("root 进入");
             base.EnterState();
         }
 
         protected override void ExitState()
         {
-            Debug.Log("root 出来");
             base.ExitState();
         }
 
@@ -41,7 +39,7 @@ namespace Player.PlayerController
                         throw new ArgumentOutOfRangeException();
                 }
             }
-            return State.Running;
+            return State.Success;
         }
 
         public override Node Clone()

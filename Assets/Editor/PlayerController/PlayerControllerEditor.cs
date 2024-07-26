@@ -113,7 +113,7 @@ namespace Player.PlayerController
             else
             {
                 // 后半部分的判断是防止，在创建新的行为树时点击该行为树，但unity还没准备好就选择，会报错
-                if (controller && AssetDatabase.CanOpenAssetInEditor(controller.GetInstanceID()))
+                if (controller && controllerView != null && AssetDatabase.CanOpenAssetInEditor(controller.GetInstanceID()))
                 {
                     controllerView.PopulateView(controller);
                 }

@@ -31,13 +31,19 @@ namespace Player.PlayerController
                     break;
                 case AnimatorControllerParameterType.Bool:
                     _characterStats.animator.SetBool(animatorParameter, boolValue);
-                    return State.Success;
+                    break;
                 case AnimatorControllerParameterType.Trigger:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            return State.Failure;
+
+            if (child)
+            {
+                child.state = state;
+                child.FixedUpdate();
+            }
+            return State.Success;
         }
     }
 }
