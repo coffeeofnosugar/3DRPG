@@ -1,9 +1,10 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
-using System.Timers;
 
 namespace Player.PlayerController
 {
@@ -14,7 +15,8 @@ namespace Player.PlayerController
         public Port[] inputs;
         public Port[] outputs;
 
-        private Timer runningTimer;
+        // private Timer runningTimer;
+        private CancellationTokenSource _cts = new CancellationTokenSource();
         private bool _bool;
         public NodeView(Node node) : base("Assets/Editor/PlayerController/NodeView.uxml")
         {
@@ -36,21 +38,30 @@ namespace Player.PlayerController
                 AddToClassList("running");
                 _bool = true;
             };
-            node.RemoveRunningClass += () =>
+            node.RemoveRunningClass += async () =>
             {
                 if (_bool)
                 {
-                    runningTimer = new Timer(300);
-                    runningTimer.Elapsed += (sender, e) =>
+                    _bool = false;
+                    _cts.Cancel();
+                    _cts = new CancellationTokenSource();
+                    try
                     {
+                        await Task.Delay(300, _cts.Token);
                         lock (this)
                         {
                             RemoveFromClassList("running");
-                            _bool = false;
                         }
-                    };
-                    runningTimer.AutoReset = false;
-                    runningTimer.Start();
+                    }
+                    catch (Exception e)
+                    {
+                        // 如果报错是任务被取消，忽略
+                        if (e is not TaskCanceledException)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
+                    }
                 }
             };
         }
