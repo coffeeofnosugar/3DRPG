@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "33767d65-5b70-41e0-8943-d99f2b2f6e13",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Run",
                     "type": "Button",
                     "id": "6b1be75d-74e3-4425-bc59-2050df1aada6",
@@ -36,6 +45,15 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "7e1d2f22-afbb-4d91-8130-41a155d60b1d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "2450ff49-e8d5-4558-8693-70524e9bac47",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -161,6 +179,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73075faf-accb-43d0-abeb-5a0e6651280b",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b32aaff-b7c8-48d8-bab2-bd9e4d3e5228",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

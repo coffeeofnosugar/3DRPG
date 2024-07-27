@@ -2,30 +2,29 @@ using System;
 using UnityEngine;
 
 namespace Player
-{/*
-    [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(CapsuleCollider))]
-    [RequireComponent(typeof(PlayerInputController))]
+{
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(PlayerStats))]
+    [RequireComponent(typeof(PlayerInputController))]
     public class PlayStateMachine : StateManager<PlayStateMachine.PlayerState>
     {
-        public enum PlayerState { Idle, Walk, Run }
+        public enum PlayerState { NormalStand, NormalCrouch, Run }
 
-        [HideInInspector] public CharacterStats characterStats;
+        [HideInInspector] public PlayerStats characterStats;
 
-        private IdleState _idleState;
-        private WalkState _walkState;
+        private NormalStandState _normalStandState;
+        private NormalCrouchState _normalCrouchState;
         private RunState _runState;
 
         private void Awake()
         {
-            characterStats = GetComponent<CharacterStats>();
+            characterStats = GetComponent<PlayerStats>();
             
-            _idleState = new IdleState(this, PlayerState.Idle);
-            _walkState = new WalkState(this, PlayerState.Walk);
+            _normalStandState = new NormalStandState(this, PlayerState.NormalStand);
+            _normalCrouchState = new NormalCrouchState(this, PlayerState.NormalCrouch);
             _runState = new RunState(this, PlayerState.Run);
             
-            CurrentState = EnumTurnToState(PlayerState.Idle);
+            CurrentState = EnumTurnToState(PlayerState.NormalStand);
         }
 
         private new void Update()
@@ -38,12 +37,12 @@ namespace Player
         {
             BaseState<PlayerState> newState = stateKey switch
             {
-                PlayerState.Idle => _idleState,
-                PlayerState.Walk => _walkState,
+                PlayerState.NormalStand => _normalStandState,
+                PlayerState.NormalCrouch => _normalCrouchState,
                 PlayerState.Run => _runState,
-                _ => _idleState
+                _ => _normalStandState
             };
             return newState;
         }
-    }*/
+    }
 }

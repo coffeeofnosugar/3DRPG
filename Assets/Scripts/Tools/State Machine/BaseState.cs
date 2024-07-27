@@ -2,7 +2,7 @@ using System;
 
 public abstract class BaseState<EState> where EState : Enum
 {
-    public BaseState(EState key)
+    protected BaseState(EState key)
     {
         StateKey = key;
     }

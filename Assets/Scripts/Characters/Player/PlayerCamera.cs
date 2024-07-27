@@ -19,15 +19,13 @@ namespace Player
         /// 鼠标移动速度
         /// </summary>
         [SerializeField, Range(0, 1)] private float linearSpeed = 1;
-        
-        private CapsuleCollider _capsuleCollider;
-        private Rigidbody _rigidbody;
-        public float _xMouse, _yMouse;
+
+        private CharacterController _characterController;
+        private float _xMouse, _yMouse;
 
         private void Awake()
         {
-            _rigidbody = player.GetComponent<Rigidbody>();
-            _capsuleCollider = player.GetComponent<CapsuleCollider>();
+            _characterController = player.GetComponent<CharacterController>();
         }
 
         private void LateUpdate()
@@ -41,9 +39,9 @@ namespace Player
             // offset.z = Mathf.Clamp(offset.z, -2, -15);
             
             Quaternion targetRotation = Quaternion.Euler(_yMouse, _xMouse, 0);
-            Vector3 targetPostion = player.position + targetRotation * new Vector3(xOffset, yOffset, -zOffset) + _capsuleCollider.center;
-            speed = _rigidbody.velocity.sqrMagnitude > 0.01f ? Mathf.Lerp(speed, 10, 5f * Time.deltaTime): Mathf.Lerp(speed, 25, 5f * Time.deltaTime);
-            transform.position = Vector3.Lerp(transform.position, targetPostion, speed * Time.deltaTime);
+            Vector3 targetPosition = player.position + targetRotation * new Vector3(xOffset, yOffset, -zOffset) + _characterController.center;
+            speed = _characterController.velocity.sqrMagnitude > 0.01f ? Mathf.Lerp(speed, 10, 5f * Time.deltaTime): Mathf.Lerp(speed, 25, 5f * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 25 * Time.deltaTime);
         }
         
