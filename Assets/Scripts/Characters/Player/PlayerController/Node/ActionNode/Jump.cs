@@ -12,7 +12,7 @@ namespace Player.PlayerController
         protected override void EnterState()
         {
             base.EnterState();
-            playerStats.rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            // playerStats.rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
         protected override State FixeUpdateState()

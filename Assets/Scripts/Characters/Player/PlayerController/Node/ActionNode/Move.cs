@@ -8,7 +8,7 @@ namespace Player.PlayerController
     {
         [Header("节点参数")]
         [SerializeField] private float currentSpeed;
-        [SerializeField] private float coefficient = 20f;
+        // [SerializeField] private float coefficient = 20f;
         protected override void EnterState()
         {
             base.EnterState();
@@ -33,17 +33,17 @@ namespace Player.PlayerController
         private void MovePlayer()
         {
             // Debug.Log(_characterStats.PlayerInputController.isRun);
-            currentSpeed = playerStats.PlayerInputController.isRun ? playerStats.RunSpeed : playerStats.WalkSpeed;
+            currentSpeed = playerStats.playerInputController.isRun ? playerStats.RunSpeed : playerStats.WalkSpeed;
             
             // 获取移动方向向量——相机在水平上的投影
             Vector3 moveDirection =
-                playerStats.cameraTransform.forward * playerStats.PlayerInputController.currentMovementInput.y + playerStats.cameraTransform.right * playerStats.PlayerInputController.currentMovementInput.x;
+                playerStats.cameraTransform.forward * playerStats.playerInputController.currentMovementInput.y + playerStats.cameraTransform.right * playerStats.playerInputController.currentMovementInput.x;
             moveDirection.y = 0;
             
-            if (playerStats.PlayerInputController.currentMovementInput.y != 0 || playerStats.PlayerInputController.currentMovementInput.x != 0)
+            if (playerStats.playerInputController.currentMovementInput.y != 0 || playerStats.playerInputController.currentMovementInput.x != 0)
                 playerStats.transform.eulerAngles = Quaternion.LookRotation(moveDirection).eulerAngles;
             
-            playerStats.rigidbody.AddForce(moveDirection.normalized * (currentSpeed * coefficient), ForceMode.Force);
+            // playerStats.rigidbody.AddForce(moveDirection.normalized * (currentSpeed * coefficient), ForceMode.Force);
         }
     }
 }

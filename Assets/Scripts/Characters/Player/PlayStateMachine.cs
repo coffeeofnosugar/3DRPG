@@ -8,13 +8,13 @@ namespace Player
     [RequireComponent(typeof(PlayerInputController))]
     public class PlayStateMachine : StateManager<PlayStateMachine.PlayerState>
     {
-        public enum PlayerState { NormalStand, NormalCrouch, Run }
+        public enum PlayerState { NormalStand, NormalCrouch, NoramlMidair }
 
         [HideInInspector] public PlayerStats characterStats;
 
         private NormalStandState _normalStandState;
         private NormalCrouchState _normalCrouchState;
-        private RunState _runState;
+        private NormalMidairState _normalMidairState;
 
         private void Awake()
         {
@@ -22,7 +22,7 @@ namespace Player
             
             _normalStandState = new NormalStandState(this, PlayerState.NormalStand);
             _normalCrouchState = new NormalCrouchState(this, PlayerState.NormalCrouch);
-            _runState = new RunState(this, PlayerState.Run);
+            _normalMidairState = new NormalMidairState(this, PlayerState.NoramlMidair);
             
             CurrentState = EnumTurnToState(PlayerState.NormalStand);
         }
@@ -31,15 +31,16 @@ namespace Player
         {
             base.Update();
             Debugs.Instance["PlayerState"] = CurrentState.ToString();
+            Debugs.Instance["PlayerSpeed"] = characterStats.characterController.velocity.magnitude.ToString("f2");
         }
-
+        
         protected override BaseState<PlayerState> EnumTurnToState(PlayerState stateKey)
         {
             BaseState<PlayerState> newState = stateKey switch
             {
                 PlayerState.NormalStand => _normalStandState,
                 PlayerState.NormalCrouch => _normalCrouchState,
-                PlayerState.Run => _runState,
+                PlayerState.NoramlMidair => _normalMidairState,
                 _ => _normalStandState
             };
             return newState;

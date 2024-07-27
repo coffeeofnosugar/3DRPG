@@ -11,6 +11,11 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
         CurrentState.EnterState();
     }
 
+    protected void FixedUpdate()
+    {
+        CurrentState.FixedUpdate();
+    }
+
     public void Update()
     {
         EState nextStateKey = CurrentState.GetNextState();
@@ -19,6 +24,16 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
             CurrentState.UpdateState();
         else
             TransitionToState(nextStateKey);
+    }
+
+    protected void LateUpdate()
+    {
+        CurrentState.LateUpdate();
+    }
+
+    protected void OnAnimatorMove()
+    {
+        CurrentState.OnAnimatorMove();
     }
 
     public void TransitionToState(EState stateKey)

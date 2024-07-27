@@ -7,14 +7,17 @@ namespace Player
 {
     public class PlayerStats : CharacterStats
     {
-        [HideInInspector] public new Rigidbody rigidbody;
-        [HideInInspector] public PlayerInputController PlayerInputController;
+        [HideInInspector] public CharacterController characterController;
+        [HideInInspector] public PlayerInputController playerInputController;
         [HideInInspector] public Transform cameraTransform;
+        public const float CrouchSpeed = 1.5f;
+        public readonly float Gravity = -9.8f;
 
         public float CrouchThreshold { get; } = 0f;
         public float StandThreshold { get; } = 1f;
         public float MidairThreshold { get; } = 2f;
 
+        public int PlayerStateHash { get; } = Animator.StringToHash("PlayerState");
         public int VerticalSpeedHash { get; } = Animator.StringToHash("VerticalSpeed");
         public int HorizontalSpeedHash { get; } = Animator.StringToHash("HorizontalSpeed");
         public int TurnSpeedHash { get; } = Animator.StringToHash("TurnSpeed");
@@ -23,8 +26,8 @@ namespace Player
         protected override void Awake()
         {
             base.Awake();
-            rigidbody = GetComponent<Rigidbody>();
-            PlayerInputController = GetComponent<PlayerInputController>();
+            characterController = GetComponent<CharacterController>();
+            playerInputController = GetComponent<PlayerInputController>();
             cameraTransform = Camera.main.transform;
         }
     }

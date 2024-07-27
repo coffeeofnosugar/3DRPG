@@ -14,31 +14,55 @@ namespace Player
             _playerStats = fsm.characterStats;
         }
 
-        // 移动
-        protected void PlayerMove()
+        public override void EnterState() { }
+        public override void ExitState() { }
+        public override void FixedUpdate() { }
+        public override void UpdateState()
         {
-            float targetSpeed = _playerStats.PlayerInputController.isRun
-                ? _playerStats.RunSpeed
-                : _playerStats.WalkSpeed;
+            PlayerMove();
+            PlayerRotate();
+        }
+        public override void LateUpdate() { }
+        public override void OnAnimatorMove()
+        {
+            _playerStats.characterController.Move(_playerStats.animator.deltaPosition);
+        }
+
+        /// <summary>
+        /// 角色移动
+        /// </summary>
+        private void PlayerMove()
+        {
+            float targetSpeed;
+            if (_playerStats.playerInputController.isCrouch)
+                targetSpeed = PlayerStats.CrouchSpeed;
+            else if (_playerStats.playerInputController.isRun)
+                targetSpeed = _playerStats.RunSpeed;
+            else
+                targetSpeed = _playerStats.WalkSpeed;
                 
-            _playerStats.animator.SetFloat(_playerStats.VerticalSpeedHash, _playerStats.PlayerInputController.currentMovementInput.magnitude * targetSpeed, .1f, Time.deltaTime);
+            _playerStats.animator.SetFloat(_playerStats.VerticalSpeedHash, _playerStats.playerInputController.currentMovementInput.magnitude * targetSpeed, .1f, Time.deltaTime);
         }
         
-        // 旋转
-        protected void PlayerRotate()
+        /// <summary>
+        /// 角色旋转
+        /// </summary>
+        private void PlayerRotate()
         {
             var forward = _playerStats.cameraTransform.forward;
             Vector3 camForwardProjection = new Vector3(forward.x, 0, forward.z).normalized;
             // 玩家输入（世界向量）
-            Vector3 playerMovement = camForwardProjection * _playerStats.PlayerInputController.currentMovementInput.y +
-                                     _playerStats.cameraTransform.right * _playerStats.PlayerInputController.currentMovementInput.x;
+            Vector3 playerMovement = camForwardProjection * _playerStats.playerInputController.currentMovementInput.y +
+                                     _playerStats.cameraTransform.right * _playerStats.playerInputController.currentMovementInput.x;
             // 玩家输入（玩家相对向量）
             playerMovement = _playerStats.transform.InverseTransformVector(playerMovement);
+            
             // 获取玩家输入与角色的夹角（弧度）
             float rad = Mathf.Atan2(playerMovement.x, playerMovement.z);
             _playerStats.animator.SetFloat(_playerStats.TurnSpeedHash, rad, .1f, Time.deltaTime);
             // 靠root motion自带的旋转角速度太慢，额外添加一个角速度
-            _playerStats.transform.Rotate(0, rad * 180 * Time.deltaTime, 0f);
+            // 在启用OnAnimatorMove后，上一行对角色的旋转就不起作用了，仅仅只起到播放动画的作用，所以需要将下面的系数变大，从180变成200
+            _playerStats.transform.Rotate(0, rad * 200 * Time.deltaTime, 0f);
         }
     }
     
@@ -46,19 +70,15 @@ namespace Player
     {
         public NormalStandState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
 
-        public override void EnterState() {  }
-
-        public override void ExitState() {  }
-
         public override void UpdateState()
         {
-            PlayerMove();
-            PlayerRotate();
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, _playerStats.StandThreshold, .1f, Time.deltaTime);
+            base.UpdateState();
         }
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (_playerStats.PlayerInputController.isCrouch)
+            if (_playerStats.playerInputController.isCrouch)
             {
                 return PlayStateMachine.PlayerState.NormalCrouch;
             }
@@ -69,21 +89,16 @@ namespace Player
     public class NormalCrouchState : PlayerBaseState
     {
         public NormalCrouchState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
-
-        public override void EnterState() {  }
-
-        public override void ExitState() {  }
-
+        
         public override void UpdateState()
         {
-            _playerStats.animator.SetFloat(_playerStats.VerticalSpeedHash, _playerStats.PlayerInputController.playerMovement.z * _playerStats.WalkSpeed, .1f, Time.deltaTime);
-            _playerStats.animator.SetFloat(_playerStats.HorizontalSpeedHash, _playerStats.PlayerInputController.playerMovement.y * _playerStats.WalkSpeed, .1f, Time.deltaTime);
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, _playerStats.CrouchThreshold, .1f, Time.deltaTime);
+            base.UpdateState();
         }
-
+        
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (_playerStats.PlayerInputController.currentMovementInput.x != 0
-                || _playerStats.PlayerInputController.currentMovementInput.y != 0)
+            if (_playerStats.playerInputController.isCrouch)
             {
                 return PlayStateMachine.PlayerState.NormalCrouch;
             }
@@ -91,25 +106,14 @@ namespace Player
         }
     }
 
-    public class RunState : PlayerBaseState
+    public class NormalMidairState : PlayerBaseState
     {
-        public RunState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
-
-        public override void EnterState() { }
-
-        public override void ExitState() { }
-
-        public override void UpdateState() { }
+        public NormalMidairState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (_playerStats.PlayerInputController.currentMovementInput.x != 0
-                || _playerStats.PlayerInputController.currentMovementInput.y != 0)
+            if (_playerStats.playerInputController.isCrouch)
             {
-                if (_playerStats.PlayerInputController.isRun)
-                {
-                    return PlayStateMachine.PlayerState.Run;
-                }
                 return PlayStateMachine.PlayerState.NormalCrouch;
             }
             return PlayStateMachine.PlayerState.NormalStand;
