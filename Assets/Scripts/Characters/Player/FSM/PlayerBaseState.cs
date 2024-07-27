@@ -25,11 +25,11 @@ namespace Player
         {
             if (_playerStats.characterController.isGrounded)
             {
-                _playerStats.VerticalVelocity = _playerStats.Gravity * Time.deltaTime;
+                _playerStats.VerticalVelocity = PlayerStats.Gravity * Time.deltaTime;
             }
             else
             {
-                _playerStats.VerticalVelocity += _playerStats.Gravity * Time.deltaTime;
+                _playerStats.VerticalVelocity += PlayerStats.Gravity * Time.deltaTime;
             }
         }
         
@@ -61,7 +61,7 @@ namespace Player
         {
             // 是否能跳跃 && 监听跳跃事件
             if (_playerStats.characterController.isGrounded && _playerStats.playerInputController.isJump)
-                _playerStats.VerticalVelocity = _playerStats.JumpVelocity;
+                _playerStats.VerticalVelocity = PlayerStats.JumpVelocity;
         }
         
         /// <summary>
@@ -71,9 +71,9 @@ namespace Player
         /// <returns></returns>
         protected Vector3 AverageVel(Vector3 newVel)
         {
-            _playerStats.velCache[_playerStats.currentChacheIndex] = newVel;
-            _playerStats.currentChacheIndex++;
-            _playerStats.currentChacheIndex %= PlayerStats.CACHE_SIZE;
+            _playerStats.velCache[_playerStats.currentCacheIndex] = newVel;
+            _playerStats.currentCacheIndex++;
+            _playerStats.currentCacheIndex %= PlayerStats.CACHE_SIZE;
             Vector3 average = Vector3.zero;
             foreach (var vel in _playerStats.velCache)
             {
@@ -97,9 +97,13 @@ namespace Player
 
         public override void UpdateState()
         {
+            // 转换成站姿
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.StandThreshold, .1f, Time.deltaTime);
+            
+            // 根据是否奔跑，设置速度
             targetSpeed = _playerStats.playerInputController.isRun ? _playerStats.RunSpeed : _playerStats.WalkSpeed;
             _playerStats.animator.SetFloat(_playerStats.FrontSpeedHash, _playerStats.playerInputController.currentMovementInput.magnitude * targetSpeed, .1f, Time.deltaTime);
-            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, _playerStats.StandThreshold, .1f, Time.deltaTime);
+            
             base.UpdateState();
             Jump();
             PlayerRotate();
@@ -140,8 +144,11 @@ namespace Player
 
         public override void UpdateState()
         {
-            _playerStats.animator.SetFloat(_playerStats.FrontSpeedHash, _playerStats.playerInputController.currentMovementInput.magnitude * _playerStats.CrouchSpeed, .1f, Time.deltaTime);
-            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, _playerStats.CrouchThreshold, .1f, Time.deltaTime);
+            // 转换成蹲姿
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.CrouchThreshold, .1f, Time.deltaTime);
+            // 将速度切换成蹲姿移动速度
+            _playerStats.animator.SetFloat(_playerStats.FrontSpeedHash, _playerStats.playerInputController.currentMovementInput.magnitude * PlayerStats.CrouchSpeed, .1f, Time.deltaTime);
+            
             base.UpdateState();
             PlayerRotate();
         }
@@ -181,8 +188,11 @@ namespace Player
 
         public override void UpdateState()
         {
-            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, _playerStats.MidairThreshold, .1f, Time.deltaTime);
+            // 转换成半空姿态
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.MidairThreshold, .1f, Time.deltaTime);
+            // 根据角色向下的速度播放动画
             _playerStats.animator.SetFloat(_playerStats.VerticalSpeedHash, _playerStats.VerticalVelocity, .1f, Time.deltaTime);
+            
             base.UpdateState();
             PlayerRotate();
         }
