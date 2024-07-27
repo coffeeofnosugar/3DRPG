@@ -598,15 +598,15 @@ BlendTree:
   m_Name: MidairState
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400004, guid: 0d9d26e2162aa4d11ab075b34c029673, type: 3}
-    m_Threshold: -2
+    m_Motion: {fileID: -864825200672550400, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
+    m_Threshold: -5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: PlayerState
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400008, guid: 0d9d26e2162aa4d11ab075b34c029673, type: 3}
+    m_Motion: {fileID: 9111558908952476143, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -614,8 +614,8 @@ BlendTree:
     m_DirectBlendParameter: PlayerState
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400006, guid: 0d9d26e2162aa4d11ab075b34c029673, type: 3}
-    m_Threshold: 2
+    m_Motion: {fileID: -4469183485442372851, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
+    m_Threshold: 5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -623,8 +623,8 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: VerticalSpeed
   m_BlendParameterY: Blend
-  m_MinThreshold: -2
-  m_MaxThreshold: 2
+  m_MinThreshold: -5
+  m_MaxThreshold: 5
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0

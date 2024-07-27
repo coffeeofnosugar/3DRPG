@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
-{
+{/*
     public class NormalState : PlayerBaseState
     {
+        private enum NormalStateEnum { StandState, CrouchState, Midair }
+
+        private NormalStateEnum currentState;
         private Vector3 averageVel = Vector3.zero;
         private static readonly int CACHE_SIZE = 3;
         private Vector3[] velCache = new Vector3[CACHE_SIZE];
@@ -123,10 +126,18 @@ namespace Player
         /// </summary>
         private void Jump()
         {
+            // 是否能跳跃 && 监听跳跃事件
             if (_playerStats.characterController.isGrounded && _playerStats.playerInputController.isJump)
             {
                 _playerStats.VerticalVelocity = _playerStats.JumpVelocity;
             }
+
+            // 播放跳跃动画
+            if (!_playerStats.characterController.isGrounded)
+            {
+                _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, _playerStats.MidairThreshold, .1f, Time.deltaTime);
+                _playerStats.animator.SetFloat(_playerStats.VerticalSpeedHash, _playerStats.VerticalVelocity, .1f, Time.deltaTime);
+            }
         }
-    }
+    }*/
 }

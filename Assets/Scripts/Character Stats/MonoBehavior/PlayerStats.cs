@@ -13,7 +13,7 @@ namespace Player
         /// <summary>
         /// 下蹲时的移动速度
         /// </summary>
-        public const float CrouchSpeed = 1.5f;
+        public readonly float CrouchSpeed = 1.5f;
         /// <summary>
         /// 重力
         /// </summary>
@@ -22,11 +22,17 @@ namespace Player
         /// 角色向下的速度
         /// </summary>
         public float VerticalVelocity;
-
         /// <summary>
         /// 跳跃速度
         /// </summary>
         public float JumpVelocity = 5f;
+
+        #region 计算前三帧的平均速度
+        public Vector3 averageVel = Vector3.zero;
+        public static readonly int CACHE_SIZE = 3;
+        public Vector3[] velCache = new Vector3[CACHE_SIZE];
+        public int currentChacheIndex = 0;
+        #endregion
         
         public float CrouchThreshold { get; } = 0f;
         public float StandThreshold { get; } = 1f;
