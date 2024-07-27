@@ -46,7 +46,7 @@ namespace Player.PlayerController
             // 删除视图中所有的内容
             DeleteElements(graphElements);
             graphViewChanged += OnGraphViewChanged;
-            if (playerController.rootNode == null)
+            if (playerController && playerController.rootNode == null)
             {
                 playerController.rootNode = playerController.CreateNode(typeof(Root)) as Root;
                 EditorUtility.SetDirty(playerController);

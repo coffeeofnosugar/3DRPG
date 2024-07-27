@@ -29,7 +29,16 @@ namespace Player
             }
             else
             {
-                _playerStats.VerticalVelocity += PlayerStats.Gravity * Time.deltaTime;
+                if (_playerStats.VerticalVelocity <= 0)
+                {
+                    // 角色在下落时乘以一个系数，以提升手感
+                    _playerStats.VerticalVelocity += PlayerStats.Gravity * PlayerStats.FallMultiplier * Time.deltaTime;
+                }
+                else
+                {
+                    // 上升时保持不变
+                    _playerStats.VerticalVelocity += PlayerStats.Gravity * Time.deltaTime;
+                }
             }
         }
         
@@ -38,14 +47,7 @@ namespace Player
         /// </summary>
         protected void PlayerRotate()
         {
-            var forward = _playerStats.cameraTransform.forward;
-            Vector3 camForwardProjection = new Vector3(forward.x, 0, forward.z).normalized;
-            // 玩家输入（世界向量）
-            Vector3 playerMovement = camForwardProjection * _playerStats.playerInputController.currentMovementInput.y +
-                                     _playerStats.cameraTransform.right * _playerStats.playerInputController.currentMovementInput.x;
-            // 玩家输入（玩家相对向量）
-            playerMovement = _playerStats.transform.InverseTransformVector(playerMovement);
-            
+            Vector3 playerMovement = _playerStats.playerInputController.playerMovement;
             // 获取玩家输入与角色的夹角（弧度）
             float rad = Mathf.Atan2(playerMovement.x, playerMovement.z);
             _playerStats.animator.SetFloat(_playerStats.TurnSpeedHash, rad, .1f, Time.deltaTime);
@@ -188,10 +190,11 @@ namespace Player
 
         public override void UpdateState()
         {
+            // 可能会抖动，取消线性插值
             // 转换成半空姿态
-            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.MidairThreshold, .1f, Time.deltaTime);
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.MidairThreshold);
             // 根据角色向下的速度播放动画
-            _playerStats.animator.SetFloat(_playerStats.VerticalSpeedHash, _playerStats.VerticalVelocity, .1f, Time.deltaTime);
+            _playerStats.animator.SetFloat(_playerStats.VerticalSpeedHash, _playerStats.VerticalVelocity);
             
             base.UpdateState();
             PlayerRotate();

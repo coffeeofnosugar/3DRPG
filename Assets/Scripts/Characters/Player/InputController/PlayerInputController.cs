@@ -7,24 +7,26 @@ namespace Player
     public class PlayerInputController : MonoBehaviour
     {
         public enum InputParameter { Movement, IsRun, IsJump }
-        /// <summary>
-        /// 移动输入
-        /// </summary>
         [Header("input parameter")]
+        private PlayerInput _playerInput;
+        private PlayerStats _playerStats;
+        /// <summary>
+        /// 移动input输入
+        /// </summary>
         public Vector2 currentMovementInput;
+        /// <summary>
+        /// 相对角色的移动方向
+        /// </summary>
+        public Vector3 playerMovement;
         public Vector2 mouseDelta;
         public bool isRun;
         public bool isJump;
         public bool isCrouch;
-        /// <summary>
-        /// 玩家移动方向
-        /// </summary>
-        public Vector3 playerMovement;
-        private PlayerInput _playerInput;
 
         private void Awake()
         {
             _playerInput = new PlayerInput();
+            _playerStats = GetComponent<PlayerStats>();
 
             _playerInput.CharacterControls.Move.started += OnMoveInput;
             _playerInput.CharacterControls.Move.canceled += OnMoveInput;
@@ -44,20 +46,24 @@ namespace Player
             _playerInput.CharacterControls.Crouch.canceled += OnCrouchInput;
         }
 
-        private void OnEnable()
+        private void Update()
         {
-            _playerInput.CharacterControls.Enable();
+            var forward = _playerStats.cameraTransform.forward;
+            Vector3 camForwardProjection = new Vector3(forward.x, 0, forward.z).normalized;
+            // 玩家输入（世界向量）
+            playerMovement = camForwardProjection * currentMovementInput.y +
+                                     _playerStats.cameraTransform.right * currentMovementInput.x;
+            // 玩家输入（玩家相对向量）
+            playerMovement = _playerStats.transform.InverseTransformVector(playerMovement);
         }
 
-        private void OnDisable()
-        {
-            _playerInput.CharacterControls.Disable();
-        }
+        private void OnEnable() { _playerInput.CharacterControls.Enable(); }
+
+        private void OnDisable() { _playerInput.CharacterControls.Disable(); }
         
         #region input event
         
         private void OnMoveInput(InputAction.CallbackContext obj) { currentMovementInput = obj.ReadValue<Vector2>(); }
-
         private void OnLookInput(InputAction.CallbackContext obj) { mouseDelta = obj.ReadValue<Vector2>(); }
         private void OnRunInput(InputAction.CallbackContext obj) { isRun = obj.ReadValueAsButton(); }
         private void OnJumpInput(InputAction.CallbackContext obj) { isJump = obj.ReadValueAsButton(); }
