@@ -8,21 +8,21 @@ namespace Player
     [RequireComponent(typeof(PlayerInputController))]
     public class PlayStateMachine : StateManager<PlayStateMachine.PlayerState>
     {
-        public enum PlayerState { NormalStand, NormalCrouch, NoramlMidair }
+        public enum PlayerState { NormalStand, NormalCrouch, NormalMidair }
 
         [HideInInspector] public PlayerStats characterStats;
 
-        private NormalStandState _normalStandState;
-        private NormalCrouchState _normalCrouchState;
-        private NormalMidairState _normalMidairState;
+        private NormalState _normalStandState;
+        // private NormalCrouchState _normalCrouchState;
+        // private NormalMidairState _normalMidairState;
 
         private void Awake()
         {
             characterStats = GetComponent<PlayerStats>();
             
-            _normalStandState = new NormalStandState(this, PlayerState.NormalStand);
-            _normalCrouchState = new NormalCrouchState(this, PlayerState.NormalCrouch);
-            _normalMidairState = new NormalMidairState(this, PlayerState.NoramlMidair);
+            _normalStandState = new NormalState(this, PlayerState.NormalStand);
+            // _normalCrouchState = new NormalCrouchState(this, PlayerState.NormalCrouch);
+            // _normalMidairState = new NormalMidairState(this, PlayerState.NormalMidair);
             
             CurrentState = EnumTurnToState(PlayerState.NormalStand);
         }
@@ -39,8 +39,8 @@ namespace Player
             BaseState<PlayerState> newState = stateKey switch
             {
                 PlayerState.NormalStand => _normalStandState,
-                PlayerState.NormalCrouch => _normalCrouchState,
-                PlayerState.NoramlMidair => _normalMidairState,
+                // PlayerState.NormalCrouch => _normalCrouchState,
+                // PlayerState.NormalMidair => _normalMidairState,
                 _ => _normalStandState
             };
             return newState;

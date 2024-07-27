@@ -1845,7 +1845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1492217648005994582, guid: 70966ecd6709c8f48b3e7391b8d6b4a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.338
+      value: -0.023
       objectReference: {fileID: 0}
     - target: {fileID: 1492217648005994582, guid: 70966ecd6709c8f48b3e7391b8d6b4a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1883,54 +1883,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4779797910097920556, guid: 70966ecd6709c8f48b3e7391b8d6b4a8, type: 3}
-      propertyPath: m_UpdateMode
+    - target: {fileID: 8369130373064776431, guid: 70966ecd6709c8f48b3e7391b8d6b4a8, type: 3}
+      propertyPath: m_MinMoveDistance
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2305487488703464172, guid: 70966ecd6709c8f48b3e7391b8d6b4a8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 873067132}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70966ecd6709c8f48b3e7391b8d6b4a8, type: 3}
 --- !u!4 &873067112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1492217648005994582, guid: 70966ecd6709c8f48b3e7391b8d6b4a8, type: 3}
   m_PrefabInstance: {fileID: 873067111}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &873067113 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2305487488703464172, guid: 70966ecd6709c8f48b3e7391b8d6b4a8, type: 3}
-  m_PrefabInstance: {fileID: 873067111}
-  m_PrefabAsset: {fileID: 0}
---- !u!143 &873067132
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873067113}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.6
-  m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.03
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1001 &915767308
 PrefabInstance:
   m_ObjectHideFlags: 0

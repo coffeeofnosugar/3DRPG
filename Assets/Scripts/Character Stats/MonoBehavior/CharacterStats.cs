@@ -65,7 +65,6 @@ public abstract class CharacterStats : MonoBehaviour
                 responseDistance = skillData.attackRange > responseDistance ? skillData.attackRange : responseDistance;
                 skillDict.Add(skillData.name, skillData);
                 blackboard.lastAttackTime.Add(skillData.name, 999f);
-                
             }
         }
     }
