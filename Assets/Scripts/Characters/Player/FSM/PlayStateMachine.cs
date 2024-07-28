@@ -6,6 +6,7 @@ namespace Player
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(PlayerStats))]
     [RequireComponent(typeof(PlayerInputController))]
+    [RequireComponent(typeof(CharacterController))]
     public class PlayStateMachine : StateManager<PlayStateMachine.PlayerState>
     {
         public enum PlayerState { NormalStand, NormalCrouch, NormalMidair }
