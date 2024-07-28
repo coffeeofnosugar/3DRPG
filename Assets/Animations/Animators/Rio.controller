@@ -345,7 +345,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: HorizontalSpeed
+  - m_Name: TurnSpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -357,7 +357,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: TurnSpeed
+  - m_Name: JumpRandom
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: HorizontalSpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -600,7 +606,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -864825200672550400, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
     m_Threshold: -5
-    m_Position: {x: 0, y: 0}
+    m_Position: {x: 1, y: -5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: PlayerState
@@ -608,7 +614,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 9111558908952476143, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
     m_Threshold: 0
-    m_Position: {x: 0, y: 0}
+    m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: PlayerState
@@ -616,18 +622,98 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -4469183485442372851, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
     m_Threshold: 5
-    m_Position: {x: 0, y: 0}
+    m_Position: {x: 1, y: 5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: PlayerState
     m_Mirror: 0
-  m_BlendParameter: VerticalSpeed
-  m_BlendParameterY: Blend
+  - serializedVersion: 2
+    m_Motion: {fileID: -864825200672550400, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
+    m_Threshold: 10
+    m_Position: {x: -1, y: -5}
+    m_TimeScale: 1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 1
+  - serializedVersion: 2
+    m_Motion: {fileID: 9111558908952476143, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
+    m_Threshold: 15
+    m_Position: {x: -1, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 1
+  - serializedVersion: 2
+    m_Motion: {fileID: -4469183485442372851, guid: 71d33e607c350cd49bf4ac827f263ae8, type: 3}
+    m_Threshold: 20
+    m_Position: {x: -1, y: 5}
+    m_TimeScale: 1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 1
+  - serializedVersion: 2
+    m_Motion: {fileID: 6234510843852800090, guid: 51dd2e4c869794f75a0df7d54b210214, type: 3}
+    m_Threshold: 25
+    m_Position: {x: 3, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -5059006814000262888, guid: 51dd2e4c869794f75a0df7d54b210214, type: 3}
+    m_Threshold: 30
+    m_Position: {x: 5, y: 3}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 6234510843852800090, guid: 51dd2e4c869794f75a0df7d54b210214, type: 3}
+    m_Threshold: 35
+    m_Position: {x: 4, y: -5}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 6234510843852800090, guid: 51dd2e4c869794f75a0df7d54b210214, type: 3}
+    m_Threshold: 40
+    m_Position: {x: -3, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 1
+  - serializedVersion: 2
+    m_Motion: {fileID: -5059006814000262888, guid: 51dd2e4c869794f75a0df7d54b210214, type: 3}
+    m_Threshold: 45
+    m_Position: {x: -5, y: 3}
+    m_TimeScale: 1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 1
+  - serializedVersion: 2
+    m_Motion: {fileID: 6234510843852800090, guid: 51dd2e4c869794f75a0df7d54b210214, type: 3}
+    m_Threshold: 50
+    m_Position: {x: -4, y: -5}
+    m_TimeScale: 1
+    m_CycleOffset: 0.5
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 1
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400004, guid: 0d9d26e2162aa4d11ab075b34c029673, type: 3}
+    m_Threshold: 55
+    m_Position: {x: 0, y: -10}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: PlayerState
+    m_Mirror: 0
+  m_BlendParameter: JumpRandom
+  m_BlendParameterY: VerticalSpeed
   m_MinThreshold: -5
-  m_MaxThreshold: 5
+  m_MaxThreshold: 55
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 0
+  m_BlendType: 3
 --- !u!206 &6956812789045166737
 BlendTree:
   m_ObjectHideFlags: 1

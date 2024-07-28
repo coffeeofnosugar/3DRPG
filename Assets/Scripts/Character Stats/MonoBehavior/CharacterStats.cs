@@ -33,10 +33,7 @@ public abstract class CharacterStats : MonoBehaviour
 
     public int currentHealth;
 
-    public Dictionary<string, SkillData_SO> skillDict { get; private set; } = new Dictionary<string, SkillData_SO>();
-
-    public float responseDistance;
-    public float responseDistanceSqr => responseDistance * responseDistance;
+    public Dictionary<string, SkillData_SO> SkillDict { get; private set; } = new Dictionary<string, SkillData_SO>();
 
     protected virtual void Awake()
     {
@@ -59,11 +56,9 @@ public abstract class CharacterStats : MonoBehaviour
     {
         if (SkillList.Count != 0)
         {
-            responseDistance = SkillList[0].attackRange;
             foreach (var skillData in SkillList)
             {
-                responseDistance = skillData.attackRange > responseDistance ? skillData.attackRange : responseDistance;
-                skillDict.Add(skillData.name, skillData);
+                SkillDict.Add(skillData.name, skillData);
                 blackboard.lastAttackTime.Add(skillData.name, 999f);
             }
         }
@@ -81,7 +76,7 @@ public abstract class CharacterStats : MonoBehaviour
     {
         if (animatorText != null)
         {
-            if (blackboard.lastAttackTime[animatorText] >= skillDict[animatorText].coolDown && blackboard.distanceTarget <= skillDict[animatorText].attackRange)
+            if (blackboard.lastAttackTime[animatorText] >= SkillDict[animatorText].coolDown && blackboard.distanceTarget <= SkillDict[animatorText].attackRange)
             {
                 return true;
             }
@@ -90,7 +85,7 @@ public abstract class CharacterStats : MonoBehaviour
         {
             foreach (var key in blackboard.lastAttackTime.Keys)
             {
-                if (blackboard.lastAttackTime[key] >= skillDict[key].coolDown && blackboard.distanceTarget <= skillDict[key].attackRange)
+                if (blackboard.lastAttackTime[key] >= SkillDict[key].coolDown && blackboard.distanceTarget <= SkillDict[key].attackRange)
                 {
                     return true;
                 }
@@ -144,7 +139,7 @@ public abstract class CharacterStats : MonoBehaviour
 
     public int DestoryTime => characterData ? characterData.destoryTime : 0;
 
-    private List<SkillData_SO> SkillList => characterData ? characterData.skillList : null;
+    protected List<SkillData_SO> SkillList => characterData ? characterData.skillList : null;
 
     #endregion
 }

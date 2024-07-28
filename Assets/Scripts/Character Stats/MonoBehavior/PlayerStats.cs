@@ -33,13 +33,18 @@ namespace Player
         public float VerticalVelocity;
         
         /// <summary>
-        /// 跳跃速度
+        /// 跳跃的最大高度
         /// </summary>
-        public const float JumpVelocity = 5f;
+        public float JumpMaxHeight = 1.5f;
+
+        /// <summary>
+        /// 跳跃初速度，根据重力学公式 h = v²/2g 计算而来
+        /// </summary>
+        public float JumpVelocity => Mathf.Sqrt(-2 * Gravity * JumpMaxHeight);
 
         #region 落地检测
         
-        public bool isGround;
+        public bool isGrounded;
         public const float GroundCheckOffset = .5f;
         #endregion
 
@@ -58,9 +63,10 @@ namespace Player
         public const float MidairThreshold = 2.1f;
         public int PlayerStateHash { get; } = Animator.StringToHash("PlayerState");
         public int FrontSpeedHash { get; } = Animator.StringToHash("FrontSpeed");
-        public int HorizontalSpeedHash { get; } = Animator.StringToHash("HorizontalSpeed");
-        public int VerticalSpeedHash { get; } = Animator.StringToHash("VerticalSpeed");
         public int TurnSpeedHash { get; } = Animator.StringToHash("TurnSpeed");
+        public int VerticalSpeedHash { get; } = Animator.StringToHash("VerticalSpeed");
+        public int JumpRandomHash { get; } = Animator.StringToHash("JumpRandom");
+        public int HorizontalSpeedHash { get; } = Animator.StringToHash("HorizontalSpeed");
         public int IsFighting { get; } = Animator.StringToHash("isFighting");
         #endregion
 
@@ -74,7 +80,19 @@ namespace Player
 
         private void Update()
         {
-            
+            CheckGround();
+        }
+
+        private void CheckGround()
+        {
+            if (Physics.SphereCast(transform.position + (Vector3.up * GroundCheckOffset), characterController.radius, Vector3.down, out RaycastHit hit, GroundCheckOffset - characterController.radius + 2 * characterController.skinWidth))
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                isGrounded = false;
+            }
         }
     }
 }

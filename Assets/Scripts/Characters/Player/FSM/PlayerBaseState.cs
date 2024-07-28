@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Player
 {
@@ -23,7 +25,7 @@ namespace Player
         /// </summary>
         private void CalculateGravity()
         {
-            if (_playerStats.characterController.isGrounded)
+            if (_playerStats.isGrounded)
             {
                 _playerStats.VerticalVelocity = PlayerStats.Gravity * Time.deltaTime;
             }
@@ -62,8 +64,8 @@ namespace Player
         protected void Jump()
         {
             // 是否能跳跃 && 监听跳跃事件
-            if (_playerStats.characterController.isGrounded && _playerStats.playerInputController.isJump)
-                _playerStats.VerticalVelocity = PlayerStats.JumpVelocity;
+            if (_playerStats.isGrounded && _playerStats.playerInputController.isJump)
+                _playerStats.VerticalVelocity = _playerStats.JumpVelocity;
         }
         
         /// <summary>
@@ -123,7 +125,7 @@ namespace Player
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (!_playerStats.characterController.isGrounded)
+            if (!_playerStats.isGrounded)
             {
                 return PlayStateMachine.PlayerState.NormalMidair;
             }
@@ -167,7 +169,7 @@ namespace Player
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (!_playerStats.characterController.isGrounded)
+            if (!_playerStats.isGrounded)
             {
                 return PlayStateMachine.PlayerState.NormalMidair;
             }
@@ -182,7 +184,28 @@ namespace Player
     public class NormalMidairState : PlayerBaseState
     {
         public NormalMidairState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
-        public override void EnterState() { }
+
+        public override void EnterState()
+        {
+            // 可能会抖动，取消线性插值
+            // 转换成半空姿态
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.MidairThreshold);
+            // 起跳时，随机取一个值，使跳跃播放不同的动画或镜像动画
+            float feetTween = Mathf.Repeat(_playerStats.animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1);
+            feetTween = feetTween < .5f ? 1 : -1;
+            if (_fsm.LastState == PlayStateMachine.PlayerState.NormalStand)
+            {
+                if (_playerStats.playerInputController.isRun)
+                    feetTween *= 3;
+                else if (_playerStats.playerInputController.currentMovementInput.magnitude != 0)
+                    feetTween *= 2;
+                else
+                    feetTween *= Random.Range(.5f, 1f);
+            }
+            else
+                feetTween *= Random.Range(0, .5f);
+            _playerStats.animator.SetFloat(_playerStats.JumpRandomHash, feetTween);
+        }
 
         public override void ExitState() { }
 
@@ -190,12 +213,8 @@ namespace Player
 
         public override void UpdateState()
         {
-            // 可能会抖动，取消线性插值
-            // 转换成半空姿态
-            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.MidairThreshold);
             // 根据角色向下的速度播放动画
             _playerStats.animator.SetFloat(_playerStats.VerticalSpeedHash, _playerStats.VerticalVelocity);
-            
             base.UpdateState();
             PlayerRotate();
         }
@@ -216,7 +235,7 @@ namespace Player
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            if (!_playerStats.characterController.isGrounded)
+            if (!_playerStats.isGrounded)
             {
                 return PlayStateMachine.PlayerState.NormalMidair;
             }
