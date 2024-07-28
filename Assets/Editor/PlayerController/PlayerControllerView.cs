@@ -41,6 +41,8 @@ namespace Player.PlayerController
         }
         public void PopulateView(PlayerController playerController)
         {
+            if (!playerController)
+                return;
             this.controller = playerController;
             graphViewChanged -= OnGraphViewChanged;
             // 删除视图中所有的内容
