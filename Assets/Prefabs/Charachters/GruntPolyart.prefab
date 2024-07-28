@@ -532,8 +532,6 @@ GameObject:
   - component: {fileID: 3782260038521706519}
   - component: {fileID: 4480104491214423326}
   - component: {fileID: 981513098050438194}
-  - component: {fileID: 395329884266562795}
-  - component: {fileID: 2117652509293670198}
   m_Layer: 7
   m_Name: GruntPolyart
   m_TagString: Enemy
@@ -622,44 +620,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &395329884266562795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5435564991144091440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd3f79fb8c1edf48bcfcea8a3866906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  templateData: {fileID: 11400000, guid: 54d26adb977f47149a036637cd24c53f, type: 2}
-  characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 2f2ee6ff86372fb43b9dd5c1f52908c1, type: 2}
-  animator: {fileID: 0}
-  agent: {fileID: 0}
-  coll: {fileID: 0}
-  originPosition: {x: 0, y: 0, z: 0}
-  originRotation: {x: 0, y: 0, z: 0, w: 0}
-  attackTarget: {fileID: 0}
-  lastAttackTime: 0
-  isCritical: 0
-  getHit: 0
-  isDeath: 0
---- !u!114 &2117652509293670198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5435564991144091440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fc1c201bdd86be4b870f1a6dd52ac2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterStats: {fileID: 0}
 --- !u!1 &5716976499121200302
 GameObject:
   m_ObjectHideFlags: 0

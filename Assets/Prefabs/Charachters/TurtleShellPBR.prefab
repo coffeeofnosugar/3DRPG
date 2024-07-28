@@ -799,9 +799,7 @@ GameObject:
   - component: {fileID: 7563847698006924579}
   - component: {fileID: 1569558123407772810}
   - component: {fileID: 659324949286912590}
-  - component: {fileID: 420689552374112775}
   - component: {fileID: 9185559372129064550}
-  - component: {fileID: 6180319549758916543}
   m_Layer: 7
   m_Name: TurtleShellPBR
   m_TagString: Enemy
@@ -869,31 +867,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &420689552374112775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7074633679985495984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd3f79fb8c1edf48bcfcea8a3866906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  templateData: {fileID: 11400000, guid: 7fabd2ad89445df4485e7232cf3558f8, type: 2}
-  characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 3a6f193aa08e30e4da2d355753c836f8, type: 2}
-  animator: {fileID: 0}
-  agent: {fileID: 0}
-  coll: {fileID: 0}
-  originPosition: {x: 0, y: 0, z: 0}
-  originRotation: {x: 0, y: 0, z: 0, w: 0}
-  attackTarget: {fileID: 0}
-  lastAttackTime: 0
-  isCritical: 0
-  getHit: 0
-  isDeath: 0
 --- !u!65 &9185559372129064550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -915,19 +888,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &6180319549758916543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7074633679985495984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda3cb81510d703468e75ffcb9d9617c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterStats: {fileID: 0}
 --- !u!1 &7401251507499756904
 GameObject:
   m_ObjectHideFlags: 0
