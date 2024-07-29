@@ -126,13 +126,9 @@ namespace Player
         public override PlayStateMachine.PlayerState GetNextState()
         {
             if (!_playerStats.isGrounded)
-            {
                 return PlayStateMachine.PlayerState.NormalMidair;
-            }
             else if (_playerStats.playerInputController.isCrouch)
-            {
                 return PlayStateMachine.PlayerState.NormalCrouch;
-            }
             return PlayStateMachine.PlayerState.NormalStand;
         }
     }
@@ -170,13 +166,9 @@ namespace Player
         public override PlayStateMachine.PlayerState GetNextState()
         {
             if (!_playerStats.isGrounded)
-            {
                 return PlayStateMachine.PlayerState.NormalMidair;
-            }
             else if (_playerStats.playerInputController.isCrouch)
-            {
                 return PlayStateMachine.PlayerState.NormalCrouch;
-            }
             return PlayStateMachine.PlayerState.NormalStand;
         }
     }
@@ -236,14 +228,64 @@ namespace Player
         public override PlayStateMachine.PlayerState GetNextState()
         {
             if (!_playerStats.isGrounded)
-            {
                 return PlayStateMachine.PlayerState.NormalMidair;
-            }
-            else if (_playerStats.playerInputController.isCrouch)
+            else
+                return PlayStateMachine.PlayerState.NormalLanding;
+        }
+    }
+
+    public class NormalLandingState : PlayerBaseState
+    {
+        private const float JumpCoolDown = .15f;
+        private float enterTime;
+        
+        private float targetSpeed;
+        public NormalLandingState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
+
+        public override void EnterState()
+        {
+            enterTime = Time.time;
+        }
+
+        public override void ExitState() { }
+
+        public override void FixedUpdate() { }
+        public override void UpdateState()
+        {
+            // 转换成站姿
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.StandThreshold, .1f, Time.deltaTime);
+            
+            // 根据是否奔跑，设置速度
+            targetSpeed = _playerStats.playerInputController.isRun ? _playerStats.RunSpeed : _playerStats.WalkSpeed;
+            _playerStats.animator.SetFloat(_playerStats.FrontSpeedHash, _playerStats.playerInputController.currentMovementInput.magnitude * targetSpeed, .1f, Time.deltaTime);
+            
+            base.UpdateState();
+            // Jump();
+            PlayerRotate();
+        }
+
+        public override void LateUpdate() { }
+
+        public override void OnAnimatorMove()
+        {
+            Vector3 playerDeltaMovement = _playerStats.animator.deltaPosition;
+            playerDeltaMovement.y = _playerStats.VerticalVelocity * Time.deltaTime;
+            _playerStats.characterController.Move(playerDeltaMovement);
+            _playerStats.averageVel = AverageVel(_playerStats.animator.velocity);
+        }
+
+        public override PlayStateMachine.PlayerState GetNextState()
+        {
+            if (Time.time - enterTime >= JumpCoolDown)
             {
-                return PlayStateMachine.PlayerState.NormalCrouch;
+                if (!_playerStats.isGrounded)
+                    return PlayStateMachine.PlayerState.NormalMidair;
+                else if (_playerStats.playerInputController.isCrouch)
+                    return PlayStateMachine.PlayerState.NormalCrouch;
+                else
+                    return PlayStateMachine.PlayerState.NormalStand;
             }
-            return PlayStateMachine.PlayerState.NormalStand;
+            return PlayStateMachine.PlayerState.NormalLanding;
         }
     }
 }
