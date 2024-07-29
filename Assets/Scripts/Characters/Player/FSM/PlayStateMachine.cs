@@ -32,7 +32,6 @@ namespace Player
 
         private new void Update()
         {
-            Debug.Log(CurrentState.StateKey);
             base.Update();
             Debugs.Instance["PlayerState"] = CurrentState.ToString();
             Debugs.Instance["PlayerSpeed"] = characterStats.characterController.velocity.magnitude.ToString("f2");

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
 {
-    protected BaseState<EState> CurrentState;
+    public BaseState<EState> CurrentState;
     public EState LastState { get; private set; }
 
     private void Start() { CurrentState.EnterState(); }

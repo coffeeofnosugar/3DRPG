@@ -25,7 +25,7 @@ namespace Player
         /// </summary>
         private void CalculateGravity()
         {
-            if (_playerStats.isGrounded)
+            if (_fsm.CurrentState.StateKey != PlayStateMachine.PlayerState.NormalMidair)
             {
                 _playerStats.VerticalVelocity = PlayerStats.Gravity * Time.deltaTime;
             }
@@ -63,8 +63,8 @@ namespace Player
         /// </summary>
         protected void Jump()
         {
-            // 是否能跳跃 && 监听跳跃事件
-            if (_playerStats.isGrounded && _playerStats.playerInputController.isJump)
+            // 监听跳跃事件
+            if (_playerStats.playerInputController.isJump)
                 _playerStats.VerticalVelocity = _playerStats.JumpVelocity;
         }
         
@@ -230,7 +230,12 @@ namespace Player
             if (!_playerStats.isGrounded)
                 return PlayStateMachine.PlayerState.NormalMidair;
             else
+            {
+                _playerStats.landingThreshold = Mathf.Clamp(_playerStats.VerticalVelocity, -10, 0);
+                _playerStats.landingThreshold /= 20f;
+                _playerStats.landingThreshold += 1f;
                 return PlayStateMachine.PlayerState.NormalLanding;
+            }
         }
     }
 
@@ -253,7 +258,7 @@ namespace Player
         public override void UpdateState()
         {
             // 转换成站姿
-            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.StandThreshold, .1f, Time.deltaTime);
+            _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, _playerStats.landingThreshold, .1f, Time.deltaTime);
             
             // 根据是否奔跑，设置速度
             targetSpeed = _playerStats.playerInputController.isRun ? _playerStats.RunSpeed : _playerStats.WalkSpeed;

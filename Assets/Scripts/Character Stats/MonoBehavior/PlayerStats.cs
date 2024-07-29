@@ -31,6 +31,8 @@ namespace Player
         /// 角色向下的速度
         /// </summary>
         public float VerticalVelocity;
+
+        public float landingThreshold;
         
         /// <summary>
         /// 跳跃的最大高度
