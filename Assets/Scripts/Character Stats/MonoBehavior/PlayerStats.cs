@@ -47,6 +47,7 @@ namespace Player
         #region 落地检测
         
         public bool isGrounded;
+        public bool isSlope;
         public const float GroundCheckOffset = .5f;
         #endregion
 
@@ -87,8 +88,10 @@ namespace Player
 
         private void CheckGround()
         {
-            if (Physics.SphereCast(transform.position + (Vector3.up * GroundCheckOffset), characterController.radius, Vector3.down, out RaycastHit hit, GroundCheckOffset - characterController.radius + 2 * characterController.skinWidth))
+            if (Physics.SphereCast(transform.position + (Vector3.up * GroundCheckOffset), characterController.radius, Vector3.down, out RaycastHit hit, GroundCheckOffset - characterController.radius + 10 * characterController.skinWidth))
             {
+                // 如果接触到的点的法线不在(0,1,0)的方向上，那么人物就在斜坡上
+                isSlope = hit.normal.y != 1f;
                 isGrounded = true;
             }
             else
@@ -96,5 +99,20 @@ namespace Player
                 isGrounded = false;
             }
         }
+
+        // private void OnDrawGizmos()
+        // {
+        //     var start = transform.position + (Vector3.up * GroundCheckOffset);
+        //     var direction = Vector3.down;
+        //     float radius = characterController.radius;
+        //     float distance = GroundCheckOffset - radius + 10 * characterController.skinWidth;
+        //     
+        //     
+        //     Gizmos.color = Color.yellow;
+        //     Gizmos.DrawSphere(start, radius);
+        //     Gizmos.DrawLine(start, start + direction * distance);
+        //     Vector3 end = start + direction * distance;
+        //     Gizmos.DrawSphere(end, radius);
+        // }
     }
 }

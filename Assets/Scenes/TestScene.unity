@@ -5620,6 +5620,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u53EF\u8389"
       objectReference: {fileID: 0}
+    - target: {fileID: 5066555011734331786, guid: d2374970741898c47b9319fb64c8ea78, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066555011734331786, guid: d2374970741898c47b9319fb64c8ea78, type: 3}
+      propertyPath: m_Center.y
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

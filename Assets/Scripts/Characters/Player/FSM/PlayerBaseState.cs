@@ -27,7 +27,11 @@ namespace Player
         {
             if (_fsm.CurrentState.StateKey != PlayStateMachine.PlayerState.NormalMidair)
             {
-                _playerStats.VerticalVelocity = PlayerStats.Gravity * Time.deltaTime;
+                if (_playerStats.isSlope)
+                    // 当角色在斜坡上时，增加向下的移动速度
+                    _playerStats.VerticalVelocity = PlayerStats.Gravity * 50 * Time.deltaTime;
+                else
+                    _playerStats.VerticalVelocity = PlayerStats.Gravity * Time.deltaTime;
             }
             else
             {
