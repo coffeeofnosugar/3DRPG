@@ -7,7 +7,7 @@ namespace Player
 {
     public class PlayerCamera : MonoBehaviour
     {
-        [SerializeField] private Transform player;
+        private Transform player;
         [SerializeField] private float xOffset = 0.3f;
         [SerializeField] private float yOffset = 0.6f;
         [SerializeField] private float zOffset = 1.9f;
@@ -25,6 +25,7 @@ namespace Player
 
         private void Awake()
         {
+            player = FindObjectOfType<PlayerStats>().transform;
             _characterController = player.GetComponent<CharacterController>();
         }
 

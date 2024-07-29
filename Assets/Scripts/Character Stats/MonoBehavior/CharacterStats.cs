@@ -40,7 +40,12 @@ public abstract class CharacterStats : MonoBehaviour
         if (templateData != null)
             characterData = Instantiate(templateData);
         else
-            Debug.LogError("未配置角色数据");
+        {
+            Debug.LogWarning("未配置角色数据");
+#if UNITY_EDITOR
+            characterData = Instantiate(UnityEditor.AssetDatabase.LoadAssetAtPath<CharacterData_SO>("Assets/Game Data/Monster Data/Player Data.asset"));
+#endif
+        }
         
         animator = GetComponent<Animator>();
 
