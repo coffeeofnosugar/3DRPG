@@ -26,7 +26,7 @@ namespace Player.PlayerController
             switch (key)
             {
                 case PlayerInputController.InputParameter.Movement:
-                    _bool = playerStats.playerInputController.currentMovementInput == vector2Value;
+                    _bool = playerStats.playerInputController.inputMovement == vector2Value;
                     break;
                 case PlayerInputController.InputParameter.IsRun:
                     break;

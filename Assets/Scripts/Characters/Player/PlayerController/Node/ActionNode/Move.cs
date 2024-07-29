@@ -37,10 +37,10 @@ namespace Player.PlayerController
             
             // 获取移动方向向量——相机在水平上的投影
             Vector3 moveDirection =
-                playerStats.cameraTransform.forward * playerStats.playerInputController.currentMovementInput.y + playerStats.cameraTransform.right * playerStats.playerInputController.currentMovementInput.x;
+                playerStats.cameraTransform.forward * playerStats.playerInputController.inputMovement.y + playerStats.cameraTransform.right * playerStats.playerInputController.inputMovement.x;
             moveDirection.y = 0;
             
-            if (playerStats.playerInputController.currentMovementInput.y != 0 || playerStats.playerInputController.currentMovementInput.x != 0)
+            if (playerStats.playerInputController.inputMovement.y != 0 || playerStats.playerInputController.inputMovement.x != 0)
                 playerStats.transform.eulerAngles = Quaternion.LookRotation(moveDirection).eulerAngles;
             
             // playerStats.rigidbody.AddForce(moveDirection.normalized * (currentSpeed * coefficient), ForceMode.Force);

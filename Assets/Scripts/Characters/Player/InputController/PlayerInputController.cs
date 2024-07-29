@@ -1,6 +1,8 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -13,15 +15,22 @@ namespace Player
         /// <summary>
         /// 移动input输入
         /// </summary>
-        public Vector2 currentMovementInput;
+        [ReadOnly, BoxGroup("移动"), LabelText("玩家操作输入")] public Vector2 inputMovement;
+        
         /// <summary>
-        /// 相对角色的移动方向
+        /// 角色的移动方向，以世界为坐标系
         /// </summary>
-        public Vector3 playerMovement;
-        public Vector2 mouseDelta;
-        public bool isRun;
-        public bool isJump;
-        public bool isCrouch;
+        [ReadOnly, BoxGroup("移动"), LabelText("角色移动方向（世界坐标系）")] public Vector3 inputMovementWorld;
+        
+        /// <summary>
+        /// 角色的移动方向，以模型为坐标系
+        /// </summary>
+        [ReadOnly, BoxGroup("移动"), LabelText("角色移动方向（角色坐标系）")] public Vector3 inputMovementPlayer;
+
+        [ReadOnly] public Vector2 mouseDelta;
+        [ReadOnly] public bool isRun;
+        [ReadOnly] public bool isJump;
+        [ReadOnly] public bool isCrouch;
 
         private void Awake()
         {
@@ -51,10 +60,10 @@ namespace Player
             var forward = _playerStats.cameraTransform.forward;
             Vector3 camForwardProjection = new Vector3(forward.x, 0, forward.z).normalized;
             // 玩家输入（世界向量）
-            playerMovement = camForwardProjection * currentMovementInput.y +
-                                     _playerStats.cameraTransform.right * currentMovementInput.x;
+            inputMovementWorld = camForwardProjection * inputMovement.y +
+                                 _playerStats.cameraTransform.right * inputMovement.x;
             // 玩家输入（玩家相对向量）
-            playerMovement = _playerStats.transform.InverseTransformVector(playerMovement);
+            inputMovementPlayer = _playerStats.transform.InverseTransformVector(inputMovementWorld);
         }
 
         private void OnEnable() { _playerInput.CharacterControls.Enable(); }
@@ -63,7 +72,7 @@ namespace Player
         
         #region input event
         
-        private void OnMoveInput(InputAction.CallbackContext obj) { currentMovementInput = obj.ReadValue<Vector2>(); }
+        private void OnMoveInput(InputAction.CallbackContext obj) { inputMovement = obj.ReadValue<Vector2>(); }
         private void OnLookInput(InputAction.CallbackContext obj) { mouseDelta = obj.ReadValue<Vector2>(); }
         private void OnRunInput(InputAction.CallbackContext obj) { isRun = obj.ReadValueAsButton(); }
         private void OnJumpInput(InputAction.CallbackContext obj) { isJump = obj.ReadValueAsButton(); }

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Sirenix.OdinInspector;
 
 namespace Player
 {
@@ -10,53 +10,110 @@ namespace Player
     {
         [HideInInspector] public CharacterController characterController;
         [HideInInspector] public PlayerInputController playerInputController;
-        [HideInInspector] public Transform cameraTransform;
+        [ReadOnly] public Transform cameraTransform;
 
         /// <summary>
         /// 下蹲时的移动速度
         /// </summary>
-        public const float CrouchSpeed = 1.5f;
+        [Title("下蹲移动速度")]
+        [ShowInInspector] public const float CrouchSpeed = 1.5f;
 
+        #region 跳跃
         /// <summary>
         /// 重力，地球重力加速度是-9.8，但是为了提升游戏手感需提高这个值
         /// </summary>
-        public const float Gravity = -15f;
+        [ShowInInspector, FoldoutGroup("跳跃")] public const float Gravity = -15f;
 
         /// <summary>
         /// 为提升跳跃手感，下落的速度需大于起跳速度
         /// </summary>
-        public const float FallMultiplier = 1.5f;
+        [ShowInInspector, FoldoutGroup("跳跃")] public const float FallMultiplier = 1.5f;
         
         /// <summary>
         /// 角色向下的速度
         /// </summary>
-        public float VerticalVelocity;
+        [ReadOnly, FoldoutGroup("跳跃")] public float VerticalVelocity;
 
-        public float landingThreshold;
+        /// <summary>
+        /// 着陆阈值，下落速度计算而来，在着陆时适当的将动画偏向蹲姿
+        /// </summary>
+        [ReadOnly, FoldoutGroup("跳跃")] public float landingThreshold;
         
         /// <summary>
         /// 跳跃的最大高度
         /// </summary>
-        public float JumpMaxHeight = 1.5f;
+        [FoldoutGroup("跳跃")] public float JumpMaxHeight = 1.5f;
 
         /// <summary>
         /// 跳跃初速度，根据重力学公式 h = v²/2g 计算而来
         /// </summary>
-        public float JumpVelocity => Mathf.Sqrt(-2 * Gravity * JumpMaxHeight);
+        [HideInInspector] public float JumpVelocity => Mathf.Sqrt(-2 * Gravity * JumpMaxHeight);
+        #endregion
+
+        #region 翻越
+
+        /// <summary>
+        /// 低于此高度的障碍物不检测是否进行翻越
+        /// </summary>
+        [ShowInInspector, FoldoutGroup("翻越")] public const float LowClimbHeight = .5f;
+
+        /// <summary>
+        /// 翻越检测距离，玩家面朝方在此距离内就能翻墙
+        /// </summary>
+        [ShowInInspector, FoldoutGroup("翻越")] public const float ClimbCheckDistance = 1f;
+
+        /// <summary>
+        /// 比较常用的角度，设置为常量
+        /// </summary>
+        [ShowInInspector, FoldoutGroup("翻越")] public const float ClimbAngel = 45f;
+
+        /// <summary>
+        /// 玩家与墙面的垂直检测距离
+        /// </summary>
+        [ShowInInspector, ReadOnly, FoldoutGroup("翻越")] public static readonly float ClimbDistance = Mathf.Cos(ClimbAngel) * ClimbCheckDistance;
+
+        /// <summary>
+        /// 射线检测高度距离间隔
+        /// </summary>
+        [ShowInInspector, FoldoutGroup("翻越")] public const float CheckHeightInterval = 1f;
+
+        /// <summary>
+        /// 存储四个射线集中的物体
+        /// </summary>
+        [ShowInInspector, ReadOnly, FoldoutGroup("翻越")] public readonly RaycastHit[] HitArray = new RaycastHit[4];
+        
+        public enum ClimbTypeEnum { Jump, Hurd, ClimbLow, ClimbHigh }
+
+        /// <summary>
+        /// 翻墙类型
+        /// </summary>
+        [HideInInspector] public ClimbTypeEnum climbType = ClimbTypeEnum.Jump;
+        #endregion
 
         #region 落地检测
         
-        public bool isGrounded;
-        public bool isSlope;
-        public const float GroundCheckOffset = .5f;
+        /// <summary>
+        /// 是否在地面上
+        /// </summary>
+        [ReadOnly, FoldoutGroup("落地检测")] public bool isGrounded;
+        
+        /// <summary>
+        /// 是否在斜坡上
+        /// </summary>
+        [ReadOnly, FoldoutGroup("落地检测")] public bool isSlope;
+        
+        /// <summary>
+        /// 检测射线起点向上偏移量
+        /// </summary>
+        [ShowInInspector, FoldoutGroup("落地检测")] public const float GroundCheckOffset = .5f;
         #endregion
 
         #region 计算前三帧的平均速度
         
-        public Vector3 averageVel = Vector3.zero;
-        public const int CACHE_SIZE = 3;
-        public Vector3[] velCache = new Vector3[CACHE_SIZE];
-        public int currentCacheIndex = 0;
+        [ReadOnly, FoldoutGroup("计算前三帧的平均速度")] public Vector3 averageVel = Vector3.zero;
+        [ShowInInspector, ReadOnly, FoldoutGroup("计算前三帧的平均速度")]public const int CACHE_SIZE = 3;
+        [ReadOnly, FoldoutGroup("计算前三帧的平均速度")] public Vector3[] velCache = new Vector3[CACHE_SIZE];
+        [ReadOnly, FoldoutGroup("计算前三帧的平均速度")] public int currentCacheIndex = 0;
         #endregion
 
         #region 获取动画哈希值
@@ -70,7 +127,9 @@ namespace Player
         public int VerticalSpeedHash { get; } = Animator.StringToHash("VerticalSpeed");
         public int JumpRandomHash { get; } = Animator.StringToHash("JumpRandom");
         public int HorizontalSpeedHash { get; } = Animator.StringToHash("HorizontalSpeed");
-        public int IsFighting { get; } = Animator.StringToHash("isFighting");
+        public int IsClimbHash { get; } = Animator.StringToHash("isClimb");
+        public int ClimbTypeHash { get; } = Animator.StringToHash("ClimbType");
+        public int IsFightingHash { get; } = Animator.StringToHash("isFighting");
         #endregion
 
         protected override void Awake()
@@ -100,19 +159,32 @@ namespace Player
             }
         }
 
-        // private void OnDrawGizmos()
-        // {
-        //     var start = transform.position + (Vector3.up * GroundCheckOffset);
-        //     var direction = Vector3.down;
-        //     float radius = characterController.radius;
-        //     float distance = GroundCheckOffset - radius + 10 * characterController.skinWidth;
-        //     
-        //     
-        //     Gizmos.color = Color.yellow;
-        //     Gizmos.DrawSphere(start, radius);
-        //     Gizmos.DrawLine(start, start + direction * distance);
-        //     Vector3 end = start + direction * distance;
-        //     Gizmos.DrawSphere(end, radius);
-        // }
+        private void OnDrawGizmos()
+        {
+            #region 地面检测
+            // var start = transform.position + (Vector3.up * GroundCheckOffset);
+            // var direction = Vector3.down;
+            // float radius = characterController.radius;
+            // float distance = GroundCheckOffset - radius + 10 * characterController.skinWidth;
+            //
+            //
+            // Gizmos.color = Color.yellow;
+            // Gizmos.DrawSphere(start, radius);
+            // Gizmos.DrawLine(start, start + direction * distance);
+            // Vector3 end = start + direction * distance;
+            // Gizmos.DrawSphere(end, radius);
+            #endregion
+
+            #region 翻墙检测
+            
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(HitArray[2].point + Vector3.up * CheckHeightInterval, Vector3.down);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(HitArray[1].point + Vector3.up * CheckHeightInterval, Vector3.down);
+            Gizmos.color = Color.black;
+            Gizmos.DrawLine(HitArray[0].point + Vector3.up * CheckHeightInterval, Vector3.down);
+
+            #endregion
+        }
     }
 }

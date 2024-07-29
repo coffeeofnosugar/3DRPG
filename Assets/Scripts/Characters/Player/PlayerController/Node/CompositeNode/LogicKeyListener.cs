@@ -83,7 +83,7 @@ namespace Player.PlayerController
             switch (checkKeyAction)
             {
                 case KeyAction.Move:
-                    var movement = playerInputController.currentMovementInput;
+                    var movement = playerInputController.inputMovement;
                     if (movement.x != 0 || movement.y != 0)
                         return State.Running;
                     break;

@@ -1,22 +1,26 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 
 public abstract class CharacterStats : MonoBehaviour
 {
-    [SerializeField] private CharacterData_SO templateData;
-    private CharacterData_SO characterData;
-    public Blackboard blackboard;
-    
     [HideInInspector] public Animator animator;
     [HideInInspector] public new Transform transform;
-    
-    // 出生点
-    [HideInInspector] public Vector3 originPosition;
-    [HideInInspector] public Quaternion originRotation;
-    
-    public bool _getHit;
 
+    [SerializeField, FoldoutGroup("CharacterStats")] private CharacterData_SO templateData;
+    [ShowInInspector, ReadOnly, FoldoutGroup("CharacterStats")] private CharacterData_SO characterData;
+    
+    [Title("黑板状态")]
+    [ShowInInspector, FoldoutGroup("CharacterStats")] public Blackboard blackboard;
+    
+    [Title("出生点")]
+    [ReadOnly, FoldoutGroup("CharacterStats")] public Vector3 originPosition;
+    [ReadOnly, FoldoutGroup("CharacterStats")] public Quaternion originRotation;
+    
+    [Title("状态")]
+    [FoldoutGroup("CharacterStats")] public int currentHealth;
+    [ReadOnly, FoldoutGroup("CharacterStats")] public bool _getHit;
     public bool GetHit
     {
         get => _getHit;
@@ -29,11 +33,10 @@ public abstract class CharacterStats : MonoBehaviour
             }
         }
     }
-    public bool isDeath;
+    [FoldoutGroup("CharacterStats")] public bool isDeath;
 
-    public int currentHealth;
-
-    public Dictionary<string, SkillData_SO> SkillDict { get; private set; } = new Dictionary<string, SkillData_SO>();
+    [Title("技能")]
+    [ShowInInspector, ReadOnly, FoldoutGroup("CharacterStats")] public Dictionary<string, SkillData_SO> SkillDict { get; private set; } = new Dictionary<string, SkillData_SO>();
 
     protected virtual void Awake()
     {
