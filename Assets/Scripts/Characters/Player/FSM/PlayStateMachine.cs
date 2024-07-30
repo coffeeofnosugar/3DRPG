@@ -1,4 +1,5 @@
 using System;
+using Tools.CoffeeTools;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -36,8 +37,10 @@ namespace Player
         private new void Update()
         {
             base.Update();
-            Debugs.Instance["PlayerState"] = CurrentState.ToString();
-            Debugs.Instance["PlayerSpeed"] = playerStats.characterController.velocity.magnitude.ToString("f2");
+            // Debugs.Instance["PlayerState"] = CurrentState.ToString();
+            // Debugs.Instance["PlayerSpeed"] = playerStats.characterController.velocity.magnitude.ToString("f2");
+            Debugs.UpdateLogText["PlayerState"] = CurrentState.ToString();
+            Debugs.UpdateLogText["PlayerSpeed"] = playerStats.characterController.velocity.magnitude.ToString("f2");
         }
         
         protected override BaseState<PlayerState> EnumTurnToState(PlayerState stateKey)

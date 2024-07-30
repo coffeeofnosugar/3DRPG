@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Tools.CoffeeTools;
 
 namespace Player
 {
@@ -136,12 +137,13 @@ namespace Player
 
         protected override void Awake()
         {
-            Debugs.Instance["玩家初始化"] = string.Empty;
+            Debugs.Show("玩家初始化...");
             base.Awake();
             characterController = GetComponent<CharacterController>();
             playerInputController = GetComponent<PlayerInputController>();
             cameraTransform = Camera.main.transform;
-            Debugs.Instance["玩家初始化"] = "Done";
+            Debugs.Show("玩家初始化...Done");
+            Debugs.Show("PlayerName: " + name);
         }
 
         private void Update()

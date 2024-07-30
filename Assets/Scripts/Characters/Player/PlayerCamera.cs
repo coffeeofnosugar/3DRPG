@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tools.CoffeeTools;
 using UnityEngine;
 
 namespace Player
@@ -26,13 +27,12 @@ namespace Player
 
         private void Awake()
         {
-            Debugs.Instance["相机初始化"] = string.Empty;
+            Debugs.Show("相机初始化...");
             if (player == null)
                 player = FindObjectOfType<PlayerStats>().transform;
-            Debugs.Instance["Name"] = player.name;
             _characterController = player.GetComponent<CharacterController>();
             
-            Debugs.Instance["相机初始化"] = "Done";
+            Debugs.Show("相机初始化...Done");
         }
 
         private void LateUpdate()
