@@ -50,37 +50,37 @@ namespace Player
         [HideInInspector] public float JumpVelocity => Mathf.Sqrt(-2 * Gravity * JumpMaxHeight);
         #endregion
 
-        #region 翻越
+        #region 攀爬
 
         /// <summary>
-        /// 低于此高度的障碍物不检测是否进行翻越
+        /// 低于此高度的障碍物不检测是否进行攀爬
         /// </summary>
-        [ShowInInspector, FoldoutGroup("翻越")] public const float LowClimbHeight = .5f;
+        [ShowInInspector, FoldoutGroup("攀爬")] public const float LowClimbHeight = .5f;
 
         /// <summary>
-        /// 翻越检测距离，玩家面朝方在此距离内就能翻墙
+        /// 攀爬检测距离，玩家面朝方在此距离内就能翻墙
         /// </summary>
-        [ShowInInspector, FoldoutGroup("翻越")] public const float ClimbCheckDistance = 1f;
+        [ShowInInspector, FoldoutGroup("攀爬")] public const float ClimbCheckDistance = 1f;
 
         /// <summary>
         /// 比较常用的角度，设置为常量
         /// </summary>
-        [ShowInInspector, FoldoutGroup("翻越")] public const float ClimbAngel = 45f;
+        [ShowInInspector, FoldoutGroup("攀爬")] public const float ClimbAngel = 45f;
 
         /// <summary>
         /// 玩家与墙面的垂直检测距离
         /// </summary>
-        [ShowInInspector, ReadOnly, FoldoutGroup("翻越")] public static readonly float ClimbDistance = Mathf.Cos(ClimbAngel) * ClimbCheckDistance;
+        [ShowInInspector, ReadOnly, FoldoutGroup("攀爬")] public static readonly float ClimbDistance = Mathf.Cos(ClimbAngel) * ClimbCheckDistance;
 
         /// <summary>
         /// 射线检测高度距离间隔
         /// </summary>
-        [ShowInInspector, FoldoutGroup("翻越")] public const float CheckHeightInterval = 1f;
+        [ShowInInspector, FoldoutGroup("攀爬")] public const float CheckHeightInterval = 1f;
 
         /// <summary>
         /// 存储四个射线集中的物体
         /// </summary>
-        [ShowInInspector, ReadOnly, FoldoutGroup("翻越")] public readonly RaycastHit[] HitArray = new RaycastHit[4];
+        [ShowInInspector, ReadOnly, FoldoutGroup("攀爬")] public readonly RaycastHit[] HitArray = new RaycastHit[4];
         
         public enum ClimbTypeEnum { Jump, Hurd, ClimbLow, ClimbHigh }
 
@@ -88,6 +88,8 @@ namespace Player
         /// 翻墙类型
         /// </summary>
         [HideInInspector] public ClimbTypeEnum climbType = ClimbTypeEnum.Jump;
+
+        [ReadOnly, FoldoutGroup("攀爬")] public Vector3 ledge;
         #endregion
 
         #region 落地检测
@@ -177,12 +179,8 @@ namespace Player
 
             #region 翻墙检测
             
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(HitArray[2].point + Vector3.up * CheckHeightInterval, Vector3.down);
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(HitArray[1].point + Vector3.up * CheckHeightInterval, Vector3.down);
-            Gizmos.color = Color.black;
-            Gizmos.DrawLine(HitArray[0].point + Vector3.up * CheckHeightInterval, Vector3.down);
+            Gizmos.color = Color.green;
+            // Gizmos.Draw
 
             #endregion
         }

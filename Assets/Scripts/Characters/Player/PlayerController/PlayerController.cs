@@ -59,7 +59,6 @@ namespace Player.PlayerController
         }
 
 #if UNITY_EDITOR
-        #region Îªview·þÎñ
         public Node CreateNode(System.Type type)
         {
             Node node = ScriptableObject.CreateInstance(type) as Node;
@@ -155,6 +154,7 @@ namespace Player.PlayerController
                 EditorUtility.SetDirty(whetherNode);
             }
         }
+#endif
 
         public List<Node> GetChildren(Node parent)
         {
@@ -184,7 +184,5 @@ namespace Player.PlayerController
             }
             return children;
         }
-        #endregion
-#endif
     }
 }

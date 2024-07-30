@@ -10,7 +10,7 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayStateMachine : StateManager<PlayStateMachine.PlayerState>
     {
-        public enum PlayerState { NormalStand, NormalCrouch, NormalMidair, NormalLanding, NormalClimbState }
+        public enum PlayerState { NormalStand, NormalCrouch, NormalMidair, NormalLanding, NormalClimb }
 
         [HideInInspector] public PlayerStats playerStats;
 
@@ -28,7 +28,7 @@ namespace Player
             _normalCrouchState = new NormalCrouchState(this, PlayerState.NormalCrouch);
             _normalMidairState = new NormalMidairState(this, PlayerState.NormalMidair);
             _normalLandingState = new NormalLandingState(this, PlayerState.NormalLanding);
-            _normalClimbState = new NormalClimbState(this, PlayerState.NormalClimbState);
+            _normalClimbState = new NormalClimbState(this, PlayerState.NormalClimb);
             
             CurrentState = EnumTurnToState(PlayerState.NormalStand);
         }
@@ -48,8 +48,8 @@ namespace Player
                 PlayerState.NormalCrouch => _normalCrouchState,
                 PlayerState.NormalMidair => _normalMidairState,
                 PlayerState.NormalLanding => _normalLandingState,
-                PlayerState.NormalClimbState => _normalClimbState,
-                _ => _normalStandState
+                PlayerState.NormalClimb => _normalClimbState,
+                _ => throw new ArgumentOutOfRangeException()
             };
             return newState;
         }

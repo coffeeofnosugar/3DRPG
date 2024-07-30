@@ -13,7 +13,7 @@ namespace BehaviourTree
         {
             if (blackboard.target)
             {
-                if (monsterStats.CouldAttack(animatorParameter))
+                if (!monsterStats.CouldAttack(animatorParameter))
                 {
                     _flag = true;
                     return;

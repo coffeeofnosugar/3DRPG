@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -100,7 +99,6 @@ namespace BehaviourTree
 
 
 #if UNITY_EDITOR
-        #region 为视图服务的方法
 
         /// <summary>
         /// 创建节点ScriptableObject类
@@ -203,6 +201,7 @@ namespace BehaviourTree
                 EditorUtility.SetDirty(decorator);
             }
         }
+#endif
 
         public List<Node> GetChildren(Node parent)
         {
@@ -227,7 +226,5 @@ namespace BehaviourTree
             }
             return children;
         }
-        #endregion
-#endif
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player
@@ -8,9 +9,9 @@ namespace Player
     public class PlayerCamera : MonoBehaviour
     {
         private Transform player;
-        [SerializeField] private float xOffset = 0.3f;
-        [SerializeField] private float yOffset = 0.6f;
-        [SerializeField] private float zOffset = 1.9f;
+        [SerializeField, BoxGroup("相机偏移量")] private float xOffset = 0.3f;
+        [SerializeField, BoxGroup("相机偏移量")] private float yOffset = 0.6f;
+        [SerializeField, BoxGroup("相机偏移量")] private float zOffset = 1.9f;
         /// <summary>
         /// 摄像机速度
         /// </summary>
@@ -26,6 +27,7 @@ namespace Player
         private void Awake()
         {
             player = FindObjectOfType<PlayerStats>().transform;
+            Debugs.Instance["player"] = player.name;
             _characterController = player.GetComponent<CharacterController>();
         }
 

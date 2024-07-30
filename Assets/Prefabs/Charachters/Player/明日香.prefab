@@ -2281,7 +2281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcc0f40eaf1e954d888e9ae13e4433b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateData: {fileID: 0}
+  animator: {fileID: 0}
+  transform: {fileID: 0}
+  templateData: {fileID: 11400000, guid: c60e3730ef32eb548977286265366c34, type: 2}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -2289,19 +2291,18 @@ MonoBehaviour:
     isAttacking: 0
     getHit: 0
     isDeath: 0
-  animator: {fileID: 0}
-  transform: {fileID: 0}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0, w: 0}
+  currentHealth: 0
   _getHit: 0
   isDeath: 0
-  currentHealth: 0
   characterController: {fileID: 0}
   playerInputController: {fileID: 0}
   cameraTransform: {fileID: 0}
   VerticalVelocity: 0
   landingThreshold: 0
   JumpMaxHeight: 1.5
+  climbType: 0
   isGrounded: 0
   isSlope: 0
   averageVel: {x: 0, y: 0, z: 0}
@@ -2322,8 +2323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2e16d5743ed914aae54c5f09195745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMovementInput: {x: 0, y: 0}
-  playerMovement: {x: 0, y: 0, z: 0}
+  inputMovement: {x: 0, y: 0}
+  inputMovementWorld: {x: 0, y: 0, z: 0}
+  inputMovementPlayer: {x: 0, y: 0, z: 0}
   mouseDelta: {x: 0, y: 0}
   isRun: 0
   isJump: 0
@@ -2366,7 +2368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9ed4047fe299442ae234f32a07b3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
 --- !u!4 &6769594944636266264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8532612927279078748, guid: 3c057ac3c5f8b2048b7b7a276926b550, type: 3}

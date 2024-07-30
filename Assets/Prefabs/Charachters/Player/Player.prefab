@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.53
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.48
+      value: -6.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51,6 +51,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_Controller
@@ -101,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcc0f40eaf1e954d888e9ae13e4433b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  transform: {fileID: 0}
   templateData: {fileID: 11400000, guid: c60e3730ef32eb548977286265366c34, type: 2}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -109,19 +115,26 @@ MonoBehaviour:
     isAttacking: 0
     getHit: 0
     isDeath: 0
-  animator: {fileID: 0}
-  transform: {fileID: 0}
   originPosition: {x: 0, y: 0, z: 0}
   originRotation: {x: 0, y: 0, z: 0, w: 0}
+  currentHealth: 0
   _getHit: 0
   isDeath: 0
-  currentHealth: 0
-  responseDistance: 0
   characterController: {fileID: 0}
   playerInputController: {fileID: 0}
   cameraTransform: {fileID: 0}
   VerticalVelocity: 0
-  JumpVelocity: 5
+  landingThreshold: 0
+  JumpMaxHeight: 1.5
+  climbType: 0
+  isGrounded: 0
+  isSlope: 0
+  averageVel: {x: 0, y: 0, z: 0}
+  velCache:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  currentCacheIndex: 0
 --- !u!114 &6064248532016198808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,12 +147,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2e16d5743ed914aae54c5f09195745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMovementInput: {x: 0, y: 0}
+  inputMovement: {x: 0, y: 0}
+  inputMovementWorld: {x: 0, y: 0, z: 0}
+  inputMovementPlayer: {x: 0, y: 0, z: 0}
   mouseDelta: {x: 0, y: 0}
   isRun: 0
   isJump: 0
   isCrouch: 0
-  playerMovement: {x: 0, y: 0, z: 0}
 --- !u!114 &7112886992544416004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9ed4047fe299442ae234f32a07b3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 0}
+  playerStats: {fileID: 0}
 --- !u!143 &8369130373064776431
 CharacterController:
   m_ObjectHideFlags: 0
@@ -190,5 +204,5 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.03
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.8, z: 0}

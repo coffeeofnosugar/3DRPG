@@ -9,10 +9,16 @@ public class MouseManager : UnitySingleton<MouseManager>
 
     [SerializeField] private Texture2D Point, Doorway, Attack, Target, Arrow;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+
     private void Update()
     {
-        SetCursorTexture();
-        MouseControl();
+        // SetCursorTexture();
+        // MouseControl();
     }
 
     private void SetCursorTexture()
