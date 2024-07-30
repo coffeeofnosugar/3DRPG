@@ -54,6 +54,9 @@ namespace BehaviourTree
         /// <param name="tree"></param>
         internal void PopulateView(BehaviourTree tree)
         {
+            if (!tree)
+                return;
+            
             this.tree = tree;
 
             graphViewChanged -= OnGraphViewChanged;

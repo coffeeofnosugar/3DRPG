@@ -4716,6 +4716,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1155751738780759494, guid: 66b7f272c5ec349bf92a241d13d7d567, type: 3}
   m_PrefabInstance: {fileID: 1836616463}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1862091423 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6047989058635932247, guid: 63a58365a606dcd4cbec2590039b7bc9, type: 3}
+  m_PrefabInstance: {fileID: 3090695145459411494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1865338460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5858,6 +5863,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1264976801638902886, guid: 082e08a59a7156f489c2a785ac6db3aa, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1862091423}
     - target: {fileID: 2317549440587691813, guid: 082e08a59a7156f489c2a785ac6db3aa, type: 3}
       propertyPath: m_Name
       value: Main Camera

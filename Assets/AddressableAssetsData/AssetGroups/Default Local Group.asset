@@ -16,17 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 1cb7462228370a94bb41b37706f6bbfa
-  m_SerializeEntries:
-  - m_GUID: 27692111de2f3514e8c9e1b6ecb6f224
-    m_Address: Assets/Prefabs/Sphere.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0e07ba29be736a942943be39bcb6626b
-    m_Address: Assets/Prefabs/Cube.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e569cebfaca8adb48ad9a9a29d86b073, type: 2}
   m_SchemaSet:

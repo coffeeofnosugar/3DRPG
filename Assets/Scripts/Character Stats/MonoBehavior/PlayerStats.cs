@@ -136,10 +136,12 @@ namespace Player
 
         protected override void Awake()
         {
+            Debugs.Instance["玩家初始化"] = string.Empty;
             base.Awake();
             characterController = GetComponent<CharacterController>();
             playerInputController = GetComponent<PlayerInputController>();
             cameraTransform = Camera.main.transform;
+            Debugs.Instance["玩家初始化"] = "Done";
         }
 
         private void Update()

@@ -8,7 +8,7 @@ namespace Player
 {
     public class PlayerCamera : MonoBehaviour
     {
-        private Transform player;
+        [SerializeField] private Transform player;
         [SerializeField, BoxGroup("相机偏移量")] private float xOffset = 0.3f;
         [SerializeField, BoxGroup("相机偏移量")] private float yOffset = 0.6f;
         [SerializeField, BoxGroup("相机偏移量")] private float zOffset = 1.9f;
@@ -26,9 +26,13 @@ namespace Player
 
         private void Awake()
         {
-            player = FindObjectOfType<PlayerStats>().transform;
-            Debugs.Instance["player"] = player.name;
+            Debugs.Instance["相机初始化"] = string.Empty;
+            if (player == null)
+                player = FindObjectOfType<PlayerStats>().transform;
+            Debugs.Instance["Name"] = player.name;
             _characterController = player.GetComponent<CharacterController>();
+            
+            Debugs.Instance["相机初始化"] = "Done";
         }
 
         private void LateUpdate()
