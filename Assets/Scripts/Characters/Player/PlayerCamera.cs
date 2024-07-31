@@ -28,10 +28,18 @@ namespace Player
         private void Awake()
         {
             Debugs.Show("相机初始化...");
-            if (player == null)
-                player = FindObjectOfType<PlayerStats>().transform;
-            _characterController = player.GetComponent<CharacterController>();
-            
+            try
+            {
+                if (player == null)
+                    player = FindObjectOfType<PlayerStats>().transform;
+                _characterController = player.GetComponent<CharacterController>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Debugs.Show("相机初始化...失败");
+                throw;
+            }
             Debugs.Show("相机初始化...Done");
         }
 

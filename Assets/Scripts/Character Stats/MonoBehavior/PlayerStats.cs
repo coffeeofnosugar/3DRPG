@@ -74,6 +74,12 @@ namespace Player
         [ShowInInspector, ReadOnly, FoldoutGroup("攀爬")] public static readonly float ClimbDistance = Mathf.Cos(ClimbAngel) * ClimbCheckDistance;
 
         /// <summary>
+        /// 墙面法线
+        /// </summary>
+        [ReadOnly, FoldoutGroup("攀爬")] public Vector3 ClimbHitNormal;
+
+        [FoldoutGroup("攀爬")] public float ClimbLowBackDistance;
+        /// <summary>
         /// 射线检测高度距离间隔
         /// </summary>
         [ShowInInspector, FoldoutGroup("攀爬")] public const float CheckHeightInterval = 1f;
@@ -90,6 +96,9 @@ namespace Player
         /// </summary>
         [HideInInspector] public ClimbTypeEnum climbType = ClimbTypeEnum.Jump;
 
+        /// <summary>
+        /// 攀爬的位置
+        /// </summary>
         [ReadOnly, FoldoutGroup("攀爬")] public Vector3 ledge;
         #endregion
 
@@ -131,6 +140,11 @@ namespace Player
         public int JumpRandomHash { get; } = Animator.StringToHash("JumpRandom");
         public int HorizontalSpeedHash { get; } = Animator.StringToHash("HorizontalSpeed");
         public int IsClimbHash { get; } = Animator.StringToHash("isClimb");
+        /// <summary>
+        ///  0: 翻越
+        ///  1: 低位攀爬
+        ///  2: 高位攀爬
+        /// </summary>
         public int ClimbTypeHash { get; } = Animator.StringToHash("ClimbType");
         public int IsFightingHash { get; } = Animator.StringToHash("isFighting");
         #endregion
@@ -167,6 +181,7 @@ namespace Player
 
         private void OnDrawGizmos()
         {
+            Transform transform = ((Component)this).transform;
             #region 地面检测
             // var start = transform.position + (Vector3.up * GroundCheckOffset);
             // var direction = Vector3.down;
@@ -184,7 +199,9 @@ namespace Player
             #region 翻墙检测
             
             Gizmos.color = Color.green;
-            // Gizmos.Draw
+            Gizmos.DrawLine(transform.position + Vector3.up * LowClimbHeight, transform.position + Vector3.up * LowClimbHeight + transform.forward * ClimbDistance);
+            Gizmos.DrawLine(transform.position + Vector3.up * (LowClimbHeight + CheckHeightInterval),
+                transform.position + Vector3.up * (LowClimbHeight + CheckHeightInterval) + transform.forward * ClimbDistance);
 
             #endregion
         }

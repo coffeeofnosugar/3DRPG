@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,16 +12,19 @@ namespace Tools.CoffeeTools
         [SerializeField] private GameObject _textPrefab;
         [SerializeField] private TMP_Text updateText;
         public static UpdateLogText UpdateLogText;
+        public enum DebugTypeEnum { Normal, WithoutUnityDebug }
 
         private void Awake()
         {
             UpdateLogText = new UpdateLogText(updateText);
         }
 
-        public static void Show(string log)
+        public static void Show(object log, DebugTypeEnum type = DebugTypeEnum.WithoutUnityDebug)
         {
-            GameObject obj = Instantiate(Debugs.Instance._textPrefab, Debugs.Instance._scrollViewContent);
-            obj.GetComponent<Text>().text = log;
+            GameObject obj = Instantiate(Instance._textPrefab, Instance._scrollViewContent);
+            obj.GetComponent<Text>().text = log.ToString();
+            if (type != DebugTypeEnum.WithoutUnityDebug)
+                Debug.Log(log);
         }
     }
 
@@ -35,15 +36,15 @@ namespace Tools.CoffeeTools
 
         private StringBuilder _stringBuilder;
         
-        public string this[string key]
+        public object this[string key]
         {
             get => _data[key];
             set
             {
                 if (_data.ContainsKey(key))
-                    _data[key] = value;
+                    _data[key] = value.ToString();
                 else
-                    _data.Add(key, value);
+                    _data.Add(key, value.ToString());
                 UpdateContent();
             }
         }

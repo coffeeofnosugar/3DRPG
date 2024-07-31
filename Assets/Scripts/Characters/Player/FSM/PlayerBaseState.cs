@@ -1,4 +1,5 @@
 using System;
+using Tools.CoffeeTools;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -85,11 +86,14 @@ namespace Player
         private PlayerStats.ClimbTypeEnum ClimbDetect(Transform _playerTransform, Vector3 _playerMovementWorld, float _offset)
         {
             // 朝玩家的朝向发射射线
-            if (Physics.Raycast(_playerTransform.position + Vector3.up * PlayerStats.LowClimbHeight, _playerTransform.forward, out RaycastHit hit, PlayerStats.ClimbCheckDistance + _offset))
+            if (Physics.Raycast(_playerTransform.position + Vector3.up * PlayerStats.LowClimbHeight,
+                    _playerTransform.forward, out RaycastHit hit,
+                    PlayerStats.ClimbCheckDistance + _offset))
             {
-                Vector3 climbHitNormal = hit.normal;
+                _playerStats.ClimbHitNormal = hit.normal;
                 // 计算墙体的法线与玩家前方的向量的角度是否大于45度  或  玩家的输入方向同理
-                if (Vector3.Angle(-climbHitNormal, _playerTransform.forward) > PlayerStats.ClimbAngel || Vector3.Angle(-climbHitNormal, _playerMovementWorld) > PlayerStats.ClimbAngel + Mathf.Cos(_offset))
+                if (Vector3.Angle(-_playerStats.ClimbHitNormal, _playerTransform.forward) > PlayerStats.ClimbAngel
+                    || Vector3.Angle(-_playerStats.ClimbHitNormal, _playerMovementWorld) > PlayerStats.ClimbAngel + Mathf.Cos(_offset))
                 {
                     return PlayerStats.ClimbTypeEnum.Jump;
                 }
@@ -107,7 +111,10 @@ namespace Player
                      *   墙墙墙墙  人
                     */
                     // 以向上1距离为间隔，玩家连续发射垂直墙面的4个射线
-                    if (Physics.Raycast(_playerTransform.position + Vector3.up * (PlayerStats.LowClimbHeight - i * PlayerStats.CheckHeightInterval), -climbHitNormal, out RaycastHit hitInfo, PlayerStats.ClimbDistance + Mathf.Cos(_offset)))
+                    if (Physics.Raycast(_playerTransform.position + Vector3.up * (PlayerStats.LowClimbHeight + i * PlayerStats.CheckHeightInterval),
+                            -_playerStats.ClimbHitNormal,
+                            out RaycastHit hitInfo,
+                            PlayerStats.ClimbDistance + Mathf.Cos(_offset)))
                     {
                         _playerStats.HitArray[i] = hitInfo;
                         // 如果4条射线都检测到了，就无法翻越，正常跳跃
@@ -120,16 +127,22 @@ namespace Player
                         break;
                     }
                     // 射线⑤：从上一次命中物体的正上方朝下发射射线，获取到玩家攀爬的位置
-                    else if (Physics.Raycast(_playerStats.HitArray[i-1].point + Vector3.up * PlayerStats.CheckHeightInterval, Vector3.down, out RaycastHit h, PlayerStats.CheckHeightInterval))
+                    else if (Physics.Raycast(_playerStats.HitArray[i - 1].point + Vector3.up * PlayerStats.CheckHeightInterval,
+                                 Vector3.down, out RaycastHit h,
+                                 PlayerStats.CheckHeightInterval))
                     {
                         _playerStats.ledge = h.point;
                         // 射线⑥：将上个射线稍微向前移动一点，检测是翻越还是攀爬
-                        if (Physics.Raycast(_playerStats.HitArray[i-1].point + Vector3.up * PlayerStats.CheckHeightInterval - climbHitNormal * .2f, Vector3.down, PlayerStats.CheckHeightInterval))
+                        if (Physics.Raycast(_playerStats.HitArray[i - 1].point + Vector3.up * PlayerStats.CheckHeightInterval - _playerStats.ClimbHitNormal * .2f, 
+                                Vector3.down,
+                                PlayerStats.CheckHeightInterval))
                             // 墙面在①和②之间低位攀爬
                             return i == 1 ? PlayerStats.ClimbTypeEnum.ClimbLow : PlayerStats.ClimbTypeEnum.ClimbHigh;
                         else
                             return PlayerStats.ClimbTypeEnum.Hurd;
                     }
+                    else
+                        return PlayerStats.ClimbTypeEnum.ClimbLow;
                 }
             }
             return PlayerStats.ClimbTypeEnum.Jump;
@@ -212,9 +225,19 @@ namespace Player
     public class NormalCrouchState : PlayerBaseState
     {
         public NormalCrouchState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
-        public override void EnterState() { }
 
-        public override void ExitState() { }
+        public override void EnterState()
+        {
+            _playerStats.characterController.height = .8f;
+            _playerStats.characterController.center = new Vector3(0, .4f, 0);
+        }
+
+        public override void ExitState()
+        {
+            _playerStats.characterController.height = 1.6f;
+            _playerStats.characterController.center = new Vector3(0, .8f, 0);
+            
+        }
 
         public override void FixedUpdate() { }
 
@@ -372,11 +395,26 @@ namespace Player
 
     public class NormalClimbState : PlayerBaseState
     {
+        /// <summary>
+        /// 低位攀爬时，左手对齐位置
+        /// </summary>
+        private Vector3 _climbLowLeftHand;
+
+        /// <summary>
+        /// 高位攀爬时，右脚对齐位置
+        /// </summary>
+        private Vector3 _climbHighRightFoot;
+        
+        /// <summary>
+        /// 高位攀爬时，右手对齐位置
+        /// </summary>
+        private Vector3 _climbHighRightHand;
+        
         public NormalClimbState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
 
         public override void EnterState()
         {
-            // 进入后关闭CharacterController控制权
+            // 进入后关闭CharacterController控制权，使用root animation控制移动，使动作表现更好
             _playerStats.characterController.enabled = false;
             switch (_playerStats.climbType)
             {
@@ -386,28 +424,89 @@ namespace Player
                     _playerStats.animator.SetInteger(_playerStats.ClimbTypeHash, 0);
                     break;
                 case PlayerStats.ClimbTypeEnum.ClimbLow:
+                    _climbLowLeftHand = _playerStats.ledge + Vector3.Cross(-_playerStats.ClimbHitNormal, Vector3.up) * .3f;     // 左手位置向左移.3米
                     _playerStats.animator.SetInteger(_playerStats.ClimbTypeHash, 1);
                     break;
                 case PlayerStats.ClimbTypeEnum.ClimbHigh:
+                    _climbHighRightHand = _playerStats.ledge + Vector3.Cross(_playerStats.ClimbHitNormal, Vector3.up) * .3f;      // 右手位置向右移.3米
+                    _climbHighRightFoot = _playerStats.ledge + Vector3.down * 1.2f;                                                     // 右脚向下移1.2米            // 这些数据都是通过动画的骨骼位置，一点点试出来的，下面的动画对齐时间也是的
                     _playerStats.animator.SetInteger(_playerStats.ClimbTypeHash, 2);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             _playerStats.animator.SetTrigger(_playerStats.IsClimbHash);
-            // 复原攀爬类型
-            _playerStats.climbType = PlayerStats.ClimbTypeEnum.Jump;
         }
 
         public override void ExitState()
         {
             _playerStats.characterController.enabled = true;
+            // 复原攀爬类型
+            _playerStats.climbType = PlayerStats.ClimbTypeEnum.Jump;
         }
 
         public override void FixedUpdate() { }
 
-        public override void LateUpdate() { }
+        public override void UpdateState()
+        {
+            // 玩家朝向墙面
+            _playerStats.transform.rotation = Quaternion.Lerp(_playerStats.transform.rotation,
+                Quaternion.LookRotation(-_playerStats.ClimbHitNormal), .5f);
+            if (_playerStats.climbType == PlayerStats.ClimbTypeEnum.Hurd)
+            {
+                // 对齐左手
+                _playerStats.animator.MatchTarget(_playerStats.ledge,
+                    Quaternion.identity,
+                    AvatarTarget.LeftHand,
+                    new MatchTargetWeightMask(Vector3.one, 0f),
+                    0,
+                    .2f);
+                // 动作做完后，角色还不足以翻越障碍
+                _playerStats.animator.MatchTarget(_playerStats.ledge + Vector3.up * .1f,
+                    Quaternion.identity,
+                    AvatarTarget.LeftHand,
+                    new MatchTargetWeightMask(Vector3.one, 0f),
+                    .35f,
+                    .45f);
+            }
+            else if (_playerStats.climbType == PlayerStats.ClimbTypeEnum.ClimbLow)
+            {
+                // 对齐左手
+                _playerStats.animator.MatchTarget(_climbLowLeftHand,
+                    Quaternion.identity,
+                    AvatarTarget.LeftHand,
+                    new MatchTargetWeightMask(Vector3.one, 0f),
+                    0,
+                    .1f);
+                // 动作做完后，角色会猛的抬起，故将玩家位置向上移动一点
+                _playerStats.animator.MatchTarget(_climbLowLeftHand + Vector3.up * .19f,
+                    Quaternion.identity,
+                    AvatarTarget.LeftHand,
+                    new MatchTargetWeightMask(Vector3.up, 0f),
+                    .1f,
+                    .3f);
+            }
+            else if (_playerStats.climbType == PlayerStats.ClimbTypeEnum.ClimbHigh)
+            {
+                _playerStats.animator.MatchTarget(_climbHighRightFoot,
+                    Quaternion.identity,
+                    AvatarTarget.RightFoot,
+                    new MatchTargetWeightMask(Vector3.one, 0f),
+                    0,
+                    .13f);
+                _playerStats.animator.MatchTarget(_climbHighRightHand,
+                    Quaternion.identity,
+                    AvatarTarget.RightHand,
+                    new MatchTargetWeightMask(Vector3.one, 0f),
+                    .2f,
+                    .32f);
+            }
+            // 不用关闭重力，Root Motion接管了移动控制，并且早OnAnimatorMove中并没有使用VerticalVelocity属性
+            base.UpdateState();
+        }
 
+        public override void LateUpdate() { }
+        
         public override void OnAnimatorMove()
         {
             // 进入的时候禁用了CharacterController控制权，所以这里将控制权归还给Root Animation
@@ -416,6 +515,7 @@ namespace Player
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
+            Debugs.UpdateLogText["Animation"] = _playerStats.animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
             if (_playerStats.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= .9f)
             {
                 return PlayStateMachine.PlayerState.NormalStand;

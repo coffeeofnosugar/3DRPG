@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
 {
-    public BaseState<EState> CurrentState;
-    public EState LastState { get; private set; }
+    [ShowInInspector, BoxGroup] public BaseState<EState> CurrentState;
+    [ShowInInspector, BoxGroup] public EState LastState { get; private set; }
 
     private void Start() { CurrentState.EnterState(); }
 
