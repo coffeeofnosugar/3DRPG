@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -22,7 +23,7 @@ namespace Tools.CoffeeTools
         public static void Show(object log, DebugTypeEnum type = DebugTypeEnum.WithoutUnityDebug)
         {
             GameObject obj = Instantiate(Instance._textPrefab, Instance._scrollViewContent);
-            obj.GetComponent<Text>().text = log.ToString();
+            obj.GetComponent<Text>().text = DateTime.Now + "  " + log.ToString();
             if (type != DebugTypeEnum.WithoutUnityDebug)
                 Debug.Log(log);
         }

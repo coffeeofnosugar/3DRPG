@@ -1,5 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
+using Tools.CoffeeTools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -53,6 +54,13 @@ namespace Player
 
             _playerInput.CharacterControls.Crouch.started += OnCrouchInput;
             _playerInput.CharacterControls.Crouch.canceled += OnCrouchInput;
+        }
+
+        private void Start()
+        {
+            Debugs.UpdateLogText["移动"] = "W/A/S/D";
+            Debugs.UpdateLogText["跳跃/攀爬"] = "Space";
+            Debugs.UpdateLogText["下蹲"] = "Ctrl";
         }
 
         private void Update()

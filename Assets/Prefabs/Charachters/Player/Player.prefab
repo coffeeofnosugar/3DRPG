@@ -53,8 +53,16 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e01c4cf1db9502249be44c28281c2cc9, type: 3}
       propertyPath: m_Controller
@@ -123,10 +131,16 @@ MonoBehaviour:
   characterController: {fileID: 0}
   playerInputController: {fileID: 0}
   cameraTransform: {fileID: 0}
+  RotationSpeed: 220
+  hasUpObstacle: 0
+  CrouchPlayerHight: 0.8
   VerticalVelocity: 0
   landingThreshold: 0
   JumpMaxHeight: 1.5
+  ClimbHitNormal: {x: 0, y: 0, z: 0}
+  ClimbLowBackDistance: 0
   climbType: 0
+  ledge: {x: 0, y: 0, z: 0}
   isGrounded: 0
   isSlope: 0
   averageVel: {x: 0, y: 0, z: 0}

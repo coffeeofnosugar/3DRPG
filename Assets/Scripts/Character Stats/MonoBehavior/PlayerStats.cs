@@ -13,11 +13,22 @@ namespace Player
         [HideInInspector] public PlayerInputController playerInputController;
         [ReadOnly] public Transform cameraTransform;
 
+        public float RotationSpeed = 220;
+
+        #region 下蹲
+
+        [ReadOnly, FoldoutGroup("下蹲")] public bool hasUpObstacle;
         /// <summary>
         /// 下蹲时的移动速度
         /// </summary>
-        [Title("下蹲移动速度")]
-        [ShowInInspector] public const float CrouchSpeed = 1.5f;
+        [ShowInInspector, FoldoutGroup("下蹲")] public const float CrouchSpeed = 1.5f;
+        
+        /// <summary>
+        /// 下蹲时玩家的高度
+        /// </summary>
+        [ShowInInspector, FoldoutGroup("下蹲")] public float CrouchPlayerHight = .8f;
+
+        #endregion
 
         #region 跳跃
         /// <summary>
@@ -52,6 +63,8 @@ namespace Player
         #endregion
 
         #region 攀爬
+
+        [ShowInInspector, FoldoutGroup("攀爬")] public static LayerMask CheckoutClimbLayer = 1 << 9;
 
         /// <summary>
         /// 低于此高度的障碍物不检测是否进行攀爬
@@ -103,6 +116,8 @@ namespace Player
         #endregion
 
         #region 落地检测
+
+        [ShowInInspector, FoldoutGroup("落地检测")] public static LayerMask CheckoutGroundLayer = 1 << 8 | 1 << 9; 
         
         /// <summary>
         /// 是否在地面上
@@ -162,12 +177,16 @@ namespace Player
 
         private void Update()
         {
+            if ((transform.position - Vector3.zero).sqrMagnitude <= .1f)
+            {
+                Debug.Log("回到原点");
+            }
             CheckGround();
         }
 
         private void CheckGround()
         {
-            if (Physics.SphereCast(transform.position + (Vector3.up * GroundCheckOffset), characterController.radius, Vector3.down, out RaycastHit hit, GroundCheckOffset - characterController.radius + 10 * characterController.skinWidth))
+            if (Physics.SphereCast(transform.position + (Vector3.up * GroundCheckOffset), characterController.radius, Vector3.down, out RaycastHit hit, GroundCheckOffset - characterController.radius + 10 * characterController.skinWidth, CheckoutGroundLayer))
             {
                 // 如果接触到的点的法线不在(0,1,0)的方向上，那么人物就在斜坡上
                 isSlope = hit.normal.y != 1f;
@@ -202,6 +221,8 @@ namespace Player
             Gizmos.DrawLine(transform.position + Vector3.up * LowClimbHeight, transform.position + Vector3.up * LowClimbHeight + transform.forward * ClimbDistance);
             Gizmos.DrawLine(transform.position + Vector3.up * (LowClimbHeight + CheckHeightInterval),
                 transform.position + Vector3.up * (LowClimbHeight + CheckHeightInterval) + transform.forward * ClimbDistance);
+            Gizmos.DrawLine(transform.position + Vector3.up * CrouchPlayerHight, transform.position + Vector3.up *
+                (CrouchPlayerHight + CrouchPlayerHight));
 
             #endregion
         }

@@ -11,7 +11,7 @@ public class MouseManager : UnitySingleton<MouseManager>
 
     private void Start()
     {
-        // Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 

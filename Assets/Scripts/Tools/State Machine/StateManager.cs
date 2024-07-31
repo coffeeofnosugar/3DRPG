@@ -1,5 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
+using Tools.CoffeeTools;
 using UnityEngine;
 
 public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
@@ -27,6 +28,7 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
     {
         CurrentState.ExitState();
         LastState = CurrentState.StateKey;
+        Debugs.Show($"×´Ì¬´Ó {LastState} ×ª»»³É {stateKey}");
         CurrentState = EnumTurnToState(stateKey);
         CurrentState.EnterState();
     }

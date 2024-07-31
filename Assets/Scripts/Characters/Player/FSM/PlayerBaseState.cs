@@ -19,6 +19,7 @@ namespace Player
         public override void UpdateState()
         {
             CalculateGravity();
+            Crouch();
         }
         
         /// <summary>
@@ -60,7 +61,7 @@ namespace Player
             _playerStats.animator.SetFloat(_playerStats.TurnSpeedHash, rad, .1f, Time.deltaTime);
             // 靠root motion自带的旋转角速度太慢，额外添加一个角速度
             // 在启用OnAnimatorMove后，上一行对角色的旋转就不起作用了，仅仅只起到播放动画的作用，所以需要将下面的系数变大，从180变成200
-            _playerStats.transform.Rotate(0, rad * 200 * Time.deltaTime, 0f);
+            _playerStats.transform.Rotate(0, rad * _playerStats.RotationSpeed * Time.deltaTime, 0f);
         }
         
         /// <summary>
@@ -75,6 +76,16 @@ namespace Player
                 _playerStats.VerticalVelocity = _playerStats.JumpVelocity;
             }
         }
+
+        /// <summary>
+        /// 检测玩家上半部分是否有障碍物
+        /// </summary>
+        protected void Crouch()
+        {
+            _playerStats.hasUpObstacle =
+                Physics.Raycast(_playerStats.transform.position + Vector3.up * _playerStats.CrouchPlayerHight,
+                    Vector3.up, _playerStats.CrouchPlayerHight);
+        }
         
         /// <summary>
         /// 翻墙检测
@@ -88,7 +99,8 @@ namespace Player
             // 朝玩家的朝向发射射线
             if (Physics.Raycast(_playerTransform.position + Vector3.up * PlayerStats.LowClimbHeight,
                     _playerTransform.forward, out RaycastHit hit,
-                    PlayerStats.ClimbCheckDistance + _offset))
+                    PlayerStats.ClimbCheckDistance + _offset,
+                    PlayerStats.CheckoutClimbLayer))
             {
                 _playerStats.ClimbHitNormal = hit.normal;
                 // 计算墙体的法线与玩家前方的向量的角度是否大于45度  或  玩家的输入方向同理
@@ -114,7 +126,8 @@ namespace Player
                     if (Physics.Raycast(_playerTransform.position + Vector3.up * (PlayerStats.LowClimbHeight + i * PlayerStats.CheckHeightInterval),
                             -_playerStats.ClimbHitNormal,
                             out RaycastHit hitInfo,
-                            PlayerStats.ClimbDistance + Mathf.Cos(_offset)))
+                            PlayerStats.ClimbDistance + Mathf.Cos(_offset),
+                            PlayerStats.CheckoutClimbLayer))
                     {
                         _playerStats.HitArray[i] = hitInfo;
                         // 如果4条射线都检测到了，就无法翻越，正常跳跃
@@ -129,13 +142,15 @@ namespace Player
                     // 射线⑤：从上一次命中物体的正上方朝下发射射线，获取到玩家攀爬的位置
                     else if (Physics.Raycast(_playerStats.HitArray[i - 1].point + Vector3.up * PlayerStats.CheckHeightInterval,
                                  Vector3.down, out RaycastHit h,
-                                 PlayerStats.CheckHeightInterval))
+                                 PlayerStats.CheckHeightInterval,
+                                 PlayerStats.CheckoutClimbLayer))
                     {
                         _playerStats.ledge = h.point;
                         // 射线⑥：将上个射线稍微向前移动一点，检测是翻越还是攀爬
                         if (Physics.Raycast(_playerStats.HitArray[i - 1].point + Vector3.up * PlayerStats.CheckHeightInterval - _playerStats.ClimbHitNormal * .2f, 
                                 Vector3.down,
-                                PlayerStats.CheckHeightInterval))
+                                PlayerStats.CheckHeightInterval,
+                                PlayerStats.CheckoutClimbLayer))
                             // 墙面在①和②之间低位攀爬
                             return i == 1 ? PlayerStats.ClimbTypeEnum.ClimbLow : PlayerStats.ClimbTypeEnum.ClimbHigh;
                         else
@@ -216,7 +231,10 @@ namespace Player
                     _ => throw new ArgumentOutOfRangeException()
                 };
             }
-            else if (_playerStats.playerInputController.isCrouch)
+            else if (Physics.Raycast(_playerStats.transform.position + Vector3.up * _playerStats.CrouchPlayerHight, Vector3.up, _playerStats.characterController.height - _playerStats.CrouchPlayerHight))
+                // 上方有物体时进入下蹲状态
+                return PlayStateMachine.PlayerState.NormalCrouch;
+            else if (_playerStats.playerInputController.isCrouch || _playerStats.hasUpObstacle)
                 return PlayStateMachine.PlayerState.NormalCrouch;
             return PlayStateMachine.PlayerState.NormalStand;
         }
@@ -228,8 +246,12 @@ namespace Player
 
         public override void EnterState()
         {
-            _playerStats.characterController.height = .8f;
-            _playerStats.characterController.center = new Vector3(0, .4f, 0);
+            // 如果上方有障碍物，直接将动作转换成蹲姿，不需要缓冲
+            if (_playerStats.hasUpObstacle)
+                _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.CrouchThreshold);
+            
+            _playerStats.characterController.height = _playerStats.CrouchPlayerHight;
+            _playerStats.characterController.center = new Vector3(0, _playerStats.CrouchPlayerHight / 2, 0);
         }
 
         public override void ExitState()
@@ -266,7 +288,8 @@ namespace Player
         {
             if (!_playerStats.isGrounded)
                 return PlayStateMachine.PlayerState.NormalMidair;
-            else if (_playerStats.playerInputController.isCrouch)
+            else if (_playerStats.playerInputController.isCrouch || _playerStats.hasUpObstacle)
+                // 如果按下了下蹲键 || 上方有物体 进入蹲姿
                 return PlayStateMachine.PlayerState.NormalCrouch;
             return PlayStateMachine.PlayerState.NormalStand;
         }
@@ -384,7 +407,7 @@ namespace Player
             {
                 if (!_playerStats.isGrounded)
                     return PlayStateMachine.PlayerState.NormalMidair;
-                else if (_playerStats.playerInputController.isCrouch)
+                else if (_playerStats.playerInputController.isCrouch || _playerStats.hasUpObstacle)
                     return PlayStateMachine.PlayerState.NormalCrouch;
                 else
                     return PlayStateMachine.PlayerState.NormalStand;
@@ -515,9 +538,12 @@ namespace Player
 
         public override PlayStateMachine.PlayerState GetNextState()
         {
-            Debugs.UpdateLogText["Animation"] = _playerStats.animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
             if (_playerStats.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= .9f)
             {
+                if (_playerStats.hasUpObstacle)
+                {
+                    return PlayStateMachine.PlayerState.NormalCrouch;
+                }
                 return PlayStateMachine.PlayerState.NormalStand;
             }
             return PlayStateMachine.PlayerState.NormalClimb;
