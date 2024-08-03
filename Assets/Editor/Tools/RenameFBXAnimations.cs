@@ -12,7 +12,7 @@ public class RenameFBXAnimations : EditorWindow
 {
     private string folderPath = "Assets"; // Ä¬ÈÏÂ·¾¶
 
-    [MenuItem("Tools/Scripts/Rename FBX Animations")]
+    [MenuItem("Tools/Tools/Rename FBX Animations")]
     public static void ShowWindow()
     {
         GetWindow<RenameFBXAnimations>("Rename FBX Animations");

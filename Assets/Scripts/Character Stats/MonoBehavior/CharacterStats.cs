@@ -145,7 +145,7 @@ public abstract class CharacterStats : MonoBehaviour
 
     public float CriticalChance => characterData ? characterData.criticalChance : 0;
 
-    public int DestoryTime => characterData ? characterData.destoryTime : 0;
+    public int DestroyTime => characterData ? characterData.destroyTime : 0;
 
     protected List<SkillData_SO> SkillList => characterData ? characterData.skillList : null;
 

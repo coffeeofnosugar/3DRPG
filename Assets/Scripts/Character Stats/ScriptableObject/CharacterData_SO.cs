@@ -33,7 +33,7 @@ public class CharacterData_SO : ScriptableObject
     public float criticalChance = 0.2f;
 
     [Tooltip("死亡后，多久时间后摧毁")]
-    public int destoryTime = 5;
+    public int destroyTime = 5;
 
     public List<SkillData_SO> skillList = new List<SkillData_SO>();
 

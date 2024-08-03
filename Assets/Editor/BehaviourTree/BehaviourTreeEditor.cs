@@ -26,7 +26,7 @@ namespace BehaviourTree
         [SerializeField]
         private VisualTreeAsset m_VisualTreeAsset = default;
 
-        [MenuItem("Tools/BehaviourTreeEditor")]
+        [MenuItem("Tools/Editor/BehaviourTreeEditor")]
         public static void OpenWindow()
         {
             BehaviourTreeEditor wnd = GetWindow<BehaviourTreeEditor>();

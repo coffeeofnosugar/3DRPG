@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class GroupObjects : OdinEditorWindow
 {
-    [MenuItem("Tools/Scripts/Group Children")]
+    [MenuItem("Tools/Tools/Group Children")]
     public static void ShowWindow()
     {
         GetWindow<GroupObjects>("Group Children");

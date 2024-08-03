@@ -26,7 +26,7 @@ namespace MonsterEditor
         [SerializeField]
         private VisualTreeAsset m_VisualTreeAsset = default;
 
-        [MenuItem("Tools/MonsterEditor")]
+        [MenuItem("Tools/Editor/MonsterEditor")]
         public static void OpenWindow()
         {
             MonsterEditor wnd = GetWindow<MonsterEditor>();
@@ -178,7 +178,7 @@ namespace MonsterEditor
             sightRangeFloatField.value = character.sightRadius;
             criticalMultiplierFloatField.value = character.criticalMultiplier;
             criticalChanceFloatField.value = character.criticalChance;
-            destoryTimeIntegerField.value = character.destoryTime;
+            destoryTimeIntegerField.value = character.destroyTime;
 
             SerializedObject so = new SerializedObject(character);
             idIntegerField.Bind(so);

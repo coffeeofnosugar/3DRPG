@@ -18,7 +18,7 @@ namespace Player.PlayerController
         [SerializeField]
         private VisualTreeAsset m_VisualTreeAsset = default;
 
-        [MenuItem("Tools/PlayerControllerEditor")]
+        [MenuItem("Tools/Editor/PlayerControllerEditor")]
         public static void OpenWindow()
         {
             PlayerControllerEditor wnd = GetWindow<PlayerControllerEditor>();
