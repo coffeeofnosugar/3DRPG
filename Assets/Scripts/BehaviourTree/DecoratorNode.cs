@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 
@@ -7,12 +8,11 @@ namespace BehaviourTree
 {
     /// <summary>
     /// 装饰器节点
-    /// 
     /// 一个子节点
     /// </summary>
     public abstract class DecoratorNode : Node
     {
-        //[HideInInspector] 
+        [ReadOnly, FoldoutGroup("Node")]
         public Node child;
 
 

@@ -32,6 +32,7 @@ namespace Player
         [ReadOnly] public bool isRun;
         [ReadOnly] public bool isJump;
         [ReadOnly] public bool isCrouch;
+        [ReadOnly] public bool isAttack;
 
         private void Awake()
         {
@@ -54,6 +55,8 @@ namespace Player
 
             _playerInput.CharacterControls.Crouch.started += OnCrouchInput;
             _playerInput.CharacterControls.Crouch.canceled += OnCrouchInput;
+
+            _playerInput.CharacterControls.Attack.started += OnAttackInput;
         }
 
         private void Start()
@@ -85,6 +88,8 @@ namespace Player
         private void OnRunInput(InputAction.CallbackContext obj) { isRun = obj.ReadValueAsButton(); }
         private void OnJumpInput(InputAction.CallbackContext obj) { isJump = obj.ReadValueAsButton(); }
         private void OnCrouchInput(InputAction.CallbackContext obj) { isCrouch = obj.ReadValueAsButton(); }
+        private void OnAttackInput(InputAction.CallbackContext obj) { isAttack = obj.ReadValueAsButton(); }
+
         #endregion
     }
 }

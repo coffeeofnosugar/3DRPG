@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player.PlayerController
 {
     public class Jump : ActionNode
     {
-        [Header("节点参数")]
+        [Title("节点参数")]
         public float jumpForce = 14;
         public float landHigh = .3f;
         protected override void EnterState()

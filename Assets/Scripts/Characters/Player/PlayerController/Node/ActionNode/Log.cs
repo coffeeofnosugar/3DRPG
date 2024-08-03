@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player.PlayerController
 {
     public class Log : ActionNode
     {
-        [Header("节点参数")]
+        [Title("节点参数")]
         [SerializeField] public string message = "null";
         protected override void EnterState()
         {

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player.PlayerController
 {
     public abstract class WhetherNode : Node
     {
+        [ReadOnly, FoldoutGroup("Node")]
         public Node[] children = new Node[2];
         
         public override Node Clone()

@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player.PlayerController
 {
     public class CheckValue : WhetherNode
     {
-        [Header("节点参数")]
+        [Title("节点参数")]
         public PlayerInputController.InputParameter key;
         public Vector2 vector2Value;
         private bool _bool;

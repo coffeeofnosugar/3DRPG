@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 
@@ -7,7 +8,7 @@ namespace BehaviourTree
 {
     public class Root : Node
     {
-        //[HideInInspector] 
+        [ReadOnly, FoldoutGroup("Node")]
         public Node child;
         protected override void OnStart()
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 
@@ -7,6 +8,7 @@ namespace Player.PlayerController
 {
     public abstract class ActionNode : Node
     {
+        [ReadOnly, FoldoutGroup("Node")]
         public Node child;
         
         public override Node Clone()

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 
@@ -8,39 +9,45 @@ namespace BehaviourTree
     /// </summary>
     public abstract class Node : ScriptableObject
     {
-        public enum State
-        {
-            Running,
-            Failure,
-            Success
-        }
+        public enum State { Running, Failure, Success }
 
         /// <summary>
         /// 标志，用来判断执行OnStart还是OnStop
         /// </summary>
-        //[HideInInspector] 
+        [ReadOnly, FoldoutGroup("Node")] 
         public bool started = false;
+        
         /// <summary>
         /// 当前节点的状态
         /// </summary>
-        //[HideInInspector] 
+        [ReadOnly, FoldoutGroup("Node")]
         public State state = State.Running;
+        
         /// <summary>
         /// guid，节点唯一标识
         /// </summary>
-        [HideInInspector] public string guid;
+        [ReadOnly, FoldoutGroup("Node")]
+        public string guid;
+        
         /// <summary>
         /// 记录element元素在视图中的位置
         /// </summary>
-        [HideInInspector] public Vector2 position;
+        [ReadOnly, FoldoutGroup("Node")]
+        public Vector2 position;
+        
         /// <summary>
         /// 节点元素的备注
         /// </summary>
-        [TextArea] public string description;
+        [ReadOnly, FoldoutGroup("Node"), TextArea]
+        public string description;
 
         
-        [HideInInspector] public Blackboard blackboard;
-        [HideInInspector] public MonsterStats monsterStats;
+        [ReadOnly, FoldoutGroup("Node")]
+        public Blackboard blackboard;
+        
+        [ReadOnly, FoldoutGroup("Node")]
+        public MonsterStats monsterStats;
+        
         public State Update()
         {
             if (!started)

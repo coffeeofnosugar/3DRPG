@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player.PlayerController
 {
     public class Move : ActionNode
     {
-        [Header("节点参数")]
+        [Title("节点参数")]
         [SerializeField] private float currentSpeed;
         // [SerializeField] private float coefficient = 20f;
         protected override void EnterState()
@@ -21,12 +22,12 @@ namespace Player.PlayerController
 
         protected override State FixeUpdateState()
         {
-            MovePlayer();
-            if (child)
-            {
-                child.state = state;
-                child.FixedUpdate();
-            }
+            // MovePlayer();
+            // if (child)
+            // {
+            //     child.state = state;
+            //     child.FixedUpdate();
+            // }
             return state;
         }
 

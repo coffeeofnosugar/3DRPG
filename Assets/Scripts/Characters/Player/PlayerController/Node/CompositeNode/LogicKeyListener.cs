@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player.PlayerController
@@ -9,7 +10,7 @@ namespace Player.PlayerController
     {
         public enum KeyAction { Move, Run, Jump, Attack }
 
-        [Header("节点参数")]
+        [Title("节点参数")]
         [SerializeField] public KeyAction checkKeyAction;
 
         private int index;
@@ -96,6 +97,8 @@ namespace Player.PlayerController
                         return State.Running;
                     break;
                 case KeyAction.Attack:
+                    if (playerInputController.isAttack)
+                        return State.Running;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

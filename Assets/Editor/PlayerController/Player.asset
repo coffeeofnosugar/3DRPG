@@ -1,185 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8973138645856532146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9acdf8a12a26314d900b3f29f36c043, type: 3}
-  m_Name: Jump
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: c948d2d7edb3f3647ba5679bdba763dc
-  position: {x: 761.00006, y: 151.00002}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  jumpForce: 14
-  landHigh: 0.3
---- !u!114 &-6214677237230785153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213883b8fe585c24ab6647438aced409, type: 3}
-  m_Name: ChangeCharacterState
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 4ed9b54c768dbc24f9e00ac23d1e0918
-  position: {x: 761.00006, y: 246}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  animatorParameter: isRun
-  type: 4
-  boolValue: 1
---- !u!114 &-5212579311640691159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9acdf8a12a26314d900b3f29f36c043, type: 3}
-  m_Name: Jump
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: c8f1dc02b2383fc40abc3df98d3cac78
-  position: {x: 371, y: 12}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  jumpForce: 14
-  landHigh: 0.3
---- !u!114 &-4302380425081455519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfdba599e126d7e4f9e520bc8e293692, type: 3}
-  m_Name: LogicKeyListener
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: e708256b210eedb4697be8ce4783afad
-  position: {x: 574.85004, y: 57.00004}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  children:
-  - {fileID: 3437323922583550615}
-  - {fileID: -8973138645856532146}
-  - {fileID: 0}
-  checkKeyAction: 2
---- !u!114 &-2599309142830825186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213883b8fe585c24ab6647438aced409, type: 3}
-  m_Name: ChangeCharacterState
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: d0c4439deaf1406418b76c9b8f6152d0
-  position: {x: 761.00006, y: 364.00003}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  animatorParameter: isRun
-  type: 4
-  boolValue: 0
---- !u!114 &-2528420630876811135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfdba599e126d7e4f9e520bc8e293692, type: 3}
-  m_Name: LogicKeyListener
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 2a348c067e87ff54f932e597b251fad5
-  position: {x: 558.0501, y: 281}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  children:
-  - {fileID: -6214677237230785153}
-  - {fileID: 0}
-  - {fileID: -2599309142830825186}
-  checkKeyAction: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,19 +16,7 @@ MonoBehaviour:
   controllerState: 0
   nodes:
   - {fileID: 4625316897240000220}
-  - {fileID: 1005773285273735655}
-  - {fileID: 5775860665699242110}
-  - {fileID: 1449589984089367478}
-  - {fileID: 7499189815392884148}
-  - {fileID: -2528420630876811135}
-  - {fileID: -6214677237230785153}
-  - {fileID: -2599309142830825186}
   - {fileID: 6723515058692008792}
-  - {fileID: 1985865883343914767}
-  - {fileID: -5212579311640691159}
-  - {fileID: -4302380425081455519}
-  - {fileID: 3437323922583550615}
-  - {fileID: -8973138645856532146}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -218,127 +26,6 @@ MonoBehaviour:
     isDeath: 0
   characterStats: {fileID: 0}
   playerInputController: {fileID: 0}
---- !u!114 &1005773285273735655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfdba599e126d7e4f9e520bc8e293692, type: 3}
-  m_Name: LogicKeyListener
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: dea3bb7c902178a42b752a24916b4995
-  position: {x: 111, y: 186}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  children:
-  - {fileID: 0}
-  - {fileID: 7499189815392884148}
-  - {fileID: 0}
-  checkKeyAction: 0
---- !u!114 &1449589984089367478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213883b8fe585c24ab6647438aced409, type: 3}
-  m_Name: ChangeCharacterState
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 52ade6be76140e9478276f19342eb493
-  position: {x: 335, y: 304}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  animatorParameter: isWalk
-  type: 4
-  boolValue: 0
---- !u!114 &1985865883343914767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213883b8fe585c24ab6647438aced409, type: 3}
-  m_Name: ChangeCharacterState
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 8eb691d0fd2879e4e8d5746fa9051343
-  position: {x: 371, y: -80}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  animatorParameter: isJump
-  type: 9
-  boolValue: 0
---- !u!114 &3437323922583550615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213883b8fe585c24ab6647438aced409, type: 3}
-  m_Name: ChangeCharacterState
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: a4bab62c3aff4f04ca5f4540d18dd020
-  position: {x: 741.6501, y: 57}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  animatorParameter: isJump
-  type: 9
-  boolValue: 0
 --- !u!114 &4625316897240000220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,39 +51,10 @@ MonoBehaviour:
     isAttacking: 0
     getHit: 0
     isDeath: 0
-  _playerInputController: {fileID: 0}
+  playerInputController: {fileID: 0}
   children:
-  - {fileID: 1005773285273735655}
---- !u!114 &5775860665699242110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213883b8fe585c24ab6647438aced409, type: 3}
-  m_Name: ChangeCharacterState
-  m_EditorClassIdentifier: 
-  started: 1
-  state: 0
-  guid: 23b2c89ec1071f045b54661a24da4892
-  position: {x: 335, y: 116}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  animatorParameter: isWalk
-  type: 4
-  boolValue: 1
+  - {fileID: 6723515058692008792}
+  current: 0
 --- !u!114 &6723515058692008792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +70,7 @@ MonoBehaviour:
   started: 0
   state: 0
   guid: 08dedf4d3a6400f48b450c5f5da0100a
-  position: {x: 126, y: -2}
+  position: {x: 127, y: 186}
   description: 
   playerStats: {fileID: 0}
   blackboard:
@@ -422,38 +80,9 @@ MonoBehaviour:
     isAttacking: 0
     getHit: 0
     isDeath: 0
-  _playerInputController: {fileID: 0}
+  playerInputController: {fileID: 0}
   children:
-  - {fileID: 1985865883343914767}
-  - {fileID: -5212579311640691159}
   - {fileID: 0}
-  checkKeyAction: 2
---- !u!114 &7499189815392884148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d74db709742f9464685335b349baa4ba, type: 3}
-  m_Name: Move
-  m_EditorClassIdentifier: 
-  started: 1
-  state: 0
-  guid: 3267432b575bb6544bfb98f9c11ad447
-  position: {x: 335, y: 211}
-  description: 
-  playerStats: {fileID: 0}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  _playerInputController: {fileID: 0}
-  child: {fileID: 0}
-  currentSpeed: 0
-  coefficient: 20
+  - {fileID: 0}
+  - {fileID: 0}
+  checkKeyAction: 3

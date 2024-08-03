@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player.PlayerController
 {
     public class Root : Node
     {
+        [ReadOnly, FoldoutGroup("Node")]
         public List<Node> children;
+        [SerializeField, ReadOnly, FoldoutGroup("Node")]
         private int current;
         protected override void EnterState()
         {
