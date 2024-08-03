@@ -14,12 +14,13 @@ namespace BehaviourTree
         int current;
         protected override void OnStart()
         {
+            base.OnStart();
             current = 0;
         }
 
         protected override void OnStop()
         {
-
+            base.OnStop();
         }
 
         protected override State OnUpdate()

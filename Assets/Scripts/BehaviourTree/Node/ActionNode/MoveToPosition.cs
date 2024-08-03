@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace BehaviourTree
 {
     public class MoveToPosition : ActionNode
     {
+        [Title("节点参数")]
         public float tolerance = 1f;
         protected override void OnStart()
         {
+            base.OnStart();
             monsterStats.animator.SetBool("Walk", true);
             monsterStats.agent.destination = blackboard.moveToPosition;
             monsterStats.agent.speed = monsterStats.WalkSpeed;
@@ -17,6 +20,7 @@ namespace BehaviourTree
         protected override void OnStop()
         {
             monsterStats.animator.SetBool("Walk", false);
+            base.OnStop();
         }
 
         protected override State OnUpdate()

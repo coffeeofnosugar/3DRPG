@@ -12,6 +12,7 @@ namespace BehaviourTree
 
         protected override void OnStart()
         {
+            base.OnStart();
             int totalWeight = 0;
             for (int i = 0; i < weights.Count; i++)
             {
@@ -34,7 +35,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-
+            base.OnStop();
         }
 
         protected override State OnUpdate()

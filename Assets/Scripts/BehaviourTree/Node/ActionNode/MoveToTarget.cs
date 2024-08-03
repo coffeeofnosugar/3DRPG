@@ -12,6 +12,7 @@ namespace BehaviourTree
         private bool _flag;
         protected override void OnStart()
         {
+            base.OnStart();
             if (blackboard.target)
             {
                 monsterStats.animator.SetBool("Run", true);
@@ -21,6 +22,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
+            base.OnStop();
             if (_flag)
             {
                 monsterStats.animator.SetBool("Run", false);

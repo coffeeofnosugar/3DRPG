@@ -172,12 +172,12 @@ namespace BehaviourTree
             inspectorView.UpdateSelection(nodeView);
         }
 
-        /// <summary>
-        /// 以每秒10帧的速度更新节点元素的标签
-        /// </summary>
-        private void OnInspectorUpdate()
-        {
-            treeView?.UpdateNodeStates();
-        }
+        // /// <summary>
+        // /// 以每秒10帧的速度更新节点元素的标签
+        // /// </summary>
+        // private void OnInspectorUpdate()
+        // {
+        //     treeView?.UpdateNodeStates();
+        // }
     }
 }

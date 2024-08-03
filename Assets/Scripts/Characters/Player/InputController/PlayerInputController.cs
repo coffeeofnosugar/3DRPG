@@ -57,6 +57,7 @@ namespace Player
             _playerInput.CharacterControls.Crouch.canceled += OnCrouchInput;
 
             _playerInput.CharacterControls.Attack.started += OnAttackInput;
+            _playerInput.CharacterControls.Attack.canceled += OnAttackInput;
         }
 
         private void Start()

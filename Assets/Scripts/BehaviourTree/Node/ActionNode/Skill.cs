@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace BehaviourTree
 {
     public class Skill : ActionNode
     {
+        [Title("节点参数")]
         public string animatorParameter;
 
         private bool _flag;
         protected override void OnStart()
         {
+            base.OnStart();
             if (blackboard.target)
             {
                 if (!monsterStats.CouldAttack(animatorParameter))
@@ -33,7 +36,7 @@ namespace BehaviourTree
 
         protected override void OnStop()
         {
-            
+            base.OnStop();
         }
 
         protected override State OnUpdate()

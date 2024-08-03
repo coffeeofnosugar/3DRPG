@@ -15,12 +15,12 @@ namespace BehaviourTree
     {
         protected override void OnStart()
         {
-
+            base.OnStart();
         }
 
         protected override void OnStop()
         {
-
+            base.OnStop();
         }
 
         protected override State OnUpdate()

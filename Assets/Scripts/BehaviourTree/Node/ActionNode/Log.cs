@@ -10,12 +10,13 @@ namespace BehaviourTree
         public string message;
         protected override void OnStart()
         {
+            base.OnStart();
             Debug.Log($"{message}");
         }
 
         protected override void OnStop()
         {
-
+            base.OnStop();
         }
 
         protected override State OnUpdate()

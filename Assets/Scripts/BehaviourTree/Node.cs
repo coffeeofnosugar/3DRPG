@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace BehaviourTree
         /// 标志，用来判断执行OnStart还是OnStop
         /// </summary>
         [ReadOnly, FoldoutGroup("Node")] 
-        public bool started = false;
+        private bool started = false;
         
         /// <summary>
         /// 当前节点的状态
@@ -48,6 +49,10 @@ namespace BehaviourTree
         [ReadOnly, FoldoutGroup("Node")]
         public MonsterStats monsterStats;
         
+        
+        public Action AddRunningClass;
+        public Action RemoveRunningClass;
+        
         public State Update()
         {
             if (!started)
@@ -78,8 +83,21 @@ namespace BehaviourTree
             return Instantiate(this);
         }
 
-        protected abstract void OnStart();
-        protected abstract void OnStop();
+        protected virtual void OnStart()
+        {
+            if (state is State.Running or State.Success)
+            {
+                AddRunningClass?.Invoke();
+            }
+        }
+
+        protected virtual void OnStop()
+        {
+            if (state is State.Failure or State.Success)
+            {
+                RemoveRunningClass?.Invoke();
+            }
+        }
         protected abstract State OnUpdate();
     }
 }
