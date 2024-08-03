@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
 {
     [ShowInInspector, BoxGroup] public BaseState<EState> CurrentState;
-    [ShowInInspector, BoxGroup] public EState LastState { get; private set; }
+    [ShowInInspector, BoxGroup] public EState LastStateKey { get; private set; }
 
     private void Start() { CurrentState.EnterState(); }
 
@@ -27,8 +27,8 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
     public void TransitionToState(EState stateKey)
     {
         CurrentState.ExitState();
-        LastState = CurrentState.StateKey;
-        Debugs.Show($"状态从 {LastState} 转换成 {stateKey}");
+        LastStateKey = CurrentState.StateKey;
+        Debugs.Show($"状态从 {LastStateKey} 转换成 {stateKey}");
         CurrentState = EnumTurnToState(stateKey);
         CurrentState.EnterState();
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Tools.CoffeeTools;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -26,7 +27,7 @@ namespace Player
         /// <summary>
         /// 下蹲时玩家的高度
         /// </summary>
-        [ShowInInspector, FoldoutGroup("下蹲")] public float CrouchPlayerHight = .8f;
+        [ShowInInspector, FoldoutGroup("下蹲")] public float crouchPlayerHeight = .8f;
 
         #endregion
 
@@ -54,12 +55,12 @@ namespace Player
         /// <summary>
         /// 跳跃的最大高度
         /// </summary>
-        [FoldoutGroup("跳跃")] public float JumpMaxHeight = 1.5f;
+        [FoldoutGroup("跳跃")] public float jumpMaxHeight = 1.5f;
 
         /// <summary>
         /// 跳跃初速度，根据重力学公式 h = v²/2g 计算而来
         /// </summary>
-        [HideInInspector] public float JumpVelocity => Mathf.Sqrt(-2 * Gravity * JumpMaxHeight);
+        [HideInInspector] public float JumpVelocity => Mathf.Sqrt(-2 * Gravity * jumpMaxHeight);
         #endregion
 
         #region 攀爬
@@ -89,9 +90,18 @@ namespace Player
         /// <summary>
         /// 墙面法线
         /// </summary>
-        [ReadOnly, FoldoutGroup("攀爬")] public Vector3 ClimbHitNormal;
+        [ReadOnly, FoldoutGroup("攀爬")] public Vector3 climbHitNormal;
 
-        [FoldoutGroup("攀爬")] public float ClimbLowBackDistance;
+        /// <summary>
+        /// 墙面与玩家的距离，由最下面一根射线检测而来
+        /// </summary>
+        [ReadOnly, FoldoutGroup("攀爬")] public float climbWallDistance;
+
+        /// <summary>
+        /// 墙壁凹凸面差值
+        /// </summary>
+        [ShowInInspector, FoldoutGroup("攀爬")] public const float ClimbWallDistanceOffset = .3f;
+
         /// <summary>
         /// 射线检测高度距离间隔
         /// </summary>
@@ -128,6 +138,11 @@ namespace Player
         /// 是否在斜坡上
         /// </summary>
         [ReadOnly, FoldoutGroup("落地检测")] public bool isSlope;
+
+        /// <summary>
+        /// 在斜坡上时，角色向下的速度，防止下坡时角色拌脚，角色速度越快改值需更大
+        /// </summary>
+        [FoldoutGroup("落地检测")] public float SlopeVerticalVelocity = 50;
         
         /// <summary>
         /// 检测射线起点向上偏移量
@@ -177,10 +192,6 @@ namespace Player
 
         private void Update()
         {
-            if ((transform.position - Vector3.zero).sqrMagnitude <= .1f)
-            {
-                Debug.Log("回到原点");
-            }
             CheckGround();
         }
 
@@ -221,8 +232,8 @@ namespace Player
             Gizmos.DrawLine(transform.position + Vector3.up * LowClimbHeight, transform.position + Vector3.up * LowClimbHeight + transform.forward * ClimbDistance);
             Gizmos.DrawLine(transform.position + Vector3.up * (LowClimbHeight + CheckHeightInterval),
                 transform.position + Vector3.up * (LowClimbHeight + CheckHeightInterval) + transform.forward * ClimbDistance);
-            Gizmos.DrawLine(transform.position + Vector3.up * CrouchPlayerHight, transform.position + Vector3.up *
-                (CrouchPlayerHight + CrouchPlayerHight));
+            Gizmos.DrawLine(transform.position + Vector3.up * crouchPlayerHeight, transform.position + Vector3.up *
+                (crouchPlayerHeight + crouchPlayerHeight));
 
             #endregion
         }

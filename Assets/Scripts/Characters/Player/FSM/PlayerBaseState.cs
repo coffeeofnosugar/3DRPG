@@ -19,7 +19,7 @@ namespace Player
         public override void UpdateState()
         {
             CalculateGravity();
-            Crouch();
+            CrouchDetect();
         }
         
         /// <summary>
@@ -31,7 +31,7 @@ namespace Player
             {
                 if (_playerStats.isSlope)
                     // 当角色在斜坡上时，增加向下的移动速度
-                    _playerStats.VerticalVelocity = PlayerStats.Gravity * 50 * Time.deltaTime;
+                    _playerStats.VerticalVelocity = PlayerStats.Gravity * _playerStats.SlopeVerticalVelocity * Time.deltaTime;
                 else
                     _playerStats.VerticalVelocity = PlayerStats.Gravity * Time.deltaTime;
             }
@@ -63,6 +63,16 @@ namespace Player
             // 在启用OnAnimatorMove后，上一行对角色的旋转就不起作用了，仅仅只起到播放动画的作用，所以需要将下面的系数变大，从180变成200
             _playerStats.transform.Rotate(0, rad * _playerStats.RotationSpeed * Time.deltaTime, 0f);
         }
+
+        /// <summary>
+        /// 检测玩家上半部分是否有障碍物
+        /// </summary>
+        protected void CrouchDetect()
+        {
+            _playerStats.hasUpObstacle =
+                Physics.Raycast(_playerStats.transform.position + Vector3.up * _playerStats.crouchPlayerHeight,
+                    Vector3.up, _playerStats.crouchPlayerHeight);
+        }
         
         /// <summary>
         /// 跳跃检测
@@ -72,19 +82,23 @@ namespace Player
             // 监听跳跃事件
             if (_playerStats.playerInputController.isJump)
             {
-                _playerStats.climbType = ClimbDetect(_playerStats.transform, _playerStats.playerInputController.inputMovementWorld, 0);
+                float velOffset = 0;
+                if (_fsm.CurrentState is NormalStandState normalStandState)
+                    switch (normalStandState.StandState)
+                    {
+                        case NormalStandState.StandStateEnum.Walk:
+                            velOffset = .5f;
+                            break;
+                        case NormalStandState.StandStateEnum.Run:
+                            velOffset = 1;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+
+                _playerStats.climbType = ClimbDetect(_playerStats.transform, _playerStats.playerInputController.inputMovementWorld, velOffset);
                 _playerStats.VerticalVelocity = _playerStats.JumpVelocity;
             }
-        }
-
-        /// <summary>
-        /// 检测玩家上半部分是否有障碍物
-        /// </summary>
-        protected void Crouch()
-        {
-            _playerStats.hasUpObstacle =
-                Physics.Raycast(_playerStats.transform.position + Vector3.up * _playerStats.CrouchPlayerHight,
-                    Vector3.up, _playerStats.CrouchPlayerHight);
         }
         
         /// <summary>
@@ -102,62 +116,81 @@ namespace Player
                     PlayerStats.ClimbCheckDistance + _offset,
                     PlayerStats.CheckoutClimbLayer))
             {
-                _playerStats.ClimbHitNormal = hit.normal;
+                _playerStats.climbHitNormal = hit.normal;
                 // 计算墙体的法线与玩家前方的向量的角度是否大于45度  或  玩家的输入方向同理
-                if (Vector3.Angle(-_playerStats.ClimbHitNormal, _playerTransform.forward) > PlayerStats.ClimbAngel
-                    || Vector3.Angle(-_playerStats.ClimbHitNormal, _playerMovementWorld) > PlayerStats.ClimbAngel + Mathf.Cos(_offset))
+                if (Vector3.Angle(-_playerStats.climbHitNormal, _playerTransform.forward) > PlayerStats.ClimbAngel
+                    || Vector3.Angle(-_playerStats.climbHitNormal, _playerMovementWorld) > PlayerStats.ClimbAngel + Mathf.Cos(_offset))
                 {
                     return PlayerStats.ClimbTypeEnum.Jump;
                 }
                 Array.Clear(_playerStats.HitArray, 0, _playerStats.HitArray.Length);
+                
+                /*     ⑥ ⑤
+                 *     |  |一一一 ④
+                 *     |  |
+                 *   墙墙墙墙一一 ③
+                 *   墙墙墙墙
+                 *   墙墙墙墙一一 ②
+                 *   墙墙墙墙
+                 *   墙墙墙墙一一 ①
+                 *   墙墙墙墙  人
+                 */
                 for (int i = 0; i < 4; i++)
                 {
-                    /*     ⑥ ⑤
-                     *     |  |一一一 ④
-                     *     |  |
-                     *   墙墙墙墙一一 ③
-                     *   墙墙墙墙
-                     *   墙墙墙墙一一 ②
-                     *   墙墙墙墙
-                     *   墙墙墙墙一一 ①
-                     *   墙墙墙墙  人
-                    */
-                    // 以向上1距离为间隔，玩家连续发射垂直墙面的4个射线
-                    if (Physics.Raycast(_playerTransform.position + Vector3.up * (PlayerStats.LowClimbHeight + i * PlayerStats.CheckHeightInterval),
-                            -_playerStats.ClimbHitNormal,
-                            out RaycastHit hitInfo,
-                            PlayerStats.ClimbDistance + Mathf.Cos(_offset),
-                            PlayerStats.CheckoutClimbLayer))
+                    // 第一根射线比较特别，单独展示
+                    if (i == 0)
                     {
-                        _playerStats.HitArray[i] = hitInfo;
-                        // 如果4条射线都检测到了，就无法翻越，正常跳跃
-                        if (i == 3)
-                            break;
-                    }
-                    else if (i == 0)
-                    {
-                        // 如果第一个射线没有射中物体，无需翻越，正常跳跃
-                        break;
-                    }
-                    // 射线⑤：从上一次命中物体的正上方朝下发射射线，获取到玩家攀爬的位置
-                    else if (Physics.Raycast(_playerStats.HitArray[i - 1].point + Vector3.up * PlayerStats.CheckHeightInterval,
-                                 Vector3.down, out RaycastHit h,
-                                 PlayerStats.CheckHeightInterval,
-                                 PlayerStats.CheckoutClimbLayer))
-                    {
-                        _playerStats.ledge = h.point;
-                        // 射线⑥：将上个射线稍微向前移动一点，检测是翻越还是攀爬
-                        if (Physics.Raycast(_playerStats.HitArray[i - 1].point + Vector3.up * PlayerStats.CheckHeightInterval - _playerStats.ClimbHitNormal * .2f, 
-                                Vector3.down,
-                                PlayerStats.CheckHeightInterval,
+                        if (Physics.Raycast(
+                                _playerTransform.position + Vector3.up * (PlayerStats.LowClimbHeight + i * PlayerStats.CheckHeightInterval),
+                                -_playerStats.climbHitNormal,
+                                out RaycastHit hitInfo,
+                                PlayerStats.ClimbDistance + Mathf.Cos(_offset),
                                 PlayerStats.CheckoutClimbLayer))
-                            // 墙面在①和②之间低位攀爬
-                            return i == 1 ? PlayerStats.ClimbTypeEnum.ClimbLow : PlayerStats.ClimbTypeEnum.ClimbHigh;
+                        {
+                            _playerStats.HitArray[i] = hitInfo;
+                            // 第一根射线射中物体后，记录墙壁与玩家的距离
+                            _playerStats.climbWallDistance = Vector3.Magnitude(
+                                _playerTransform.position + Vector3.up *
+                                (PlayerStats.LowClimbHeight + i * PlayerStats.CheckHeightInterval) - 
+                                hitInfo.point);
+                        }
                         else
-                            return PlayerStats.ClimbTypeEnum.Hurd;
+                            break;      // 如果第一个射线没有射中物体，无需翻越，正常跳跃
                     }
                     else
-                        return PlayerStats.ClimbTypeEnum.ClimbLow;
+                    {
+                        // 以向上1距离为间隔，玩家连续发射垂直墙面的4个射线
+                        if (Physics.Raycast(_playerTransform.position + Vector3.up * (PlayerStats.LowClimbHeight + i * PlayerStats.CheckHeightInterval),
+                                -_playerStats.climbHitNormal,
+                                out RaycastHit hitInfo,
+                                _playerStats.climbWallDistance + PlayerStats.ClimbWallDistanceOffset,
+                                PlayerStats.CheckoutClimbLayer))
+                        {
+                            _playerStats.HitArray[i] = hitInfo;
+                            // 如果4条射线都检测到了，就无法翻越，正常跳跃
+                            if (i == 3)
+                                break;
+                        }
+                        // 射线⑤：从上一次命中物体的正上方朝下发射射线，获取到玩家攀爬的位置
+                        else if (Physics.Raycast(_playerStats.HitArray[i - 1].point + Vector3.up * PlayerStats.CheckHeightInterval,
+                                     Vector3.down, out RaycastHit h,
+                                     PlayerStats.CheckHeightInterval,
+                                     PlayerStats.CheckoutClimbLayer))
+                        {
+                            _playerStats.ledge = h.point;
+                            // 射线⑥：将上个射线稍微向前移动一点，检测是翻越还是攀爬
+                            if (Physics.Raycast(_playerStats.HitArray[i - 1].point + Vector3.up * PlayerStats.CheckHeightInterval - _playerStats.climbHitNormal * .2f, 
+                                    Vector3.down,
+                                    PlayerStats.CheckHeightInterval,
+                                    PlayerStats.CheckoutClimbLayer))
+                                // 墙面在①和②之间低位攀爬
+                                return i == 1 ? PlayerStats.ClimbTypeEnum.ClimbLow : PlayerStats.ClimbTypeEnum.ClimbHigh;
+                            else
+                                return PlayerStats.ClimbTypeEnum.Hurd;
+                        }
+                        else
+                            return PlayerStats.ClimbTypeEnum.ClimbLow;
+                    }
                 }
             }
             return PlayerStats.ClimbTypeEnum.Jump;
@@ -185,6 +218,8 @@ namespace Player
 
     public class NormalStandState : PlayerBaseState
     {
+        public enum StandStateEnum { Walk, Run }
+        public StandStateEnum StandState { get; private set; }
         private float targetSpeed;
         public NormalStandState(PlayStateMachine fsm, PlayStateMachine.PlayerState key) : base(fsm, key) { }
 
@@ -199,8 +234,17 @@ namespace Player
             // 转换成站姿
             _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.StandThreshold, .1f, Time.deltaTime);
             
-            // 根据是否奔跑，设置速度
-            targetSpeed = _playerStats.playerInputController.isRun ? _playerStats.RunSpeed : _playerStats.WalkSpeed;
+            // 根据是否奔跑，设置速度和状态
+            if (_playerStats.playerInputController.isRun)
+            {
+                targetSpeed = _playerStats.RunSpeed;
+                StandState = StandStateEnum.Run;
+            }
+            else
+            {
+                targetSpeed = _playerStats.WalkSpeed;
+                StandState = StandStateEnum.Walk;
+            }
             _playerStats.animator.SetFloat(_playerStats.FrontSpeedHash, _playerStats.playerInputController.inputMovement.magnitude * targetSpeed, .1f, Time.deltaTime);
             
             base.UpdateState();
@@ -231,9 +275,6 @@ namespace Player
                     _ => throw new ArgumentOutOfRangeException()
                 };
             }
-            else if (Physics.Raycast(_playerStats.transform.position + Vector3.up * _playerStats.CrouchPlayerHight, Vector3.up, _playerStats.characterController.height - _playerStats.CrouchPlayerHight))
-                // 上方有物体时进入下蹲状态
-                return PlayStateMachine.PlayerState.NormalCrouch;
             else if (_playerStats.playerInputController.isCrouch || _playerStats.hasUpObstacle)
                 return PlayStateMachine.PlayerState.NormalCrouch;
             return PlayStateMachine.PlayerState.NormalStand;
@@ -250,8 +291,8 @@ namespace Player
             if (_playerStats.hasUpObstacle)
                 _playerStats.animator.SetFloat(_playerStats.PlayerStateHash, PlayerStats.CrouchThreshold);
             
-            _playerStats.characterController.height = _playerStats.CrouchPlayerHight;
-            _playerStats.characterController.center = new Vector3(0, _playerStats.CrouchPlayerHight / 2, 0);
+            _playerStats.characterController.height = _playerStats.crouchPlayerHeight;
+            _playerStats.characterController.center = new Vector3(0, _playerStats.crouchPlayerHeight / 2, 0);
         }
 
         public override void ExitState()
@@ -307,7 +348,7 @@ namespace Player
             // 起跳时，随机取一个值，使跳跃播放不同的动画或镜像动画
             float feetTween = Mathf.Repeat(_playerStats.animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1);
             feetTween = feetTween < .5f ? 1 : -1;
-            if (_fsm.LastState == PlayStateMachine.PlayerState.NormalStand)
+            if (_fsm.LastStateKey == PlayStateMachine.PlayerState.NormalStand)
             {
                 if (_playerStats.playerInputController.isRun)
                     feetTween *= 3;
@@ -447,11 +488,11 @@ namespace Player
                     _playerStats.animator.SetInteger(_playerStats.ClimbTypeHash, 0);
                     break;
                 case PlayerStats.ClimbTypeEnum.ClimbLow:
-                    _climbLowLeftHand = _playerStats.ledge + Vector3.Cross(-_playerStats.ClimbHitNormal, Vector3.up) * .3f;     // 左手位置向左移.3米
+                    _climbLowLeftHand = _playerStats.ledge + Vector3.Cross(-_playerStats.climbHitNormal, Vector3.up) * .3f;     // 左手位置向左移.3米
                     _playerStats.animator.SetInteger(_playerStats.ClimbTypeHash, 1);
                     break;
                 case PlayerStats.ClimbTypeEnum.ClimbHigh:
-                    _climbHighRightHand = _playerStats.ledge + Vector3.Cross(_playerStats.ClimbHitNormal, Vector3.up) * .3f;      // 右手位置向右移.3米
+                    _climbHighRightHand = _playerStats.ledge + Vector3.Cross(_playerStats.climbHitNormal, Vector3.up) * .3f;      // 右手位置向右移.3米
                     _climbHighRightFoot = _playerStats.ledge + Vector3.down * 1.2f;                                                     // 右脚向下移1.2米            // 这些数据都是通过动画的骨骼位置，一点点试出来的，下面的动画对齐时间也是的
                     _playerStats.animator.SetInteger(_playerStats.ClimbTypeHash, 2);
                     break;
@@ -474,7 +515,7 @@ namespace Player
         {
             // 玩家朝向墙面
             _playerStats.transform.rotation = Quaternion.Lerp(_playerStats.transform.rotation,
-                Quaternion.LookRotation(-_playerStats.ClimbHitNormal), .5f);
+                Quaternion.LookRotation(-_playerStats.climbHitNormal), .5f);
             if (_playerStats.climbType == PlayerStats.ClimbTypeEnum.Hurd)
             {
                 // 对齐左手
