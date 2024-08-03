@@ -7,12 +7,12 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 
-public class GroupChildren : OdinEditorWindow
+public class GroupObjects : OdinEditorWindow
 {
     [MenuItem("Tools/Scripts/Group Children")]
     public static void ShowWindow()
     {
-        GetWindow<GroupChildren>("Group Children");
+        GetWindow<GroupObjects>("Group Children");
     }
 
     [ShowInInspector] public Transform[] children;
