@@ -24,9 +24,9 @@ namespace BehaviourTree
         {
             if (blackboard.target && monsterStats.agent.remainingDistance <= distance)
             {
-                return State.Failure;
+                return State.Success;
             }
-            return State.Success;
+            return State.Failure;
         }
     }
 }

@@ -2,11 +2,17 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
+#if UNITY_EDITOR
+
+
+/// <summary>
+/// 选择文件夹，将文件夹下的子物体
+/// </summary>
 public class RenameFBXAnimations : EditorWindow
 {
     private string folderPath = "Assets"; // 默认路径
 
-    [MenuItem("Tools/Rename FBX Animations")]
+    [MenuItem("Tools/Scripts/Rename FBX Animations")]
     public static void ShowWindow()
     {
         GetWindow<RenameFBXAnimations>("Rename FBX Animations");
@@ -100,3 +106,5 @@ public class RenameFBXAnimations : EditorWindow
         Debug.Log("Renaming completed.");
     }
 }
+
+#endif

@@ -18,11 +18,7 @@
                 <ui:VisualElement name="divider" class="horizontal" />
                 <ui:VisualElement name="output" />
             </ui:VisualElement>
-			
-			
-			
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="selection-border" picking-mode="Ignore" />
 </ui:UXML>
-

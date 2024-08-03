@@ -28,6 +28,7 @@ namespace BehaviourTree
             {
                 return State.Failure;
             }
+            
             if (Time.time - startTime > duration)
             {
                 return State.Success;

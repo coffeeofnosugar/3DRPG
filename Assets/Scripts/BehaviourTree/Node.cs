@@ -1,6 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 namespace BehaviourTree
@@ -15,38 +16,38 @@ namespace BehaviourTree
         /// <summary>
         /// 标志，用来判断执行OnStart还是OnStop
         /// </summary>
-        [ReadOnly, FoldoutGroup("Node")] 
+        [ReadOnly, BoxGroup] 
         private bool started = false;
         
         /// <summary>
         /// 当前节点的状态
         /// </summary>
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public State state = State.Running;
         
         /// <summary>
         /// guid，节点唯一标识
         /// </summary>
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public string guid;
         
         /// <summary>
         /// 记录element元素在视图中的位置
         /// </summary>
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public Vector2 position;
         
         /// <summary>
         /// 节点元素的备注
         /// </summary>
-        [ReadOnly, FoldoutGroup("Node"), TextArea]
+        [ReadOnly, BoxGroup, TextArea]
         public string description;
 
         
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public Blackboard blackboard;
         
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public MonsterStats monsterStats;
         
         

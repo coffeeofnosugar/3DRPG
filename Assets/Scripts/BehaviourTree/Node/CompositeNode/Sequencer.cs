@@ -8,9 +8,9 @@ namespace BehaviourTree
     /// <summary>
     /// 定序节点
     /// 按顺序执行第一个节点
-    /// 如果该节点在这一帧返回running，则下一帧依然直接该节点
+    /// 如果该节点在这一帧返回running，则下一帧依然执行该节点
     /// 除非该节点在这一帧返回success\failure，下一针才会执行下一个子节点
-    /// 直到执行完所有子节点后本节点才会返回
+    /// 直到执行完所有子节点后本节点才会返回，无论子节点返回成功还是失败
     /// </summary>
     public class Sequencer : CompositeNode
     {
@@ -18,6 +18,7 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             base.OnStart();
+            Debug.Log($"{guid}  {state}");
             current = 0;
         }
 
@@ -35,12 +36,12 @@ namespace BehaviourTree
 
                 switch (child.Update())
                 {
-                    case State.Running:
-                        return State.Running;
-                    case State.Failure:
-                        return State.Failure;
                     case State.Success:
                         continue;
+                    case State.Failure:
+                        continue;
+                    case State.Running:
+                        return State.Running;
                 }
             }
 

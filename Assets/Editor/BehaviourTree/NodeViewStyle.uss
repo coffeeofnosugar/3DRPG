@@ -119,7 +119,7 @@
 }
 
 .running #node-state {
-    background-color: rgb(86, 219, 32);
+    background-color: rgb(43, 199, 212);
 }
 
 .success #node-state {

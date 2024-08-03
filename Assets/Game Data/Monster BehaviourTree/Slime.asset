@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8146e9cb666e5a147a7146e9cd568291, type: 3}
   m_Name: Root
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: 024436d71b89fe64d84e0013b3cc7064
   position: {x: 0, y: 0}
@@ -26,6 +25,86 @@ MonoBehaviour:
     isDeath: 0
   monsterStats: {fileID: 0}
   child: {fileID: -2126242177950122235}
+--- !u!114 &-8314389804103341551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adeadabbe3866cd478b495686ce0f586, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 4ae301ee73ea59c448fc55853c3ed921
+  position: {x: -0.0000064373016, y: 280}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  children:
+  - {fileID: 4711538500666313139}
+  - {fileID: -8205832655257685861}
+--- !u!114 &-8226642347019212414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1a0473351b86cd42b1ff781cfbbf8be, type: 3}
+  m_Name: CoolDown
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 99433e594d2560c47904193740d21b93
+  position: {x: -238, y: 917}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  coolDown: 5
+  _time: -3.4028235e+38
+--- !u!114 &-8205832655257685861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: bd09c231f56d35240a08b341e6f52a8a
+  position: {x: 261.855, y: 447.005}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  children:
+  - {fileID: -6465275317586015839}
+  - {fileID: -814918535894628135}
 --- !u!114 &-7855510110079360905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,7 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44cc2979a202a247b7aa7ad07913dcf, type: 3}
   m_Name: MoveToPosition
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: a926dc1fcf479ed42aa8c0fb1e633c09
   position: {x: -206.35, y: 604.00006}
@@ -64,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb5ebe80755e754998720eef7497af4, type: 3}
   m_Name: MoveToTarget
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: 23e507cbfb4421c46b80437896f9700b
   position: {x: 33.00004, y: 604.00006}
@@ -78,6 +155,88 @@ MonoBehaviour:
     isDeath: 0
   monsterStats: {fileID: 0}
   tolerance: 1
+--- !u!114 &-4154840272393867372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adeadabbe3866cd478b495686ce0f586, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 21c7edfdacd53ef449c4006d2331c7ac
+  position: {x: 514.315, y: 739.58014}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  children:
+  - {fileID: -2889212474405743219}
+  - {fileID: -1378166830330969549}
+  - {fileID: 2223528865140522689}
+--- !u!114 &-3297313669096345595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adeadabbe3866cd478b495686ce0f586, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 17c0a8493c5e68845ae04262e7b9dd46
+  position: {x: 128.66504, y: 740}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  children:
+  - {fileID: -8226642347019212414}
+  - {fileID: 4746312297100846575}
+  - {fileID: 4088941201081563669}
+--- !u!114 &-2889212474405743219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1a0473351b86cd42b1ff781cfbbf8be, type: 3}
+  m_Name: CoolDown
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 68e563dc2cd89ea42bb1dd41b6dee0ad
+  position: {x: 333, y: 917}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  coolDown: 2
+  _time: -3.4028235e+38
 --- !u!114 &-2590252864520987470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b520fb83eeb167841b271a8238aed765, type: 3}
   m_Name: RandomPosition
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: 47620d96f0f1b304a95606246dfd3dd5
   position: {x: -356.35007, y: 604.00006}
@@ -103,33 +261,6 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   monsterStats: {fileID: 0}
---- !u!114 &-2399336995987073748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 31aea65c5c7883f4699e01d1541d9a9a
-  position: {x: 55, y: 718}
-  description: 
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  monsterStats: {fileID: 0}
-  children:
-  - {fileID: 4088941201081563669}
 --- !u!114 &-2126242177950122235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595eae3db2814b746a017c3578324379, type: 3}
   m_Name: Repeat
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: c0ace999f40a6d24b8567eb43f46ed03
   position: {x: 0, y: 148.09999}
@@ -155,8 +285,8 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   monsterStats: {fileID: 0}
-  child: {fileID: -1986982665808209055}
---- !u!114 &-1986982665808209055
+  child: {fileID: -8314389804103341551}
+--- !u!114 &-1378166830330969549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,13 +295,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adeadabbe3866cd478b495686ce0f586, type: 3}
-  m_Name: Selector
+  m_Script: {fileID: 11500000, guid: 7e2f1ee6be98e4d40b759df9440efe46, type: 3}
+  m_Name: TargetDistance
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
-  guid: c42115bff157ba84dadba43a3ee02065
-  position: {x: 0, y: 297.9}
+  guid: fe9b13e6e0ddf5b4c9de1c126f173387
+  position: {x: 539.99994, y: 917.00006}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  distance: 1
+--- !u!114 &-814918535894628135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 0bad5e43cae440449b556b2a841bf077
+  position: {x: 384.8475, y: 577.9325}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -182,35 +336,8 @@ MonoBehaviour:
     isDeath: 0
   monsterStats: {fileID: 0}
   children:
-  - {fileID: 4711538500666313139}
-  - {fileID: 582124139208481210}
---- !u!114 &-636630985017530442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3d6f9fa299f7f143861c58f26636e47, type: 3}
-  m_Name: Weight
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: 704208360f2588d41b24abcaf8622de9
-  position: {x: 443.26022, y: 580.00006}
-  description: 
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  monsterStats: {fileID: 0}
-  children: []
-  weights: 
+  - {fileID: -3297313669096345595}
+  - {fileID: -4154840272393867372}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,18 +355,22 @@ MonoBehaviour:
   nodes:
   - {fileID: -8518566403547890604}
   - {fileID: -2126242177950122235}
-  - {fileID: -1986982665808209055}
   - {fileID: 4711538500666313139}
   - {fileID: 6776659942449182264}
   - {fileID: -2590252864520987470}
   - {fileID: -7855510110079360905}
-  - {fileID: 582124139208481210}
   - {fileID: -6465275317586015839}
-  - {fileID: 3889467843482978773}
   - {fileID: 4088941201081563669}
   - {fileID: 2223528865140522689}
-  - {fileID: -636630985017530442}
-  - {fileID: -2399336995987073748}
+  - {fileID: -8226642347019212414}
+  - {fileID: 4746312297100846575}
+  - {fileID: -2889212474405743219}
+  - {fileID: -1378166830330969549}
+  - {fileID: -8314389804103341551}
+  - {fileID: -3297313669096345595}
+  - {fileID: -4154840272393867372}
+  - {fileID: -814918535894628135}
+  - {fileID: -8205832655257685861}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -248,34 +379,6 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   characterStats: {fileID: 0}
---- !u!114 &582124139208481210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: b8f96bad6bfa2ea4b8b1fb87e00df922
-  position: {x: 150, y: 455.00006}
-  description: 
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  monsterStats: {fileID: 0}
-  children:
-  - {fileID: -6465275317586015839}
-  - {fileID: 3889467843482978773}
 --- !u!114 &2223528865140522689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,10 +391,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd649445d382f0c46887f3093d602115, type: 3}
   m_Name: Skill
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: 2c6e7102951c85d4d9d535ab5f3b5e27
-  position: {x: 348.5, y: 763}
+  position: {x: 750.74677, y: 917}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -302,34 +404,6 @@ MonoBehaviour:
     isDeath: 0
   monsterStats: {fileID: 0}
   animatorParameter: Attack01
---- !u!114 &3889467843482978773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  started: 0
-  state: 0
-  guid: b636a5683665f424894728ce1ba2cb46
-  position: {x: 244.29996, y: 604}
-  description: 
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    target: {fileID: 0}
-    distanceTarget: 0
-    isAttacking: 0
-    getHit: 0
-    isDeath: 0
-  monsterStats: {fileID: 0}
-  children:
-  - {fileID: -2399336995987073748}
-  - {fileID: 2223528865140522689}
 --- !u!114 &4088941201081563669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,10 +416,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd649445d382f0c46887f3093d602115, type: 3}
   m_Name: Skill
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: b9521d8477a57c946b56ce80167e2666
-  position: {x: 159, y: 854}
+  position: {x: 150.00014, y: 917}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -368,7 +441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718d4902a63a7ad4a8821fb1156da871, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: a849b552d126d8441bf5f0b619afb909
   position: {x: -356, y: 465}
@@ -385,6 +457,31 @@ MonoBehaviour:
   - {fileID: 6776659942449182264}
   - {fileID: -2590252864520987470}
   - {fileID: -7855510110079360905}
+--- !u!114 &4746312297100846575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2f1ee6be98e4d40b759df9440efe46, type: 3}
+  m_Name: TargetDistance
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 3aa23a9cc6bdb83429c14e8018de071d
+  position: {x: -33, y: 917}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  distance: 2
 --- !u!114 &6776659942449182264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0289d7c4efef96e4c956f544b6dfa971, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  started: 0
   state: 0
   guid: 10281e5426faf4a4ba9cd7ddbf719a9c
   position: {x: -506.35004, y: 604.00006}

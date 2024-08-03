@@ -7,7 +7,7 @@ namespace BehaviourTree
 {
     /// <summary>
     /// 选择节点
-    /// 子节点从左到右判断，如果执行成功或失败就退出
+    /// 子节点从左到右判断，如果执行失败就退出
     /// </summary>
     public class Selector : CompositeNode
     {
@@ -32,12 +32,12 @@ namespace BehaviourTree
 
                 switch (child.Update())
                 {
+                    case State.Success:
+                        continue;
+                    case State.Failure:
+                        return State.Failure;
                     case State.Running:
                         return State.Running;
-                    case State.Success:
-                        return State.Success;
-                    case State.Failure:
-                        continue;
                 }
             }
 
