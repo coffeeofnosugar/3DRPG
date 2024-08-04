@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
-public class MouseManager : UnitySingleton<MouseManager>
+
+public class MouseManager : MonoSingleton<MouseManager>
 {
     public event Action<Vector3> OnMouseClicked;
     public event Action<GameObject> OnEnemyClicked;
@@ -17,6 +18,10 @@ public class MouseManager : UnitySingleton<MouseManager>
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.A))
+        {
+            Debug.Log("A");
+        }
         // SetCursorTexture();
         // MouseControl();
     }

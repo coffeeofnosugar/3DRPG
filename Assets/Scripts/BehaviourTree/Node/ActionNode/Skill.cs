@@ -50,6 +50,8 @@ namespace BehaviourTree
 
             monsterStats.agent.destination = monsterStats.transform.position;
             monsterStats.transform.LookAt(blackboard.target.transform);       // 怪物会莫名的旋转，故添加这行代码
+            
+            Debug.Log($"{animatorNmae}: {info.normalizedTime}");
             if (animatorNmae != animatorParameter)
             {
                 return State.Running;

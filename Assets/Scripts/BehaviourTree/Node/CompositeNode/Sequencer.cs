@@ -18,7 +18,6 @@ namespace BehaviourTree
         protected override void OnStart()
         {
             base.OnStart();
-            Debug.Log($"{guid}  {state}");
             current = 0;
         }
 

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Tools.CoffeeTools
 {
-    public class Debugs : UnitySingleton<Debugs>
+    public class Debugs : MonoSingleton<Debugs>
     {
         [SerializeField] private Transform _scrollViewContent;
         [SerializeField] private GameObject _textPrefab;
@@ -15,8 +15,10 @@ namespace Tools.CoffeeTools
         public static UpdateLogText UpdateLogText;
         public enum DebugTypeEnum { Normal, WithoutUnityDebug }
 
-        private void Awake()
+        private new void Awake()
         {
+            Debug.Log("≥ı ºªØDebugs");
+            base.Awake();
             UpdateLogText = new UpdateLogText(updateText);
         }
 
