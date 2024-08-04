@@ -17,7 +17,6 @@ namespace Tools.CoffeeTools
 
         private new void Awake()
         {
-            Debug.Log("≥ı ºªØDebugs");
             base.Awake();
             UpdateLogText = new UpdateLogText(updateText);
         }
