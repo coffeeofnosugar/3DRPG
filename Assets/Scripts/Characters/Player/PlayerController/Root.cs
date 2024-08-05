@@ -8,9 +8,9 @@ namespace Player.PlayerController
 {
     public class Root : Node
     {
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public List<Node> children;
-        [SerializeField, ReadOnly, FoldoutGroup("Node")]
+        [SerializeField, ReadOnly, BoxGroup]
         private int current;
         protected override void EnterState()
         {

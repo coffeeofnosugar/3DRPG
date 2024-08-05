@@ -46,17 +46,16 @@ namespace BehaviourTree
                 return State.Success;
             }
             var info = monsterStats.animator.GetCurrentAnimatorStateInfo(1);
-            string animatorNmae = monsterStats.animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
+            string animatorName = monsterStats.animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
 
             monsterStats.agent.destination = monsterStats.transform.position;
             monsterStats.transform.LookAt(blackboard.target.transform);       // 怪物会莫名的旋转，故添加这行代码
             
-            Debug.Log($"{animatorNmae}: {info.normalizedTime}");
-            if (animatorNmae != animatorParameter)
+            if (animatorName != animatorParameter)
             {
                 return State.Running;
             }
-            if (animatorNmae == animatorParameter && info.normalizedTime <= 0.95f)
+            if (animatorName == animatorParameter && info.normalizedTime <= 0.95f)
             {
                 return State.Running;
             }

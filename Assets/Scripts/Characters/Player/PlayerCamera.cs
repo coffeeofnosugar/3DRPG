@@ -23,28 +23,30 @@ namespace Player
         [SerializeField, Range(0, 1)] private float linearSpeed = 1;
 
         private CharacterController _characterController;
+        private PlayerInputController _playerInput;
         private float _xMouse, _yMouse;
 
         private void Awake()
         {
-            Debugs.Show("相机初始化...");
             try
             {
                 if (player == null)
                     player = FindObjectOfType<PlayerStats>().transform;
                 _characterController = player.GetComponent<CharacterController>();
+                _playerInput = player.GetComponent<PlayerInputController>();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                Debugs.Show("相机初始化...失败");
                 throw;
             }
-            Debugs.Show("相机初始化...Done");
         }
 
         private void LateUpdate()
         {
+            if (_playerInput.isPause)
+                return;
+            
             _xMouse += Input.GetAxis("Mouse X") * linearSpeed;
             _yMouse -= Input.GetAxis("Mouse Y") * linearSpeed;
             // 限制垂直方向的角度
@@ -52,7 +54,7 @@ namespace Player
             // 滑轮
             // offset.z -= Input.GetAxis("Mouse ScrollWheel") * 10;
             // offset.z = Mathf.Clamp(offset.z, -2, -15);
-            
+        
             Quaternion targetRotation = Quaternion.Euler(_yMouse, _xMouse, 0);
             Vector3 targetPosition = player.position + targetRotation * new Vector3(xOffset, yOffset, -zOffset) + _characterController.center;
             speed = _characterController.velocity.sqrMagnitude > 0.01f ? Mathf.Lerp(speed, 10, 5f * Time.deltaTime): Mathf.Lerp(speed, 25, 5f * Time.deltaTime);

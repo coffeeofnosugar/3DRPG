@@ -102,6 +102,14 @@ public abstract class CharacterStats : MonoBehaviour
         return false;
     }
 
+    public void Attack()
+    {
+        if (blackboard.target)
+        {
+            blackboard.target.GetComponent<Animator>().SetTrigger("GettingHit");
+        }
+    }
+
 
     /// <summary>
     /// ‘Ï≥……À∫¶

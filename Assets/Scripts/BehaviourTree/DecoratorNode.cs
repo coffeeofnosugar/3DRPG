@@ -12,7 +12,7 @@ namespace BehaviourTree
     /// </summary>
     public abstract class DecoratorNode : Node
     {
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public Node child;
 
 

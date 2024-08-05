@@ -17,7 +17,6 @@ public class MoveObject : MonoBehaviour
 
     private void Update()
     {
-        transform.parent.position = Vector3.MoveTowards(transform.parent.position, movePos[i], speed * Time.deltaTime);
         if (Vector3.Distance(transform.parent.position, movePos[i]) <= .1f)
         {
             if (time > waitTime)
@@ -28,10 +27,15 @@ public class MoveObject : MonoBehaviour
             else
                 time += Time.deltaTime;
         }
-        if (player)
+        else if (player)
         {
+            transform.parent.position = Vector3.MoveTowards(transform.parent.position, movePos[i], speed * Time.deltaTime);
             int j = i == 0 ? 1 : 0;
             _characterController.Move((movePos[i] - movePos[j]).normalized * (speed * Time.deltaTime));
+        }
+        else
+        {
+            transform.parent.position = Vector3.MoveTowards(transform.parent.position, movePos[i], speed * Time.deltaTime);
         }
     }
 

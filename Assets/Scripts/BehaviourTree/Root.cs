@@ -8,7 +8,7 @@ namespace BehaviourTree
 {
     public class Root : Node
     {
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public Node child;
         protected override void OnStart()
         {

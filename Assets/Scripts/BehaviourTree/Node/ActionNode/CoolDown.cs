@@ -15,7 +15,7 @@ namespace BehaviourTree
 
         protected override void OnStart()
         {
-            if (Time.time - _time > coolDown)
+            if (blackboard.target && Time.time - _time > coolDown)
             {
                 _time = Time.time;
                 state = State.Success;

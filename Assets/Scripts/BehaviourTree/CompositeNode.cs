@@ -13,7 +13,7 @@ namespace BehaviourTree
     /// </summary>
     public abstract class CompositeNode : Node
     {
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public List<Node> children = new List<Node>();
 
         public override Node Clone()

@@ -1,5 +1,34 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9194043596401120395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d6f9fa299f7f143861c58f26636e47, type: 3}
+  m_Name: Weight
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 70f76f03d76a7cb42a461ff623d0f207
+  position: {x: 605.725, y: 190}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  children:
+  - {fileID: 5904365131717881039}
+  - {fileID: 1682553272399850407}
+  - {fileID: 1478620976066474127}
+  weights: 010000000100000001000000
 --- !u!114 &-8518566403547890604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 99433e594d2560c47904193740d21b93
-  position: {x: -238, y: 917}
+  position: {x: 17.637558, y: 917}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -119,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: a926dc1fcf479ed42aa8c0fb1e633c09
-  position: {x: -206.35, y: 604.00006}
+  position: {x: -202.03252, y: 586}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -144,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 23e507cbfb4421c46b80437896f9700b
-  position: {x: 33.00004, y: 604.00006}
+  position: {x: 34.322502, y: 586}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -169,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 21c7edfdacd53ef449c4006d2331c7ac
-  position: {x: 514.315, y: 739.58014}
+  position: {x: 627.90515, y: 740}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -197,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 17c0a8493c5e68845ae04262e7b9dd46
-  position: {x: 128.66504, y: 740}
+  position: {x: 167.63754, y: 739.99994}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -225,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 68e563dc2cd89ea42bb1dd41b6dee0ad
-  position: {x: 333, y: 917}
+  position: {x: 477.90518, y: 917.00006}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -251,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 47620d96f0f1b304a95606246dfd3dd5
-  position: {x: -356.35007, y: 604.00006}
+  position: {x: -352.0001, y: 586.00006}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -300,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: fe9b13e6e0ddf5b4c9de1c126f173387
-  position: {x: 539.99994, y: 917.00006}
+  position: {x: 627.90515, y: 917.00006}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -371,6 +400,10 @@ MonoBehaviour:
   - {fileID: -4154840272393867372}
   - {fileID: -814918535894628135}
   - {fileID: -8205832655257685861}
+  - {fileID: -9194043596401120395}
+  - {fileID: 5904365131717881039}
+  - {fileID: 1682553272399850407}
+  - {fileID: 1478620976066474127}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     target: {fileID: 0}
@@ -379,6 +412,56 @@ MonoBehaviour:
     getHit: 0
     isDeath: 0
   characterStats: {fileID: 0}
+--- !u!114 &1478620976066474127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0e68d47ca254e439c8e2430a558f89, type: 3}
+  m_Name: PlayAnimation
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 05bd993de6580c84494f99b6571baf7d
+  position: {x: 793.7801, y: 350.99997}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  animatorParameter: 
+--- !u!114 &1682553272399850407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd649445d382f0c46887f3093d602115, type: 3}
+  m_Name: Skill
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 798e2d000b5cb9741a466eedcd1cb41d
+  position: {x: 605.99994, y: 351}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  animatorParameter: 
 --- !u!114 &2223528865140522689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 2c6e7102951c85d4d9d535ab5f3b5e27
-  position: {x: 750.74677, y: 917}
+  position: {x: 777.90515, y: 917.00006}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -418,7 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: b9521d8477a57c946b56ce80167e2666
-  position: {x: 150.00014, y: 917}
+  position: {x: 317.6375, y: 917}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -443,7 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: a849b552d126d8441bf5f0b619afb909
-  position: {x: -356, y: 465}
+  position: {x: -352.0325, y: 447}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -471,7 +554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 3aa23a9cc6bdb83429c14e8018de071d
-  position: {x: -33, y: 917}
+  position: {x: 167.63754, y: 917}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -482,6 +565,31 @@ MonoBehaviour:
     isDeath: 0
   monsterStats: {fileID: 0}
   distance: 2
+--- !u!114 &5904365131717881039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bfb31b232c66f4897ecf7701c9d905, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: 
+  state: 0
+  guid: 2f02217365402704aa302bef31e20f87
+  position: {x: 412, y: 351}
+  description: 
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    target: {fileID: 0}
+    distanceTarget: 0
+    isAttacking: 0
+    getHit: 0
+    isDeath: 0
+  monsterStats: {fileID: 0}
+  message: 
 --- !u!114 &6776659942449182264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,7 +604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   guid: 10281e5426faf4a4ba9cd7ddbf719a9c
-  position: {x: -506.35004, y: 604.00006}
+  position: {x: -502.03247, y: 586}
   description: 
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}

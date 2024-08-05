@@ -11,26 +11,26 @@ namespace Player.PlayerController
     {
         public enum State { Running, Failure, Success }
 
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public bool started = false;
 
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public State state = State.Running;
 
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public string guid;
         
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public Vector2 position;
         
-        [ReadOnly, FoldoutGroup("Node"), TextArea]
+        [BoxGroup, TextArea]
         public string description;
         
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public PlayerStats playerStats;
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public Blackboard blackboard;
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public PlayerInputController playerInputController;
 
         public Action AddRunningClass;

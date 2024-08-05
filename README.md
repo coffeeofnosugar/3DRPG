@@ -21,17 +21,19 @@
 - 通过行为树窗口视图连接逻辑控制器节点和动作节点，实现定制化怪物AI
 - 在PlayerMode下可以通过行为树视图实时观察怪物当前状态
 
-![image-20240711165537097](./ProjectIntroduce/image-20240711165537097.png)
-
-![image-20240711170818313](./ProjectIntroduce/image-20240711170818313.png)
-
+<div class="container">
+    <img src="https://www.coffeeofnosugar.top/images/daily/%E9%A1%B9%E7%9B%AE/%E8%A1%8C%E4%B8%BA%E6%A0%911.png"></img>
+    <img src="https://www.coffeeofnosugar.top/images/daily/%E9%A1%B9%E7%9B%AE/%E8%A1%8C%E4%B8%BA%E6%A0%912.png"></img>
+</div>
 
 
 ---
 
-### 怪物数据编辑器
+### 第三人称控制
 
-使用怪物编辑器添加、删除、修改怪物的基础属性、添加删除技能、配置技能数值。
+- `CharacterController`控制玩家移动
+- 有限状态机模式控制玩家状态
+- `Input System`监听玩家输入
+- `Animator`控制玩家动画，下一步计划将舍弃`Animator`转而使用`Playable`播放动画
 
-![image-20240711171023007](./ProjectIntroduce/image-20240711171023007.png)
-
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=112907996171197&bvid=BV1nxaoeNELZ&cid=500001638921677&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>

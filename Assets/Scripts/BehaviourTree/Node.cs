@@ -40,7 +40,7 @@ namespace BehaviourTree
         /// <summary>
         /// 节点元素的备注
         /// </summary>
-        [ReadOnly, BoxGroup, TextArea]
+        [BoxGroup, TextArea]
         public string description;
 
         
@@ -63,6 +63,10 @@ namespace BehaviourTree
             }
 
             state = OnUpdate();
+            if (state is State.Running or State.Success)
+            {
+                AddRunningClass?.Invoke();
+            }
 
             if (state != State.Running)
             {
@@ -86,10 +90,6 @@ namespace BehaviourTree
 
         protected virtual void OnStart()
         {
-            if (state is State.Running or State.Success)
-            {
-                AddRunningClass?.Invoke();
-            }
         }
 
         protected virtual void OnStop()

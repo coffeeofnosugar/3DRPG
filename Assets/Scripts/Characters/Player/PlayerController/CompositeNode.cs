@@ -7,7 +7,7 @@ namespace Player.PlayerController
 {
     public abstract class CompositeNode : Node
     {
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public Node[] children = new Node[3];
 
         public override Node Clone()

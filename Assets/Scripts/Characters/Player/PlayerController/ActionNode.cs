@@ -8,7 +8,7 @@ namespace Player.PlayerController
 {
     public abstract class ActionNode : Node
     {
-        [ReadOnly, FoldoutGroup("Node")]
+        [ReadOnly, BoxGroup]
         public Node child;
         
         public override Node Clone()
