@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Player.PlayerController
 {
-    [CreateAssetMenu()]
+    [CreateAssetMenu(fileName = "...SkillController", menuName = "Player/PlayerController")]
     public class PlayerController : ScriptableObject
     {
         public Node rootNode;

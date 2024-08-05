@@ -9,7 +9,7 @@ namespace BehaviourTree
     /// <summary>
     /// 一个怪物的行为树
     /// </summary>
-    [CreateAssetMenu()]
+    [CreateAssetMenu(fileName = "...BehaviourTree", menuName = "Enemy/BehaviourTree")]
     public class BehaviourTree : ScriptableObject
     {
         public Node rootNode;

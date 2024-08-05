@@ -12,15 +12,15 @@ public class MouseManager : MonoSingleton<MouseManager>
 
     private void Start()
     {
-        // Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.M))
         {
-            Debug.Log("A");
+            Debug.Log("M");
         }
         // SetCursorTexture();
         // MouseControl();

@@ -39,25 +39,25 @@ namespace Player
             _playerInput = new PlayerInput();
             _playerStats = GetComponent<PlayerStats>();
 
-            _playerInput.CharacterControls.Move.started += OnMoveInput;
-            _playerInput.CharacterControls.Move.canceled += OnMoveInput;
-            _playerInput.CharacterControls.Move.performed += OnMoveInput;
+            _playerInput.InGame.Move.started += OnMoveInput;
+            _playerInput.InGame.Move.canceled += OnMoveInput;
+            _playerInput.InGame.Move.performed += OnMoveInput;
             
-            _playerInput.CharacterControls.Look.started += OnLookInput;
-            _playerInput.CharacterControls.Look.canceled += OnLookInput;
-            _playerInput.CharacterControls.Look.performed += OnLookInput;
+            _playerInput.InGame.Look.started += OnLookInput;
+            _playerInput.InGame.Look.canceled += OnLookInput;
+            _playerInput.InGame.Look.performed += OnLookInput;
 
-            _playerInput.CharacterControls.Run.started += OnRunInput;
-            _playerInput.CharacterControls.Run.canceled += OnRunInput;
+            _playerInput.InGame.Run.started += OnRunInput;
+            _playerInput.InGame.Run.canceled += OnRunInput;
 
-            _playerInput.CharacterControls.Jump.started += OnJumpInput;
-            _playerInput.CharacterControls.Jump.canceled += OnJumpInput;
+            _playerInput.InGame.Jump.started += OnJumpInput;
+            _playerInput.InGame.Jump.canceled += OnJumpInput;
 
-            _playerInput.CharacterControls.Crouch.started += OnCrouchInput;
-            _playerInput.CharacterControls.Crouch.canceled += OnCrouchInput;
+            _playerInput.InGame.Crouch.started += OnCrouchInput;
+            _playerInput.InGame.Crouch.canceled += OnCrouchInput;
 
-            _playerInput.CharacterControls.Attack.started += OnAttackInput;
-            _playerInput.CharacterControls.Attack.canceled += OnAttackInput;
+            _playerInput.InGame.Attack.started += OnAttackInput;
+            _playerInput.InGame.Attack.canceled += OnAttackInput;
         }
 
         private void Start()
@@ -78,9 +78,9 @@ namespace Player
             inputMovementPlayer = _playerStats.transform.InverseTransformVector(inputMovementWorld);
         }
 
-        private void OnEnable() { _playerInput.CharacterControls.Enable(); }
+        private void OnEnable() { _playerInput.InGame.Enable(); }
 
-        private void OnDisable() { _playerInput.CharacterControls.Disable(); }
+        private void OnDisable() { _playerInput.InGame.Disable(); }
         
         #region input event
         
