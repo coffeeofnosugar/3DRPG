@@ -1,3 +1,8 @@
+
+
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=112907996171197&bvid=BV1nxaoeNELZ&cid=500001638921677&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+
+
 ### 行为树编辑器
 
 使用UI Builder**从零制作**怪物行为树可视化编辑器，通过视图连接各个节点，实现定制化怪物AI。
@@ -35,5 +40,3 @@
 - 有限状态机模式控制玩家状态
 - `Input System`监听玩家输入
 - `Animator`控制玩家动画，下一步计划将舍弃`Animator`转而使用`Playable`播放动画
-
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=112907996171197&bvid=BV1nxaoeNELZ&cid=500001638921677&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
