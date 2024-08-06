@@ -35,6 +35,22 @@ MonoBehaviour:
     m_Key: Exit
     m_Metadata:
       m_Items: []
+  - m_Id: 216633715605504
+    m_Key: Quit_Popup_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217200332521472
+    m_Key: Quit_Popup_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217275519614976
+    m_Key: Quit_Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217319266205696
+    m_Key: Quit_Cancel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

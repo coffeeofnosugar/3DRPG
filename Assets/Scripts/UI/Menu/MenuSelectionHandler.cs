@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -11,7 +8,6 @@ namespace UI
     public class MenuSelectionHandler : MonoBehaviour
     {
         [SerializeField] private InputReader _inputReader;
-        [SerializeField] private GameObject _defaultSelection;
         [SerializeField, ReadOnly] private GameObject _currentSelection;
         [SerializeField, ReadOnly] private GameObject _mouseSelection;
 
@@ -19,8 +15,6 @@ namespace UI
         {
             _inputReader.UIMousePointEvent += HandleMousePoint;
             _inputReader.UINavigateEvent += HandleNavigate;
-            
-            UpdateSelection(_defaultSelection);     // …Ë÷√ƒ¨»œ—°‘Ò
         }
     
         private void OnDisable()
@@ -44,8 +38,11 @@ namespace UI
 
         public void HandleMouseEnter(GameObject UIElement)
         {
-            _mouseSelection = UIElement;
-            EventSystem.current.SetSelectedGameObject(UIElement);
+            if (UIElement.TryGetComponent<MultiInputButton>(out var button) && button.interactable)
+            {
+                _mouseSelection = UIElement.gameObject;
+                EventSystem.current.SetSelectedGameObject(_mouseSelection);
+            }
         }
 
         public void HandleMouseExit(GameObject UIElement)
@@ -80,7 +77,7 @@ namespace UI
         /// <param name="UIElement"></param>
         public void UpdateSelection(GameObject UIElement)
         {
-            if (UIElement.TryGetComponent<MultiInputSelectableElement>(out var e))
+            if (UIElement.TryGetComponent<MultiInputButton>(out var button))
             {
                 _mouseSelection = UIElement;
                 _currentSelection = UIElement;

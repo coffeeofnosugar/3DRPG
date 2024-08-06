@@ -32,7 +32,10 @@ namespace Player
 
         #region UI
         
-        public event Action ResumeEvent = delegate { };
+        /// <summary>
+        /// UI控制: 键盘ESC、手柄B键和菜单键
+        /// </summary>
+        public event Action CancelEvent = delegate { };
         /// <summary>
         /// UI控制: 鼠标移动时的位置坐标
         /// </summary>
@@ -52,9 +55,6 @@ namespace Player
 
                 _playerInput.InGame.SetCallbacks(this);
                 _playerInput.UI.SetCallbacks(this);
-
-                // SetInGame();
-                SetUI();
             }
         }
         
@@ -67,9 +67,9 @@ namespace Player
         /// <summary>
         /// 启用游戏键位，关闭UI键位
         /// </summary>
-        public void SetInGame()
+        public void EnableInGameInput()
         {
-            Debug.Log("启动InGame输入控制");
+            Debug.Log("Enable InGameInput");
             _playerInput.InGame.Enable();
             _playerInput.UI.Disable();
         }
@@ -77,9 +77,9 @@ namespace Player
         /// <summary>
         /// 启用UI键位，关闭游戏键位
         /// </summary>
-        public void SetUI()
+        public void EnableUIInput()
         {
-            Debug.Log("启动UI输入控制");
+            Debug.Log("Enable UIInput");
             _playerInput.InGame.Disable();
             _playerInput.UI.Enable();
         }
@@ -148,12 +148,12 @@ namespace Player
         #endregion
 
         #region UI
-        
-        public void OnResume(InputAction.CallbackContext context)
+
+        public void OnCancel(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
             {
-                ResumeEvent.Invoke();
+                CancelEvent.Invoke();
             }
         }
 
@@ -188,12 +188,6 @@ namespace Player
         {
             
         }
-
-        public void OnCancel(InputAction.CallbackContext context)
-        {
-            
-        }
-
         #endregion
     }
 }

@@ -275,7 +275,7 @@
             "id": "d10f81dd-8a9a-4ba8-9864-b79c968d841b",
             "actions": [
                 {
-                    "name": "Resume",
+                    "name": "Cancel",
                     "type": "PassThrough",
                     "id": "bd232939-6167-41ca-a6f9-5dbc236b1961",
                     "expectedControlType": "Button",
@@ -336,15 +336,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Cancel",
-                    "type": "Button",
-                    "id": "b42eed33-8fa3-42be-ab68-5f27fc9ed518",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -355,7 +346,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Resume",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -366,7 +357,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Resume",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69d4eca8-40b9-4443-b9cf-eb56c5036185",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -686,17 +688,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Submit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0b93a7ef-2f2b-4ff8-8e9b-6953f303547a",
-                    "path": "*/{Cancel}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
