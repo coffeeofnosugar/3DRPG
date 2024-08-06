@@ -13,26 +13,36 @@ namespace Player
 
         // 将delegate分配给事件，可以使用空委托初始化他们
         // 当我们调用事件时，可以跳过null检查
+
+        #region InGame
         
         public event Action<Vector2> MoveEvent = delegate { };
-        
         public event Action<Vector2> LookEvent = delegate { };
-        
         public event Action StartRunEvent = delegate { };
         public event Action StopRunEvent = delegate { };
-        
         public event Action JumpEvent = delegate { };
         public event Action JumpCanceledEvent = delegate { };
-        
         public event Action StartCrouchEvent = delegate { };
         public event Action StopCrouchEvent = delegate { };
-        
         public event Action AttackEvent = delegate { };
         public event Action AttackCanceledEvent = delegate { };
-        
         public event Action PauseEvent = delegate { };
         
+        #endregion
+
+        #region UI
+        
         public event Action ResumeEvent = delegate { };
+        /// <summary>
+        /// UI控制: 鼠标移动时的位置坐标
+        /// </summary>
+        public event Action<Vector2> UIMousePointEvent = delegate { };
+        /// <summary>
+        /// UI控制: 键盘的 W/A/S/D/上/下/左/右、手柄的左摇杆/十字键
+        /// </summary>
+        public event Action<Vector2> UINavigateEvent = delegate { };
+        
+        #endregion
 
         private void OnEnable()
         {
@@ -43,9 +53,11 @@ namespace Player
                 _playerInput.InGame.SetCallbacks(this);
                 _playerInput.UI.SetCallbacks(this);
 
-                SetInGame();
+                // SetInGame();
+                SetUI();
             }
         }
+        
 
         private void OnDisable()
         {
@@ -57,6 +69,7 @@ namespace Player
         /// </summary>
         public void SetInGame()
         {
+            Debug.Log("启动InGame输入控制");
             _playerInput.InGame.Enable();
             _playerInput.UI.Disable();
         }
@@ -66,6 +79,7 @@ namespace Player
         /// </summary>
         public void SetUI()
         {
+            Debug.Log("启动UI输入控制");
             _playerInput.InGame.Disable();
             _playerInput.UI.Enable();
         }
@@ -78,7 +92,8 @@ namespace Player
             _playerInput.InGame.Disable();
             _playerInput.UI.Disable();
         }
-        
+
+        #region InGame
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -127,22 +142,25 @@ namespace Player
             if (context.phase == InputActionPhase.Performed)
             {
                 PauseEvent.Invoke();
-                SetUI();
             }
         }
 
+        #endregion
+
+        #region UI
+        
         public void OnResume(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
             {
                 ResumeEvent.Invoke();
-                SetInGame();
             }
         }
 
         public void OnPoint(InputAction.CallbackContext context)
         {
-            
+            if (context.phase == InputActionPhase.Performed)
+                UIMousePointEvent.Invoke(context.ReadValue<Vector2>());
         }
 
         public void OnClick(InputAction.CallbackContext context)
@@ -157,7 +175,8 @@ namespace Player
 
         public void OnNavigate(InputAction.CallbackContext context)
         {
-            
+            if (context.phase == InputActionPhase.Performed)
+                UINavigateEvent.Invoke(context.ReadValue<Vector2>());
         }
 
         public void OnScrollWheel(InputAction.CallbackContext context)
@@ -174,5 +193,7 @@ namespace Player
         {
             
         }
+
+        #endregion
     }
 }
