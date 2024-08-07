@@ -55,7 +55,6 @@ namespace UI
                 UpdatePagination(currentPagination - 1);
             else
                 UpdatePagination(currentPagination + 1);
-            Debug.Log($"currentPagination: {currentPagination}");
         }
     }
 }

@@ -67,14 +67,6 @@ MonoBehaviour:
     m_Key: Setting_Language_Current(zh)
     m_Metadata:
       m_Items: []
-  - m_Id: 292668456976384
-    m_Key: Setting_Language_Current(en)
-    m_Metadata:
-      m_Items: []
-  - m_Id: 292889995919360
-    m_Key: Setting_Language_Current(ja)
-    m_Metadata:
-      m_Items: []
   - m_Id: 368270270676992
     m_Key: Setting_DebugMode
     m_Metadata:

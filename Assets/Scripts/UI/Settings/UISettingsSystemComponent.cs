@@ -8,6 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace UI
 {
     public enum LanguageType { Chinese, English, Japanese }
+    public enum DebugModeType { On, Off }
 
     public class UISettingsSystemComponent : MonoBehaviour
     {
@@ -48,7 +49,7 @@ namespace UI
             languageItem.ChangeOption += ChangeLanguage;
             
             debugModeItem.button.SelectThisButton += debugModeItem.ControllerThisItem;
-            debugModeItem.ChangeOption += ChangeLanguage;
+            debugModeItem.ChangeOption += ChangeDebugMode;
             
             languageItem.button.UpdateSelected();       // 必须在初始化所有完之后在更改选择，不然不会改变isSelected
         }
@@ -56,6 +57,9 @@ namespace UI
         {
             languageItem.button.SelectThisButton -= languageItem.ControllerThisItem;
             languageItem.ChangeOption -= ChangeLanguage;
+            
+            debugModeItem.button.SelectThisButton -= debugModeItem.ControllerThisItem;
+            debugModeItem.ChangeOption -= ChangeDebugMode;
         }
 
         private void InitializeCompleted(AsyncOperationHandle obj)
@@ -65,9 +69,12 @@ namespace UI
             debugModeItem.InitializedItem(1, 2, "Yes");
         }
 
+        #region SystemSettings
+
+        
         private void ChangeLanguage(bool @bool)
         {
-            Debug.Log($"Move: {@bool}");
+            SettingLanguage((LanguageType)(languageItem.paginationFiller.currentPagination - 1));
         }
 
 
@@ -85,14 +92,16 @@ namespace UI
         }
 
 
-        // private bool Vector2ToBool(Vector2 vector2)
-        // {
-        //     if (vector2.x >= .3f)
-        //         return false;
-        //     else if (vector2.x <= .3f)
-        //         return false;
-        //     else
-        //         
-        // }
+        private void ChangeDebugMode(bool @bool)
+        {
+            SettingDebugMode((DebugModeType)(debugModeItem.paginationFiller.currentPagination - 1));
+        }
+
+        private void SettingDebugMode(DebugModeType type)
+        {
+            Debug.Log($"Debug Mode Setting: {type}");
+        }
+
+        #endregion
     }
 }

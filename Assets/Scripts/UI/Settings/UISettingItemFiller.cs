@@ -18,7 +18,7 @@ namespace UI
         [SerializeField, BoxGroup] public MultiInputButton button;
         [SerializeField, BoxGroup] private LocalizeStringEvent _title;
         [SerializeField, BoxGroup] private LocalizeStringEvent currentOptionsText;
-        [SerializeField, BoxGroup] private UIPaginationFiller paginationFiller;
+        [SerializeField, BoxGroup] public UIPaginationFiller paginationFiller;
         [SerializeField, BoxGroup] private Button buttonPrevious;
         [SerializeField, BoxGroup] private Button buttonNext;
         [ReadOnly, BoxGroup] public bool isSelected;        // EventSystem.Current选择的是否是自己
@@ -35,7 +35,6 @@ namespace UI
             
             buttonPrevious.onClick.AddListener(() => { ButtonUpdateOptions(true).Forget();});
             buttonNext.onClick.AddListener(() => { ButtonUpdateOptions(false).Forget();});
-            buttonNext.OnClickAsync();
             
             button.SelectThisButton += ControllerThisItem;
         }
