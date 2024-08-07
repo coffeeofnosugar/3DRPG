@@ -54,6 +54,42 @@ MonoBehaviour:
     m_Localized: No
     m_Metadata:
       m_Items: []
+  - m_Id: 273703626227712
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273805652672512
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278999413178368
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292285336666112
+    m_Localized: Chinese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292668456976384
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292889995919360
+    m_Localized: Japanese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368270270676992
+    m_Localized: Debug Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369805323026432
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369939356205056
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

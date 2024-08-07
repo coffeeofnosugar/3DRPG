@@ -18,19 +18,19 @@ MonoBehaviour:
   m_GUID: b14c352b037540242987a681774bd5e0
   m_SerializeEntries:
   - m_GUID: af7e5fc3b99df724da1d871a8fae3614
-    m_Address: Chinese (Simplified) (zh-Hans)
+    m_Address: Chinese
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fe76cbfe114b28142b65e8d5d6759dfe
-    m_Address: English (en)
+    m_Address: English
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f4a9f61077fc1f45a31a28eb7c9ff60
-    m_Address: Japanese (Japan) (ja-JP)
+    m_Address: Japanese
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale

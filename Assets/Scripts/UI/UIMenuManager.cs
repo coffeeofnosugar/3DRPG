@@ -8,7 +8,7 @@ namespace UI
 	public class UIMenuManager : MonoBehaviour
 	{
 		[SerializeField] private UIPopup _popupPanel = default;
-		// [SerializeField] private UISettingsController _settingsPanel = default;
+		[SerializeField] private UISettingsController _settingsPanel = default;
 		// [SerializeField] private UICredits _creditsPanel = default;
 		[SerializeField] private UIMainMenu _mainMenuPanel = default;
 
@@ -38,7 +38,7 @@ namespace UI
 			_mainMenuPanel.SetMenuScreen(_hasSaveData);
 			// _mainMenuPanel.ContinueButtonAction += _continueGameEvent.RaiseEvent;
 			// _mainMenuPanel.NewGameButtonAction += ButtonStartNewGameClicked;
-			// _mainMenuPanel.SettingsButtonAction += OpenSettingsScreen;
+			_mainMenuPanel.SettingsButtonAction += OpenSettingsScreen;
 			// _mainMenuPanel.CreditsButtonAction += OpenCreditsScreen;
 			_mainMenuPanel.ExitButtonAction += ShowExitConfirmationPopup;
 		}
@@ -96,17 +96,19 @@ namespace UI
 			_mainMenuPanel.SetMenuScreen(_hasSaveData);
 		}
 
-		// public void OpenSettingsScreen()
-		// {
-		// 	_settingsPanel.gameObject.SetActive(true);
-		// 	_settingsPanel.Closed += CloseSettingsScreen;
-		// }
-		// public void CloseSettingsScreen()
-		// {
-		// 	_settingsPanel.Closed -= CloseSettingsScreen;
-		// 	_settingsPanel.gameObject.SetActive(false);
-		// 	_mainMenuPanel.SetMenuScreen(_hasSaveData);
-		// }
+		public void OpenSettingsScreen()
+		{
+			_settingsPanel.gameObject.SetActive(true);
+			_settingsPanel.Closed += CloseSettingsScreen;
+		}
+		
+		public void CloseSettingsScreen()
+		{
+			_settingsPanel.Closed -= CloseSettingsScreen;
+			_settingsPanel.gameObject.SetActive(false);
+			_mainMenuPanel.SetMenuScreen(_hasSaveData);
+		}
+		
 		// public void OpenCreditsScreen()
 		// {
 		// 	_creditsPanel.gameObject.SetActive(true);

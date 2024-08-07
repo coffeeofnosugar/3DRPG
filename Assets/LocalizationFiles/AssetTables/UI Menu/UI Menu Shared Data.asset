@@ -51,6 +51,42 @@ MonoBehaviour:
     m_Key: Quit_Cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 273703626227712
+    m_Key: Setting_Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273805652672512
+    m_Key: Setting_Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278999413178368
+    m_Key: Setting_Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292285336666112
+    m_Key: Setting_Language_Current(zh)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292668456976384
+    m_Key: Setting_Language_Current(en)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292889995919360
+    m_Key: Setting_Language_Current(ja)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368270270676992
+    m_Key: Setting_DebugMode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369805323026432
+    m_Key: Setting_DebugMode_Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369939356205056
+    m_Key: Setting_DebugMode_No
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

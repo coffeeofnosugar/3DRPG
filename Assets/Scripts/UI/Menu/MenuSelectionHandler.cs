@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
+    /// <summary>
+    /// 该类主要是为了显示当前选择的是哪个按钮，并没有直接参与到选择按钮中
+    /// </summary>
     public class MenuSelectionHandler : MonoBehaviour
     {
         [SerializeField] private InputReader _inputReader;
@@ -28,13 +31,14 @@ namespace UI
             if ((EventSystem.current != null) && (EventSystem.current.currentSelectedGameObject == null) && (_currentSelection != null))
                 EventSystem.current.SetSelectedGameObject(_currentSelection);
         }
-
-        public void Unselect()
-        {
-            _currentSelection = null;
-            if (EventSystem.current != null)
-                EventSystem.current.SetSelectedGameObject(null);
-        }
+        
+        // 不知道有啥用
+        // public void Unselect()
+        // {
+        //     _currentSelection = null;
+        //     if (EventSystem.current != null)
+        //         EventSystem.current.SetSelectedGameObject(null);
+        // }
 
         public void HandleMouseEnter(GameObject UIElement)
         {
@@ -79,8 +83,8 @@ namespace UI
         {
             if (UIElement.TryGetComponent<MultiInputButton>(out var button))
             {
-                _mouseSelection = UIElement;
                 _currentSelection = UIElement;
+                _mouseSelection = UIElement;
             }
         }
     }

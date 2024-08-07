@@ -3,11 +3,10 @@ using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.Localization;
+using UnityEngine.Serialization;
 
 namespace UI
 {
-    public enum PopupButtonType { Confirm, Cancel, Close, DoNothing, }
-
     public enum PopupType { Quit, NewGame, BackToMenu, }
 
     public class UIPopup : MonoBehaviour
@@ -16,7 +15,7 @@ namespace UI
         [SerializeField] private LocalizeStringEvent _descriptionText = default;
         [SerializeField] private MultiInputButton _popupButton1 = default;
         [SerializeField] private MultiInputButton _popupButton2 = default;
-        [SerializeField] private MultiInputButton _buttonClose = default;
+        [SerializeField] private MultiInputButton _closeButton = default;
         [SerializeField] private Player.InputReader _inputReader = default;
 
         private PopupType _actualType;
@@ -38,8 +37,8 @@ namespace UI
             bool hasExitButton = false;             // 是否拥有关闭窗口按钮
             _titleText.StringReference.TableEntryReference = _actualType.ToString() + "_Popup_Title";
             _descriptionText.StringReference.TableEntryReference = _actualType.ToString() + "_Popup_Description";
-            string tableEntryReferenceConfirm =  _actualType + "_" + PopupButtonType.Confirm;
-            string tableEntryReferenceCancel = _actualType + "_" + PopupButtonType.Cancel ;
+            string tableEntryReferenceConfirm =  _actualType + "_Confirm";
+            string tableEntryReferenceCancel = _actualType + "_Cancel" ;
             switch (_actualType)
             {
                 case PopupType.NewGame:
@@ -80,7 +79,7 @@ namespace UI
 
             if (hasExitButton) // 是否有关闭窗口按钮
             {
-                _buttonClose.gameObject.SetActive(true);
+                _closeButton.gameObject.SetActive(true);
                 _inputReader.CancelEvent += ClosePopupButtonClicked;
             }
         }

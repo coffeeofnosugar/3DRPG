@@ -42,14 +42,14 @@ namespace UI
 
         public void UpdateSelected()
         {
-            _menuSelectionHandler.UpdateSelection(gameObject);
+            Select();       // 由于重写了OnSelect，所以在使用这个方法之后会执行<see cref="MenuSelectionHandler.UpdateSelection"/>方法更新当前选择的Button
         }
         
         public void UpdateSelected(string tableEntryReference, bool isSelected = false)
         {
             _buttonText.StringReference.TableEntryReference = tableEntryReference;
             if (isSelected)
-                Select();
+                Select();       // 由于重写了OnSelect，所以在使用这个方法之后会执行<see cref="MenuSelectionHandler.UpdateSelection"/>方法更新当前选择的Button
         }
 
         // public override void OnSubmit(BaseEventData eventData)
