@@ -20,12 +20,14 @@ namespace UI
 
         public void InitializedPagination(int selectedIndex, int paginationCount)
         {
-            _instantiatedImages = new List<Image>();        // 清空列表
-            totalPagination = paginationCount;
-            for (int i = 0; i < paginationCount; i++)
+            if (_instantiatedImages.Count <= 0)
             {
-                var image = Instantiate(_imagePaginationPrefab, transform);
-                _instantiatedImages.Add(image);
+                totalPagination = paginationCount;
+                for (int i = 0; i < paginationCount; i++)
+                {
+                    var image = Instantiate(_imagePaginationPrefab, transform);
+                    _instantiatedImages.Add(image);
+                }
             }
             UpdatePagination(selectedIndex);
         }
@@ -47,16 +49,13 @@ namespace UI
             }
         }
 
-        public void MoveLeftPagination()
+        public void MovePagination(bool @bool)
         {
-            UpdatePagination(currentPagination - 1);
-            Debug.Log($"向左移动当前是第 {currentPagination} 个");
-        }
-
-        public void MoveRightPagination()
-        {
-            UpdatePagination(currentPagination + 1);
-            Debug.Log($"向右移动当前是第 {currentPagination} 个");
+            if (@bool)
+                UpdatePagination(currentPagination - 1);
+            else
+                UpdatePagination(currentPagination + 1);
+            Debug.Log($"currentPagination: {currentPagination}");
         }
     }
 }

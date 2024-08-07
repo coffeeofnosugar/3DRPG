@@ -1409,6 +1409,10 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u662F"
       objectReference: {fileID: 0}
+    - target: {fileID: 5616688844152584884, guid: c6ded0d38cee7994a83aeaab95d7e4a7, type: 3}
+      propertyPath: localizeKey
+      value: Setting_DebugMode
+      objectReference: {fileID: 0}
     - target: {fileID: 8424243534061822904, guid: c6ded0d38cee7994a83aeaab95d7e4a7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1508,6 +1512,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b3c39e3aafa6e445826e79382efb9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &872533417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5616688844152584884, guid: c6ded0d38cee7994a83aeaab95d7e4a7, type: 3}
+  m_PrefabInstance: {fileID: 872533413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1892b2b9f8db147818996bad3efa4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &896418464
@@ -2173,6 +2188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   languageItem: {fileID: 1969169851}
+  debugModeItem: {fileID: 872533417}
 --- !u!1 &1064852528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,7 +2276,7 @@ GameObject:
   - component: {fileID: 1201915074}
   - component: {fileID: 1201915075}
   m_Layer: 5
-  m_Name: Setting Items
+  m_Name: Setting_Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4050,6 +4066,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1201915074}
     m_Modifications:
+    - target: {fileID: 1071184123454416348, guid: c6ded0d38cee7994a83aeaab95d7e4a7, type: 3}
+      propertyPath: m_StringReference.m_WaitForCompletion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2487503832165432742, guid: c6ded0d38cee7994a83aeaab95d7e4a7, type: 3}
       propertyPath: m_Name
       value: Setting_Item_Language

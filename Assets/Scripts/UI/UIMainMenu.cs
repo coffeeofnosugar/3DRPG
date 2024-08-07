@@ -26,7 +26,6 @@ namespace UI
         public void SetMenuScreen(bool hasSaveData)
         {
             _continueButton.interactable = hasSaveData;
-            Debug.Log($"hasSaveData: {hasSaveData}");
             if (hasSaveData)
                 _continueButton.Select();
             else
