@@ -27,7 +27,7 @@ namespace UI
         {
             _popupButton1.onClick.RemoveListener(ConfirmButtonClicked);
             _popupButton2.onClick.RemoveListener(CancelButtonClicked);
-            _inputReader.CancelEvent -= ClosePopupButtonClicked;
+            _inputReader.UICancelEvent -= ClosePopupButtonClicked;
         }
         
         public void SetPopup(PopupType popupType)
@@ -80,7 +80,7 @@ namespace UI
             if (hasExitButton) // 是否有关闭窗口按钮
             {
                 _closeButton.gameObject.SetActive(true);
-                _inputReader.CancelEvent += ClosePopupButtonClicked;
+                _inputReader.UICancelEvent += ClosePopupButtonClicked;
             }
         }
         

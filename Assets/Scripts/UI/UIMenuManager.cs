@@ -9,7 +9,7 @@ namespace UI
 	{
 		[SerializeField] private UIPopup _popupPanel = default;
 		[SerializeField] private UISettingsController _settingsPanel = default;
-		// [SerializeField] private UICredits _creditsPanel = default;
+		[SerializeField] private UICredits _creditsPanel = default;
 		[SerializeField] private UIMainMenu _mainMenuPanel = default;
 
 		// [SerializeField] private SaveSystem _saveSystem = default;
@@ -39,7 +39,7 @@ namespace UI
 			// _mainMenuPanel.ContinueButtonAction += _continueGameEvent.RaiseEvent;
 			// _mainMenuPanel.NewGameButtonAction += ButtonStartNewGameClicked;
 			_mainMenuPanel.SettingsButtonAction += OpenSettingsScreen;
-			// _mainMenuPanel.CreditsButtonAction += OpenCreditsScreen;
+			_mainMenuPanel.CreditsButtonAction += OpenCreditsScreen;
 			_mainMenuPanel.ExitButtonAction += ShowExitConfirmationPopup;
 		}
 
@@ -109,18 +109,18 @@ namespace UI
 			_mainMenuPanel.SetMenuScreen(_hasSaveData);
 		}
 		
-		// public void OpenCreditsScreen()
-		// {
-		// 	_creditsPanel.gameObject.SetActive(true);
-		//
-		// 	_creditsPanel.OnCloseCredits += CloseCreditsScreen;
-		// }
-		// public void CloseCreditsScreen()
-		// {
-		// 	_creditsPanel.OnCloseCredits -= CloseCreditsScreen;
-		// 	_creditsPanel.gameObject.SetActive(false);
-		// 	_mainMenuPanel.SetMenuScreen(_hasSaveData);
-		// }
+		public void OpenCreditsScreen()
+		{
+			_creditsPanel.gameObject.SetActive(true);
+		
+			_creditsPanel.Closed += CloseCreditsScreen;
+		}
+		public void CloseCreditsScreen()
+		{
+			_creditsPanel.Closed -= CloseCreditsScreen;
+			_creditsPanel.gameObject.SetActive(false);
+			_mainMenuPanel.SetMenuScreen(_hasSaveData);
+		}
 
 		/// <summary>
 		/// 展示退出弹窗提示界面

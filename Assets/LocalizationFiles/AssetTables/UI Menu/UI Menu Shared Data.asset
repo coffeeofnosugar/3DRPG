@@ -79,6 +79,26 @@ MonoBehaviour:
     m_Key: Setting_DebugMode_No
     m_Metadata:
       m_Items: []
+  - m_Id: 666437524537344
+    m_Key: Credits_To_Community
+    m_Metadata:
+      m_Items: []
+  - m_Id: 784588891373568
+    m_Key: Credits_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 784866717876224
+    m_Key: Credits_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 786076288040960
+    m_Key: Credits_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 786981070716928
+    m_Key: Credits_3
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -82,6 +82,28 @@ MonoBehaviour:
     m_Localized: No
     m_Metadata:
       m_Items: []
+  - m_Id: 666437524537344
+    m_Localized: Credits goes to the community
+    m_Metadata:
+      m_Items: []
+  - m_Id: 784588891373568
+    m_Localized: In no particular order
+    m_Metadata:
+      m_Items: []
+  - m_Id: 784866717876224
+    m_Localized: 'code: coffee233'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 786076288040960
+    m_Localized: "Mode: \u6A21\u4E4B\u5C4B-\u795E\u5E1D\u5B87\u3001Blink\u3001VertexModeler\u3001Dungeon
+      Mason"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 786981070716928
+    m_Localized: "Plugins: Odin\u3001ES3\u3001Hot Reload\u3001DOTween Pro\u3001Magical
+      Cloth 2"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

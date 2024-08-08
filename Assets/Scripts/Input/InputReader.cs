@@ -35,7 +35,7 @@ namespace Player
         /// <summary>
         /// UI控制: 键盘ESC、手柄B键和菜单键
         /// </summary>
-        public event Action CancelEvent = delegate { };
+        public event Action UICancelEvent = delegate { };
         /// <summary>
         /// UI控制: 鼠标移动时的位置坐标
         /// </summary>
@@ -44,6 +44,7 @@ namespace Player
         /// UI控制: 键盘的 W/A/S/D/上/下/左/右、手柄的左摇杆/十字键
         /// </summary>
         public event Action<Vector2> UINavigateEvent = delegate { };
+        
         
         #endregion
 
@@ -153,7 +154,7 @@ namespace Player
         {
             if (context.phase == InputActionPhase.Performed)
             {
-                CancelEvent.Invoke();
+                UICancelEvent.Invoke();
             }
         }
 
