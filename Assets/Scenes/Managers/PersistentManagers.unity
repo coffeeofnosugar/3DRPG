@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameplayScene: {fileID: 11400000, guid: ab9df525e51be6840a1561ad45f18558, type: 2}
   _inputReader: {fileID: 11400000, guid: c2a89e8cd31fd5147b19885385630027, type: 2}
+  _loadLocation: {fileID: 11400000, guid: e1ebd64b721c2b64980c8f48ddd62afc, type: 2}
   _loadMenu: {fileID: 11400000, guid: 8eacdadf2d459214998175ba8dc436cb, type: 2}
   _coldStartupLocation: {fileID: 11400000, guid: bb9688f913f85f44c8ba5031f3979349, type: 2}
   _onSceneReadyTrigger: {fileID: 11400000, guid: 54582e0f0bf92834b836a4d2debfa4fe, type: 2}

@@ -10,7 +10,7 @@ public class SetPosition : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debugs.Show("触发传送", Debugs.DebugTypeEnum.Normal);
+            // Debugs.Show("触发传送", Debugs.DebugTypeEnum.Normal);
             other.transform.position = targetPos.position;
             other.transform.rotation = targetPos.rotation;
             Debug.Log(other.transform.position);

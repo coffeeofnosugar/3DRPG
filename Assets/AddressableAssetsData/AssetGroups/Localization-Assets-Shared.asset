@@ -22,6 +22,12 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f4536c91fe31024eb1b152576e82905
+    m_Address: Assets/LocalizationFiles/AssetTables/Scene Names/Scene Names Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: e569cebfaca8adb48ad9a9a29d86b073, type: 2}
   m_SchemaSet:

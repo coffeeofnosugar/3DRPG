@@ -18,7 +18,7 @@ namespace Tools.CoffeeTools
         private new void Awake()
         {
             base.Awake();
-            UpdateLogText = new UpdateLogText(updateText);
+            // UpdateLogText = new UpdateLogText(updateText);
         }
 
         public static void Show(object log, DebugTypeEnum type = DebugTypeEnum.WithoutUnityDebug)

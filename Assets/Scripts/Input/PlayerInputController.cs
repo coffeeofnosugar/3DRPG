@@ -70,9 +70,9 @@ namespace Player
 
         private void Start()
         {
-            Debugs.UpdateLogText["移动"] = "W/A/S/D";
-            Debugs.UpdateLogText["跳跃/攀爬"] = "Space";
-            Debugs.UpdateLogText["下蹲"] = "Ctrl";
+            // Debugs.UpdateLogText["移动"] = "W/A/S/D";
+            // Debugs.UpdateLogText["跳跃/攀爬"] = "Space";
+            // Debugs.UpdateLogText["下蹲"] = "Ctrl";
         }
 
         private void Update()

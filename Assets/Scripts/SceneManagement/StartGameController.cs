@@ -11,6 +11,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartGameController : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class StartGameController : MonoBehaviour
 	private LoadEventChannelSO _loadLocationTrigger;
 
 	[Title("Load Local Scene")] [SerializeField, InlineEditor]
-	private GameSceneSO _localtionToLoad;
+	private LocationSO _localtionToLoad;
 
 	private void Awake()
 	{
@@ -45,5 +46,6 @@ public class StartGameController : MonoBehaviour
 	private void StartNewGame()
 	{
 		Debug.Log("开始新的游戏");
+		_loadLocationTrigger.RaiseEvent(_localtionToLoad);
 	}
 }
