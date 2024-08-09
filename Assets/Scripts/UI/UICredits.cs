@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ namespace UI
     public class UICredits : MonoBehaviour
     {
         [SerializeField] private MultiInputButton _closeButton;
-        [SerializeField] private Player.InputReader _inputReader;
+        [SerializeField, InlineEditor] private Player.InputReader _inputReader;
         [SerializeField] private UICreditsRoller _creditsRoller;
         
         public Action Closed;

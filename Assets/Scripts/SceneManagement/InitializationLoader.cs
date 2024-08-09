@@ -4,7 +4,6 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
-using Events;
 
 /// <summary>
 /// 这个类负责加载持久化管理器场景来启动游戏
@@ -13,11 +12,11 @@ using Events;
 
 public class InitializationLoader : MonoBehaviour
 {
-    [SerializeField] private GameSceneSO _managersScene = default;      // 持久化管理器场景
-    [SerializeField] private GameSceneSO _menuToLoad = default;         // 菜单场景
+    [SerializeField, InlineEditor] private GameSceneSO _persistentManagersSO = default;      // 持久化管理器场景
+    [SerializeField, InlineEditor] private GameSceneSO _menuToLoad = default;         // 菜单场景
 
     [Title("Broadcasting on")]  // 触发广播
-    [SerializeField] private AssetReference _menuLoadChannel = default; // 用于存放 LoadEventChannelSO 资源
+    [SerializeField, InlineEditor] private AssetReference _menuLoadChannel = default; // 用于存放 LoadEventChannelSO 资源
 
     private void Start()
     {
@@ -25,7 +24,7 @@ public class InitializationLoader : MonoBehaviour
         // LoadSceneMode.Additive表示添加当前场景，而不是替换
         // true表示是否立刻激活该场景
         // 当场景加载完成时，会触发LoadEventChannel方法
-        _managersScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true).Completed += LoadEventChannel;
+        _persistentManagersSO.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true).Completed += LoadEventChannel;
     }
 
     /// <summary>

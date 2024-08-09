@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b1f9f3c067f834eb0b07e26fa10ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _managersScene: {fileID: 11400000, guid: 80e0ac4f30d4af94db26090f5eae0ff1, type: 2}
+  _persistentManagersSO: {fileID: 11400000, guid: 80e0ac4f30d4af94db26090f5eae0ff1, type: 2}
   _menuToLoad: {fileID: 11400000, guid: 19a28a7df96410a49ba3c4f304dd48e8, type: 2}
   _menuLoadChannel:
     m_AssetGUID: 8eacdadf2d459214998175ba8dc436cb

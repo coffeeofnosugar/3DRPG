@@ -12,7 +12,7 @@ namespace UI
         [SerializeField, BoxGroup("LanguageTab")] private MultiInputButton _closeButton;
         [SerializeField, BoxGroup("LanguageTab")] private UISettingsSystemComponent settingsSystemComponent;
 
-        [SerializeField] private Player.InputReader _inputReader;
+        [SerializeField, InlineEditor] private Player.InputReader _inputReader;
 
         
         public Action Closed;

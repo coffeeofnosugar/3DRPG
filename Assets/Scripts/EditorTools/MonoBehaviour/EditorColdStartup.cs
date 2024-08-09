@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Events;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -10,8 +10,8 @@ using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 public class EditorColdStartup : MonoBehaviour
 {
-	[SerializeField] private GameSceneSO _thisSceneSO = default;		// 当前场景
-	[SerializeField] private GameSceneSO _persistentManagersSO = default;	// 持久管理器场景
+	[SerializeField, InlineEditor] private GameSceneSO _thisSceneSO = default;		// 当前场景
+	[SerializeField, InlineEditor] private GameSceneSO _persistentManagersSO = default;	// 持久管理器场景
 	[SerializeField] private AssetReference _notifyColdStartupChannel = default;		// 冷启动广播
 	// [SerializeField] private VoidEventChannelSO _onSceneReadyChannel = default;		// 场景加载完毕
 	// [SerializeField] private PathStorageSO _pathStorage = default;

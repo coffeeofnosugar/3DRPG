@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ namespace UI
         [SerializeField] private MultiInputButton _popupButton1 = default;
         [SerializeField] private MultiInputButton _popupButton2 = default;
         [SerializeField] private MultiInputButton _closeButton = default;
-        [SerializeField] private Player.InputReader _inputReader = default;
+        [SerializeField, InlineEditor] private Player.InputReader _inputReader = default;
 
         private PopupType _actualType;
 

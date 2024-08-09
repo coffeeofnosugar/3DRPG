@@ -10,7 +10,7 @@ namespace UI
     /// </summary>
     public class MenuSelectionHandler : MonoBehaviour
     {
-        [SerializeField] private InputReader _inputReader;
+        [SerializeField, InlineEditor] private InputReader _inputReader;
         [SerializeField, ReadOnly] public GameObject _currentSelection;
         [SerializeField, ReadOnly] private GameObject _mouseSelection;
 

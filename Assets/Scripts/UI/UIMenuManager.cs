@@ -1,66 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
 {
 	public class UIMenuManager : MonoBehaviour
 	{
-		[SerializeField] private UIPopup _popupPanel = default;
-		[SerializeField] private UISettingsController _settingsPanel = default;
-		[SerializeField] private UICredits _creditsPanel = default;
-		[SerializeField] private UIMainMenu _mainMenuPanel = default;
+		[Title("Start Initialized")]	// 触发广播
+		[SerializeField, InlineEditor] private VoidEventChannelSO _startInitializer;
+		
+		[Title("UI Controller")]
+		[SerializeField] private UIMainMenu _mainMenuPanel = default;				// 主界面选项
+		[SerializeField] private UISettingsController _settingsPanel = default;		// 设置界面
+		[SerializeField] private UICredits _creditsPanel = default;					// 制作人员名单
+		[SerializeField] private UIPopup _popupPanel = default;						// 退出弹窗界面
 
 		// [SerializeField] private SaveSystem _saveSystem = default;
 
-		[SerializeField] private Player.InputReader _inputReader = default;
+		[Title("Input ScriptableObject")]
+		[SerializeField, InlineEditor] private Player.InputReader _inputReader = default;			// 玩家输入
 
 
-		// [Header("Broadcasting on")]
-		// [SerializeField]
-		// private VoidEventChannelSO _startNewGameEvent = default;
-		// [SerializeField]
-		// private VoidEventChannelSO _continueGameEvent = default;
+		[Title("Broadcasting on")]
+		// [SerializeField] private VoidEventChannelSO _continueGameEvent = default;
+		[SerializeField, InlineEditor] private VoidEventChannelSO _startNewGameEvent = default;
 
 
 
 		private bool _hasSaveData = false;
 
-		private void Start()
+		private void Awake()
+		{
+			_startInitializer.OnEventRaised += InitializedMainMenu;
+		}
+
+		private void InitializedMainMenu()
 		{
 			_inputReader.EnableUIInput();
 			SetMenuScreen();
+			_startInitializer.OnEventRaised -= InitializedMainMenu;
 		}
+
 
 		void SetMenuScreen()
 		{
 			// _hasSaveData = _saveSystem.LoadSaveDataFromDisk();
 			_mainMenuPanel.SetMenuScreen(_hasSaveData);
-			// _mainMenuPanel.ContinueButtonAction += _continueGameEvent.RaiseEvent;
-			// _mainMenuPanel.NewGameButtonAction += ButtonStartNewGameClicked;
 			_mainMenuPanel.SettingsButtonAction += OpenSettingsScreen;
 			_mainMenuPanel.CreditsButtonAction += OpenCreditsScreen;
 			_mainMenuPanel.ExitButtonAction += ShowExitConfirmationPopup;
+			// _mainMenuPanel.ContinueButtonAction += _continueGameEvent.RaiseEvent;
+			_mainMenuPanel.NewGameButtonAction += ButtonStartNewGameClicked;
 		}
 
-		// void ButtonStartNewGameClicked()
-		// {
-		// 	if (!_hasSaveData)
-		// 	{
-		// 		ConfirmStartNewGame();
-		// 	}
-		// 	else
-		// 	{
-		// 		ShowStartNewGameConfirmationPopup();
-		// 	}
-		// }
+		void ButtonStartNewGameClicked()
+		{
+			if (!_hasSaveData)
+			{
+				ConfirmStartNewGame();
+			}
+			else
+			{
+				// ShowStartNewGameConfirmationPopup();
+			}
+		}
 
-		// void ConfirmStartNewGame()
-		// {
-		// 	_startNewGameEvent.RaiseEvent();
-		// }
+		void ConfirmStartNewGame()
+		{
+			_startNewGameEvent.RaiseEvent();
+		}
 
 		// void ShowStartNewGameConfirmationPopup()
 		// {

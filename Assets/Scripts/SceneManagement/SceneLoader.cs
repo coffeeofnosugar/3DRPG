@@ -5,36 +5,35 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
-using Events;
 
 /// <summary>
 /// 这个类管理场景的加载和卸载。
 /// </summary>
 public class SceneLoader : MonoBehaviour
 {
-	[SerializeField] private GameSceneSO _gameplayScene = default;			// GamePlay场景，该场景里存放了游玩时的各种Manager，如血量的展示、GameManager游戏进程控制等
-	[SerializeField] private Player.InputReader _inputReader = default;		// 用户输入
+	[SerializeField, InlineEditor] private GameSceneSO _gameplayScene = default;			// GamePlay场景，该场景里存放了游玩时的各种Manager，如血量的展示、GameManager游戏进程控制等
+	[SerializeField, InlineEditor] private Player.InputReader _inputReader = default;		// 用户输入
 
 	[Title("Listening to")]		// 注册事件
-	[SerializeField] private LoadEventChannelSO _loadLocation = default;			// 注册加载地点场景
-	[SerializeField] private LoadEventChannelSO _loadMenu = default;				// 注册加载菜单场景
-	[SerializeField] private LoadEventChannelSO _coldStartupLocation = default;		// 注册加载地点场景，该方法是通过点击UnityEditor的Play直接开始游戏，而无需通过Initialization Scene初始化
-
-	[Header("Broadcasting on")]	// 触发广播
-	[SerializeField] private BoolEventChannelSO _toggleLoadingScreen = default;		// 用于显示或隐藏加载屏幕
-	[SerializeField] private VoidEventChannelSO _onSceneReady = default;			// 用于在场景加载完成后触发事件
-	[SerializeField] private FadeChannelSO _fadeRequestChannel = default;			// 用于管理屏幕的淡入和淡出效果
+	// [SerializeField] private LoadEventChannelSO _loadLocation = default;			// 注册加载玩法场景
+	[SerializeField, InlineEditor] private LoadEventChannelSO _loadMenu = default;				// 注册加载菜单场景，加载菜单场景时需要删除Gameplay游戏管理场景，所以要分开将加载玩法场景区分开来
+	[SerializeField, InlineEditor] private LoadEventChannelSO _coldStartupLocation = default;		// 注册加载地点场景，该方法是通过点击UnityEditor的Play直接开始游戏，而无需通过Initialization Scene初始化
+																					// 这里主要是获取Gameplay场景并保存下来，以免离开当玩法场景时Gameplay没有卸载
+	[Title("Broadcasting on")]	// 触发广播
+	// [SerializeField] private BoolEventChannelSO _toggleLoadingScreen = default;		// 用于显示或隐藏加载屏幕
+	[SerializeField, InlineEditor] private VoidEventChannelSO _onSceneReady = default;			// 用于在场景加载完成后触发事件
+	// [SerializeField] private FadeChannelSO _fadeRequestChannel = default;			// 用于管理屏幕的淡入和淡出效果
 
 	private AsyncOperationHandle<SceneInstance> _loadingOperationHandle;			// 用于存储场景异步加载操作的句柄。通过它可以跟踪加载操作的状态和结果。
-	private AsyncOperationHandle<SceneInstance> _gameplayManagerLoadingOpHandle;	// 用于存储游戏管理场景异步加载操作的句柄。
+	// private AsyncOperationHandle<SceneInstance> _gameplayManagerLoadingOpHandle;	// 用于存储游戏管理场景异步加载操作的句柄。
 
 	// 存储场景加载请求的参数
 	private GameSceneSO _sceneToLoad;				// 要加载的目标场景
 	private GameSceneSO _currentlyLoadedScene;		// 当前的场景
-	private bool _showLoadingScreen;				// 标志是否在加载新场景时显示加载屏幕
+	// private bool _showLoadingScreen;				// 标志是否在加载新场景时显示加载屏幕
 
-	private SceneInstance _gameplayManagerSceneInstance = new SceneInstance();		// 用于存储游戏管理场景的实力
-	private float _fadeDuration = .5f;												// 淡入淡出持续时间
+	// private SceneInstance _gameplaySceneInstance = new SceneInstance();				// 用于存储游戏管理场景的实例，方便在
+	// private float _fadeDuration = .5f;												// 淡入淡出持续时间
 	private bool _isLoading = false;                                    			// 标志是否正在加载中，防止在加载过程中发起新的加载请求
 
 	/// <summary>
@@ -42,7 +41,7 @@ public class SceneLoader : MonoBehaviour
 	/// </summary>
 	private void OnEnable()
 	{
-		_loadLocation.OnLoadingRequested += LoadLocation;
+		// _loadLocation.OnLoadingRequested += LoadLocation;
 		_loadMenu.OnLoadingRequested += LoadMenu;
 #if UNITY_EDITOR	// 因为_coldStartupLocation是在UnityEditor的Play直接开始游戏，所以只能在UnityEditor中运行
 		_coldStartupLocation.OnLoadingRequested += LocationColdStartup;
@@ -54,7 +53,7 @@ public class SceneLoader : MonoBehaviour
 	/// </summary>
 	private void OnDisable()
 	{
-		_loadLocation.OnLoadingRequested -= LoadLocation;
+		// _loadLocation.OnLoadingRequested -= LoadLocation;
 		_loadMenu.OnLoadingRequested -= LoadMenu;
 #if UNITY_EDITOR
 		_coldStartupLocation.OnLoadingRequested -= LocationColdStartup;
@@ -73,9 +72,9 @@ public class SceneLoader : MonoBehaviour
 		if (_currentlyLoadedScene.sceneType == GameSceneSO.GameSceneType.Location)
 		{
 			// 加载Gameplay游戏管理场景（同步加载）
-			_gameplayManagerLoadingOpHandle = _gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
-			_gameplayManagerLoadingOpHandle.WaitForCompletion();
-			_gameplayManagerSceneInstance = _gameplayManagerLoadingOpHandle.Result;
+			// _gameplayManagerLoadingOpHandle = _gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
+			// _gameplayManagerLoadingOpHandle.WaitForCompletion();
+			// _gameplaySceneInstance = _gameplayManagerLoadingOpHandle.Result;
 
 			// Gameplay游戏管理场景加载完毕后启动游戏玩法
 			StartGameplay();
@@ -83,44 +82,44 @@ public class SceneLoader : MonoBehaviour
 	}
 #endif
 
-	/// <summary>
-	/// 处理 Location 关卡场景加载请求
-	/// </summary>
-	private void LoadLocation(GameSceneSO locationToLoad, bool showLoadingScreen, bool fadeScreen)
-	{
-		// 检查是否正在加载场景，防止玩家在同一帧中同时进入两个场景
-		if (_isLoading)
-			return;
+	// /// <summary>
+	// /// 处理 Location 关卡场景加载请求
+	// /// </summary>
+	// private void LoadLocation(GameSceneSO locationToLoad, bool showLoadingScreen, bool fadeScreen)
+	// {
+	// 	// 检查是否正在加载场景，防止玩家在同一帧中同时进入两个场景
+	// 	if (_isLoading)
+	// 		return;
+	//
+	// 	_sceneToLoad = locationToLoad;
+	// 	// _showLoadingScreen = showLoadingScreen;
+	// 	_isLoading = true;
+	//
+	// 	// 如果我们从主菜单进入，我们需要首先加载Gameplay游戏管理场景
+	// 	if (_gameplaySceneInstance.Scene == null
+	// 		|| !_gameplaySceneInstance.Scene.isLoaded)
+	// 	{
+	// 		// 异步加载Gameplay场景
+	// 		_gameplayManagerLoadingOpHandle = _gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
+	// 		_gameplayManagerLoadingOpHandle.Completed += OnGameplayManagersLoaded;		// 加载完毕后将Gameplay游戏管理赋值给_gameplayManagerSceneInstance，并卸载之前的场景
+	// 	}
+	// 	else
+	// 	{
+	// 		// 如果Gameplay游戏管理场景已经加载则直接开始卸载之前的场景
+	// 		UnloadPreviousScene();
+	// 	}
+	// }
 
-		_sceneToLoad = locationToLoad;
-		_showLoadingScreen = showLoadingScreen;
-		_isLoading = true;
-
-		// 如果我们从主菜单进入，我们需要首先加载Gameplay游戏管理场景
-		if (_gameplayManagerSceneInstance.Scene == null
-			|| !_gameplayManagerSceneInstance.Scene.isLoaded)
-		{
-			// 异步加载Gameplay场景
-			_gameplayManagerLoadingOpHandle = _gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
-			_gameplayManagerLoadingOpHandle.Completed += OnGameplayManagersLoaded;		// 加载完毕后将Gameplay游戏管理赋值给_gameplayManagerSceneInstance，并卸载之前的场景
-		}
-		else
-		{
-			// 如果Gameplay游戏管理场景已经加载则直接开始卸载之前的场景
-			StartCoroutine(UnloadPreviousScene());
-		}
-	}
-
-	/// <summary>
-	/// 将Gameplay游戏管理赋值给_gameplayManagerSceneInstance，并卸载之前的场景
-	/// </summary>
-	/// <param name="obj"></param>
-	private void OnGameplayManagersLoaded(AsyncOperationHandle<SceneInstance> obj)
-	{
-		_gameplayManagerSceneInstance = _gameplayManagerLoadingOpHandle.Result;
-
-		StartCoroutine(UnloadPreviousScene());
-	}
+	// /// <summary>
+	// /// 将Gameplay游戏管理赋值给_gameplayManagerSceneInstance，并卸载之前的场景
+	// /// </summary>
+	// /// <param name="obj"></param>
+	// private void OnGameplayManagersLoaded(AsyncOperationHandle<SceneInstance> obj)
+	// {
+	// 	_gameplaySceneInstance = _gameplayManagerLoadingOpHandle.Result;
+	//
+	// 	UnloadPreviousScene();
+	// }
 
 	/// <summary>
 	/// 处理菜单场景加载请求，需要先将Gameplay游戏管理场景删除，防止持续运行游戏玩法逻辑
@@ -132,26 +131,26 @@ public class SceneLoader : MonoBehaviour
 			return;
 
 		_sceneToLoad = menuToLoad;
-		_showLoadingScreen = showLoadingScreen;
+		// _showLoadingScreen = showLoadingScreen;
 		_isLoading = true;
 
-		// 如果我们从玩法关卡返回主菜单，我们需要卸载Gameplay游戏管理场景
-		if (_gameplayManagerSceneInstance.Scene != null
-			&& _gameplayManagerSceneInstance.Scene.isLoaded)
-			Addressables.UnloadSceneAsync(_gameplayManagerLoadingOpHandle, true);		// 释放后_gameplayManagerSceneInstance同样也变空了
+		// // 如果我们从玩法关卡返回主菜单，我们需要卸载Gameplay游戏管理场景
+		// if (_gameplaySceneInstance.Scene != null
+		// 	&& _gameplaySceneInstance.Scene.isLoaded)
+		// 	Addressables.UnloadSceneAsync(_gameplayManagerLoadingOpHandle, true);		// 释放后_gameplayManagerSceneInstance同样也变空了
 
-		StartCoroutine(UnloadPreviousScene());
+		UnloadPreviousScene();
 	}
 
 	/// <summary>
-	/// 在Location和Menu加载中，这个函数复杂删除先前加载的场景
+	/// 在Location和Menu加载中，这个函数是卸载先前的场景
 	/// </summary>
-	private IEnumerator UnloadPreviousScene()
+	private void UnloadPreviousScene()
 	{
 		_inputReader.DisableAllInput();					// 禁用所有输入
-		_fadeRequestChannel.FadeOut(_fadeDuration);		// 触发淡出效果
+		// _fadeRequestChannel.FadeOut(_fadeDuration);		// 触发淡出效果
 
-		yield return new WaitForSeconds(_fadeDuration); // 等待淡出完成
+		// yield return new WaitForSeconds(_fadeDuration); // 等待淡出完成
 
 		if (_currentlyLoadedScene != null)															// 这里的情况还是挺多的
 		{																							// 1.正常启动游戏，第一次进入主菜单，_currentlyLoadedScene从未被赋值过，直接跳过
@@ -180,9 +179,9 @@ public class SceneLoader : MonoBehaviour
 	/// </summary>
 	private void LoadNewScene()
 	{
-		// 是否显示加载屏幕
-		if (_showLoadingScreen)
-			_toggleLoadingScreen.RaiseEvent(true);
+		// // 是否显示加载屏幕
+		// if (_showLoadingScreen)
+		// 	_toggleLoadingScreen.RaiseEvent(true);
 
 		// 异步加载场景
 		_loadingOperationHandle = _sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true, 0);
@@ -200,10 +199,10 @@ public class SceneLoader : MonoBehaviour
 
 		_isLoading = false;						// 还原标志，表示这一次场景加载结束
 
-		if (_showLoadingScreen)
-			_toggleLoadingScreen.RaiseEvent(false);		// 关闭加载屏幕
-
-		_fadeRequestChannel.FadeIn(_fadeDuration);		// 触发淡入效果
+		// if (_showLoadingScreen)
+		// 	_toggleLoadingScreen.RaiseEvent(false);		// 关闭加载屏幕
+		//
+		// _fadeRequestChannel.FadeIn(_fadeDuration);		// 触发淡入效果
 	
 		StartGameplay();								// 启动游戏玩法
 	}

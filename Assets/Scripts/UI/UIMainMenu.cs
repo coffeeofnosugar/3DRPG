@@ -32,18 +32,16 @@ namespace UI
                 _NewGameButton.Select();
         }
 
-        public void NewGameButton()
-        {
-            Debug.Log("Open NewGame UI");
-            NewGameButtonAction.Invoke();
-        }
-
         public void ContinueButton()
         {
-            Debug.Log("Open Continue UI");
             ContinueButtonAction.Invoke();
         }
 
+        public void NewGameButton()
+        {
+            NewGameButtonAction.Invoke();
+        }
+        
         public void SettingsButton()
         {
             Debug.Log("Open Settings UI");
