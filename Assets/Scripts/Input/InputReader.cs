@@ -14,6 +14,12 @@ namespace Player
         // 将delegate分配给事件，可以使用空委托初始化他们
         // 当我们调用事件时，可以跳过null检查
 
+        /// <summary>
+        /// 左键是否点击下去了
+        /// </summary>
+        /// <returns></returns>
+        public bool LeftMouseDown() => Mouse.current.leftButton.isPressed;
+        
         #region InGame
         
         public event Action<Vector2> MoveEvent = delegate { };
@@ -153,9 +159,7 @@ namespace Player
         public void OnCancel(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
-            {
                 UICancelEvent.Invoke();
-            }
         }
 
         public void OnPoint(InputAction.CallbackContext context)

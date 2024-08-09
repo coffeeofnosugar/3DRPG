@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI
@@ -21,6 +22,7 @@ namespace UI
             _inputReader.UINavigateEvent += _creditsRoller.ChangeRollSpeed;
             
             _creditsRoller.StartRolling(4);
+            
             _closeButton.UpdateSelected();
         }
 
@@ -32,7 +34,7 @@ namespace UI
             
             _creditsRoller.StopRoll();
         }
-
+        
         private void OnClickClosedButton()
         {
             Closed.Invoke();

@@ -11,7 +11,7 @@ namespace UI
     public class MenuSelectionHandler : MonoBehaviour
     {
         [SerializeField] private InputReader _inputReader;
-        [SerializeField, ReadOnly] private GameObject _currentSelection;
+        [SerializeField, ReadOnly] public GameObject _currentSelection;
         [SerializeField, ReadOnly] private GameObject _mouseSelection;
 
         private void OnEnable()
@@ -33,13 +33,28 @@ namespace UI
         }
         
         // 不知道有啥用
-        // public void Unselect()
-        // {
-        //     _currentSelection = null;
-        //     if (EventSystem.current != null)
-        //         EventSystem.current.SetSelectedGameObject(null);
-        // }
+        public void Unselect()
+        {
+            _currentSelection = null;
+            if (EventSystem.current != null)
+                EventSystem.current.SetSelectedGameObject(null);
+        }
+        
+        /// <summary>
+        /// 是否能触发提交
+        /// </summary>
+        /// <returns></returns>
+        public bool AllowsSubmit()
+        {
+            // 鼠标选择对象
+            return !_inputReader.LeftMouseDown()
+                   // && 运算顺序高于 ||
+                   // 导航选择对象
+                   || _mouseSelection != null && _mouseSelection == _currentSelection;
+        }
 
+        #region 鼠标
+        
         public void HandleMouseEnter(GameObject UIElement)
         {
             if (UIElement.TryGetComponent<MultiInputButton>(out var button) && button.interactable)
@@ -62,6 +77,9 @@ namespace UI
             if (_mouseSelection != null)
                 EventSystem.current.SetSelectedGameObject(_mouseSelection);
         }
+        
+        #endregion
+        
 
         /// <summary>
         /// 使用键盘的 W/A/S/D/上/下/左/右 或 手柄的左摇杆/十字键 时触发事件
@@ -79,13 +97,11 @@ namespace UI
         /// 由手柄或键盘导航输入触发
         /// </summary>
         /// <param name="UIElement"></param>
-        public void UpdateSelection(GameObject UIElement)
+        public void UpdateSelection(MultiInputButton UIElement)
         {
-            if (UIElement.TryGetComponent<MultiInputButton>(out var button))
-            {
-                _currentSelection = UIElement;
-                _mouseSelection = UIElement;
-            }
+            var UIObj = UIElement.gameObject;
+            _currentSelection = UIObj;
+            _mouseSelection = UIObj;
         }
     }
 }

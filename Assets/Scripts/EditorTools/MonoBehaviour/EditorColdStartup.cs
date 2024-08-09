@@ -13,13 +13,14 @@ public class EditorColdStartup : MonoBehaviour
 	[SerializeField] private GameSceneSO _thisSceneSO = default;		// 当前场景
 	[SerializeField] private GameSceneSO _persistentManagersSO = default;	// 持久管理器场景
 	[SerializeField] private AssetReference _notifyColdStartupChannel = default;		// 冷启动广播
-	[SerializeField] private VoidEventChannelSO _onSceneReadyChannel = default;		// 场景加载完毕
+	// [SerializeField] private VoidEventChannelSO _onSceneReadyChannel = default;		// 场景加载完毕
 	// [SerializeField] private PathStorageSO _pathStorage = default;
 	// [SerializeField] private SaveSystem _saveSystem = default;
 
 	private bool isColdStart = false;
 	private void Awake()
 	{
+		// 当前场景并不会在Awake中加载，而是会在enable和start之间的时机加载
 		if (!SceneManager.GetSceneByName(_persistentManagersSO.sceneReference.editorAsset.name).isLoaded)
 		{
 			isColdStart = true;
@@ -48,10 +49,12 @@ public class EditorColdStartup : MonoBehaviour
 	
 	/// <summary>
 	/// 持久管理器加载完毕后加载后触发冷启动广播
+	/// 这个方法的作用其实就是让_persistentManagersSO加载完毕后执行OnNotifyChannelLoaded
 	/// </summary>
 	/// <param name="obj"></param>
 	private void LoadEventChannel(AsyncOperationHandle<SceneInstance> obj)
 	{
+		// 给冷广播添加OnNotifyChannelLoaded事件
 		_notifyColdStartupChannel.LoadAssetAsync<LoadEventChannelSO>().Completed += OnNotifyChannelLoaded;
 	}
 
@@ -63,9 +66,10 @@ public class EditorColdStartup : MonoBehaviour
 		}
 		else
 		{
-			//Raise a fake scene ready event, so the player is spawned
-			_onSceneReadyChannel.RaiseEvent();
-			//When this happens, the player won't be able to move between scenes because the SceneLoader has no conception of which scene we are in
+			Debug.LogError("There is no scene");
+			// //Raise a fake scene ready event, so the player is spawned
+			// _onSceneReadyChannel.RaiseEvent();
+			// //When this happens, the player won't be able to move between scenes because the SceneLoader has no conception of which scene we are in
 		}
 	}
 }

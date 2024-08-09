@@ -34,31 +34,31 @@ namespace UI
 
         public void NewGameButton()
         {
-            Debug.Log("NewGame");
+            Debug.Log("Open NewGame UI");
             NewGameButtonAction.Invoke();
         }
 
         public void ContinueButton()
         {
-            Debug.Log("Continue");
+            Debug.Log("Open Continue UI");
             ContinueButtonAction.Invoke();
         }
 
         public void SettingsButton()
         {
-            Debug.Log("Settings");
+            Debug.Log("Open Settings UI");
             SettingsButtonAction.Invoke();
         }
 
         public void CreditsButton()
         {
-            Debug.Log("Credits");
+            Debug.Log("Open Credits UI");
             CreditsButtonAction.Invoke();
         }
 
         public void ExitButton()
         {
-            Debug.Log("Exit");
+            Debug.Log("Open Exit UI");
             ExitButtonAction.Invoke();
         }
     }

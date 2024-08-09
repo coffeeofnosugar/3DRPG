@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI
@@ -32,6 +33,7 @@ namespace UI
 			_inputReader.EnableUIInput();
 			SetMenuScreen();
 		}
+
 		void SetMenuScreen()
 		{
 			// _hasSaveData = _saveSystem.LoadSaveDataFromDisk();
@@ -112,7 +114,6 @@ namespace UI
 		public void OpenCreditsScreen()
 		{
 			_creditsPanel.gameObject.SetActive(true);
-		
 			_creditsPanel.Closed += CloseCreditsScreen;
 		}
 		public void CloseCreditsScreen()
