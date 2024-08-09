@@ -32,8 +32,10 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - AssetInventory.Examples
     - Boxophobic.Utils.Scripts
     - Cinemachine
+    - DamageNumbersPro
     - MagicaClothV2
     - SingularityGroup.HotReload.Runtime
     - SingularityGroup.HotReload.Runtime.Public

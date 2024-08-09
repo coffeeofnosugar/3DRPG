@@ -9,7 +9,7 @@ namespace Player
 {
     public class PlayerCamera : MonoBehaviour
     {
-        [SerializeField] private Transform player;
+        [SerializeField] public Transform player;
         [SerializeField, BoxGroup("相机偏移量")] private float xOffset = 0;
         [SerializeField, BoxGroup("相机偏移量")] private float yOffset = .7f;
         [SerializeField, BoxGroup("相机偏移量")] private float zOffset = 5f;
