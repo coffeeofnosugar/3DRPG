@@ -1931,6 +1931,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startInitializer: {fileID: 11400000, guid: 6cacf8e2931eb564faba09499c0300ed, type: 2}
   _startNewGameEvent: {fileID: 11400000, guid: dfbedcb859062c94b87d1623e59f09ce, type: 2}
+  _loadLocationTrigger: {fileID: 11400000, guid: e1ebd64b721c2b64980c8f48ddd62afc, type: 2}
+  _localtionToLoad: {fileID: 11400000, guid: fb7577e4a58932f46a7b1468d31267ff, type: 2}
 --- !u!114 &829432190 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2659282167939481261, guid: 3a47d789dd62a4f41abe147d7275e8a0, type: 3}
@@ -3991,7 +3993,7 @@ MonoBehaviour:
   _creditsPanel: {fileID: 1895386999}
   _popupPanel: {fileID: 1525030244}
   _inputReader: {fileID: 11400000, guid: c2a89e8cd31fd5147b19885385630027, type: 2}
-  _startNewGameEvent: {fileID: 11400000, guid: dfbedcb859062c94b87d1623e59f09ce, type: 2}
+  _startNewGameTrigger: {fileID: 11400000, guid: dfbedcb859062c94b87d1623e59f09ce, type: 2}
 --- !u!114 &1605749358
 MonoBehaviour:
   m_ObjectHideFlags: 0

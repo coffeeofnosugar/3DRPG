@@ -24,13 +24,11 @@ public class SceneInitializer : MonoBehaviour
 
 	private void Awake()
 	{
-		Debug.Log("Awake SceneInitializer");
 		_onSceneReady.OnEventRaised += Initialized;
 	}
 	
 	private void Initialized()
 	{
-		Debug.Log("SceneInitializer Command");
 		_startInitializers.RaiseEvent();
 		_onSceneReady.OnEventRaised -= Initialized;
 	}

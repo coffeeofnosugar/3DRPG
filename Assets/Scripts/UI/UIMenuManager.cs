@@ -2,32 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace UI
 {
 	public class UIMenuManager : MonoBehaviour
 	{
-		[Title("Start Initialized")]	// 触发广播
+		[Title("Start Initialized")]	// 初始化
 		[SerializeField, InlineEditor] private VoidEventChannelSO _startInitializer;
 		
 		[Title("UI Controller")]
-		[SerializeField] private UIMainMenu _mainMenuPanel = default;				// 主界面选项
-		[SerializeField] private UISettingsController _settingsPanel = default;		// 设置界面
-		[SerializeField] private UICredits _creditsPanel = default;					// 制作人员名单
-		[SerializeField] private UIPopup _popupPanel = default;						// 退出弹窗界面
+		[SerializeField, BoxGroup("UI Controller")] private UIMainMenu _mainMenuPanel = default;				// 主界面选项
+		[SerializeField, BoxGroup("UI Controller")] private UISettingsController _settingsPanel = default;		// 设置界面
+		[SerializeField, BoxGroup("UI Controller")] private UICredits _creditsPanel = default;					// 制作人员名单
+		[SerializeField, BoxGroup("UI Controller")] private UIPopup _popupPanel = default;						// 退出弹窗界面
 
 		// [SerializeField] private SaveSystem _saveSystem = default;
 
 		[Title("Input ScriptableObject")]
 		[SerializeField, InlineEditor] private Player.InputReader _inputReader = default;			// 玩家输入
-
-
+		
 		[Title("Broadcasting on")]
 		// [SerializeField] private VoidEventChannelSO _continueGameEvent = default;
-		[SerializeField, InlineEditor] private VoidEventChannelSO _startNewGameEvent = default;
+		[SerializeField, InlineEditor] private VoidEventChannelSO _startNewGameTrigger = default;
 
 
 
@@ -71,7 +68,7 @@ namespace UI
 
 		void ConfirmStartNewGame()
 		{
-			_startNewGameEvent.RaiseEvent();
+			_startNewGameTrigger.RaiseEvent();
 		}
 
 		// void ShowStartNewGameConfirmationPopup()

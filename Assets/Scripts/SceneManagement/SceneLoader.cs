@@ -1,7 +1,6 @@
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
@@ -21,7 +20,7 @@ public class SceneLoader : MonoBehaviour
 																					// 这里主要是获取Gameplay场景并保存下来，以免离开当玩法场景时Gameplay没有卸载
 	[Title("Broadcasting on")]	// 触发广播
 	// [SerializeField] private BoolEventChannelSO _toggleLoadingScreen = default;		// 用于显示或隐藏加载屏幕
-	[SerializeField, InlineEditor] private VoidEventChannelSO _onSceneReady = default;			// 用于在场景加载完成后触发事件
+	[SerializeField, InlineEditor] private VoidEventChannelSO _onSceneReadyTrigger = default;			// 用于在场景加载完成后触发事件
 	// [SerializeField] private FadeChannelSO _fadeRequestChannel = default;			// 用于管理屏幕的淡入和淡出效果
 
 	private AsyncOperationHandle<SceneInstance> _loadingOperationHandle;			// 用于存储场景异步加载操作的句柄。通过它可以跟踪加载操作的状态和结果。
@@ -209,12 +208,12 @@ public class SceneLoader : MonoBehaviour
 
 	private void StartGameplay()
 	{
-		_onSceneReady.RaiseEvent();				// SpawnSystem将玩家刷新到游戏场景中
+		_onSceneReadyTrigger.RaiseEvent();				// SpawnSystem将玩家刷新到游戏场景中
 	}
 
 	private void ExitGame()
 	{
-		Application.Quit();
 		Debug.Log("Exit!");
+		Application.Quit();
 	}
 }

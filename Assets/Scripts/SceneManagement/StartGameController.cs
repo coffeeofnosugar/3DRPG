@@ -8,16 +8,23 @@
 // </summary>
 //-----------------------------------------------------------------------
 
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class StartGameController : MonoBehaviour
 {
-	[Title("Start Initialized")]	// 触发广播
-	[SerializeField, InlineEditor] private VoidEventChannelSO _startInitializer = default;
+	[Title("Start Initialized")] [SerializeField, InlineEditor]
+	private VoidEventChannelSO _startInitializer = default;		// 初始化
 	
-	[Title("Listening to")]
-	[SerializeField, InlineEditor] private VoidEventChannelSO _startNewGameEvent = default;
+	[Title("Listening to")] [SerializeField, InlineEditor]
+	private VoidEventChannelSO _startNewGameEvent = default;
+
+	[Title("Broadcasting on")] [SerializeField, InlineEditor]
+	private LoadEventChannelSO _loadLocationTrigger;
+
+	[Title("Load Local Scene")] [SerializeField, InlineEditor]
+	private GameSceneSO _localtionToLoad;
 
 	private void Awake()
 	{
@@ -28,6 +35,11 @@ public class StartGameController : MonoBehaviour
 	{
 		_startNewGameEvent.OnEventRaised += StartNewGame;
 		_startInitializer.OnEventRaised -= InitializedStartGameController;
+	}
+
+	private void OnDestroy()
+	{
+		_startNewGameEvent.OnEventRaised -= StartNewGame;
 	}
 
 	private void StartNewGame()
