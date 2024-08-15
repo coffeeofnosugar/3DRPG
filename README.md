@@ -1,6 +1,7 @@
+## 由于项目文件过大，现在将此项目的文件迁移到另一个[仓库](https://github.com/coffeeofnosugar/study-project)里
 
 
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=112907996171197&bvid=BV1nxaoeNELZ&cid=500001638921677&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+游戏内资源和插件均来自网络，仅供学习使用
 
 
 ### 行为树编辑器
